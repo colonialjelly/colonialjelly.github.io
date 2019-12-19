@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+Hi, I'm Giorgi. I'm a BS/MS student at the University of Utah studying Machine Learning and NLP. 
 
 ### More Information
 
