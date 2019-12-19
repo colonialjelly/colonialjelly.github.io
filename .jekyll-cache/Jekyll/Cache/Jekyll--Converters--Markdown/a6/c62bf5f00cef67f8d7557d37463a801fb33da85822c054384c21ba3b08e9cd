@@ -1,0 +1,105 @@
+I"!<p>* I’m assuming that the reader is familiar with linear classifiers</p>
+
+<p>* For the entirety of this post I will be assuming binary classes but everything that I write here can be extended to multi-class problems</p>
+
+<p>There are many types of neural networks, each having some advantage over others, in this post I want to introduce the simplest form of a neural network, a Multi-Layer Perceptron (MLP). MLPs are a powerful method for approximating functions and it’s a relatively simple model to implement.</p>
+
+<!-- It has been proven that under some conditions MLPs is a universal approximator, meaning that it can represent any function with arbitrary precision. NOTE: this does not mean that MLPs can do everything, this only means that it is expressive enough to represent any set of points, i.e get 100% accuracy on the training set (NOT the test set). A database is equally expressive.
+
+
+\* (It's kind of related to Perceptron but honestly not really.) -->
+
+<p>Before we jump into talking about MLPs, let’s quickly go over linear classifiers. Given training data as pairs $(\boldsymbol{x}_i, y_i)$ where $\boldsymbol{x}_i \in \mathbb{R}^n$ are our datapoints (observations) and $y_i \in {0, 1}$ are their corresponding class labels. The goal is to learn a vector of weights $\boldsymbol{w}$ and a bias $b$ such that $\boldsymbol{w}^T\boldsymbol{x} + b \ge 0$ if $\boldsymbol{x}$ belongs to the positive class and $\boldsymbol{w}^T\boldsymbol{x} + b &lt; 0$ otherwise (belongs to negative class). This decision can be written as the following step function:</p>
+
+<p>$\text{Prediction} = \begin{cases}
+      1 &amp; \boldsymbol{w}^T\boldsymbol{x} + b \ge 0 <br />
+      0 &amp;  \text{Otherwise}<br />
+\end{cases}$</p>
+
+<p>In the case of Logistic Regression the decision function is characterized by the sigmoid function $\sigma(z) = \frac{1}{1+e^{-z}}$ where $z = \boldsymbol{w}^T\boldsymbol{x} + b$</p>
+
+<p>$\text{Prediction} = \begin{cases}
+      1 &amp; \sigma(z) \ge \theta <br />
+      0 &amp;  \text{Otherwise}<br />
+\end{cases}$</p>
+
+<p>Where $\theta$ is usually set to be 0.5.</p>
+
+<p>Note: These are actually just a couple of examples of a zoo of functions that people in deep learning literature refer to as Activation functions.</p>
+
+<p>If the dataset is linearly separable this is all fine, since we can always learn $\boldsymbol{w}$ and $b$ that separates the data perfectly.</p>
+
+<p>[Insert image of two blobs]</p>
+
+<p>We’re good even if the dataset is almost linearly separable, i.e the data points can be separated with a line, barring a few noisy observations.</p>
+
+<p>[Insert image of two slightly noisy blobs]</p>
+
+<p>But what can we do if the dataset is highly non-linear? for example something like this:</p>
+
+<p><img src="circles.png" alt="" /></p>
+
+<p>One thing we could potentially do is to come up with some non-linear transformation function $\phi(\boldsymbol{x})$ such that the data becomes linearly separable. We can then apply that transformation to the original dataset and learn a linear classifier on the transformed dataset.</p>
+
+<p>For example in this case we can see that the data points come from two co-centric circles. We can use this information to come up with a function: $\phi(\boldsymbol{x}) = [x_1^2, x_2^2]$</p>
+
+<p>Now we can learn a vector $\boldsymbol{w}$ and bias $b$ such that $\boldsymbol{w}^T\phi(\boldsymbol{x}) + b \ge 0$ if $\boldsymbol{x}$ is positive and $\boldsymbol{w}^T\phi(\boldsymbol{x}) + b &lt; 0$ otherwise.</p>
+
+<p><img src="circles_transformed.png" alt="" /></p>
+
+<p>This works, but what can we do when it’s not obvious what the underlying function is? What if we’re working in high dimensions where we can’t visualize the shape of the dataset? In general it’s hard to come up with these transformation functions.</p>
+
+<p>Here’s another idea, instead of learning one linear classifier let’s try to learn three linear classifiers and then combine them to get something like this:</p>
+
+<p><img src="circles_3.png" alt="" /></p>
+
+<p>We know how to learn a single linear classifier but how can we learn three linear classifiers that can produce a result like this? The naive approach would be to try to learn them independently using different random initializations and hope that they converge to something like what we want. But this approach is doomed from the beginning since each classifier will try to fit the whole data while ignoring what the other classifiers are doing. In other words there will be no cooperation since none of the classifiers will be ‘aware’ of each other. This is the opposite of what we want. We want/need the classifiers to work together.</p>
+
+<p>What if I told you that a 2-layer MLP can do both of the things we mentioned. It can learn a non-linear transformation that makes the dataset linearly separable and it can learn multiple linear classifiers that cooperate.</p>
+
+<p>Let’s continue with our idea of learning three classifiers but instead of looking at them as independent classifiers, let’s define them as units into a joint system. Each units ‘job’ will be to learn to classify some portion of the input space. We also need a way to combine the outputs of each unit into a final classification decision. In order to do this we can define a final classifier that will take as input the outputs of all of the units and will output a classification decision.</p>
+
+<p>For simpler notation, let’s combine $\boldsymbol{w_1}, \boldsymbol{w_2}$ and $\boldsymbol{w_3}$ into a matrix and call it $\boldsymbol{W}$ and combine $b_1, b_2$, and $b_3$ into a vector and call it $\boldsymbol{b}$.</p>
+
+<p>$\boldsymbol{W} = \begin{bmatrix}
+           \boldsymbol{w_1} <br />
+           \boldsymbol{w_2} <br />
+           \boldsymbol{w_3} <br />
+         \end{bmatrix} = \begin{bmatrix}
+                    w_1^{(1)} &amp; w_1^{(2)}<br />
+                    w_2^{(1)} &amp; w_2^{(2)}<br />
+                    w_3^{(1)} &amp; w_3^{(2)}<br />
+                  \end{bmatrix}$ $\boldsymbol{b} = \begin{bmatrix}
+                             b_1 <br />
+                             b_2 <br />
+                             b_3 <br />
+                           \end{bmatrix}$</p>
+
+<p>Now we need to get the classification decision from all three classifiers. We might be tempted to use the step function but for technical reasons that will become clear later on, we require the function to be differentiable and since the step function is not, we cannot use it. We could however use the sigmoid.</p>
+
+<p>The classification decision from each of the units can then be obtained by applying $\sigma$ element-wise to each of the three outputs.</p>
+
+<p>$\sigma(\boldsymbol{Wx} + \boldsymbol{b}) = \begin{bmatrix}
+\sigma(\boldsymbol{w_1x} + b_1) <br />
+\sigma(\boldsymbol{w_2x} + b_2) <br />
+\sigma(\boldsymbol{w_3x} + b_3) <br />
+\end{bmatrix}$</p>
+
+<p>Ok great now we have a way to get outputs from all three classifiers at the same time, but we still need a way to combine them. For example if the outputs from the classifiers are $[0.7, 0.6, 0.2]$ what should the classification decision be?</p>
+
+<p>Let’s define another classifier $(\boldsymbol{w}<em>{final}, b</em>{final})$ that will take the outputs of the 3 classifiers as input and will produce a final output: $\boldsymbol{w}<em>{final}^T\sigma(\boldsymbol{Wx} + \boldsymbol{b}) + b</em>{final}$</p>
+
+<p>And finally in order to get the final classification decision, we apply a sigmoid activation to the result of this as well. Combining all the parts we get that our function is defined as:</p>
+
+<p>$\text{MLP}(x) =\sigma(\boldsymbol{w}<em>{final}^T\sigma(\boldsymbol{Wx} + \boldsymbol{b}) + b</em>{final})$</p>
+
+<p>This one line actually fully defines our 2-layer MLP.</p>
+
+<p>All is left is to define a loss function over the above function and optimize it with respect to $\boldsymbol{W}, \boldsymbol{b}, \boldsymbol{w}<em>{final}, b</em>{final}$ using backpropagation. Which I will be talking about in the next post (hopefully).</p>
+
+<p>Here’s the really cool thing, going back to how we started. We said that if we had a transformation function that could make the dataset linearly separable then learning would be easy. Well $\phi(\boldsymbol{x}) = \sigma(\boldsymbol{Wx} + \boldsymbol{b})$ will actually be that transformation that makes the dataset linearly separable. This is what the data looks like after applying that learned function:</p>
+
+<p>Isn’t that neat?</p>
+
+<hr />
+:ET
