@@ -95,14 +95,14 @@
   <div class="entry">
     <ul>
   <li>
-    <p><em>I’m assuming that the reader is familiar with linear classifiers</em></p>
+    <p><em>This post is best suited for people who are familiar with linear classifiers, specifically Logistic Regression</em></p>
   </li>
   <li>
     <p><em>For the entirety of this post I will be assuming binary classes but everything that I write here can be extended to multi-class problems</em></p>
   </li>
 </ul>
 
-<p>There are many types of neural networks, each having some advantage over others, in this post I want to introduce the simplest form of a neural network, a Multi-Layer Perceptron (MLP). MLPs are a powerful method for approximating functions and it’s a relatively simple model to implement.</p>
+<p>There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multi-Layer Perceptron (MLP). MLPs are a powerful method for approximating functions and it’s a relatively simple model to implement.</p>
 
 <p>Before we jump into talking about MLPs, let’s quickly go over linear classifiers. Given training data as pairs <script type="math/tex">(\boldsymbol{x}_i, y_i)</script> where <script type="math/tex">\boldsymbol{x}_i \in \mathbb{R}^n</script> are our datapoints (observations) and <script type="math/tex">y_i \in \{0, 1\}</script> are their corresponding class labels. The goal is to learn a vector of weights <script type="math/tex">\boldsymbol{w}</script> and a bias <script type="math/tex">b</script> such that <script type="math/tex">\boldsymbol{w}^T\boldsymbol{x} + b \ge 0</script> if <script type="math/tex">\boldsymbol{x}</script> belongs to the positive class and <script type="math/tex">% <![CDATA[
 \boldsymbol{w}^T\boldsymbol{x} + b < 0 %]]></script> otherwise (belongs to negative class). This decision can be written as the following step function:</p>
@@ -129,7 +129,7 @@
 
 <p><img src="../images/blobs.png" alt="" /></p>
 
-<p>But what can we do if the dataset is highly non-linear? for example something like this:</p>
+<p>But what can we do if the dataset is highly non-linear? For example something like this:</p>
 
 <p><img src="../images/circles.png" alt="" /></p>
 
@@ -152,9 +152,19 @@
 
 <p>This is where MLPs come in. A two-layer MLP can actually do both of the aforementioned things. It can learn a non-linear transformation that makes the dataset linearly separable and it can learn multiple linear classifiers that cooperate.</p>
 
-<p><strong>First Layer:</strong></p>
+<!-- **Neural Networks:**
 
-<p>Let’s continue our idea of learning three classifiers: <script type="math/tex">(\boldsymbol{w_1}, b_1), (\boldsymbol{w_2}, b_3)</script> and <script type="math/tex">(\boldsymbol{w_3}, b_3)</script>. For compactness, let’s combine all of the classifiers into a single matrix and all of the biases into a vector.</p>
+By far the most common way of introducing neural networks is with the notion of computational graphs. While I do think that computational graphs are an important concept to understand, I do not think that they are the best way to be introduced to neural networks. Instead I will be using concepts that hopefully you the reader are familiar with. These are the essential operations for neural networks: matrix multiplication, non-linear activation functions and function composition. -->
+
+<!-- In general it's better to teach new ideas using concepts and terms that a person is already familiar with, since this allows for the already known things to function as a foundation to be built on, rather than trying build from scratch.
+
+The term 'neural networks' itself is kind of misleading. It creates an image of a brain like structure and it feeds into the whole hype about AI taking over. Neural networks in reality are nothing but a chain of matrix multiplications followed by non-linear functions.   -->
+
+<p><strong>First Layer</strong></p>
+
+<p>A layer in the context of an MLP is nothing but a linear transformation followed by an activation function. We will use our idea of learning multiple classifiers but instead of looking at them independently, we’ll define them together as a single layer.</p>
+
+<p>Let’s define three classifiers <script type="math/tex">(\boldsymbol{w_1}, b_1), (\boldsymbol{w_2}, b_3)</script> and <script type="math/tex">(\boldsymbol{w_3}, b_3)</script>. For compactness, let’s combine all of the weights into a single matrix and all of the biases into a vector.</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \boldsymbol{W} = \begin{bmatrix}
@@ -171,31 +181,9 @@
                              b_3 \\
                            \end{bmatrix} %]]></script>
 
-<!-- Let's continue with our idea of learning three classifiers but instead of looking at them as independent classifiers, let's define them as units into a single layer. Each units 'job' will be to learn to classify some portion of the input space. This will be the first layer of our MLP.
+<p>Now we need to get the classification decision from all three classifiers. We might be tempted to use the step function but for technical reasons, that will become clear later on, we require the function to be differentiable and since the step function is not, we cannot use it. We could however use the sigmoid.</p>
 
-We will also need a way to combine the outputs of each unit into a final classification decision. In order to do this we can define another classifier that will take as input the outputs of all of the units and will output a classification decision.
-
-**First Layer:**
-
-For simpler notation, let's combine $$\boldsymbol{w_1}, \boldsymbol{w_2}$$ and $$\boldsymbol{w_3}$$ into a matrix and call it $$\boldsymbol{W}$$ and combine $$b_1, b_2$$, and $$b_3$$ into a vector and call it $$\boldsymbol{b}$$.
-
-$$\boldsymbol{W} = \begin{bmatrix}
-           \boldsymbol{w_1} \\
-           \boldsymbol{w_2} \\
-           \boldsymbol{w_3} \\
-         \end{bmatrix} = \begin{bmatrix}
-                    w_1^{(1)} & w_1^{(2)}\\
-                    w_2^{(1)} & w_2^{(2)}\\
-                    w_3^{(1)} & w_3^{(2)}\\
-                  \end{bmatrix} \boldsymbol{b} = \begin{bmatrix}
-                             b_1 \\
-                             b_2 \\
-                             b_3 \\
-                           \end{bmatrix}$$ -->
-
-<p>Now we need to get the classification decision from all three classifiers. We might be tempted to use the step function but for technical reasons that will become clear later on, we require the function to be differentiable and since the step function is not, we cannot use it. We could however use the sigmoid.</p>
-
-<p>The classification decision from each of the units can then be obtained by applying <script type="math/tex">\sigma</script> element-wise to each of the three outputs.</p>
+<p>The classification decision from each of the classifiers can then be obtained by applying <script type="math/tex">\sigma</script> element-wise to each of the three outputs.</p>
 
 <script type="math/tex; mode=display">\sigma(\boldsymbol{Wx} + \boldsymbol{b}) = \begin{bmatrix}
 \sigma(\boldsymbol{w_1x} + b_1) \\
@@ -203,11 +191,13 @@ $$\boldsymbol{W} = \begin{bmatrix}
 \sigma(\boldsymbol{w_3x} + b_3) \\
 \end{bmatrix}</script>
 
-<p>In the neural network lingo this is a hidden layer with 3 sigmoid units. But we need not use sigmoid here. As I mentioned in the beginning of this post, the sigmoid function is just one example of many activation functions. We could use anything we want (as long as it’s differentiable). Here are a few alternatives: Tanh, ReLu, LeakyReLu etc. The most popular choice in practice is the ReLu activation defined as <script type="math/tex">\max(0, x)</script></p>
+<p>Notice that what we have is a linear transformation <script type="math/tex">\boldsymbol{s} = \boldsymbol{Wx} + \boldsymbol{b}</script>, followed by a non-linear activation <script type="math/tex">\boldsymbol{h} = \sigma(\boldsymbol{s})</script>.</p>
 
-<p><strong>Second Layer:</strong></p>
+<p><em>In the neural network lingo what we defined above is a hidden layer with 3 sigmoid units. Note that we need not use sigmoid here. As I mentioned in the beginning of this post, the sigmoid function is just one example of many activation functions. We could use anything we want (as long as it’s differentiable). Here are a few alternatives: Tanh, ReLu, LeakyReLu etc. The most popular choice in practice is the ReLu activation defined as <script type="math/tex">\max(0, x)</script>.</em></p>
 
-<p>The first layer gives us three outputs but we still need a way to combine them into a final classification decision. For example if the outputs from the layer is <script type="math/tex">[0.7, 0.6, 0.2]</script> what should the classification decision be?</p>
+<p><strong>Second Layer</strong></p>
+
+<p>The first layer gives us outputs from the classifier but we still need a way to combine them into one final classification decision. For example if the outputs from the layer are <script type="math/tex">[0.7, 0.6, 0.1]</script> what should the classification decision be?</p>
 
 <p>Let’s define another classifier <script type="math/tex">(\boldsymbol{w}_{final}, b_{final})</script> that will take the outputs of the three classifiers as input and will produce a final output: <script type="math/tex">\boldsymbol{w}_{final}^T\sigma(\boldsymbol{Wx} + \boldsymbol{b}) + b_{final}</script></p>
 
@@ -217,9 +207,21 @@ $$\boldsymbol{W} = \begin{bmatrix}
 
 <p>This one line actually fully defines our two-layer MLP.</p>
 
-<p>All is left is to define a loss function over the above function and optimize it with respect to <script type="math/tex">\boldsymbol{W}, \boldsymbol{b}, \boldsymbol{w}_{final}, b_{final}</script> using backpropagation. Which I will be talking about in the next post (hopefully).</p>
+<p><strong>Why do we need activations?</strong></p>
 
-<p><strong>Result:</strong></p>
+<p>When I defined the first layer, I said that we needed to get a classification decision from each of the classifiers. This isn’t quite right. We don’t need a classification decision. What we actually need is a response. A response that is non-linear in the input. Non-linear activation functions are actually what makes this whole thing work. If for example in our hidden layer we removed the <script type="math/tex">\sigma</script> activation and replaced it with an identity, the MLP will actually become a linear classifier which would mean that we will not be able represent the non-linear shape of the input data. To convince yourself, write out the MLP without any activations and see that it reduces to a linear function.</p>
+
+<!-- **More layers**
+
+In practice we usually have many such layers each connected to each other, i.e the output of one becomes the input for to next one. Chaining layers like this is actually the same as function composition. If we define each layer as a function, $$f_i(x) = g(\boldsymbol{W}_i\boldsymbol{x}+b_i)$$, where $$g$$ is some non-linear activation then an n-layer MLP can be written as the function composition $$MLP(x) = f_n(f_{n-1}(...(f_1(x))) $$. The depth of a network corresponds to $$n$$, when $$n > 2$$, people refer to this network as deep (this is where the term deep learning comes from). The width of a network corresponds to the number of units in each of the layer.
+
+The functions $$f_1,f_2, ..., f_{n-1}$$ are all learning a transformations with the ultimate goal to make the input $$X$$ linearly separable for the final layer $$f_n$$. This is the essence of deep learning. Every neural network one way or another is trying to learn a transformation function on the input space that can render the data linearly separable. -->
+
+<p><strong>Learning</strong></p>
+
+<p>We have managed to define a two-layer MLP but we still need a way to learn the parameters of the function. The entire function is fully differentiable and this is no accident. As I said earlier, we refrained from using the step-function as an activation since it’s not differentiable. We needed everything to be differentiable because we want to use Stochastic Gradient Descent (SGD) to learn the parameters of the function. And as you know SGD works by repeatedly taking the gradient of the objective function w.r.t learnable parameters and taking a step in the direction of the steepest descent.</p>
+
+<p><strong>Result</strong></p>
 
 <p>I want to skip ahead a little bit and show what the result will be after learning the parameters. Going back to how we started, we said that if we had a transformation function that could make the dataset linearly separable then learning would be easy. Well <script type="math/tex">\phi(\boldsymbol{x}) = \sigma(\boldsymbol{Wx} + \boldsymbol{b})</script> will actually be that transformation that makes the dataset linearly separable. This is what the data looks like after applying that learned function:</p>
 
