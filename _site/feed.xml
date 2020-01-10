@@ -1,13 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-12-20T22:08:34+04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Giorgi</title><subtitle>I want to know simple things well</subtitle><author><name>Giorgi Kvernadze</name></author><entry><title type="html">Multi-Layer Perceptron</title><link href="http://localhost:4000/multilayer-perceptron/" rel="alternate" type="text/html" title="Multi-Layer Perceptron" /><published>2019-12-19T00:00:00+04:00</published><updated>2019-12-19T00:00:00+04:00</updated><id>http://localhost:4000/multilayer-perceptron</id><content type="html" xml:base="http://localhost:4000/multilayer-perceptron/">&lt;ul&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-12-30T14:51:49+04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Giorgi</title><subtitle>I want to know simple things well</subtitle><author><name>Giorgi Kvernadze</name></author><entry><title type="html">Introduction to Multilayer Perceptron</title><link href="http://localhost:4000/multilayer-perceptron/" rel="alternate" type="text/html" title="Introduction to Multilayer Perceptron" /><published>2019-12-19T00:00:00+04:00</published><updated>2019-12-19T00:00:00+04:00</updated><id>http://localhost:4000/multilayer-perceptron</id><content type="html" xml:base="http://localhost:4000/multilayer-perceptron/">&lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;em&gt;This post is best suited for people who are familiar with linear classifiers, specifically Logistic Regression&lt;/em&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;em&gt;For the entirety of this post I will be assuming binary classes but everything that I write here can be extended to multi-class problems&lt;/em&gt;&lt;/p&gt;
   &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;The goal of this post isn’t to be a comprehensive guide about neural networks, rather this is an attempt to show a path from going from logistic regression to a neural network where at each step we intuitively build on something that we already know&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multi-Layer Perceptron (MLP). MLPs are a powerful method for approximating functions and it’s a relatively simple model to implement.&lt;/p&gt;
+&lt;p&gt;There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it’s a relatively simple model to implement.&lt;/p&gt;
 
 &lt;p&gt;Before we jump into talking about MLPs, let’s quickly go over linear classifiers. Given training data as pairs &lt;script type=&quot;math/tex&quot;&gt;(\boldsymbol{x}_i, y_i)&lt;/script&gt; where &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{x}_i \in \mathbb{R}^n&lt;/script&gt; are our datapoints (observations) and &lt;script type=&quot;math/tex&quot;&gt;y_i \in \{0, 1\}&lt;/script&gt; are their corresponding class labels. The goal is to learn a vector of weights &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{w}&lt;/script&gt; and a bias &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt; such that &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{w}^T\boldsymbol{x} + b \ge 0&lt;/script&gt; if &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{x}&lt;/script&gt; belongs to the positive class and &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
 \boldsymbol{w}^T\boldsymbol{x} + b &lt; 0 %]]&gt;&lt;/script&gt; otherwise (belongs to negative class). This decision can be written as the following step function:&lt;/p&gt;
@@ -28,7 +31,7 @@
 
 &lt;p&gt;Where &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt; is usually set to be 0.5.&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Note: These are actually just a couple of examples of a zoo of functions that people in deep learning literature refer to as Activation functions.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Note: These are actually just a couple of examples of a zoo of functions that people in deep learning literature refer to as activation functions.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;If the dataset is linearly separable this is all fine, since we can always learn &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{w}&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt; that separates the data perfectly. We’re good even if the dataset is almost linearly separable, i.e the data points can be separated with a line, barring a few noisy observations.&lt;/p&gt;
 
@@ -98,17 +101,17 @@ The term 'neural networks' itself is kind of misleading. It creates an image of 
 
 &lt;p&gt;Notice that what we have is a linear transformation &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{s} = \boldsymbol{Wx} + \boldsymbol{b}&lt;/script&gt;, followed by a non-linear activation &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{h} = \sigma(\boldsymbol{s})&lt;/script&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;In the neural network lingo what we defined above is a hidden layer with 3 sigmoid units. Note that we need not use sigmoid here. As I mentioned in the beginning of this post, the sigmoid function is just one example of many activation functions. We could use anything we want (as long as it’s differentiable). Here are a few alternatives: Tanh, ReLu, LeakyReLu etc. The most popular choice in practice is the ReLu activation defined as &lt;script type=&quot;math/tex&quot;&gt;\max(0, x)&lt;/script&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;In the neural network lingo what we defined above is a hidden layer with 3 sigmoid units. Note that we need not use sigmoid here. As I mentioned in the beginning of this post, the sigmoid function is just one example of many activation functions. We could use anything we want (as long as it’s differentiable). Here are a few alternatives: Tanh, ReLu, LeakyReLu etc. The most popular choice in practice is the ReLu activation defined as &lt;script type=&quot;math/tex&quot;&gt;\text{ReLu}(z)=\max(0, z)&lt;/script&gt;.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Second Layer&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;The first layer gives us outputs from the classifier but we still need a way to combine them into one final classification decision. For example if the outputs from the layer are &lt;script type=&quot;math/tex&quot;&gt;[0.7, 0.6, 0.1]&lt;/script&gt; what should the classification decision be?&lt;/p&gt;
+&lt;p&gt;The first layer gives us outputs from the classifiers but we still need a way to combine them into one final classification decision. For example if the outputs from the layer are &lt;script type=&quot;math/tex&quot;&gt;[0.7, 0.5, 0.1]&lt;/script&gt; what should the classification decision be?&lt;/p&gt;
 
 &lt;p&gt;Let’s define another classifier &lt;script type=&quot;math/tex&quot;&gt;(\boldsymbol{w}_{final}, b_{final})&lt;/script&gt; that will take the outputs of the three classifiers as input and will produce a final output: &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{w}_{final}^T\sigma(\boldsymbol{Wx} + \boldsymbol{b}) + b_{final}&lt;/script&gt;&lt;/p&gt;
 
 &lt;p&gt;And finally in order to get the final classification decision, we apply a sigmoid activation to the result of this as well. Combining all the parts we get that our function is defined as:&lt;/p&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{MLP}(x) =\sigma(\boldsymbol{w}_{final}^T\sigma(\boldsymbol{Wx} + \boldsymbol{b}) + b_{final})&lt;/script&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{MLP}(\boldsymbol{x}) =\sigma(\boldsymbol{w}_{final}^T\sigma(\boldsymbol{Wx} + \boldsymbol{b}) + b_{final})&lt;/script&gt;
 
 &lt;p&gt;This one line actually fully defines our two-layer MLP.&lt;/p&gt;
 
@@ -124,11 +127,105 @@ The functions $$f_1,f_2, ..., f_{n-1}$$ are all learning a transformations with 
 
 &lt;p&gt;&lt;strong&gt;Learning&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;We have managed to define a two-layer MLP but we still need a way to learn the parameters of the function. The entire function is fully differentiable and this is no accident. As I said earlier, we refrained from using the step-function as an activation since it’s not differentiable. We needed everything to be differentiable because we want to use Stochastic Gradient Descent (SGD) to learn the parameters of the function. And as you know SGD works by repeatedly taking the gradient of the objective function w.r.t learnable parameters and taking a step in the direction of the steepest descent.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;You are free to skip ahead this section if you don’t care about knowing all the nitty gritty details of learning the parameters of the MLP.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;We have managed to define a two-layer MLP but we still need a way to learn the parameters of the function. The entire function is fully differentiable and this is no accident. As I said earlier, we refrained from using the step-function as an activation because of technical reasons. Well the technical reason is that differentiability is nice and we like it because it allows us to use well known optimization algorithms like Gradient Descent (GD).&lt;/p&gt;
+
+&lt;p&gt;When we define the loss function, the goal will be to minimize the loss w.r.t to the parameters &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{W}, \boldsymbol{b}, \boldsymbol{w}_{final}, b_{final}&lt;/script&gt;. This will require application of the chain rule and if we’re not careful about giving names to intermediate values, it will quickly get hairy. So let’s do that first.&lt;/p&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{s}_1 = \boldsymbol{Wx} + \boldsymbol{b}&lt;/script&gt; &lt;br /&gt;
+  &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{h} = \sigma(\boldsymbol{s}_1)&lt;/script&gt; &lt;br /&gt;
+  &lt;script type=&quot;math/tex&quot;&gt;s_2 = \boldsymbol{w}^T_{final}\boldsymbol{h} + b_{final}&lt;/script&gt; &lt;br /&gt;
+  &lt;script type=&quot;math/tex&quot;&gt;\hat{y} = \sigma(s_2)&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;Okay now that we have our intermediate values named, let’s define the loss function. We’re going to be using binary cross-entropy (negative log likelihood) which is defined as:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;L(y, \hat{y}) = \frac{1}{n} \sum_{i=1}^n -y_i\log\hat{y_i} - (1-y_i)\log(1-\hat{y_i})&lt;/script&gt;
+
+&lt;p&gt;Before we start the tedious process of taking partial derivatives of a composed function I want to remind you that the goal is to compute these four partial derivatives: &lt;script type=&quot;math/tex&quot;&gt;\frac{\partial L}{\partial \boldsymbol{w}_{final}}, \frac{\partial L}{\partial b_{final}}, \frac{\partial L}{\partial \boldsymbol{W}}, \frac{\partial L}{\partial \boldsymbol{b}}&lt;/script&gt;. If we have these values, we can use them to update the parameters at each step of GD. Using the chain rule we can write down each of the partial derivatives as a product:&lt;/p&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\frac{\partial L}{\partial \boldsymbol{w}_{final}} = \frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial \boldsymbol{w}_{final}}&lt;/script&gt; &lt;br /&gt;
+  &lt;script type=&quot;math/tex&quot;&gt;\frac{\partial L}{\partial b_{final}} = \frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial b_{final}}&lt;/script&gt; &lt;br /&gt;
+  &lt;script type=&quot;math/tex&quot;&gt;\frac{\partial L}{\partial \boldsymbol{W}} = \frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial \boldsymbol{h}}\frac{\partial \boldsymbol{h}}{\partial \boldsymbol{s}_1}\frac{\partial \boldsymbol{s}_1}{\partial \boldsymbol{W}}&lt;/script&gt; &lt;br /&gt;
+  &lt;script type=&quot;math/tex&quot;&gt;\frac{\partial L}{\partial \boldsymbol{b}} = \frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial \boldsymbol{h}}\frac{\partial \boldsymbol{h}}{\partial \boldsymbol{s}_1}\frac{\partial \boldsymbol{s}_1}{\partial \boldsymbol{b}}&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;I know this looks complex but it really isn’t that complicated. All we’re doing is taking a partial derivative of the loss with respect to each of the learnable parameters. Since the loss is a composition function we have to use chain rule. That’s it.&lt;/p&gt;
+
+&lt;p&gt;We can see that &lt;script type=&quot;math/tex&quot;&gt;\frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}&lt;/script&gt; is shared among all of them and that &lt;script type=&quot;math/tex&quot;&gt;L, \hat{y}, s_2&lt;/script&gt; are all scalar variables therefore the derivatives are relatively easy to compute.&lt;/p&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\frac{\partial L}{\partial \hat{y}} = \frac{\hat{y}-y}{\hat{y}(1-\hat{y})}&lt;/script&gt; &lt;br /&gt;
+  &lt;script type=&quot;math/tex&quot;&gt;\frac{\partial \hat{y}}{\partial s_2} = \hat{y}(1-\hat{y})&lt;/script&gt; (Recall that &lt;script type=&quot;math/tex&quot;&gt;\sigma^{'}(z) = (1-\sigma(z))\sigma(z)&lt;/script&gt;)&lt;/p&gt;
+
+&lt;p&gt;Hence &lt;script type=&quot;math/tex&quot;&gt;\frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2} = \hat{y}-y&lt;/script&gt;.&lt;/p&gt;
+
+&lt;p&gt;Continuing down the chain we get:&lt;/p&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\frac{\partial s_2}{\partial \boldsymbol{w}_{final}} = \boldsymbol{h}&lt;/script&gt; &lt;br /&gt;
+  &lt;script type=&quot;math/tex&quot;&gt;\frac{\partial s_2}{\partial b_{final}} = 1&lt;/script&gt; &lt;br /&gt;
+  &lt;script type=&quot;math/tex&quot;&gt;\frac{\partial s_2}{\partial \boldsymbol{h}} = \boldsymbol{w}_{final}&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;Now since, &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{h}&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{s_1}&lt;/script&gt; are both vectors, the partial &lt;script type=&quot;math/tex&quot;&gt;\frac{\partial \boldsymbol{h}}{\partial \boldsymbol{s_1}}&lt;/script&gt; will be a matrix, however it will be a diagonal matrix.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\frac{\partial \boldsymbol{h}}{\partial \boldsymbol{s_1}} = \text{diag}((\boldsymbol{1} - \boldsymbol{h}) \odot \boldsymbol{h})&lt;/script&gt;
+
+&lt;p&gt;Which can be replaced by an element-wise multiplication in the chain as: &lt;script type=&quot;math/tex&quot;&gt;\odot (\boldsymbol{1} - \boldsymbol{h}) \odot \boldsymbol{h}&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;The partial derivative &lt;script type=&quot;math/tex&quot;&gt;\frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{W}}&lt;/script&gt; is the most complicated to compute. &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{s_1}&lt;/script&gt; is a vector and &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{W}&lt;/script&gt; is a matrix, therefore the result of the partial derivative will be a 3 dimensional tensor! But fortunately, we will be able to reduce it to something more simple.&lt;/p&gt;
+
+&lt;p&gt;Instead of computing the partial derivative with respect to entire weight matrix, let’s instead take derivatives with respect to each of the classifiers &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{w_1}, \boldsymbol{w_2},&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{w_3}&lt;/script&gt; (These would correspond to the rows of &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{W}&lt;/script&gt;). Each of these derivatives will be a matrix instead of a tensor.&lt;/p&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{w_1}} = \begin{bmatrix}
+             x_1 &amp;&amp; x_2\\
+             0 &amp;&amp; 0 \\
+             0 &amp;&amp; 0 \\
+           \end{bmatrix} %]]&gt;&lt;/script&gt; &lt;br /&gt;
+  &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{w_2}} = \begin{bmatrix}
+            0 &amp;&amp; 0\\
+            x_1 &amp;&amp; x_2 \\
+            0 &amp;&amp; 0 \\
+          \end{bmatrix} %]]&gt;&lt;/script&gt; &lt;br /&gt;
+  &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{w_3}} = \begin{bmatrix}
+            0 &amp;&amp; 0\\
+            0 &amp;&amp; 0 \\
+            x_1 &amp;&amp; x_2 \\
+          \end{bmatrix} %]]&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;We know that we’re gonna be using these values in a multiplication. We can use this fact to simplify the expression for the derivative. Let &lt;script type=&quot;math/tex&quot;&gt;\frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial \boldsymbol{h}}\frac{\partial \boldsymbol{h}}{\partial \boldsymbol{s}_1} = \boldsymbol{\delta}&lt;/script&gt;, then we’ll have&lt;/p&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{\delta} \frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{w_1}} = [\delta_1x_1, \delta_1x_2]&lt;/script&gt; &lt;br /&gt;
+  &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{\delta} \frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{w_2}} = [\delta_2x_1, \delta_2x_2]&lt;/script&gt; &lt;br /&gt;
+  &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{\delta} \frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{w_3}} = [\delta_3x_1, \delta_3x_2]&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;Which implies that &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\boldsymbol{\delta}\frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{W}} = \begin{bmatrix}
+          \delta_1x_1 &amp;&amp; \delta_1x_2\\
+          \delta_2x_1 &amp;&amp; \delta_2x_2 \\
+          \delta_3x_1 &amp;&amp; \delta_3x_2 \\
+        \end{bmatrix} %]]&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;We can rewrite this compactly as an &lt;em&gt;outer product&lt;/em&gt; between &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{\delta}&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{x}&lt;/script&gt;.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial \boldsymbol{h}}\frac{\partial \boldsymbol{h}}{\partial \boldsymbol{s}_1}\frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{W}} = \boldsymbol{\delta} \otimes \boldsymbol{x}&lt;/script&gt;
+
+&lt;p&gt;And finally&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{b}} = \text{diag}(\boldsymbol{1}) = \boldsymbol{I}&lt;/script&gt;
+
+&lt;p&gt;Putting everything together:&lt;/p&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\frac{\partial L}{\partial \boldsymbol{w}_{final}} = (\hat{y} - y)\boldsymbol{h}&lt;/script&gt; &lt;br /&gt;
+  &lt;script type=&quot;math/tex&quot;&gt;\frac{\partial L}{\partial b_{final}} = \hat{y} - y&lt;/script&gt; &lt;br /&gt;
+  &lt;script type=&quot;math/tex&quot;&gt;\frac{\partial L}{\partial \boldsymbol{W}} = ((\hat{y} - y)\boldsymbol{w}_{final}\odot (\boldsymbol{1} - \boldsymbol{h}) \odot \boldsymbol{h}) \otimes \boldsymbol{x}&lt;/script&gt; &lt;br /&gt;
+  &lt;script type=&quot;math/tex&quot;&gt;\frac{\partial L}{\partial \boldsymbol{b}} = ((\hat{y} - y)\boldsymbol{w}_{final}\odot (\boldsymbol{1} - \boldsymbol{h}) \odot \boldsymbol{h})^T&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;You may have noticed that all of this is for a single datapoint &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{x}&lt;/script&gt;, we wouldn’t do this in practice. It is much more preferable to have everything computed for a batch of inputs &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{X}&lt;/script&gt;, this allows us to update the parameters much more efficiently. I highly recommend you redo all of the computations of the partial derivatives in matrix form.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Result&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;I want to skip ahead a little bit and show what the result will be after learning the parameters. Going back to how we started, we said that if we had a transformation function that could make the dataset linearly separable then learning would be easy. Well &lt;script type=&quot;math/tex&quot;&gt;\phi(\boldsymbol{x}) = \sigma(\boldsymbol{Wx} + \boldsymbol{b})&lt;/script&gt; will actually be that transformation that makes the dataset linearly separable. This is what the data looks like after applying that learned function:&lt;/p&gt;
+&lt;p&gt;Going back to how we started, we said that if we had a transformation function that could make the dataset linearly separable then learning would be easy. Well &lt;script type=&quot;math/tex&quot;&gt;\phi(\boldsymbol{x}) = \sigma(\boldsymbol{Wx} + \boldsymbol{b})&lt;/script&gt; will actually be that transformation that makes the dataset linearly separable. This is what the data looks like after applying that learned function:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../images/projection.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 

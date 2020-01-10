@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Multi-Layer Perceptron
+title:  Introduction to Multilayer Perceptron
 categories: [Machine Learning, Neural Networks]
 excerpt: There are many types of neural networks, each having some advantage over others, in this post I want to introduce the simplest form of a neural network, a Multi-Layer Perceptron (MLP). MLPs are a powerful method for approximating functions and it's a relatively simple model to implement.
 mathjax: true
@@ -10,7 +10,9 @@ mathjax: true
 
 - *For the entirety of this post I will be assuming binary classes but everything that I write here can be extended to multi-class problems*
 
-There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multi-Layer Perceptron (MLP). MLPs are a powerful method for approximating functions and it's a relatively simple model to implement.
+- *The goal of this post isn't to be a comprehensive guide about neural networks, rather this is an attempt to show a path from going from logistic regression to a neural network where at each step we intuitively build on something that we already know*
+
+There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it's a relatively simple model to implement.
 
 Before we jump into talking about MLPs, let's quickly go over linear classifiers. Given training data as pairs $$(\boldsymbol{x}_i, y_i)$$ where $$\boldsymbol{x}_i \in \mathbb{R}^n$$ are our datapoints (observations) and $$y_i \in \{0, 1\}$$ are their corresponding class labels. The goal is to learn a vector of weights $$\boldsymbol{w}$$ and a bias $$b$$ such that $$\boldsymbol{w}^T\boldsymbol{x} + b \ge 0$$ if $$\boldsymbol{x}$$ belongs to the positive class and $$\boldsymbol{w}^T\boldsymbol{x} + b < 0$$ otherwise (belongs to negative class). This decision can be written as the following step function:
 
@@ -28,7 +30,7 @@ $$\text{Prediction} = \begin{cases}
 
 Where $$\theta$$ is usually set to be 0.5.
 
-*Note: These are actually just a couple of examples of a zoo of functions that people in deep learning literature refer to as Activation functions.*
+*Note: These are actually just a couple of examples of a zoo of functions that people in deep learning literature refer to as activation functions.*
 
 If the dataset is linearly separable this is all fine, since we can always learn $$\boldsymbol{w}$$ and $$b$$ that separates the data perfectly. We're good even if the dataset is almost linearly separable, i.e the data points can be separated with a line, barring a few noisy observations.  
 
@@ -100,17 +102,17 @@ $$\sigma(\boldsymbol{Wx} + \boldsymbol{b}) = \begin{bmatrix}
 
 Notice that what we have is a linear transformation $$\boldsymbol{s} = \boldsymbol{Wx} + \boldsymbol{b}$$, followed by a non-linear activation $$\boldsymbol{h} = \sigma(\boldsymbol{s})$$.
 
-*In the neural network lingo what we defined above is a hidden layer with 3 sigmoid units. Note that we need not use sigmoid here. As I mentioned in the beginning of this post, the sigmoid function is just one example of many activation functions. We could use anything we want (as long as it's differentiable). Here are a few alternatives: Tanh, ReLu, LeakyReLu etc. The most popular choice in practice is the ReLu activation defined as $$\max(0, x)$$.*
+*In the neural network lingo what we defined above is a hidden layer with 3 sigmoid units. Note that we need not use sigmoid here. As I mentioned in the beginning of this post, the sigmoid function is just one example of many activation functions. We could use anything we want (as long as it's differentiable). Here are a few alternatives: Tanh, ReLu, LeakyReLu etc. The most popular choice in practice is the ReLu activation defined as $$\text{ReLu}(z)=\max(0, z)$$.*
 
 **Second Layer**
 
-The first layer gives us outputs from the classifier but we still need a way to combine them into one final classification decision. For example if the outputs from the layer are $$[0.7, 0.6, 0.1]$$ what should the classification decision be?
+The first layer gives us outputs from the classifiers but we still need a way to combine them into one final classification decision. For example if the outputs from the layer are $$[0.7, 0.5, 0.1]$$ what should the classification decision be?
 
 Let's define another classifier $$(\boldsymbol{w}_{final}, b_{final})$$ that will take the outputs of the three classifiers as input and will produce a final output: $$\boldsymbol{w}_{final}^T\sigma(\boldsymbol{Wx} + \boldsymbol{b}) + b_{final}$$
 
 And finally in order to get the final classification decision, we apply a sigmoid activation to the result of this as well. Combining all the parts we get that our function is defined as:
 
- $$\text{MLP}(x) =\sigma(\boldsymbol{w}_{final}^T\sigma(\boldsymbol{Wx} + \boldsymbol{b}) + b_{final})$$
+ $$\text{MLP}(\boldsymbol{x}) =\sigma(\boldsymbol{w}_{final}^T\sigma(\boldsymbol{Wx} + \boldsymbol{b}) + b_{final})$$
 
 This one line actually fully defines our two-layer MLP.
 
@@ -127,12 +129,105 @@ The functions $$f_1,f_2, ..., f_{n-1}$$ are all learning a transformations with 
 
 **Learning**
 
-We have managed to define a two-layer MLP but we still need a way to learn the parameters of the function. The entire function is fully differentiable and this is no accident. As I said earlier, we refrained from using the step-function as an activation since it's not differentiable. We needed everything to be differentiable because we want to use Stochastic Gradient Descent (SGD) to learn the parameters of the function. And as you know SGD works by repeatedly taking the gradient of the objective function w.r.t learnable parameters and taking a step in the direction of the steepest descent.
+*You are free to skip ahead this section if you don't care about knowing all the nitty gritty details of learning the parameters of the MLP.*
+
+We have managed to define a two-layer MLP but we still need a way to learn the parameters of the function. The entire function is fully differentiable and this is no accident. As I said earlier, we refrained from using the step-function as an activation because of technical reasons. Well the technical reason is that differentiability is nice and we like it because it allows us to use well known optimization algorithms like Gradient Descent (GD).
+
+When we define the loss function, the goal will be to minimize the loss w.r.t to the parameters $$\boldsymbol{W}, \boldsymbol{b}, \boldsymbol{w}_{final}, b_{final}$$. This will require application of the chain rule and if we're not careful about giving names to intermediate values, it will quickly get hairy. So let's do that first.
+
+
+  $$\boldsymbol{s}_1 = \boldsymbol{Wx} + \boldsymbol{b}$$ \\
+  $$\boldsymbol{h} = \sigma(\boldsymbol{s}_1)$$ \\
+  $$s_2 = \boldsymbol{w}^T_{final}\boldsymbol{h} + b_{final}$$ \\
+  $$\hat{y} = \sigma(s_2)$$
+
+Okay now that we have our intermediate values named, let's define the loss function. We're going to be using binary cross-entropy (negative log likelihood) which is defined as:
+
+$$ L(y, \hat{y}) = \frac{1}{n} \sum_{i=1}^n -y_i\log\hat{y_i} - (1-y_i)\log(1-\hat{y_i})$$
+
+Before we start the tedious process of taking partial derivatives of a composed function I want to remind you that the goal is to compute these four partial derivatives: $$\frac{\partial L}{\partial \boldsymbol{w}_{final}}, \frac{\partial L}{\partial b_{final}}, \frac{\partial L}{\partial \boldsymbol{W}}, \frac{\partial L}{\partial \boldsymbol{b}}$$. If we have these values, we can use them to update the parameters at each step of GD. Using the chain rule we can write down each of the partial derivatives as a product:
+
+  $$\frac{\partial L}{\partial \boldsymbol{w}_{final}} = \frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial \boldsymbol{w}_{final}}$$ \\
+  $$\frac{\partial L}{\partial b_{final}} = \frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial b_{final}}$$ \\
+  $$\frac{\partial L}{\partial \boldsymbol{W}} = \frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial \boldsymbol{h}}\frac{\partial \boldsymbol{h}}{\partial \boldsymbol{s}_1}\frac{\partial \boldsymbol{s}_1}{\partial \boldsymbol{W}}$$ \\
+  $$\frac{\partial L}{\partial \boldsymbol{b}} = \frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial \boldsymbol{h}}\frac{\partial \boldsymbol{h}}{\partial \boldsymbol{s}_1}\frac{\partial \boldsymbol{s}_1}{\partial \boldsymbol{b}}$$
+
+I know this looks complex but it really isn't that complicated. All we're doing is taking a partial derivative of the loss with respect to each of the learnable parameters. Since the loss is a composition function we have to use chain rule. That's it.
+
+We can see that $$\frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}$$ is shared among all of them and that $$L, \hat{y}, s_2$$ are all scalar variables therefore the derivatives are relatively easy to compute.
+
+  $$\frac{\partial L}{\partial \hat{y}} = \frac{\hat{y}-y}{\hat{y}(1-\hat{y})}$$ \\
+  $$\frac{\partial \hat{y}}{\partial s_2} = \hat{y}(1-\hat{y})$$ (Recall that $$\sigma^{'}(z) = (1-\sigma(z))\sigma(z)$$)
+
+Hence $$\frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2} = \hat{y}-y$$.
+
+Continuing down the chain we get:
+
+  $$\frac{\partial s_2}{\partial \boldsymbol{w}_{final}} = \boldsymbol{h}$$ \\
+  $$\frac{\partial s_2}{\partial b_{final}} = 1$$ \\
+  $$\frac{\partial s_2}{\partial \boldsymbol{h}} = \boldsymbol{w}_{final}$$
+
+Now since, $$\boldsymbol{h}$$ and $$\boldsymbol{s_1}$$ are both vectors, the partial $$\frac{\partial \boldsymbol{h}}{\partial \boldsymbol{s_1}}$$ will be a matrix, however it will be a diagonal matrix.
+
+  $$\frac{\partial \boldsymbol{h}}{\partial \boldsymbol{s_1}} = \text{diag}((\boldsymbol{1} - \boldsymbol{h}) \odot \boldsymbol{h})$$
+
+Which can be replaced by an element-wise multiplication in the chain as: $$\odot (\boldsymbol{1} - \boldsymbol{h}) \odot \boldsymbol{h}$$
+
+The partial derivative $$\frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{W}}$$ is the most complicated to compute. $$\boldsymbol{s_1}$$ is a vector and $$\boldsymbol{W}$$ is a matrix, therefore the result of the partial derivative will be a 3 dimensional tensor! But fortunately, we will be able to reduce it to something more simple.
+
+Instead of computing the partial derivative with respect to entire weight matrix, let's instead take derivatives with respect to each of the classifiers $$\boldsymbol{w_1}, \boldsymbol{w_2},$$ and $$\boldsymbol{w_3}$$ (These would correspond to the rows of $$\boldsymbol{W}$$). Each of these derivatives will be a matrix instead of a tensor.
+
+  $$\frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{w_1}} = \begin{bmatrix}
+             x_1 && x_2\\
+             0 && 0 \\
+             0 && 0 \\
+           \end{bmatrix}$$ \\
+  $$\frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{w_2}} = \begin{bmatrix}
+            0 && 0\\
+            x_1 && x_2 \\
+            0 && 0 \\
+          \end{bmatrix}$$ \\
+  $$\frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{w_3}} = \begin{bmatrix}
+            0 && 0\\
+            0 && 0 \\
+            x_1 && x_2 \\
+          \end{bmatrix}$$
+
+We know that we're gonna be using these values in a multiplication. We can use this fact to simplify the expression for the derivative. Let $$\frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial \boldsymbol{h}}\frac{\partial \boldsymbol{h}}{\partial \boldsymbol{s}_1} = \boldsymbol{\delta}$$, then we'll have
+
+  $$\boldsymbol{\delta} \frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{w_1}} = [\delta_1x_1, \delta_1x_2]$$ \\
+  $$\boldsymbol{\delta} \frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{w_2}} = [\delta_2x_1, \delta_2x_2]$$ \\
+  $$\boldsymbol{\delta} \frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{w_3}} = [\delta_3x_1, \delta_3x_2]$$
+
+
+Which implies that $$\boldsymbol{\delta}\frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{W}} = \begin{bmatrix}
+          \delta_1x_1 && \delta_1x_2\\
+          \delta_2x_1 && \delta_2x_2 \\
+          \delta_3x_1 && \delta_3x_2 \\
+        \end{bmatrix}$$
+
+We can rewrite this compactly as an *outer product* between $$\boldsymbol{\delta}$$ and $$\boldsymbol{x}$$.
+
+$$\frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial \boldsymbol{h}}\frac{\partial \boldsymbol{h}}{\partial \boldsymbol{s}_1}\frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{W}} = \boldsymbol{\delta} \otimes \boldsymbol{x}$$
+
+And finally
+
+$$\frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{b}} = \text{diag}(\boldsymbol{1}) = \boldsymbol{I}$$
+
+
+Putting everything together:
+
+  $$\frac{\partial L}{\partial \boldsymbol{w}_{final}} = (\hat{y} - y)\boldsymbol{h}$$ \\
+  $$\frac{\partial L}{\partial b_{final}} = \hat{y} - y$$ \\
+  $$\frac{\partial L}{\partial \boldsymbol{W}} = ((\hat{y} - y)\boldsymbol{w}_{final}\odot (\boldsymbol{1} - \boldsymbol{h}) \odot \boldsymbol{h}) \otimes \boldsymbol{x}$$ \\
+  $$\frac{\partial L}{\partial \boldsymbol{b}} = ((\hat{y} - y)\boldsymbol{w}_{final}\odot (\boldsymbol{1} - \boldsymbol{h}) \odot \boldsymbol{h})^T$$
+
+You may have noticed that all of this is for a single datapoint $$\boldsymbol{x}$$, we wouldn't do this in practice. It is much more preferable to have everything computed for a batch of inputs $$\boldsymbol{X}$$, this allows us to update the parameters much more efficiently. I highly recommend you redo all of the computations of the partial derivatives in matrix form. 
 
 
 **Result**
 
-I want to skip ahead a little bit and show what the result will be after learning the parameters. Going back to how we started, we said that if we had a transformation function that could make the dataset linearly separable then learning would be easy. Well $$\phi(\boldsymbol{x}) = \sigma(\boldsymbol{Wx} + \boldsymbol{b})$$ will actually be that transformation that makes the dataset linearly separable. This is what the data looks like after applying that learned function:
+Going back to how we started, we said that if we had a transformation function that could make the dataset linearly separable then learning would be easy. Well $$\phi(\boldsymbol{x}) = \sigma(\boldsymbol{Wx} + \boldsymbol{b})$$ will actually be that transformation that makes the dataset linearly separable. This is what the data looks like after applying that learned function:
 
 ![](../images/projection.png)
 
