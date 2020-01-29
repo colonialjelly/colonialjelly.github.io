@@ -1,0 +1,2 @@
+I")<p>About 6-8 months ago I was working on the problem of detecting out-of-distribution (OOD) samples. One of the papers I was following was using OOD samples in their loss in a clever way. They were minimizing the loss on the in distribution data (training data) and at the same time they were</p>
+:ET

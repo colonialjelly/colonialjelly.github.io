@@ -2,6 +2,14 @@
   
     {
 
+      "title"    : "Better generalization with OOD data regularization",
+      "url"      : "/spurious-correlations/",
+      "category" : "Machine Learning",
+      "date"     : "December 20, 2019"
+    } ,
+  
+    {
+
       "title"    : "Introduction to Multilayer Perceptron",
       "url"      : "/multilayer-perceptron/",
       "category" : "Machine Learning, Neural Networks",
