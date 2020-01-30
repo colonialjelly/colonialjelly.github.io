@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Introduction to Multilayer Perceptron – Giorgi – I want to know simple things well</title>
+    <title>Introduction to Multilayer Perceptron – Giorgi – I think, therefore I'm distracted</title>
     <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Introduction to Multilayer Perceptron | Giorgi</title>
 <meta name="generator" content="Jekyll v4.0.0" />
@@ -43,7 +43,7 @@
 
 
     <link rel="stylesheet" type="text/css" href="/assets/style.css" />
-    <link rel="alternate" type="application/rss+xml" title="Giorgi - I want to know simple things well" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Giorgi - I think, therefore I'm distracted" href="/feed.xml" />
     <link rel="canonical" href="http://localhost:4000/multilayer-perceptron/" />
 
     <meta name="theme-color" content="#000000">
@@ -60,7 +60,7 @@
 
             <div class="site-info">
               <h1 class="site-name"><a href="/">Giorgi</a></h1>
-              <p class="site-description">I want to know simple things well</p> 
+              <p class="site-description">I think, therefore I'm distracted</p> 
             </div>
 
             <nav>
@@ -318,6 +318,11 @@ The functions $$f_1,f_2, ..., f_{n-1}$$ are all learning a transformations with 
 
 <p>You may have noticed that all of this is for a single datapoint <script type="math/tex">\boldsymbol{x}</script>, we wouldn’t do this in practice. It is much more preferable to have everything computed for a batch of inputs <script type="math/tex">\boldsymbol{X}</script>, this allows us to update the parameters much more efficiently. I highly recommend you redo all of the computations of the partial derivatives in matrix form.</p>
 
+<p>I’ve also purposefully skipped over a lot of the details. I wanted this block of the post to serve as a reference for your own solutions rather than a complete guide. Here are some useful notes that can come in handy if you want to do everything from scratch:</p>
+
+<p><a href="http://cs231n.stanford.edu/vecDerivs.pdf">Vector, Matrix, and Tensor Derivatives - Erik Learned-Miller</a>
+<a href="https://web.stanford.edu/class/cs224n/readings/gradient-notes.pdf">Computing Neural Network Gradients - Kevin Clark</a></p>
+
 <p><strong>Result</strong></p>
 
 <p>Going back to how we started, we said that if we had a transformation function that could make the dataset linearly separable then learning would be easy. Well <script type="math/tex">\phi(\boldsymbol{x}) = \sigma(\boldsymbol{Wx} + \boldsymbol{b})</script> will actually be that transformation that makes the dataset linearly separable. This is what the data looks like after applying that learned function:</p>
@@ -328,7 +333,8 @@ The functions $$f_1,f_2, ..., f_{n-1}$$ are all learning a transformations with 
 
 <p><img src="../images/hidden_classifiers.png" alt="" /></p>
 
-<p>pretty neat huh?</p>
+<p>pretty neat huh?
+Here’s a link to the Jupyter notebook that contains all the code for this post: s<a href="https://github.com/colonialjelly/multilayer-perceptron/blob/master/multilayer-perceptron.ipynb">Code</a></p>
 
   </div>
 
