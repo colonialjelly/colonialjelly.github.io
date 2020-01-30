@@ -226,8 +226,8 @@ You may have noticed that all of this is for a single datapoint $$\boldsymbol{x}
 
 I've also purposefully skipped over a lot of the details. I wanted this block of the post to serve as a reference for your own solutions rather than a complete guide. Here are some useful notes that can come in handy if you want to do everything from scratch:
 
-[Vector, Matrix, and Tensor Derivatives - Erik Learned-Miller](http://cs231n.stanford.edu/vecDerivs.pdf)
-[Computing Neural Network Gradients - Kevin Clark](https://web.stanford.edu/class/cs224n/readings/gradient-notes.pdf)
+- [Vector, Matrix, and Tensor Derivatives - Erik Learned-Miller](http://cs231n.stanford.edu/vecDerivs.pdf)
+- [Computing Neural Network Gradients - Kevin Clark](https://web.stanford.edu/class/cs224n/readings/gradient-notes.pdf)
 
 **Result**
 
@@ -240,4 +240,5 @@ And these are the three linear classifiers that are learned in the hidden layer:
 ![](../images/hidden_classifiers.png)
 
 pretty neat huh?
-Here's a link to the Jupyter notebook that contains all the code for this post: s[Code](https://github.com/colonialjelly/multilayer-perceptron/blob/master/multilayer-perceptron.ipynb)
+
+Here's a link to the Jupyter notebook that contains all the code for this post: [Code](https://github.com/colonialjelly/multilayer-perceptron/blob/master/multilayer-perceptron.ipynb)
