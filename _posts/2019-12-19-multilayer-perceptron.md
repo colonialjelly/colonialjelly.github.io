@@ -10,11 +10,13 @@ mathjax: true
 
 - *For the entirety of this post I will be assuming binary classes but everything that I write here can be extended to multi-class problems*
 
-- *The goal of this post isn't to be a comprehensive guide about neural networks, rather this is an attempt to show a path from going from logistic regression to a neural network where at each step we intuitively build on something that we already know*
+- *The goal of this post isn't to be a comprehensive guide about neural networks, rather this is an attempt to show a path, going from linear classifier to a simple neural network*
 
 There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it's a relatively simple model to implement.
 
-Before we jump into talking about MLPs, let's quickly go over linear classifiers. Given training data as pairs $$(\boldsymbol{x}_i, y_i)$$ where $$\boldsymbol{x}_i \in \mathbb{R}^n$$ are our datapoints (observations) and $$y_i \in \{0, 1\}$$ are their corresponding class labels. The goal is to learn a vector of weights $$\boldsymbol{w}$$ and a bias $$b$$ such that $$\boldsymbol{w}^T\boldsymbol{x} + b \ge 0$$ if $$\boldsymbol{x}$$ belongs to the positive class and $$\boldsymbol{w}^T\boldsymbol{x} + b < 0$$ otherwise (belongs to negative class). This decision can be written as the following step function:
+Before we jump into talking about MLPs, let's quickly go over linear classifiers. Given training data as pairs $$(\boldsymbol{x}_i, y_i)$$ where $$\boldsymbol{x}_i \in \mathbb{R}^n$$ are datapoints (observations) and $$y_i \in \{0, 1\}$$ are their corresponding class labels. The goal is to learn a vector of weights $$\boldsymbol{w}$$ and a bias $$b$$ such that $$\boldsymbol{w}^T\boldsymbol{x} + b \ge 0$$ if $$\boldsymbol{x}$$ belongs to the positive class and $$\boldsymbol{w}^T\boldsymbol{x} + b < 0$$ otherwise (belongs to negative class) [^1]. This decision can be written as the following step function:
+
+[^1]:The positive and negative classes are arbitrarily assigned and are not really essential to the problem formulation.
 
 $$\text{Prediction} = \begin{cases}
       1 & \boldsymbol{w}^T\boldsymbol{x} + b \ge 0 \\
@@ -28,11 +30,11 @@ $$\text{Prediction} = \begin{cases}
       0 &  \text{Otherwise}\\
 \end{cases}$$
 
-Where $$\theta$$ is usually set to be 0.5.
+Where $$\theta$$ is a threshold that is usually set to be 0.5.
 
 *Note: These are actually just a couple of examples of a zoo of functions that people in deep learning literature refer to as activation functions.*
 
-If the dataset is linearly separable this is all fine, since we can always learn $$\boldsymbol{w}$$ and $$b$$ that separates the data perfectly. We're good even if the dataset is almost linearly separable, i.e the data points can be separated with a line, barring a few noisy observations.  
+If the dataset is linearly separable this is all fine, since we can always learn $$\boldsymbol{w}$$ and $$b$$ that separates the data perfectly. We're in good shape even if the dataset is almost linearly separable, i.e the data points can be separated with a line, barring a few noisy observations.  
 
 ![](../images/blobs.png)
 
@@ -40,9 +42,11 @@ But what can we do if the dataset is highly non-linear? For example something li
 
 ![](../images/circles.png)
 
-One thing we could potentially do is to come up with some non-linear transformation function $$\phi(\boldsymbol{x})$$ such that the data becomes linearly separable. We can then apply that transformation to the original dataset and learn a linear classifier on the transformed dataset.
+One thing we could potentially do is to come up with some non-linear transformation function $$\phi(\boldsymbol{x})$$, such that applying it, renders the data linearly separable. Having this transformation function would allow us to use all the tools we have for linear classification.
 
-For example in this case we can see that the data points come from two co-centric circles. We can use this information to come up with a function: $$\phi(\boldsymbol{x}) = [x_1^2, x_2^2]$$
+<!-- We can then apply that transformation to the original dataset and learn a linear classifier on the transformed dataset. -->
+
+For example in this case we can see that the data points come from two concentric circles. Using this information we define the following transformation function: $$\phi(\boldsymbol{x}) = [x_1^2, x_2^2]$$
 
 Now we can learn a vector $$\boldsymbol{w}$$ and bias $$b$$ such that $$\boldsymbol{w}^T\phi(\boldsymbol{x}) + b \ge 0$$ if $$\boldsymbol{x}$$ is positive and $$\boldsymbol{w}^T\phi(\boldsymbol{x}) + b < 0$$ otherwise.
 
@@ -54,9 +58,9 @@ Here's another idea, instead of learning one linear classifier let's try to lear
 
 ![](../images/circles3.png)
 
-We know how to learn a single linear classifier but how can we learn three linear classifiers that can produce a result like this? The naive approach would be to try to learn them independently using different random initializations and hope that they converge to something like what we want. But this approach is doomed from the beginning since each classifier will try to fit the whole data while ignoring what the other classifiers are doing. In other words there will be no cooperation since none of the classifiers will be 'aware' of each other. This is the opposite of what we want. We want/need the classifiers to work together.
+We know how to learn a single linear classifier but how can we learn three linear classifiers that can produce a result like this? The naive approach would be to try to learn them independently using different random initializations and hope that they converge to something like what we want. But this approach is doomed from the beginning since each classifier will try to fit the whole data while ignoring what the other classifiers are doing. In other words there will be no cooperation since none of the classifiers will be "aware" of each other. This is the opposite of what we want. We want/need the classifiers to work together.
 
-This is where MLPs come in. A two-layer MLP can actually do both of the aforementioned things. It can learn a non-linear transformation that makes the dataset linearly separable and it can learn multiple linear classifiers that cooperate.
+This is where MLPs come in. A two-layer MLP can actually do both of the aforementioned things. 1) It can learn a non-linear transformation that makes the dataset linearly separable and 2) it can learn multiple linear classifiers that cooperate.
 
 
 <!-- **Neural Networks:**
