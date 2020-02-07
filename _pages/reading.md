@@ -19,3 +19,4 @@ List of some books I recommend reading (in no particular order):
 * **How to Win Friends and Influence People** - Dale Carnegie
 * **Slaughterhouse-Five** - Kurt Vonnegut
 * **Surely You're Joking, Mr. Feynman!** - Richard Feynman
+* **21 Lessons for the 21st Century** - Yuval Noah Harari
