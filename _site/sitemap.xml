@@ -17,6 +17,9 @@
 <loc>http://localhost:4000/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/listening/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/reading/</loc>
 </url>
 <url>

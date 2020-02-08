@@ -195,13 +195,15 @@ We have managed to define a simple MLP but we still need a way to learn the para
 #### Loss Function
 
 Since the function is differentiable, we can define a loss function and then start optimizing with respect to the learnable parameters using gradient descent. Notice that the output of the MLP is a real number between 0 and 1. What we're essentially doing is modeling the conditional distribution
-$$P(y | \boldsymbol{x})$$ with a parametrized function $$MLP(\boldsymbol{x}; \theta)$$ [^2]. If we assume that all of the observations $$\boldsymbol{x} \in X$$ (dataset) are drawn independently and identically distributed (i.i.d) from some distribution, we can then write down the negative log-likelihood function and optimize it with respect the parameters $$\theta$$.
+$$P(y | \boldsymbol{x})$$ with a parametrized function $$MLP(\boldsymbol{x}; \theta)$$ [^1]. This means we can use the principle of maximum likelihood to estimate the parameters.
 
-[^2]: To simplify the notation I'm referring to all of the parameters $$\boldsymbol{w}_{m}, b_{m}, \boldsymbol{W}, \boldsymbol{b}$$ with just $$\theta$$.
+[^1]: To simplify the notation I'm referring to all of the parameters $$\boldsymbol{w}_{m}, b_{m}, \boldsymbol{W}, \boldsymbol{b}$$ with just $$\theta$$.
 
 $$L(y, \hat{y}) = \frac{1}{n} \sum_{i=1}^n -y_i\log\hat{y_i} - (1-y_i)\log(1-\hat{y_i})$$
 
-Where $$\hat{y} = MLP(\boldsymbol{x}; \theta)$$. The objective is to minimize $$L(y, \hat{y})$$ with respect to the learnable parameters $$\theta$$.
+[^2]: What we have written here is the negative log-likelihood. Some people refer to this loss function as binary cross-entropy loss. These are equivalent loss functions, the only difference is the method/assumptions that one uses to arrive at each.
+
+Where $$\hat{y} = MLP(\boldsymbol{x}; \theta)$$. The objective is to minimize $$L(y, \hat{y})$$ [^2] with respect to the learnable parameters $$\theta$$.
 
 #### Optimization
 
@@ -220,7 +222,7 @@ Since $$L$$ is a composition function, we will need to use the chain rule (Remem
 
 #### Derivatives, Derivatives, Derivatives
 
-*Skip this section if you don't care about all of the nitty-gritty details of computing the partials. Although I do think that it's good to do this at least once by hand.*
+*Skip this section if you don't care about all of the gory details of computing the partials. Although I do think that it's a good idea to do this at least once by hand.*
 
 Now we will need to breakdown each of the partial derivatives using the chain rule. If we're not careful about giving names to intermediate values, it will quickly get hairy. So let's do that first.
 
@@ -318,14 +320,26 @@ I've also purposefully skipped over a lot of the details. I wanted this block of
 - [Computing Neural Network Gradients - Kevin Clark](https://web.stanford.edu/class/cs224n/readings/gradient-notes.pdf)
 
 ## Analysis
-Phew! now that's over with. Let's see what the results are after the optimization. Going back to how we started, we said that if we had a transformation function that could make the dataset linearly separable then learning would be easy. Well $$\phi(\boldsymbol{x}) = \sigma(\boldsymbol{Wx} + \boldsymbol{b})$$ will actually be that transformation that makes the dataset linearly separable. This is what the data looks like after applying that learned function:
+Phew! now that's over with. Let's see what the results after running gradient descent (1000 iterations with a learning rate of 0.01). Do you remember how we started? We said that if only we had a transformation function that could make the dataset linearly separable then learning would be easy. Well $$\phi(\boldsymbol{x}) = \sigma(\boldsymbol{Wx} + \boldsymbol{b})$$ will actually be that transformation that makes the dataset linearly separable. This is what the data looks like after applying that learned function:
 
 ![](../images/projection.png)
 
-And these are the three linear classifiers that are learned in the hidden layer:
+As you can see the data is completely linearly separable. In essence, this is what most of learning is when it comes to neural networks. Every neural network classifier that has classification as a primary task is trying to learn some kind of a transformation on the data so that the data becomes linearly separable. This is a big reason why neural networks became so popular. In the past people (usually domain experts) spent tremendous efforts in engineering features to make learning easy. Now a lot of that is handled by (deep) neural networks [^3].
+
+[^3]: There are downsides to this, I'll write a post about this in the future (hopefully).
+
+We were also trying to learn multiple linear classifiers. and voilà, these are the three linear classifiers $$(\boldsymbol{w}_{1}, b_1), (\boldsymbol{w}_{2}, b_3)$$ and $$(\boldsymbol{w}_{3}, b_3)$$ that are learned:
 
 ![](../images/hidden_classifiers.png)
 
-pretty neat huh?
+And finally this is what the learned decision boundary looks like in the original space. The colors indicate the predictions of the classifier.
+
+![](../images/decision_boundary.png)
+
+This is awesome innit? but wait hold on. While this classifier gets 100% accuracy, it does not represent the true function...
+
+Does that bother you?
 
 Here's a link to the Jupyter notebook that contains all the code for this post: [Code](https://github.com/colonialjelly/multilayer-perceptron/blob/master/multilayer-perceptron.ipynb)
+
+## Footnotes

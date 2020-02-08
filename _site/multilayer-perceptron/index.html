@@ -284,11 +284,11 @@ The functions $$f_1,f_2, ..., f_{n-1}$$ are all learning a transformations with 
 <h4 id="loss-function">Loss Function</h4>
 
 <p>Since the function is differentiable, we can define a loss function and then start optimizing with respect to the learnable parameters using gradient descent. Notice that the output of the MLP is a real number between 0 and 1. What we’re essentially doing is modeling the conditional distribution
-<script type="math/tex">P(y | \boldsymbol{x})</script> with a parametrized function <script type="math/tex">MLP(\boldsymbol{x}; \theta)</script> <sup id="fnref:2"><a href="#fn:2" class="footnote">1</a></sup>. If we assume that all of the observations <script type="math/tex">\boldsymbol{x} \in X</script> (dataset) are drawn independently and identically distributed (i.i.d) from some distribution, we can then write down the negative log-likelihood function and optimize it with respect the parameters <script type="math/tex">\theta</script>.</p>
+<script type="math/tex">P(y | \boldsymbol{x})</script> with a parametrized function <script type="math/tex">MLP(\boldsymbol{x}; \theta)</script> <sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>. This means we can use the principle of maximum likelihood to estimate the parameters.</p>
 
 <script type="math/tex; mode=display">L(y, \hat{y}) = \frac{1}{n} \sum_{i=1}^n -y_i\log\hat{y_i} - (1-y_i)\log(1-\hat{y_i})</script>
 
-<p>Where <script type="math/tex">\hat{y} = MLP(\boldsymbol{x}; \theta)</script>. The objective is to minimize <script type="math/tex">L(y, \hat{y})</script> with respect to the learnable parameters <script type="math/tex">\theta</script>.</p>
+<p>Where <script type="math/tex">\hat{y} = MLP(\boldsymbol{x}; \theta)</script>. The objective is to minimize <script type="math/tex">L(y, \hat{y})</script> <sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup> with respect to the learnable parameters <script type="math/tex">\theta</script>.</p>
 
 <h4 id="optimization">Optimization</h4>
 
@@ -307,7 +307,7 @@ The functions $$f_1,f_2, ..., f_{n-1}$$ are all learning a transformations with 
 
 <h4 id="derivatives-derivatives-derivatives">Derivatives, Derivatives, Derivatives</h4>
 
-<p><em>Skip this section if you don’t care about all of the nitty-gritty details of computing the partials. Although I do think that it’s good to do this at least once by hand.</em></p>
+<p><em>Skip this section if you don’t care about all of the gory details of computing the partials. Although I do think that it’s a good idea to do this at least once by hand.</em></p>
 
 <p>Now we will need to breakdown each of the partial derivatives using the chain rule. If we’re not careful about giving names to intermediate values, it will quickly get hairy. So let’s do that first.</p>
 
@@ -409,21 +409,37 @@ $$ L(y, \hat{y}) = \frac{1}{n} \sum_{i=1}^n -y_i\log\hat{y_i} - (1-y_i)\log(1-\h
 </ul>
 
 <h2 id="analysis">Analysis</h2>
-<p>Phew! now that’s over with. Let’s see what the results are after the optimization. Going back to how we started, we said that if we had a transformation function that could make the dataset linearly separable then learning would be easy. Well <script type="math/tex">\phi(\boldsymbol{x}) = \sigma(\boldsymbol{Wx} + \boldsymbol{b})</script> will actually be that transformation that makes the dataset linearly separable. This is what the data looks like after applying that learned function:</p>
+<p>Phew! now that’s over with. Let’s see what the results after running gradient descent (1000 iterations with a learning rate of 0.01). Do you remember how we started? We said that if only we had a transformation function that could make the dataset linearly separable then learning would be easy. Well <script type="math/tex">\phi(\boldsymbol{x}) = \sigma(\boldsymbol{Wx} + \boldsymbol{b})</script> will actually be that transformation that makes the dataset linearly separable. This is what the data looks like after applying that learned function:</p>
 
 <p><img src="../images/projection.png" alt="" /></p>
 
-<p>And these are the three linear classifiers that are learned in the hidden layer:</p>
+<p>As you can see the data is completely linearly separable. In essence, this is what most of learning is when it comes to neural networks. Every neural network classifier that has classification as a primary task is trying to learn some kind of a transformation on the data so that the data becomes linearly separable. This is a big reason why neural networks became so popular. In the past people (usually domain experts) spent tremendous efforts in engineering features to make learning easy. Now a lot of that is handled by (deep) neural networks <sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup>.</p>
+
+<p>We were also trying to learn multiple linear classifiers. and voilà, these are the three linear classifiers <script type="math/tex">(\boldsymbol{w}_{1}, b_1), (\boldsymbol{w}_{2}, b_3)</script> and <script type="math/tex">(\boldsymbol{w}_{3}, b_3)</script> that are learned:</p>
 
 <p><img src="../images/hidden_classifiers.png" alt="" /></p>
 
-<p>pretty neat huh?</p>
+<p>And finally this is what the learned decision boundary looks like in the original space. The colors indicate the predictions of the classifier.</p>
+
+<p><img src="../images/decision_boundary.png" alt="" /></p>
+
+<p>This is awesome innit? but wait hold on. While this classifier gets 100% accuracy, it does not represent the true function…</p>
+
+<p>Does that bother you?</p>
 
 <p>Here’s a link to the Jupyter notebook that contains all the code for this post: <a href="https://github.com/colonialjelly/multilayer-perceptron/blob/master/multilayer-perceptron.ipynb">Code</a></p>
+
+<h2 id="footnotes">Footnotes</h2>
 <div class="footnotes">
   <ol>
+    <li id="fn:1">
+      <p>To simplify the notation I’m referring to all of the parameters <script type="math/tex">\boldsymbol{w}_{m}, b_{m}, \boldsymbol{W}, \boldsymbol{b}</script> with just <script type="math/tex">\theta</script>. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
     <li id="fn:2">
-      <p>To simplify the notation I’m referring to all of the parameters <script type="math/tex">\boldsymbol{w}_{m}, b_{m}, \boldsymbol{W}, \boldsymbol{b}</script> with just <script type="math/tex">\theta</script>. <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+      <p>What we have written here is the negative log-likelihood. Some people refer to this loss function as binary cross-entropy loss. These are equivalent loss functions, the only difference is the method/assumptions that one uses to arrive at each. <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>There are downsides to this, I’ll write a post about this in the future (hopefully). <a href="#fnref:3" class="reversefootnote">&#8617;</a></p>
     </li>
   </ol>
 </div>

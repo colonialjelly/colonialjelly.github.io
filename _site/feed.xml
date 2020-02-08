@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-02-07T12:13:23-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Giorgi</title><subtitle>I think, therefore I'm distracted</subtitle><author><name>Giorgi Kvernadze</name></author><entry><title type="html">From Linear Classifiers to Neural Networks</title><link href="http://localhost:4000/multilayer-perceptron/" rel="alternate" type="text/html" title="From Linear Classifiers to Neural Networks" /><published>2019-12-19T00:00:00-07:00</published><updated>2019-12-19T00:00:00-07:00</updated><id>http://localhost:4000/multilayer-perceptron</id><content type="html" xml:base="http://localhost:4000/multilayer-perceptron/">&lt;ul&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-02-07T17:25:39-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Giorgi</title><subtitle>I think, therefore I'm distracted</subtitle><author><name>Giorgi Kvernadze</name></author><entry><title type="html">From Linear Classifiers to Neural Networks</title><link href="http://localhost:4000/multilayer-perceptron/" rel="alternate" type="text/html" title="From Linear Classifiers to Neural Networks" /><published>2019-12-19T00:00:00-07:00</published><updated>2019-12-19T00:00:00-07:00</updated><id>http://localhost:4000/multilayer-perceptron</id><content type="html" xml:base="http://localhost:4000/multilayer-perceptron/">&lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;em&gt;This post is best suited for people who are familiar with linear classifiers, specifically Logistic Regression. I will also be assuming that the reader is familiar with gradient descent&lt;/em&gt;&lt;/p&gt;
   &lt;/li&gt;
@@ -188,11 +188,11 @@ The functions $$f_1,f_2, ..., f_{n-1}$$ are all learning a transformations with 
 &lt;h4 id=&quot;loss-function&quot;&gt;Loss Function&lt;/h4&gt;
 
 &lt;p&gt;Since the function is differentiable, we can define a loss function and then start optimizing with respect to the learnable parameters using gradient descent. Notice that the output of the MLP is a real number between 0 and 1. What we’re essentially doing is modeling the conditional distribution
-&lt;script type=&quot;math/tex&quot;&gt;P(y | \boldsymbol{x})&lt;/script&gt; with a parametrized function &lt;script type=&quot;math/tex&quot;&gt;MLP(\boldsymbol{x}; \theta)&lt;/script&gt; &lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. If we assume that all of the observations &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{x} \in X&lt;/script&gt; (dataset) are drawn independently and identically distributed (i.i.d) from some distribution, we can then write down the negative log-likelihood function and optimize it with respect the parameters &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt;.&lt;/p&gt;
+&lt;script type=&quot;math/tex&quot;&gt;P(y | \boldsymbol{x})&lt;/script&gt; with a parametrized function &lt;script type=&quot;math/tex&quot;&gt;MLP(\boldsymbol{x}; \theta)&lt;/script&gt; &lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. This means we can use the principle of maximum likelihood to estimate the parameters.&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;L(y, \hat{y}) = \frac{1}{n} \sum_{i=1}^n -y_i\log\hat{y_i} - (1-y_i)\log(1-\hat{y_i})&lt;/script&gt;
 
-&lt;p&gt;Where &lt;script type=&quot;math/tex&quot;&gt;\hat{y} = MLP(\boldsymbol{x}; \theta)&lt;/script&gt;. The objective is to minimize &lt;script type=&quot;math/tex&quot;&gt;L(y, \hat{y})&lt;/script&gt; with respect to the learnable parameters &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt;.&lt;/p&gt;
+&lt;p&gt;Where &lt;script type=&quot;math/tex&quot;&gt;\hat{y} = MLP(\boldsymbol{x}; \theta)&lt;/script&gt;. The objective is to minimize &lt;script type=&quot;math/tex&quot;&gt;L(y, \hat{y})&lt;/script&gt; &lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; with respect to the learnable parameters &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt;.&lt;/p&gt;
 
 &lt;h4 id=&quot;optimization&quot;&gt;Optimization&lt;/h4&gt;
 
@@ -211,7 +211,7 @@ The functions $$f_1,f_2, ..., f_{n-1}$$ are all learning a transformations with 
 
 &lt;h4 id=&quot;derivatives-derivatives-derivatives&quot;&gt;Derivatives, Derivatives, Derivatives&lt;/h4&gt;
 
-&lt;p&gt;&lt;em&gt;Skip this section if you don’t care about all of the nitty-gritty details of computing the partials. Although I do think that it’s good to do this at least once by hand.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Skip this section if you don’t care about all of the gory details of computing the partials. Although I do think that it’s a good idea to do this at least once by hand.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;Now we will need to breakdown each of the partial derivatives using the chain rule. If we’re not careful about giving names to intermediate values, it will quickly get hairy. So let’s do that first.&lt;/p&gt;
 
@@ -313,21 +313,37 @@ $$ L(y, \hat{y}) = \frac{1}{n} \sum_{i=1}^n -y_i\log\hat{y_i} - (1-y_i)\log(1-\h
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;analysis&quot;&gt;Analysis&lt;/h2&gt;
-&lt;p&gt;Phew! now that’s over with. Let’s see what the results are after the optimization. Going back to how we started, we said that if we had a transformation function that could make the dataset linearly separable then learning would be easy. Well &lt;script type=&quot;math/tex&quot;&gt;\phi(\boldsymbol{x}) = \sigma(\boldsymbol{Wx} + \boldsymbol{b})&lt;/script&gt; will actually be that transformation that makes the dataset linearly separable. This is what the data looks like after applying that learned function:&lt;/p&gt;
+&lt;p&gt;Phew! now that’s over with. Let’s see what the results after running gradient descent (1000 iterations with a learning rate of 0.01). Do you remember how we started? We said that if only we had a transformation function that could make the dataset linearly separable then learning would be easy. Well &lt;script type=&quot;math/tex&quot;&gt;\phi(\boldsymbol{x}) = \sigma(\boldsymbol{Wx} + \boldsymbol{b})&lt;/script&gt; will actually be that transformation that makes the dataset linearly separable. This is what the data looks like after applying that learned function:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../images/projection.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;And these are the three linear classifiers that are learned in the hidden layer:&lt;/p&gt;
+&lt;p&gt;As you can see the data is completely linearly separable. In essence, this is what most of learning is when it comes to neural networks. Every neural network classifier that has classification as a primary task is trying to learn some kind of a transformation on the data so that the data becomes linearly separable. This is a big reason why neural networks became so popular. In the past people (usually domain experts) spent tremendous efforts in engineering features to make learning easy. Now a lot of that is handled by (deep) neural networks &lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;We were also trying to learn multiple linear classifiers. and voilà, these are the three linear classifiers &lt;script type=&quot;math/tex&quot;&gt;(\boldsymbol{w}_{1}, b_1), (\boldsymbol{w}_{2}, b_3)&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;(\boldsymbol{w}_{3}, b_3)&lt;/script&gt; that are learned:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../images/hidden_classifiers.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;pretty neat huh?&lt;/p&gt;
+&lt;p&gt;And finally this is what the learned decision boundary looks like in the original space. The colors indicate the predictions of the classifier.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/decision_boundary.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is awesome innit? but wait hold on. While this classifier gets 100% accuracy, it does not represent the true function…&lt;/p&gt;
+
+&lt;p&gt;Does that bother you?&lt;/p&gt;
 
 &lt;p&gt;Here’s a link to the Jupyter notebook that contains all the code for this post: &lt;a href=&quot;https://github.com/colonialjelly/multilayer-perceptron/blob/master/multilayer-perceptron.ipynb&quot;&gt;Code&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;footnotes&quot;&gt;Footnotes&lt;/h2&gt;
 &lt;div class=&quot;footnotes&quot;&gt;
   &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;To simplify the notation I’m referring to all of the parameters &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{w}_{m}, b_{m}, \boldsymbol{W}, \boldsymbol{b}&lt;/script&gt; with just &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt;. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
     &lt;li id=&quot;fn:2&quot;&gt;
-      &lt;p&gt;To simplify the notation I’m referring to all of the parameters &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{w}_{m}, b_{m}, \boldsymbol{W}, \boldsymbol{b}&lt;/script&gt; with just &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt;. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;What we have written here is the negative log-likelihood. Some people refer to this loss function as binary cross-entropy loss. These are equivalent loss functions, the only difference is the method/assumptions that one uses to arrive at each. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot;&gt;
+      &lt;p&gt;There are downsides to this, I’ll write a post about this in the future (hopefully). &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;</content><author><name>Giorgi Kvernadze</name></author><summary type="html">There are many types of neural networks, each having some advantage over others, in this post I want to introduce the simplest form of a neural network, a Multi-Layer Perceptron (MLP). MLPs are a powerful method for approximating functions and it's a relatively simple model to implement.</summary></entry></feed>
