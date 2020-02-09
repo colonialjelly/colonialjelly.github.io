@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-02-07T17:25:39-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Giorgi</title><subtitle>I think, therefore I'm distracted</subtitle><author><name>Giorgi Kvernadze</name></author><entry><title type="html">From Linear Classifiers to Neural Networks</title><link href="http://localhost:4000/multilayer-perceptron/" rel="alternate" type="text/html" title="From Linear Classifiers to Neural Networks" /><published>2019-12-19T00:00:00-07:00</published><updated>2019-12-19T00:00:00-07:00</updated><id>http://localhost:4000/multilayer-perceptron</id><content type="html" xml:base="http://localhost:4000/multilayer-perceptron/">&lt;ul&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-02-09T16:54:13-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Giorgi</title><subtitle>I think, therefore I'm distracted</subtitle><author><name>Giorgi Kvernadze</name></author><entry><title type="html">From Linear Classifiers to Neural Networks</title><link href="http://localhost:4000/multilayer-perceptron/" rel="alternate" type="text/html" title="From Linear Classifiers to Neural Networks" /><published>2019-12-19T00:00:00-07:00</published><updated>2019-12-19T00:00:00-07:00</updated><id>http://localhost:4000/multilayer-perceptron</id><content type="html" xml:base="http://localhost:4000/multilayer-perceptron/">&lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;This post is best suited for people who are familiar with linear classifiers, specifically Logistic Regression. I will also be assuming that the reader is familiar with gradient descent&lt;/em&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;em&gt;This post is best suited for people who are familiar with linear classifiers. I will also be assuming that the reader is familiar with gradient descent&lt;/em&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;The goal of this post isn’t to be a comprehensive guide about neural networks, rather this is an attempt to show a path, going from linear classifier to a simple neural network&lt;/em&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;em&gt;The goal of this post isn’t to be a comprehensive guide about neural networks, rather this is an attempt to show an intuitive path, going from linear classifiers to a simple neural network&lt;/em&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it’s a relatively simple model to implement.&lt;/p&gt;
+&lt;p&gt;There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it’s a simple model to implement (kinda’).&lt;/p&gt;
 
 &lt;p&gt;Before we jump into talking about MLPs, let’s quickly go over linear classifiers. Given training data as pairs &lt;script type=&quot;math/tex&quot;&gt;(\boldsymbol{x}_i, y_i)&lt;/script&gt; where &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{x}_i \in \mathbb{R}^{d}&lt;/script&gt; are datapoints (observations) and &lt;script type=&quot;math/tex&quot;&gt;y_i \in \{0, 1\}&lt;/script&gt; are their corresponding class labels. The goal is to learn a vector of weights &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{w} \in \mathbb{R}^{d}&lt;/script&gt; and a bias &lt;script type=&quot;math/tex&quot;&gt;b \in \mathbb{R}&lt;/script&gt; such that &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{w}^T\boldsymbol{x}_{i} + b \ge 0&lt;/script&gt; if &lt;script type=&quot;math/tex&quot;&gt;y_{i} = 1&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
 \boldsymbol{w}^T\boldsymbol{x}_{i} + b &lt; 0 %]]&gt;&lt;/script&gt; otherwise (&lt;script type=&quot;math/tex&quot;&gt;y_{i} = 0&lt;/script&gt;). This decision can be summarized as the following step function:&lt;/p&gt;
@@ -69,7 +69,7 @@ By far the most common way of introducing neural networks is with the notion of 
 
 The term 'neural networks' itself is kind of misleading. It creates an image of a brain like structure and it feeds into the whole hype about AI taking over. Neural networks in reality are nothing but a chain of matrix multiplications followed by non-linear functions.   --&gt;
 
-&lt;h2 id=&quot;forward&quot;&gt;Forward&lt;/h2&gt;
+&lt;h2 id=&quot;design&quot;&gt;Design&lt;/h2&gt;
 
 &lt;h4 id=&quot;three-linear-classifiers&quot;&gt;Three Linear Classifiers&lt;/h4&gt;
 
@@ -125,70 +125,14 @@ This classifier which is kind of a meta classifier, will essentially act as a co
 &lt;p&gt;&lt;strong&gt;Exercise:&lt;/strong&gt;
 A question that you might have at this point is “why do we need to have a decision function applied to the three linear classifiers, can’t we directly plug the outputs to the meta classifier and produce a decision? “. I’m gonna leave the answer to that as an exercise. Remove all the &lt;script type=&quot;math/tex&quot;&gt;\sigma&lt;/script&gt; functions, and simplify the expression. What do you get? Is it different than having a single linear classifier?&lt;/p&gt;
 
-&lt;!-- A layer in the context of an MLP is nothing but a linear transformation followed by an activation function. We will use our idea of learning multiple classifiers but instead of looking at them independently, we'll define them together as a single layer.
-
-Let's define three classifiers $$(\boldsymbol{w_1}, b_1), (\boldsymbol{w_2}, b_3)$$ and $$(\boldsymbol{w_3}, b_3)$$. For compactness, let's combine all of the weights into a single matrix and all of the biases into a vector.
-
-$$\boldsymbol{W} = \begin{bmatrix}
-           \boldsymbol{w_1} \\
-           \boldsymbol{w_2} \\
-           \boldsymbol{w_3} \\
-         \end{bmatrix} = \begin{bmatrix}
-                    w_1^{(1)} &amp; w_1^{(2)}\\
-                    w_2^{(1)} &amp; w_2^{(2)}\\
-                    w_3^{(1)} &amp; w_3^{(2)}\\
-                  \end{bmatrix} \boldsymbol{b} = \begin{bmatrix}
-                             b_1 \\
-                             b_2 \\
-                             b_3 \\
-                           \end{bmatrix}$$ --&gt;
-
-&lt;!-- Now we need to get the classification decision from all three classifiers. We might be tempted to use the step function but for technical reasons, that will become clear later on, we require the function to be differentiable and since the step function is not, we cannot use it. We could however use the sigmoid.
-
-The classification decision from each of the classifiers can then be obtained by applying $$\sigma$$ element-wise to each of the three outputs.
-
-$$\sigma(\boldsymbol{Wx} + \boldsymbol{b}) = \begin{bmatrix}
-\sigma(\boldsymbol{w_1x} + b_1) \\
-\sigma(\boldsymbol{w_2x} + b_2) \\
-\sigma(\boldsymbol{w_3x} + b_3) \\
-\end{bmatrix}$$
-
-Notice that what we have is a linear transformation $$\boldsymbol{s} = \boldsymbol{Wx} + \boldsymbol{b}$$, followed by a non-linear activation $$\boldsymbol{h} = \sigma(\boldsymbol{s})$$. --&gt;
-
-&lt;!-- *In the neural network lingo what we defined above is a hidden layer with 3 sigmoid units. Note that we need not use sigmoid here. As I mentioned in the beginning of this post, the sigmoid function is just one example of many activation functions. We could use anything we want (as long as it's differentiable). Here are a few alternatives: Tanh, ReLu, LeakyReLu etc. The most popular choice in practice is the ReLu activation defined as $$\text{ReLu}(z)=\max(0, z)$$.* --&gt;
-
-&lt;!-- **Second Layer**
-
-The first layer gives us outputs from the classifiers but we still need a way to combine them into one final classification decision. For example if the outputs from the layer are $$[0.7, 0.5, 0.1]$$ what should the classification decision be?
-
-Let's define another classifier $$(\boldsymbol{w}_{final}, b_{final})$$ that will take the outputs of the three classifiers as input and will produce a final output: $$\boldsymbol{w}_{final}^T\sigma(\boldsymbol{Wx} + \boldsymbol{b}) + b_{final}$$
-
-And finally in order to get the final classification decision, we apply a sigmoid activation to the result of this as well. Combining all the parts we get that our function is defined as:
-
- $$\text{MLP}(\boldsymbol{x}) =\sigma(\boldsymbol{w}_{final}^T\sigma(\boldsymbol{Wx} + \boldsymbol{b}) + b_{final})$$
-
-This one line actually fully defines our two-layer MLP. --&gt;
-
-&lt;!-- **Why do we need activations?**
-
-When I defined the first layer, I said that we needed to get a classification decision from each of the classifiers. This isn't quite right. We don't need a classification decision. What we actually need is a response. A response that is non-linear in the input. Non-linear activation functions are actually what makes this whole thing work. If for example in our hidden layer we removed the $$\sigma$$ activation and replaced it with an identity, the MLP will actually become a linear classifier which would mean that we will not be able represent the non-linear shape of the input data. To convince yourself, write out the MLP without any activations and see that it reduces to a linear function. --&gt;
-
-&lt;!-- **More layers**
-
-In practice we usually have many such layers each connected to each other, i.e the output of one becomes the input for to next one. Chaining layers like this is actually the same as function composition. If we define each layer as a function, $$f_i(x) = g(\boldsymbol{W}_i\boldsymbol{x}+b_i)$$, where $$g$$ is some non-linear activation then an n-layer MLP can be written as the function composition $$MLP(x) = f_n(f_{n-1}(...(f_1(x))) $$. The depth of a network corresponds to $$n$$, when $$n &gt; 2$$, people refer to this network as deep (this is where the term deep learning comes from). The width of a network corresponds to the number of units in each of the layer.
-
-The functions $$f_1,f_2, ..., f_{n-1}$$ are all learning a transformations with the ultimate goal to make the input $$X$$ linearly separable for the final layer $$f_n$$. This is the essence of deep learning. Every neural network one way or another is trying to learn a transformation function on the input space that can render the data linearly separable. --&gt;
-
-&lt;h2 id=&quot;backward&quot;&gt;Backward&lt;/h2&gt;
-
-&lt;!-- *You are free to skip ahead this section if you don't care about knowing all the nitty gritty details of learning the parameters of the MLP.* --&gt;
+&lt;h2 id=&quot;learn&quot;&gt;Learn&lt;/h2&gt;
 
 &lt;p&gt;We have managed to define a simple MLP but we still need a way to learn the parameters of the function. The function is fully differentiable and this is no accident. As I said earlier, we chose to use the sigmoid function instead of the step-function as a decision function because of technical reasons. Well the technical reason is that, differentiability is nice and we like it because it allows us to use gradient based optimization algorithms like gradient descent.&lt;/p&gt;
 
 &lt;h4 id=&quot;loss-function&quot;&gt;Loss Function&lt;/h4&gt;
 
 &lt;p&gt;Since the function is differentiable, we can define a loss function and then start optimizing with respect to the learnable parameters using gradient descent. Notice that the output of the MLP is a real number between 0 and 1. What we’re essentially doing is modeling the conditional distribution
-&lt;script type=&quot;math/tex&quot;&gt;P(y | \boldsymbol{x})&lt;/script&gt; with a parametrized function &lt;script type=&quot;math/tex&quot;&gt;MLP(\boldsymbol{x}; \theta)&lt;/script&gt; &lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. This means we can use the principle of maximum likelihood to estimate the parameters.&lt;/p&gt;
+&lt;script type=&quot;math/tex&quot;&gt;P(y | \boldsymbol{x})&lt;/script&gt; with a parametrized function &lt;script type=&quot;math/tex&quot;&gt;MLP(\boldsymbol{x}; \theta)&lt;/script&gt; &lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. This means that we can use the principle of maximum likelihood to estimate the parameters.&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;L(y, \hat{y}) = \frac{1}{n} \sum_{i=1}^n -y_i\log\hat{y_i} - (1-y_i)\log(1-\hat{y_i})&lt;/script&gt;
 
@@ -218,11 +162,7 @@ The functions $$f_1,f_2, ..., f_{n-1}$$ are all learning a transformations with 
 &lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{s}_1 = \boldsymbol{Wx} + \boldsymbol{b}&lt;/script&gt; &lt;br /&gt;
   &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{h} = \sigma(\boldsymbol{s}_1)&lt;/script&gt; &lt;br /&gt;
   &lt;script type=&quot;math/tex&quot;&gt;s_2 = \boldsymbol{w}^T_{m}\boldsymbol{h} + b_{m}&lt;/script&gt; &lt;br /&gt;
-  &lt;script type=&quot;math/tex&quot;&gt;\hat{y} = \sigma(s_2) = MLP(\boldsymbol{x})&lt;/script&gt;&lt;/p&gt;
-
-&lt;!-- Okay now that we have our intermediate values named, let's define the loss function. We're going to be using binary cross-entropy (negative log likelihood) which is defined as:
-
-$$ L(y, \hat{y}) = \frac{1}{n} \sum_{i=1}^n -y_i\log\hat{y_i} - (1-y_i)\log(1-\hat{y_i})$$ --&gt;
+  &lt;script type=&quot;math/tex&quot;&gt;\hat{y} = \sigma(s_2)&lt;/script&gt;&lt;/p&gt;
 
 &lt;p&gt;Before we start the tedious process of taking partial derivatives of a composed function I want to remind you that the goal is to compute these four partial derivatives: &lt;script type=&quot;math/tex&quot;&gt;\frac{\partial L}{\partial \boldsymbol{w}_{m}}, \frac{\partial L}{\partial b_{m}}, \frac{\partial L}{\partial \boldsymbol{W}}, \frac{\partial L}{\partial \boldsymbol{b}}&lt;/script&gt;. If we have these values, we can use them to update the parameters at each step of gradient descent. Using the chain rule we can write down each of the partial derivatives as a product:&lt;/p&gt;
 
@@ -305,14 +245,14 @@ $$ L(y, \hat{y}) = \frac{1}{n} \sum_{i=1}^n -y_i\log\hat{y_i} - (1-y_i)\log(1-\h
 
 &lt;p&gt;You may have noticed that all of this is for a single datapoint &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{x}&lt;/script&gt;, we wouldn’t do this in practice. It is much more preferable to have everything computed for a batch of inputs &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{X}&lt;/script&gt;, this allows us to update the parameters much more efficiently. I highly recommend you redo all of the computations of the partial derivatives in matrix form.&lt;/p&gt;
 
-&lt;p&gt;I’ve also purposefully skipped over a lot of the details. I wanted this block of the post to serve as a reference for your own solutions rather than a complete guide. Here are some useful notes that can come in handy if you want to do everything from scratch:&lt;/p&gt;
+&lt;p&gt;I’ve also purposefully skipped over a lot of the details. I wanted this block of the post to serve as a reference for your own solutions rather than a complete step-by-step guide. Here are some useful notes that can come in handy if you want to do everything from scratch:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://cs231n.stanford.edu/vecDerivs.pdf&quot;&gt;Vector, Matrix, and Tensor Derivatives - Erik Learned-Miller&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://web.stanford.edu/class/cs224n/readings/gradient-notes.pdf&quot;&gt;Computing Neural Network Gradients - Kevin Clark&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;analysis&quot;&gt;Analysis&lt;/h2&gt;
+&lt;h2 id=&quot;results&quot;&gt;Results&lt;/h2&gt;
 &lt;p&gt;Phew! now that’s over with. Let’s see what the results after running gradient descent (1000 iterations with a learning rate of 0.01). Do you remember how we started? We said that if only we had a transformation function that could make the dataset linearly separable then learning would be easy. Well &lt;script type=&quot;math/tex&quot;&gt;\phi(\boldsymbol{x}) = \sigma(\boldsymbol{Wx} + \boldsymbol{b})&lt;/script&gt; will actually be that transformation that makes the dataset linearly separable. This is what the data looks like after applying that learned function:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../images/projection.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
@@ -327,11 +267,101 @@ $$ L(y, \hat{y}) = \frac{1}{n} \sum_{i=1}^n -y_i\log\hat{y_i} - (1-y_i)\log(1-\h
 
 &lt;p&gt;&lt;img src=&quot;../images/decision_boundary.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;This is awesome innit? but wait hold on. While this classifier gets 100% accuracy, it does not represent the true function…&lt;/p&gt;
+&lt;p&gt;This is awesome isn’t it? but wait hold on. While this classifier gets 100% accuracy, it does not represent the true function… With three classifiers the shape we are learning is a triangle-ish shape. That’s because it’s the only possible shape that captures all the data with three classifiers. But we know that the actual function is a circle. With four classifiers we can get rectangle-ish shapes, with five a pentagon-ish and so on. Intuitively, if we added a lot more classifiers we should get closer to an actual circle. Here’s a progression of the decision boundary going from 5 to 50 with increments of 5:&lt;/p&gt;
 
-&lt;p&gt;Does that bother you?&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../images/decision_boundaries_progress.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Here’s a link to the Jupyter notebook that contains all the code for this post: &lt;a href=&quot;https://github.com/colonialjelly/multilayer-perceptron/blob/master/multilayer-perceptron.ipynb&quot;&gt;Code&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This looks much better. But wait… This isn’t really the true function either. Everything in the middle is classified as red, but there will never by any points there. The true function generates points on the boundary of the circle, never inside the circle. Furthermore, the only reason we were able to make this correction was because we’re working in 2 dimensions and we know exactly what the true function is. What do we do if we have a dataset in high dimensions coming from an unknown function? Would we be able to trust the learned classifier even if we get 100% accuracy?&lt;/p&gt;
+
+&lt;h2 id=&quot;jargon&quot;&gt;Jargon&lt;/h2&gt;
+
+&lt;p&gt;For the entirety of the post I have purposefully avoided mentioning neural network jargon that you usually see in the literature. I think some of the terms itself can bring a lot of confusion to people when they first get introduced to neural networks. However, since the field is set on using these terms, it’s necessary to know them. Let’s go back and put names on some of the things we’ve talked about.&lt;/p&gt;
+
+&lt;h3 id=&quot;activation-functions&quot;&gt;Activation Functions&lt;/h3&gt;
+
+&lt;p&gt;We talked about decision functions. We mentioned the step function and the sigmoid function. The justification for having them was straight-forward since we were talking in the context of classifiers and we had to have a function that produces a prediction. But in the context of neural networks we don’t really care for predictions if it isn’t the last classifier (the meta-classifier). Every intermediate function can have any form, as long as it’s differentiable.&lt;/p&gt;
+
+&lt;p&gt;So we aren’t constrained to using functions that produce predictions like sigmoid or the step function. Here are a few others we could have used: Tanh, ReLu, LeakyReLu, SoftPlus etc. People refer to these functions as activation functions. The most popular choice in practice is the ReLu activation defined as &lt;script type=&quot;math/tex&quot;&gt;\text{ReLu}(z)=\max(0, z)&lt;/script&gt;. Activation functions are usually non-linear which is the reason why neural networks are able to learn non-linear functions. When the input is a vector or a matrix, the activation function is applied element-wise.&lt;/p&gt;
+
+&lt;h3 id=&quot;unit-neuron&quot;&gt;Unit (Neuron)&lt;/h3&gt;
+
+&lt;p&gt;As we mentioned above, we don’t really need to predict in the intermediate operations. Therefore, we probably shouldn’t be calling these functions classifiers. People usually call these functions neurons or units. I prefer to call them units since calling to them neurons is drawing a parallel to biological neurons which are not similar at all. A unit takes the following form:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;g(\boldsymbol{w}^T\boldsymbol{x} + b) = y&lt;/script&gt;
+
+&lt;p&gt;Where &lt;script type=&quot;math/tex&quot;&gt;g&lt;/script&gt; is some (usually non-linear) activation function.&lt;/p&gt;
+
+&lt;h3 id=&quot;layer&quot;&gt;Layer&lt;/h3&gt;
+
+&lt;p&gt;A layer in the context of an MLP is a linear transformation followed by an activation function. A bunch of neurons together on the same level make a layer. What a level means will be more clear when we see the graphical representation of neural networks.&lt;/p&gt;
+
+&lt;p&gt;In this post we defined a 2 layer MLP.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Layer 1: Linear transformation &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{Wx} + \boldsymbol{b} = \boldsymbol{s}_1 \rightarrow&lt;/script&gt; activation &lt;script type=&quot;math/tex&quot;&gt;\rightarrow \sigma(\boldsymbol{s}_1) = \boldsymbol{h}&lt;/script&gt;&lt;/li&gt;
+  &lt;li&gt;Layer 2: Linear transformation &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{w}_{m}^T\boldsymbol{h} + b_{m} = \boldsymbol{s}_2 \rightarrow&lt;/script&gt; activation &lt;script type=&quot;math/tex&quot;&gt;\sigma(\boldsymbol{s}_2) \rightarrow \hat{y}&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;People refer to the layers before the last layer as hidden layers. In this case we only had one hidden layer (Layer 1).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;More layers&lt;/strong&gt;
+In practice we usually have many such layers each connected to each other, i.e the output of one becomes the input for to next one. Chaining layers like this is actually the same as function composition. If we define each layer as a function, &lt;script type=&quot;math/tex&quot;&gt;f_i(x) = g(\boldsymbol{W}_i\boldsymbol{x} + \boldsymbol{b}_i)&lt;/script&gt;, where &lt;script type=&quot;math/tex&quot;&gt;g&lt;/script&gt; is some activation function, then an n-layer MLP can be written as the function composition &lt;script type=&quot;math/tex&quot;&gt;MLP(x) = f_n(f_{n-1}(...(f_1(x)))&lt;/script&gt;. The depth of a network corresponds to &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;. A network with depth &lt;script type=&quot;math/tex&quot;&gt;n &gt; 2&lt;/script&gt;, is called deep (this is where the term deep learning comes from). The width of a network corresponds to the number of units in each of the layer.&lt;/p&gt;
+
+&lt;h3 id=&quot;graph&quot;&gt;Graph&lt;/h3&gt;
+
+&lt;p&gt;You may have been confused about the fact that MLP is called a neural network. So far we haven’t seen the “network” part. The MLP that we defined can equivalently be represented by a directed acyclic graph (DAG).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/nn.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;All of the edges correspond to the weights (parameters) of the model. The nodes represent computation. For example &lt;script type=&quot;math/tex&quot;&gt;h_1&lt;/script&gt; represents the following computation:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;h_{1} = \sigma(\boldsymbol{w}_{1}^T\boldsymbol{x} + b_{1})&lt;/script&gt;
+
+&lt;p&gt;Remember that previously we computed &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{h}&lt;/script&gt; in one operation &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{h} = \sigma(\boldsymbol{Wx} + \boldsymbol{b})&lt;/script&gt;. We can equivalently calculate it with three operations:&lt;/p&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;h_{1} = \sigma(\boldsymbol{w}_{1}^T\boldsymbol{x} + b_{1})&lt;/script&gt; &lt;br /&gt;
+&lt;script type=&quot;math/tex&quot;&gt;h_{2} = \sigma(\boldsymbol{w}_{2}^T\boldsymbol{x} + b_{2})&lt;/script&gt; &lt;br /&gt;
+&lt;script type=&quot;math/tex&quot;&gt;h_{3} = \sigma(\boldsymbol{w}_{3}^T\boldsymbol{x} + b_{3})&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;Edges coming out of the node that has a 1 on it are the biases. To make sense of the rest of the edges, let’s highlight a single unit  &lt;script type=&quot;math/tex&quot;&gt;(\boldsymbol{w_1}, b_{1})&lt;/script&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/nn_single.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This representation is useful for computing gradients. If we wanted to take the derivative of the loss with respect to the first unit, the highlighted path tells us that we have to start from the last output and work our way backwards until we reach the desired variables. In this post we calculated all of the gradients by hand but in practice this is done through the algorithm known as backpropagation. It works by repeatedly applying the chain rule to compute all the gradients.&lt;/p&gt;
+
+&lt;h3 id=&quot;forward-pass&quot;&gt;Forward pass&lt;/h3&gt;
+
+&lt;p&gt;Running through the graph and computing the all the values is called the forward pass. It’s called forward pass because we’re traveling from the first layer to the last. The computation below correspond to the forward pass:&lt;/p&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{s}_1 = \boldsymbol{Wx} + \boldsymbol{b}&lt;/script&gt; &lt;br /&gt;
+&lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{h} = \sigma(\boldsymbol{s}_1)&lt;/script&gt; &lt;br /&gt;
+&lt;script type=&quot;math/tex&quot;&gt;s_2 = \boldsymbol{w}^T_{m}\boldsymbol{h} + b_{m}&lt;/script&gt; &lt;br /&gt;
+&lt;script type=&quot;math/tex&quot;&gt;\hat{y} = \sigma(s_2)&lt;/script&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;backward-pass&quot;&gt;Backward pass&lt;/h3&gt;
+
+&lt;p&gt;Computing the derivatives of all the parameters with respect to the outputs is called a backward pass. Similar to forward pass, the backward pass is called backward because we’re traversing starting from the last layer and working our way back. The computations below describe the backward pass:&lt;/p&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\frac{\partial L}{\partial \boldsymbol{w}_{m}} = \frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial \boldsymbol{w}_{m}}&lt;/script&gt; &lt;br /&gt;
+&lt;script type=&quot;math/tex&quot;&gt;\frac{\partial L}{\partial b_{m}} = \frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial b_{m}}&lt;/script&gt; &lt;br /&gt;
+&lt;script type=&quot;math/tex&quot;&gt;\frac{\partial L}{\partial \boldsymbol{W}} = \frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial \boldsymbol{h}}\frac{\partial \boldsymbol{h}}{\partial \boldsymbol{s}_1}\frac{\partial \boldsymbol{s}_1}{\partial \boldsymbol{W}}&lt;/script&gt; &lt;br /&gt;
+&lt;script type=&quot;math/tex&quot;&gt;\frac{\partial L}{\partial \boldsymbol{b}} = \frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial \boldsymbol{h}}\frac{\partial \boldsymbol{h}}{\partial \boldsymbol{s}_1}\frac{\partial \boldsymbol{s}_1}{\partial \boldsymbol{b}}&lt;/script&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;final-words&quot;&gt;Final Words&lt;/h2&gt;
+
+&lt;p&gt;I hope this post has provided some insight to you on how neural networks work. It is by no means comprehensive, I have skipped over a lot of really important details. If you want to continue learning about neural networks, the &lt;a href=&quot;https://www.deeplearningbook.org/&quot;&gt;Deep Learning book by Ian Goodfellow and Yoshua Bengio and Aaron Courville&lt;/a&gt; is a good place to start. Here are a few other good resources:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://playground.tensorflow.org&quot;&gt;Neural Network Playground&lt;/a&gt; One of the best ways to learn something is to play around with it. The NN playground lets you easily build and train models and various synthetic datasets. Great tool for building intuition.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://cs231n.github.io/&quot;&gt;CS231n: Convolutional Neural Networks for Visual Recognition&lt;/a&gt; Contains excellent notes from Andrej Karpathy, highly recommend&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cs.toronto.edu/~rgrosse/courses/csc321_2018/&quot;&gt;CSC 321: Intro to Neural Networks and Machine Learning&lt;/a&gt; Has more than just neural networks. The lecture slides and notes are really good and it builds up from linear classifiers.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&quot;&gt;3Blue1Brown: Neural Networks&lt;/a&gt; One of my all time favorite educational channels&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://cs229.stanford.edu/notes2019fall/cs229-notes-deep_learning.pdf&quot;&gt;CS229 Lecture Notes by Andrew Ng: Deep Learning&lt;/a&gt; Andrew Ng’s tutorials are always very good&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;code&quot;&gt;Code&lt;/h2&gt;
+
+&lt;p&gt;What’s a tutorial without code, am I right? Here’s a link to the Jupyter notebook that contains all the code for this post: &lt;a href=&quot;https://github.com/colonialjelly/multilayer-perceptron/blob/master/multilayer-perceptron.ipynb&quot;&gt;Code&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;footnotes&quot;&gt;Footnotes&lt;/h2&gt;
 &lt;div class=&quot;footnotes&quot;&gt;
@@ -346,4 +376,4 @@ $$ L(y, \hat{y}) = \frac{1}{n} \sum_{i=1}^n -y_i\log\hat{y_i} - (1-y_i)\log(1-\h
       &lt;p&gt;There are downsides to this, I’ll write a post about this in the future (hopefully). &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>Giorgi Kvernadze</name></author><summary type="html">There are many types of neural networks, each having some advantage over others, in this post I want to introduce the simplest form of a neural network, a Multi-Layer Perceptron (MLP). MLPs are a powerful method for approximating functions and it's a relatively simple model to implement.</summary></entry></feed>
+&lt;/div&gt;</content><author><name>Giorgi Kvernadze</name></author><summary type="html">There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it's a simple model to implement (kinda').</summary></entry></feed>

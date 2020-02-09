@@ -2,15 +2,15 @@
 layout: post
 title:  From Linear Classifiers to Neural Networks
 categories: [Machine Learning, Neural Networks]
-excerpt: There are many types of neural networks, each having some advantage over others, in this post I want to introduce the simplest form of a neural network, a Multi-Layer Perceptron (MLP). MLPs are a powerful method for approximating functions and it's a relatively simple model to implement.
+excerpt: There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it's a simple model to implement (kinda').
 mathjax: true
 ---
 
-- *This post is best suited for people who are familiar with linear classifiers, specifically Logistic Regression. I will also be assuming that the reader is familiar with gradient descent*
+- *This post is best suited for people who are familiar with linear classifiers. I will also be assuming that the reader is familiar with gradient descent*
 
-- *The goal of this post isn't to be a comprehensive guide about neural networks, rather this is an attempt to show a path, going from linear classifier to a simple neural network*
+- *The goal of this post isn't to be a comprehensive guide about neural networks, rather this is an attempt to show an intuitive path, going from linear classifiers to a simple neural network*
 
-There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it's a relatively simple model to implement.
+There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it's a simple model to implement (kinda').
 
 Before we jump into talking about MLPs, let's quickly go over linear classifiers. Given training data as pairs $$(\boldsymbol{x}_i, y_i)$$ where $$\boldsymbol{x}_i \in \mathbb{R}^{d}$$ are datapoints (observations) and $$y_i \in \{0, 1\}$$ are their corresponding class labels. The goal is to learn a vector of weights $$\boldsymbol{w} \in \mathbb{R}^{d}$$ and a bias $$b \in \mathbb{R}$$ such that $$\boldsymbol{w}^T\boldsymbol{x}_{i} + b \ge 0$$ if $$y_{i} = 1$$ and $$\boldsymbol{w}^T\boldsymbol{x}_{i} + b < 0$$ otherwise ($$y_{i} = 0$$). This decision can be summarized as the following step function:
 
@@ -71,7 +71,7 @@ By far the most common way of introducing neural networks is with the notion of 
 The term 'neural networks' itself is kind of misleading. It creates an image of a brain like structure and it feeds into the whole hype about AI taking over. Neural networks in reality are nothing but a chain of matrix multiplications followed by non-linear functions.   -->
 
 
-## Forward
+## Design
 
 #### Three Linear Classifiers
 
@@ -129,73 +129,14 @@ Everything before the semicolon is the input of the function and everything afte
 A question that you might have at this point is "why do we need to have a decision function applied to the three linear classifiers, can't we directly plug the outputs to the meta classifier and produce a decision? ". I'm gonna leave the answer to that as an exercise. Remove all the $$\sigma$$ functions, and simplify the expression. What do you get? Is it different than having a single linear classifier?
 
 
-
-
-<!-- A layer in the context of an MLP is nothing but a linear transformation followed by an activation function. We will use our idea of learning multiple classifiers but instead of looking at them independently, we'll define them together as a single layer.
-
-Let's define three classifiers $$(\boldsymbol{w_1}, b_1), (\boldsymbol{w_2}, b_3)$$ and $$(\boldsymbol{w_3}, b_3)$$. For compactness, let's combine all of the weights into a single matrix and all of the biases into a vector.
-
-$$\boldsymbol{W} = \begin{bmatrix}
-           \boldsymbol{w_1} \\
-           \boldsymbol{w_2} \\
-           \boldsymbol{w_3} \\
-         \end{bmatrix} = \begin{bmatrix}
-                    w_1^{(1)} & w_1^{(2)}\\
-                    w_2^{(1)} & w_2^{(2)}\\
-                    w_3^{(1)} & w_3^{(2)}\\
-                  \end{bmatrix} \boldsymbol{b} = \begin{bmatrix}
-                             b_1 \\
-                             b_2 \\
-                             b_3 \\
-                           \end{bmatrix}$$ -->
-
-
-<!-- Now we need to get the classification decision from all three classifiers. We might be tempted to use the step function but for technical reasons, that will become clear later on, we require the function to be differentiable and since the step function is not, we cannot use it. We could however use the sigmoid.
-
-The classification decision from each of the classifiers can then be obtained by applying $$\sigma$$ element-wise to each of the three outputs.
-
-$$\sigma(\boldsymbol{Wx} + \boldsymbol{b}) = \begin{bmatrix}
-\sigma(\boldsymbol{w_1x} + b_1) \\
-\sigma(\boldsymbol{w_2x} + b_2) \\
-\sigma(\boldsymbol{w_3x} + b_3) \\
-\end{bmatrix}$$
-
-Notice that what we have is a linear transformation $$\boldsymbol{s} = \boldsymbol{Wx} + \boldsymbol{b}$$, followed by a non-linear activation $$\boldsymbol{h} = \sigma(\boldsymbol{s})$$. -->
-
-<!-- *In the neural network lingo what we defined above is a hidden layer with 3 sigmoid units. Note that we need not use sigmoid here. As I mentioned in the beginning of this post, the sigmoid function is just one example of many activation functions. We could use anything we want (as long as it's differentiable). Here are a few alternatives: Tanh, ReLu, LeakyReLu etc. The most popular choice in practice is the ReLu activation defined as $$\text{ReLu}(z)=\max(0, z)$$.* -->
-
-<!-- **Second Layer**
-
-The first layer gives us outputs from the classifiers but we still need a way to combine them into one final classification decision. For example if the outputs from the layer are $$[0.7, 0.5, 0.1]$$ what should the classification decision be?
-
-Let's define another classifier $$(\boldsymbol{w}_{final}, b_{final})$$ that will take the outputs of the three classifiers as input and will produce a final output: $$\boldsymbol{w}_{final}^T\sigma(\boldsymbol{Wx} + \boldsymbol{b}) + b_{final}$$
-
-And finally in order to get the final classification decision, we apply a sigmoid activation to the result of this as well. Combining all the parts we get that our function is defined as:
-
- $$\text{MLP}(\boldsymbol{x}) =\sigma(\boldsymbol{w}_{final}^T\sigma(\boldsymbol{Wx} + \boldsymbol{b}) + b_{final})$$
-
-This one line actually fully defines our two-layer MLP. -->
-
-<!-- **Why do we need activations?**
-
-When I defined the first layer, I said that we needed to get a classification decision from each of the classifiers. This isn't quite right. We don't need a classification decision. What we actually need is a response. A response that is non-linear in the input. Non-linear activation functions are actually what makes this whole thing work. If for example in our hidden layer we removed the $$\sigma$$ activation and replaced it with an identity, the MLP will actually become a linear classifier which would mean that we will not be able represent the non-linear shape of the input data. To convince yourself, write out the MLP without any activations and see that it reduces to a linear function. -->
-
-<!-- **More layers**
-
-In practice we usually have many such layers each connected to each other, i.e the output of one becomes the input for to next one. Chaining layers like this is actually the same as function composition. If we define each layer as a function, $$f_i(x) = g(\boldsymbol{W}_i\boldsymbol{x}+b_i)$$, where $$g$$ is some non-linear activation then an n-layer MLP can be written as the function composition $$MLP(x) = f_n(f_{n-1}(...(f_1(x))) $$. The depth of a network corresponds to $$n$$, when $$n > 2$$, people refer to this network as deep (this is where the term deep learning comes from). The width of a network corresponds to the number of units in each of the layer.
-
-The functions $$f_1,f_2, ..., f_{n-1}$$ are all learning a transformations with the ultimate goal to make the input $$X$$ linearly separable for the final layer $$f_n$$. This is the essence of deep learning. Every neural network one way or another is trying to learn a transformation function on the input space that can render the data linearly separable. -->
-
-## Backward
-
-<!-- *You are free to skip ahead this section if you don't care about knowing all the nitty gritty details of learning the parameters of the MLP.* -->
+## Learn
 
 We have managed to define a simple MLP but we still need a way to learn the parameters of the function. The function is fully differentiable and this is no accident. As I said earlier, we chose to use the sigmoid function instead of the step-function as a decision function because of technical reasons. Well the technical reason is that, differentiability is nice and we like it because it allows us to use gradient based optimization algorithms like gradient descent.
 
 #### Loss Function
 
 Since the function is differentiable, we can define a loss function and then start optimizing with respect to the learnable parameters using gradient descent. Notice that the output of the MLP is a real number between 0 and 1. What we're essentially doing is modeling the conditional distribution
-$$P(y | \boldsymbol{x})$$ with a parametrized function $$MLP(\boldsymbol{x}; \theta)$$ [^1]. This means we can use the principle of maximum likelihood to estimate the parameters.
+$$P(y | \boldsymbol{x})$$ with a parametrized function $$MLP(\boldsymbol{x}; \theta)$$ [^1]. This means that we can use the principle of maximum likelihood to estimate the parameters.
 
 [^1]: To simplify the notation I'm referring to all of the parameters $$\boldsymbol{w}_{m}, b_{m}, \boldsymbol{W}, \boldsymbol{b}$$ with just $$\theta$$.
 
@@ -229,11 +170,7 @@ Now we will need to breakdown each of the partial derivatives using the chain ru
   $$\boldsymbol{s}_1 = \boldsymbol{Wx} + \boldsymbol{b}$$ \\
   $$\boldsymbol{h} = \sigma(\boldsymbol{s}_1)$$ \\
   $$s_2 = \boldsymbol{w}^T_{m}\boldsymbol{h} + b_{m}$$ \\
-  $$\hat{y} = \sigma(s_2) = MLP(\boldsymbol{x})$$
-
-<!-- Okay now that we have our intermediate values named, let's define the loss function. We're going to be using binary cross-entropy (negative log likelihood) which is defined as:
-
-$$ L(y, \hat{y}) = \frac{1}{n} \sum_{i=1}^n -y_i\log\hat{y_i} - (1-y_i)\log(1-\hat{y_i})$$ -->
+  $$\hat{y} = \sigma(s_2)$$
 
 Before we start the tedious process of taking partial derivatives of a composed function I want to remind you that the goal is to compute these four partial derivatives: $$\frac{\partial L}{\partial \boldsymbol{w}_{m}}, \frac{\partial L}{\partial b_{m}}, \frac{\partial L}{\partial \boldsymbol{W}}, \frac{\partial L}{\partial \boldsymbol{b}}$$. If we have these values, we can use them to update the parameters at each step of gradient descent. Using the chain rule we can write down each of the partial derivatives as a product:
 
@@ -314,12 +251,12 @@ Putting everything together:
 
 You may have noticed that all of this is for a single datapoint $$\boldsymbol{x}$$, we wouldn't do this in practice. It is much more preferable to have everything computed for a batch of inputs $$\boldsymbol{X}$$, this allows us to update the parameters much more efficiently. I highly recommend you redo all of the computations of the partial derivatives in matrix form.
 
-I've also purposefully skipped over a lot of the details. I wanted this block of the post to serve as a reference for your own solutions rather than a complete guide. Here are some useful notes that can come in handy if you want to do everything from scratch:
+I've also purposefully skipped over a lot of the details. I wanted this block of the post to serve as a reference for your own solutions rather than a complete step-by-step guide. Here are some useful notes that can come in handy if you want to do everything from scratch:
 
 - [Vector, Matrix, and Tensor Derivatives - Erik Learned-Miller](http://cs231n.stanford.edu/vecDerivs.pdf)
 - [Computing Neural Network Gradients - Kevin Clark](https://web.stanford.edu/class/cs224n/readings/gradient-notes.pdf)
 
-## Analysis
+## Results
 Phew! now that's over with. Let's see what the results after running gradient descent (1000 iterations with a learning rate of 0.01). Do you remember how we started? We said that if only we had a transformation function that could make the dataset linearly separable then learning would be easy. Well $$\phi(\boldsymbol{x}) = \sigma(\boldsymbol{Wx} + \boldsymbol{b})$$ will actually be that transformation that makes the dataset linearly separable. This is what the data looks like after applying that learned function:
 
 ![](../images/projection.png)
@@ -336,10 +273,98 @@ And finally this is what the learned decision boundary looks like in the origina
 
 ![](../images/decision_boundary.png)
 
-This is awesome innit? but wait hold on. While this classifier gets 100% accuracy, it does not represent the true function...
+This is awesome isn't it? but wait hold on. While this classifier gets 100% accuracy, it does not represent the true function... With three classifiers the shape we are learning is a triangle-ish shape. That's because it's the only possible shape that captures all the data with three classifiers. But we know that the actual function is a circle. With four classifiers we can get rectangle-ish shapes, with five a pentagon-ish and so on. Intuitively, if we added a lot more classifiers we should get closer to an actual circle. Here's a progression of the decision boundary going from 5 to 50 with increments of 5:
 
-Does that bother you?
+![](../images/decision_boundaries_progress.png)
 
-Here's a link to the Jupyter notebook that contains all the code for this post: [Code](https://github.com/colonialjelly/multilayer-perceptron/blob/master/multilayer-perceptron.ipynb)
+This looks much better. But wait... This isn't really the true function either. Everything in the middle is classified as red, but there will never by any points there. The true function generates points on the boundary of the circle, never inside the circle. Furthermore, the only reason we were able to make this correction was because we're working in 2 dimensions and we know exactly what the true function is. What do we do if we have a dataset in high dimensions coming from an unknown function? Would we be able to trust the learned classifier even if we get 100% accuracy?
+
+## Jargon
+
+For the entirety of the post I have purposefully avoided mentioning neural network jargon that you usually see in the literature. I think some of the terms itself can bring a lot of confusion to people when they first get introduced to neural networks. However, since the field is set on using these terms, it's necessary to know them. Let's go back and put names on some of the things we've talked about.
+
+### Activation Functions
+
+We talked about decision functions. We mentioned the step function and the sigmoid function. The justification for having them was straight-forward since we were talking in the context of classifiers and we had to have a function that produces a prediction. But in the context of neural networks we don't really care for predictions if it isn't the last classifier (the meta-classifier). Every intermediate function can have any form, as long as it's differentiable.
+
+So we aren't constrained to using functions that produce predictions like sigmoid or the step function. Here are a few others we could have used: Tanh, ReLu, LeakyReLu, SoftPlus etc. People refer to these functions as activation functions. The most popular choice in practice is the ReLu activation defined as $$\text{ReLu}(z)=\max(0, z)$$. Activation functions are usually non-linear which is the reason why neural networks are able to learn non-linear functions. When the input is a vector or a matrix, the activation function is applied element-wise.
+
+### Unit (Neuron)
+
+As we mentioned above, we don't really need to predict in the intermediate operations. Therefore, we probably shouldn't be calling these functions classifiers. People usually call these functions neurons or units. I prefer to call them units since calling to them neurons is drawing a parallel to biological neurons which are not similar at all. A unit takes the following form:
+
+$$g(\boldsymbol{w}^T\boldsymbol{x} + b) = y$$
+
+Where $$g$$ is some (usually non-linear) activation function.
+
+### Layer
+
+A layer in the context of an MLP is a linear transformation followed by an activation function. A bunch of neurons together on the same level make a layer. What a level means will be more clear when we see the graphical representation of neural networks.
+
+In this post we defined a 2 layer MLP.
+- Layer 1: Linear transformation $$\boldsymbol{Wx} + \boldsymbol{b} = \boldsymbol{s}_1 \rightarrow $$ activation $$\rightarrow \sigma(\boldsymbol{s}_1) = \boldsymbol{h}$$
+- Layer 2: Linear transformation $$\boldsymbol{w}_{m}^T\boldsymbol{h} + b_{m} = \boldsymbol{s}_2 \rightarrow $$ activation $$\sigma(\boldsymbol{s}_2) \rightarrow \hat{y}$$
+
+People refer to the layers before the last layer as hidden layers. In this case we only had one hidden layer (Layer 1).
+
+**More layers**
+In practice we usually have many such layers each connected to each other, i.e the output of one becomes the input for to next one. Chaining layers like this is actually the same as function composition. If we define each layer as a function, $$f_i(x) = g(\boldsymbol{W}_i\boldsymbol{x} + \boldsymbol{b}_i)$$, where $$g$$ is some activation function, then an n-layer MLP can be written as the function composition $$MLP(x) = f_n(f_{n-1}(...(f_1(x))) $$. The depth of a network corresponds to $$n$$. A network with depth $$n > 2$$, is called deep (this is where the term deep learning comes from). The width of a network corresponds to the number of units in each of the layer.
+
+
+### Graph
+
+You may have been confused about the fact that MLP is called a neural network. So far we haven't seen the "network" part. The MLP that we defined can equivalently be represented by a directed acyclic graph (DAG).
+
+![](../images/nn.png)
+
+All of the edges correspond to the weights (parameters) of the model. The nodes represent computation. For example $$h_1$$ represents the following computation:
+
+$$h_{1} = \sigma(\boldsymbol{w}_{1}^T\boldsymbol{x} + b_{1})$$
+
+Remember that previously we computed $$\boldsymbol{h}$$ in one operation $$\boldsymbol{h} = \sigma(\boldsymbol{Wx} + \boldsymbol{b})$$. We can equivalently calculate it with three operations:
+
+$$h_{1} = \sigma(\boldsymbol{w}_{1}^T\boldsymbol{x} + b_{1})$$ \\
+$$h_{2} = \sigma(\boldsymbol{w}_{2}^T\boldsymbol{x} + b_{2})$$ \\
+$$h_{3} = \sigma(\boldsymbol{w}_{3}^T\boldsymbol{x} + b_{3})$$
+
+Edges coming out of the node that has a 1 on it are the biases. To make sense of the rest of the edges, let's highlight a single unit  $$(\boldsymbol{w_1}, b_{1})$$:
+
+![](../images/nn_single.png)
+
+This representation is useful for computing gradients. If we wanted to take the derivative of the loss with respect to the first unit, the highlighted path tells us that we have to start from the last output and work our way backwards until we reach the desired variables. In this post we calculated all of the gradients by hand but in practice this is done through the algorithm known as backpropagation. It works by repeatedly applying the chain rule to compute all the gradients.
+
+### Forward pass
+
+Running through the graph and computing the all the values is called the forward pass. It's called forward pass because we're traveling from the first layer to the last. The computation below correspond to the forward pass:
+
+$$\boldsymbol{s}_1 = \boldsymbol{Wx} + \boldsymbol{b}$$ \\
+$$\boldsymbol{h} = \sigma(\boldsymbol{s}_1)$$ \\
+$$s_2 = \boldsymbol{w}^T_{m}\boldsymbol{h} + b_{m}$$ \\
+$$\hat{y} = \sigma(s_2)$$
+
+### Backward pass
+
+Computing the derivatives of all the parameters with respect to the outputs is called a backward pass. Similar to forward pass, the backward pass is called backward because we're traversing starting from the last layer and working our way back. The computations below describe the backward pass:
+
+$$\frac{\partial L}{\partial \boldsymbol{w}_{m}} = \frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial \boldsymbol{w}_{m}}$$ \\
+$$\frac{\partial L}{\partial b_{m}} = \frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial b_{m}}$$ \\
+$$\frac{\partial L}{\partial \boldsymbol{W}} = \frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial \boldsymbol{h}}\frac{\partial \boldsymbol{h}}{\partial \boldsymbol{s}_1}\frac{\partial \boldsymbol{s}_1}{\partial \boldsymbol{W}}$$ \\
+$$\frac{\partial L}{\partial \boldsymbol{b}} = \frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial \boldsymbol{h}}\frac{\partial \boldsymbol{h}}{\partial \boldsymbol{s}_1}\frac{\partial \boldsymbol{s}_1}{\partial \boldsymbol{b}}$$
+
+
+## Final Words
+
+I hope this post has provided some insight to you on how neural networks work. It is by no means comprehensive, I have skipped over a lot of really important details. If you want to continue learning about neural networks, the [Deep Learning book by Ian Goodfellow and Yoshua Bengio and Aaron Courville](https://www.deeplearningbook.org/) is a good place to start. Here are a few other good resources:
+
+- [Neural Network Playground](https://playground.tensorflow.org) One of the best ways to learn something is to play around with it. The NN playground lets you easily build and train models and various synthetic datasets. Great tool for building intuition.  
+- [CS231n: Convolutional Neural Networks for Visual Recognition](http://cs231n.github.io/) Contains excellent notes from Andrej Karpathy, highly recommend
+- [CSC 321: Intro to Neural Networks and Machine Learning](https://www.cs.toronto.edu/~rgrosse/courses/csc321_2018/) Has more than just neural networks. The lecture slides and notes are really good and it builds up from linear classifiers.
+- [3Blue1Brown: Neural Networks](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi) One of my all time favorite educational channels
+- [CS229 Lecture Notes by Andrew Ng: Deep Learning](http://cs229.stanford.edu/notes2019fall/cs229-notes-deep_learning.pdf) Andrew Ng's tutorials are always very good
+
+---
+## Code
+
+What's a tutorial without code, am I right? Here's a link to the Jupyter notebook that contains all the code for this post: [Code](https://github.com/colonialjelly/multilayer-perceptron/blob/master/multilayer-perceptron.ipynb)
 
 ## Footnotes

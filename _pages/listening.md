@@ -23,7 +23,7 @@ List of some albums I recommend listening to (in no particular order):
 * **Depression Cherry** - Beach House
 * **Awake** - Tycho
 * **The Richest Man in Babylon** - Thievery Corporation
-* **Harmless Melodirs** - Yellow Days
+* **Harmless Melodies** - Yellow Days
 * **Congratulations** - MGMT
 * **The Everlasting Blink** - Bent
 * **Mezzanine** - Massive Attack
