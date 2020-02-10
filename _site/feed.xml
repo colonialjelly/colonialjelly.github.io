@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-02-09T19:10:23-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Giorgi</title><subtitle>I think, therefore I'm distracted</subtitle><author><name>Giorgi Kvernadze</name></author><entry><title type="html">From Linear Classifiers to Neural Networks</title><link href="http://localhost:4000/multilayer-perceptron/" rel="alternate" type="text/html" title="From Linear Classifiers to Neural Networks" /><published>2019-12-19T00:00:00-07:00</published><updated>2019-12-19T00:00:00-07:00</updated><id>http://localhost:4000/multilayer-perceptron</id><content type="html" xml:base="http://localhost:4000/multilayer-perceptron/">&lt;ul&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-02-09T19:16:38-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Giorgi</title><subtitle>I think, therefore I'm distracted</subtitle><author><name>Giorgi Kvernadze</name></author><entry><title type="html">From Linear Classifiers to Neural Networks</title><link href="http://localhost:4000/multilayer-perceptron/" rel="alternate" type="text/html" title="From Linear Classifiers to Neural Networks" /><published>2019-12-19T00:00:00-07:00</published><updated>2019-12-19T00:00:00-07:00</updated><id>http://localhost:4000/multilayer-perceptron</id><content type="html" xml:base="http://localhost:4000/multilayer-perceptron/">&lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;em&gt;This post is best suited for people who are familiar with linear classifiers. I will also be assuming that the reader is familiar with gradient descent.&lt;/em&gt;&lt;/p&gt;
   &lt;/li&gt;
@@ -322,13 +322,11 @@ In practice, we usually have many such layers with each connected to each other,
 
 &lt;p&gt;In this post we calculated all of the gradients by hand but in practice this is done through the algorithm known as backpropagation. It works by repeatedly applying the chain rule to compute all the gradients.&lt;/p&gt;
 
-&lt;h3 id=&quot;forward-pass&quot;&gt;Forward pass&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Forward pass:&lt;/strong&gt;
+Running through the graph and computing all the values is called the forward pass. It’s called forward pass because we’re traveling from the first layer to the last.&lt;/p&gt;
 
-&lt;p&gt;Running through the graph and computing all the values is called the forward pass. It’s called forward pass because we’re traveling from the first layer to the last.&lt;/p&gt;
-
-&lt;h3 id=&quot;backward-pass&quot;&gt;Backward pass&lt;/h3&gt;
-
-&lt;p&gt;Computing the derivatives of all the parameters with respect to the outputs is called a backward pass. Similar to forward pass, the backward pass is called backward because we’re traversing starting from the last layer and working our way back.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Backward pass:&lt;/strong&gt;
+Computing the derivatives of all the parameters with respect to the outputs is called a backward pass. Similar to forward pass, the backward pass is called backward because we’re traversing starting from the last layer and working our way back.&lt;/p&gt;
 
 &lt;h2 id=&quot;final-words&quot;&gt;Final Words&lt;/h2&gt;
 
@@ -359,4 +357,4 @@ In practice, we usually have many such layers with each connected to each other,
       &lt;p&gt;There are downsides to this, I’ll write a post about this in the future (hopefully). &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>Giorgi Kvernadze</name></author><summary type="html">There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it's a simple model to implement (kinda').</summary></entry></feed>
+&lt;/div&gt;</content><author><name>Giorgi Kvernadze</name></author><summary type="html">There are many types of neural networks, each having some advantage over others. In this post, I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it's a relatively simple model to implement.</summary></entry></feed>

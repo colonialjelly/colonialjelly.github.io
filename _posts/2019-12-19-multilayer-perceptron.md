@@ -2,7 +2,7 @@
 layout: post
 title:  From Linear Classifiers to Neural Networks
 categories: [Machine Learning, Neural Networks]
-excerpt: There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it's a simple model to implement (kinda').
+excerpt: There are many types of neural networks, each having some advantage over others. In this post, I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it's a relatively simple model to implement.
 mathjax: true
 ---
 
@@ -327,12 +327,10 @@ This representation is useful for computing gradients. If we wanted to take the 
 
 In this post we calculated all of the gradients by hand but in practice this is done through the algorithm known as backpropagation. It works by repeatedly applying the chain rule to compute all the gradients.
 
-### Forward pass
-
+**Forward pass:**
 Running through the graph and computing all the values is called the forward pass. It's called forward pass because we're traveling from the first layer to the last.
 
-### Backward pass
-
+**Backward pass:**
 Computing the derivatives of all the parameters with respect to the outputs is called a backward pass. Similar to forward pass, the backward pass is called backward because we're traversing starting from the last layer and working our way back.
 
 
