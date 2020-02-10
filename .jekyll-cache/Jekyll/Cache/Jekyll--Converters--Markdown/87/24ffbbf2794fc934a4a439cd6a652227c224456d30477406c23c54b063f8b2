@@ -1,100 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>From Linear Classifiers to Neural Networks – Giorgi – I think, therefore I'm distracted</title>
-    <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>From Linear Classifiers to Neural Networks | Giorgi</title>
-<meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="From Linear Classifiers to Neural Networks" />
-<meta name="author" content="Giorgi Kvernadze" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it’s a simple model to implement (kinda’)." />
-<meta property="og:description" content="There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it’s a simple model to implement (kinda’)." />
-<link rel="canonical" href="http://localhost:4000/multilayer-perceptron/" />
-<meta property="og:url" content="http://localhost:4000/multilayer-perceptron/" />
-<meta property="og:site_name" content="Giorgi" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2019-12-19T00:00:00-07:00" />
-<script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/multilayer-perceptron/"},"@type":"BlogPosting","url":"http://localhost:4000/multilayer-perceptron/","headline":"From Linear Classifiers to Neural Networks","dateModified":"2019-12-19T00:00:00-07:00","datePublished":"2019-12-19T00:00:00-07:00","author":{"@type":"Person","name":"Giorgi Kvernadze"},"description":"There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it’s a simple model to implement (kinda’).","@context":"https://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
-        <meta charset="utf-8" />
-    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
-
-    
-    <meta name="description" content="There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it's a simple model to implement (kinda')." />
-    <meta property="og:description" content="There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it's a simple model to implement (kinda')." />
-    
-    <meta name="author" content="Giorgi" />
-
-    
-    <meta property="og:title" content="From Linear Classifiers to Neural Networks" />
-    <meta property="twitter:title" content="From Linear Classifiers to Neural Networks" />
-    
-
-    
-    <meta property="og:image" content="http://localhost:4000https://avatars0.githubusercontent.com/u/10067792?s=460&v=4"/>
-    <meta property="twitter:image" content="http://localhost:4000https://avatars0.githubusercontent.com/u/10067792?s=460&v=4"/>
-    
-    <meta property="og:site_name" content="Amit Merchant - Software Engineer"/>
-
-
-    <link rel="stylesheet" type="text/css" href="/assets/style.css" />
-    <link rel="alternate" type="application/rss+xml" title="Giorgi - I think, therefore I'm distracted" href="/feed.xml" />
-    <link rel="canonical" href="http://localhost:4000/multilayer-perceptron/" />
-
-    <meta name="theme-color" content="#000000">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-  </head>
-
-  <body>
-    <div id="bar"></div>
-    <div class="wrapper-container">
-      <div class="wrapper-masthead">
-        <div class="container">
-          <header class="masthead clearfix">
-            <a href="/" class="site-avatar"><img src="https://avatars0.githubusercontent.com/u/10067792?s=460&v=4" /></a>
-
-            <div class="site-info">
-              <h1 class="site-name"><a href="/">Giorgi</a></h1>
-              <p class="site-description">I think, therefore I'm distracted</p> 
-            </div>
-
-            <nav>
-              <a href="/">Home</a>
-              <a href="/reading">Reading</a>
-              <a href="/search">Search</a>
-              <a href="/about">About</a>
-            </nav>
-          </header>
-        </div>
-      </div>
-
-      <div class="wrapper-main">
-        <div id="main" role="main" class="container">
-          <article class="post detailed">
-  <h1>From Linear Classifiers to Neural Networks</h1>
-
-  <div>
-    <p class="author_title">Giorgi Kvernadze  ·  December 19, 2019</p>
-    
-    <div class="post-tags">
-      
-      
-        <a href="/categories/#Machine Learning">Machine Learning</a>
-        &nbsp;
-      
-        <a href="/categories/#Neural Networks">Neural Networks</a>
-        
-      
-    </div>
-  </div>
-    
-  <div class="entry">
-    <ul>
+I"��<ul>
   <li>
     <p><em>This post is best suited for people who are familiar with linear classifiers. I will also be assuming that the reader is familiar with gradient descent.</em></p>
   </li>
@@ -349,29 +253,29 @@ A question that you might have at this point is “why do we need to have a deci
 
 <p>As you can see the data is completely linearly separable. In essence, this is what most of learning is when it comes to neural networks. Every neural network classifier that has classification as a primary task is trying to learn some kind of a transformation on the data so that the data becomes linearly separable. This is a big reason why neural networks became so popular. In the past, people (usually domain experts) spent tremendous efforts in engineering features to make learning easy. Now a lot of that is handled by (deep) neural networks <sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup>.</p>
 
-<p>We were also trying to learn multiple linear classifiers. And voilà, these are the three linear classifiers <script type="math/tex">(\boldsymbol{w}_{1}, b_1), (\boldsymbol{w}_{2}, b_3)</script> and <script type="math/tex">(\boldsymbol{w}_{3}, b_3)</script> that are learned:</p>
+<p>We were also trying to learn multiple linear classifiers. and voilà, these are the three linear classifiers <script type="math/tex">(\boldsymbol{w}_{1}, b_1), (\boldsymbol{w}_{2}, b_3)</script> and <script type="math/tex">(\boldsymbol{w}_{3}, b_3)</script> that are learned:</p>
 
 <p><img src="../images/hidden_classifiers.png" alt="" /></p>
 
-<p>Finally this is what the learned decision boundary looks like in the original space. The colors indicate the predictions of the classifier.</p>
+<p>And finally this is what the learned decision boundary looks like in the original space. The colors indicate the predictions of the classifier.</p>
 
 <p><img src="../images/decision_boundary.png" alt="" /></p>
 
-<p>This is awesome, isn’t it? But wait, hold on. While this classifier gets 100% accuracy, it does not represent the true function… with three classifiers, the shape we are learning is a triangle-ish shape. That’s because it’s the only possible shape that captures all the data with three lines. But we know that the actual function is a circle. With four classifiers we can get rectangle-ish shapes, with five a pentagon-ish and so on. Intuitively, if we add more classifiers, we should get closer to an actual circle. Here’s a progression of the decision boundary going from 5 to 50 with increments of 5:</p>
+<p>This is awesome isn’t it? but wait hold on. While this classifier gets 100% accuracy, it does not represent the true function… With three classifiers the shape we are learning is a triangle-ish shape. That’s because it’s the only possible shape that captures all the data with three classifiers. But we know that the actual function is a circle. With four classifiers we can get rectangle-ish shapes, with five a pentagon-ish and so on. Intuitively, if we added a lot more classifiers we should get closer to an actual circle. Here’s a progression of the decision boundary going from 5 to 50 with increments of 5:</p>
 
 <p><img src="../images/decision_boundaries_progress.png" alt="" /></p>
 
-<p>This looks much better. Yet this isn’t really the true function either. Everything in the middle is classified as red, but there will never be any points there. The true function generates points on the boundary of the circle, never inside the circle. Furthermore, the only reason we were able to make this correction was because we’re working in 2 dimensions and we know exactly what the true function is. What do we do if we have a dataset in high dimensions coming from an unknown function? Would we be able to trust the learned classifier even if we get 100% accuracy?</p>
+<p>This looks much better. But wait… This isn’t really the true function either. Everything in the middle is classified as red, but there will never by any points there. The true function generates points on the boundary of the circle, never inside the circle. Furthermore, the only reason we were able to make this correction was because we’re working in 2 dimensions and we know exactly what the true function is. What do we do if we have a dataset in high dimensions coming from an unknown function? Would we be able to trust the learned classifier even if we get 100% accuracy?</p>
 
 <h2 id="jargon">Jargon</h2>
 
-<p>For the entirety of the post, I have purposefully avoided mentioning neural network lingo that you usually see in the literature. I think some of the terms themselves can bring a lot of confusion to people when they first get introduced to neural networks. However, since the field is set on using these terms, it’s necessary to know them. Let’s go back and put names on some of the things we’ve talked about.</p>
+<p>For the entirety of the post I have purposefully avoided mentioning neural network lingo that you usually see in the literature. I think some of the terms itself can bring a lot of confusion to people when they first get introduced to neural networks. However, since the field is set on using these terms, it’s necessary to know them. Let’s go back and put names on some of the things we’ve talked about.</p>
 
 <h3 id="activation-functions">Activation Functions</h3>
 
-<p>We talked about decision functions. We mentioned the step function and the sigmoid function. The justification for having them was straight-forward since we were talking in the context of classifiers and we had to have a function that produces a prediction. In the context of neural networks we don’t really care for predictions if it isn’t the last classifier (the meta-classifier). Every intermediate function can have any form, as long as it’s differentiable.</p>
+<p>We talked about decision functions. We mentioned the step function and the sigmoid function. The justification for having them was straight-forward since we were talking in the context of classifiers and we had to have a function that produces a prediction. But in the context of neural networks we don’t really care for predictions if it isn’t the last classifier (the meta-classifier). Every intermediate function can have any form, as long as it’s differentiable.</p>
 
-<p>Because of this, we aren’t constrained to using functions that produce predictions like sigmoid or the step function. Here are a few others we could have used: Tanh, ReLu, LeakyReLu, SoftPlus etc. People refer to these functions as activation functions. The most popular choice in practice is the ReLu activation defined as <script type="math/tex">\text{ReLu}(z)=\max(0, z)</script>. Activation functions are almost always non-linear. The non-linearity is the reason why neural networks are able to learn non-linear functions. When the input is a vector or a matrix, the activation function is applied element-wise.</p>
+<p>So we aren’t constrained to using functions that produce predictions like sigmoid or the step function. Here are a few others we could have used: Tanh, ReLu, LeakyReLu, SoftPlus etc. People refer to these functions as activation functions. The most popular choice in practice is the ReLu activation defined as <script type="math/tex">\text{ReLu}(z)=\max(0, z)</script>. Activation functions are usually non-linear which is the reason why neural networks are able to learn non-linear functions. When the input is a vector or a matrix, the activation function is applied element-wise.</p>
 
 <h3 id="unit-neuron">Unit (Neuron)</h3>
 
@@ -385,16 +289,16 @@ A question that you might have at this point is “why do we need to have a deci
 
 <p>A layer in the context of an MLP is a linear transformation followed by an activation function. A bunch of neurons together on the same level make a layer. What a level means will be more clear when we see the graphical representation of neural networks.</p>
 
-<p>In this post, we defined a 2 layer MLP.</p>
+<p>In this post we defined a 2 layer MLP.</p>
 <ul>
   <li>Layer 1: Linear transformation <script type="math/tex">\boldsymbol{Wx} + \boldsymbol{b} = \boldsymbol{s}_1 \rightarrow</script> activation <script type="math/tex">\rightarrow \sigma(\boldsymbol{s}_1) = \boldsymbol{h}</script></li>
   <li>Layer 2: Linear transformation <script type="math/tex">\boldsymbol{w}_{m}^T\boldsymbol{h} + b_{m} = \boldsymbol{s}_2 \rightarrow</script> activation <script type="math/tex">\sigma(\boldsymbol{s}_2) \rightarrow \hat{y}</script></li>
 </ul>
 
-<p>People refer to the layers before the last layer as hidden layers. In this case, we only had one hidden layer (Layer 1).</p>
+<p>People refer to the layers before the last layer as hidden layers. In this case we only had one hidden layer (Layer 1).</p>
 
-<p><strong>More layers:</strong>
-In practice, we usually have many such layers with each connected to each other, i.e the output of one becomes the input for to next one. Chaining layers like this is actually the same as function composition. If we define each layer as a function <script type="math/tex">f_i(x) = g(\boldsymbol{W}_i\boldsymbol{x} + \boldsymbol{b}_i)</script> where <script type="math/tex">g</script> is some activation function, then an n-layer MLP can be written as the function composition <script type="math/tex">MLP(x) = f_n(f_{n-1}(...(f_1(x)))</script>. The depth of a network corresponds to <script type="math/tex">n</script>. A network with depth <script type="math/tex">n > 2</script>, is called deep (this is where the term deep learning comes from). The width of a network corresponds to the number of units in each of the layer.</p>
+<p><strong>More layers</strong>
+In practice we usually have many such layers each connected to each other, i.e the output of one becomes the input for to next one. Chaining layers like this is actually the same as function composition. If we define each layer as a function, <script type="math/tex">f_i(x) = g(\boldsymbol{W}_i\boldsymbol{x} + \boldsymbol{b}_i)</script>, where <script type="math/tex">g</script> is some activation function, then an n-layer MLP can be written as the function composition <script type="math/tex">MLP(x) = f_n(f_{n-1}(...(f_1(x)))</script>. The depth of a network corresponds to <script type="math/tex">n</script>. A network with depth <script type="math/tex">n > 2</script>, is called deep (this is where the term deep learning comes from). The width of a network corresponds to the number of units in each of the layer.</p>
 
 <h3 id="graph">Graph</h3>
 
@@ -404,7 +308,7 @@ In practice, we usually have many such layers with each connected to each other,
 
 <p>These kinds of graphs are called computational graphs and they are just another way to describe a neural network model. It provides a good way to break down a complex computation into its’ primitive parts.</p>
 
-<p>All of the edges correspond to the weights (parameters) of the model. The nodes represent computation. For example, <script type="math/tex">h_1</script> represents the following computation:</p>
+<p>All of the edges correspond to the weights (parameters) of the model. The nodes represent computation. For example <script type="math/tex">h_1</script> represents the following computation:</p>
 
 <script type="math/tex; mode=display">h_{1} = \sigma(\boldsymbol{w}_{1}^T\boldsymbol{x} + b_{1})</script>
 
@@ -428,19 +332,20 @@ In practice, we usually have many such layers with each connected to each other,
 
 <h2 id="final-words">Final Words</h2>
 
-<p>I hope this post has provided some insight to you on how neural networks work. It is by no means comprehensive, I have skipped over a lot of details. If you want to continue learning about neural networks, I would recommend the <a href="https://www.deeplearningbook.org/">Deep Learning book by Ian Goodfellow and Yoshua Bengio and Aaron Courville</a> as a good place to start. Here are a few other good resources:</p>
+<p>I hope this post has provided some insight to you on how neural networks work. It is by no means comprehensive, I have skipped over a lot of really important details. If you want to continue learning about neural networks, the <a href="https://www.deeplearningbook.org/">Deep Learning book by Ian Goodfellow and Yoshua Bengio and Aaron Courville</a> is a good place to start. Here are a few other good resources:</p>
 
 <ul>
-  <li><a href="https://playground.tensorflow.org">Neural Network Playground</a> - One of the best ways to learn something is to play around with it. The NN playground lets you easily build and train models on various synthetic datasets. Great tool for building intuition.</li>
-  <li><a href="http://cs231n.github.io/">CS231n: Convolutional Neural Networks for Visual Recognition</a> - Contains excellent notes from Andrej Karpathy, highly recommend.</li>
-  <li><a href="https://www.cs.toronto.edu/~rgrosse/courses/csc321_2018/">CSC 321: Intro to Neural Networks and Machine Learning</a> - This has more than just neural networks. The lecture slides and notes are really good and it builds up from linear classifiers.</li>
-  <li><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi">3Blue1Brown: Neural Networks</a> - One of my all time favorite educational channels. Has some amazing, visual heavy explanations on the concepts behind neural networks.</li>
+  <li><a href="https://playground.tensorflow.org">Neural Network Playground</a> One of the best ways to learn something is to play around with it. The NN playground lets you easily build and train models and various synthetic datasets. Great tool for building intuition.</li>
+  <li><a href="http://cs231n.github.io/">CS231n: Convolutional Neural Networks for Visual Recognition</a> Contains excellent notes from Andrej Karpathy, highly recommend</li>
+  <li><a href="https://www.cs.toronto.edu/~rgrosse/courses/csc321_2018/">CSC 321: Intro to Neural Networks and Machine Learning</a> Has more than just neural networks. The lecture slides and notes are really good and it builds up from linear classifiers.</li>
+  <li><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi">3Blue1Brown: Neural Networks</a> One of my all time favorite educational channels</li>
+  <li><a href="http://cs229.stanford.edu/notes2019fall/cs229-notes-deep_learning.pdf">CS229 Lecture Notes by Andrew Ng: Deep Learning</a> Andrew Ng’s tutorials are always very good</li>
 </ul>
 
 <hr />
 <h2 id="code">Code</h2>
 
-<p>What’s a tutorial without code, am I right? <a href="https://github.com/colonialjelly/multilayer-perceptron/blob/master/multilayer-perceptron.ipynb">Here</a> is a link to the Jupyter notebook that contains all the code for this post.</p>
+<p>What’s a tutorial without code, am I right? Here’s a link to the Jupyter notebook that contains all the code for this post: <a href="https://github.com/colonialjelly/multilayer-perceptron/blob/master/multilayer-perceptron.ipynb">Code</a></p>
 
 <h2 id="footnotes">Footnotes</h2>
 <div class="footnotes">
@@ -456,81 +361,4 @@ In practice, we usually have many such layers with each connected to each other,
     </li>
   </ol>
 </div>
-
-  </div>
-
-  <div>
-    <p><span class="share-box">Share:</span> <a href="http://twitter.com/share?text=From Linear Classifiers to Neural Networks&url=http://localhost:4000/multilayer-perceptron/" target="_blank">Twitter</a>, <a href="https://www.facebook.com/sharer.php?u=http://localhost:4000/multilayer-perceptron/" target="_blank">Facebook</a></p>
-  </div>
-
-  <!--<div class="date">
-    Written on December 19, 2019
-  </div>-->
-
-  
-<div class="comments">
-	<div id="disqus_thread"></div>
-	<script type="text/javascript">
-
-	    var disqus_shortname = 'giothinks';
-
-	    (function() {
-	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-	    })();
-
-	</script>
-	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-
-
-<script type="text/javascript" async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
-
-</article>
-
-        </div>
-      </div>
-
-      <div class="wrapper-footer">
-        <div class="container">
-          <footer class="footer">
-            
-<a href="mailto:giorgi@cs.utah.edu"><i class="svg-icon email"></i></a>
-
-
-<a href="https://github.com/colonialjelly"><i class="svg-icon github"></i></a>
-
-
-
-<a href="/feed.xml"><i class="svg-icon rss"></i></a>
-<a href="https://www.twitter.com/colonialjelly"><i class="svg-icon twitter"></i></a>
-
-
-
-
-
-          </footer>
-        </div>
-      </div>
-    </div>
-
-    
-	<!-- Google Analytics -->
-	<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-		ga('create', 'UA-157355591-1', 'auto');
-		ga('send', 'pageview', {
-		  'page': '/multilayer-perceptron/',
-		  'title': 'From Linear Classifiers to Neural Networks'
-		});
-	</script>
-	<!-- End Google Analytics -->
-
-
-  </body>
-</html>
+:ET

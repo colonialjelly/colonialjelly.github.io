@@ -1,100 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>From Linear Classifiers to Neural Networks – Giorgi – I think, therefore I'm distracted</title>
-    <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>From Linear Classifiers to Neural Networks | Giorgi</title>
-<meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="From Linear Classifiers to Neural Networks" />
-<meta name="author" content="Giorgi Kvernadze" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it’s a simple model to implement (kinda’)." />
-<meta property="og:description" content="There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it’s a simple model to implement (kinda’)." />
-<link rel="canonical" href="http://localhost:4000/multilayer-perceptron/" />
-<meta property="og:url" content="http://localhost:4000/multilayer-perceptron/" />
-<meta property="og:site_name" content="Giorgi" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2019-12-19T00:00:00-07:00" />
-<script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/multilayer-perceptron/"},"@type":"BlogPosting","url":"http://localhost:4000/multilayer-perceptron/","headline":"From Linear Classifiers to Neural Networks","dateModified":"2019-12-19T00:00:00-07:00","datePublished":"2019-12-19T00:00:00-07:00","author":{"@type":"Person","name":"Giorgi Kvernadze"},"description":"There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it’s a simple model to implement (kinda’).","@context":"https://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
-        <meta charset="utf-8" />
-    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
-
-    
-    <meta name="description" content="There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it's a simple model to implement (kinda')." />
-    <meta property="og:description" content="There are many types of neural networks, each having some advantage over others. In this post I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it's a simple model to implement (kinda')." />
-    
-    <meta name="author" content="Giorgi" />
-
-    
-    <meta property="og:title" content="From Linear Classifiers to Neural Networks" />
-    <meta property="twitter:title" content="From Linear Classifiers to Neural Networks" />
-    
-
-    
-    <meta property="og:image" content="http://localhost:4000https://avatars0.githubusercontent.com/u/10067792?s=460&v=4"/>
-    <meta property="twitter:image" content="http://localhost:4000https://avatars0.githubusercontent.com/u/10067792?s=460&v=4"/>
-    
-    <meta property="og:site_name" content="Amit Merchant - Software Engineer"/>
-
-
-    <link rel="stylesheet" type="text/css" href="/assets/style.css" />
-    <link rel="alternate" type="application/rss+xml" title="Giorgi - I think, therefore I'm distracted" href="/feed.xml" />
-    <link rel="canonical" href="http://localhost:4000/multilayer-perceptron/" />
-
-    <meta name="theme-color" content="#000000">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-  </head>
-
-  <body>
-    <div id="bar"></div>
-    <div class="wrapper-container">
-      <div class="wrapper-masthead">
-        <div class="container">
-          <header class="masthead clearfix">
-            <a href="/" class="site-avatar"><img src="https://avatars0.githubusercontent.com/u/10067792?s=460&v=4" /></a>
-
-            <div class="site-info">
-              <h1 class="site-name"><a href="/">Giorgi</a></h1>
-              <p class="site-description">I think, therefore I'm distracted</p> 
-            </div>
-
-            <nav>
-              <a href="/">Home</a>
-              <a href="/reading">Reading</a>
-              <a href="/search">Search</a>
-              <a href="/about">About</a>
-            </nav>
-          </header>
-        </div>
-      </div>
-
-      <div class="wrapper-main">
-        <div id="main" role="main" class="container">
-          <article class="post detailed">
-  <h1>From Linear Classifiers to Neural Networks</h1>
-
-  <div>
-    <p class="author_title">Giorgi Kvernadze  ·  December 19, 2019</p>
-    
-    <div class="post-tags">
-      
-      
-        <a href="/categories/#Machine Learning">Machine Learning</a>
-        &nbsp;
-      
-        <a href="/categories/#Neural Networks">Neural Networks</a>
-        
-      
-    </div>
-  </div>
-    
-  <div class="entry">
-    <ul>
+I"�<ul>
   <li>
     <p><em>This post is best suited for people who are familiar with linear classifiers. I will also be assuming that the reader is familiar with gradient descent.</em></p>
   </li>
@@ -200,24 +104,28 @@ The term 'neural networks' itself is kind of misleading. It creates an image of 
 
 <h4 id="the-meta-classifier">The Meta Classifier</h4>
 
-<p>Let’s define another linear classifier but this time instead of taking the data points as input, this classifier will take the outputs of the three classifiers as input and will output a final classification decision. In a way it’s a meta classifier since it classifies using outputs of other classifiers.</p>
+<p>Let’s define another linear classifier, but this time instead of taking the data points as input, this classifier will take the outputs of the three classifiers as input and will output a final classification decision. In a way it’s a meta classifier, since it classifies using outputs of other classifiers.</p>
 
 <p>Let <script type="math/tex">\boldsymbol{h}^{3 \times 1}</script> be the output of the previous classifiers, i.e <script type="math/tex">\boldsymbol{h} = \sigma(\boldsymbol{Wx} + \boldsymbol{b})</script>, then the prediction of the meta classifier <script type="math/tex">(\boldsymbol{w}_{m}, b_{m})</script> is defined as: <script type="math/tex">\sigma(\boldsymbol{w}_{m}^T\boldsymbol{h} + b_{m})</script>, where <script type="math/tex">\boldsymbol{w}_{m} \in \mathbb{R}^3</script> and <script type="math/tex">b_{m} \in \mathbb{R}</script>.</p>
 
-<p>And there it is, we finally have all the components. All three classifiers are connected, we have a way to produce a single prediction using all three of them and there is hope that coordination will happen because of the meta classifier.</p>
+<!-- This classifier will have 2 jobs: 1) combine outputs in the forward pass and 2) act as a "conductor" by ensuring coordination during the backward pass. -->
+<!--
+This classifier which is kind of a meta classifier, will essentially act as a conductor, making sure there is coordination between the previous three classifiers. -->
 
-<p>Just to recap, the expression below is the function that corresponds to our MLP:</p>
+<p>And there it is, we finally have everything. All three classifiers are connected, we have a way to produce a single prediction using all three of them and there is hope that coordination will happen because of the meta classifier.</p>
+
+<p>Just to recap, the expression bellow is the function that corresponds to our MLP:</p>
 
 <script type="math/tex; mode=display">\text{MLP}(\boldsymbol{x}; \boldsymbol{w}_{m}, b_{m}, \boldsymbol{W}, \boldsymbol{b}) =\sigma(\boldsymbol{w}_{m}^T\sigma(\boldsymbol{Wx} + \boldsymbol{b}) + b_{m})</script>
 
 <p>Everything before the semicolon is the input of the function and everything after are the parameters of the function. Our goal is to learn the parameters.</p>
 
 <p><strong>Exercise:</strong>
-A question that you might have at this point is “why do we need to have a decision function applied to the three linear classifiers, can’t we directly plug the outputs to the meta classifier and produce a decision?”. I’m gonna leave the answer to that as an exercise. Remove all the <script type="math/tex">\sigma</script> functions, and simplify the expression. What do you get? Is it different than having a single linear classifier?</p>
+A question that you might have at this point is “why do we need to have a decision function applied to the three linear classifiers, can’t we directly plug the outputs to the meta classifier and produce a decision? “. I’m gonna leave the answer to that as an exercise. Remove all the <script type="math/tex">\sigma</script> functions, and simplify the expression. What do you get? Is it different than having a single linear classifier?</p>
 
 <h2 id="learn">Learn</h2>
 
-<p>We have managed to define a simple MLP but we still need a way to learn the parameters of the function. The function is fully differentiable and this is no accident. As I said earlier, we chose to use the sigmoid function instead of the step-function as a decision function because of technical reasons. Well the technical reason is this: differentiability is nice and we like it because it allows us to use gradient based optimization algorithms like gradient descent.</p>
+<p>We have managed to define a simple MLP but we still need a way to learn the parameters of the function. The function is fully differentiable and this is no accident. As I said earlier, we chose to use the sigmoid function instead of the step-function as a decision function because of technical reasons. Well the technical reason is that, differentiability is nice and we like it because it allows us to use gradient based optimization algorithms like gradient descent.</p>
 
 <h4 id="loss-function">Loss Function</h4>
 
@@ -230,13 +138,13 @@ A question that you might have at this point is “why do we need to have a deci
 
 <h4 id="optimization">Optimization</h4>
 
-<p>The plan is to use gradient descent to optimize <script type="math/tex">L</script>. Remember that during gradient descent, we need take the gradient of the objective at every step of the algorithm (hence the name).</p>
+<p>The plan is to use gradient descent to optimize <script type="math/tex">L</script>. Remember that during gradient descent, we need take the gradient (hence the name) of the objective at every step of the algorithm.</p>
 
 <script type="math/tex; mode=display">\theta \leftarrow \theta - \alpha \nabla_{\theta} L</script>
 
 <p>Where <script type="math/tex">\alpha</script> is the step size (learning rate).</p>
 
-<p>Since <script type="math/tex">L</script> is a composition function, we will need to use the chain rule (from calculus). Furthermore, <script type="math/tex">\theta</script> isn’t a single variable, we will be optimizing with respect to 4 different variables <script type="math/tex">\boldsymbol{w}_{m}, b_{m}, \boldsymbol{W}, \boldsymbol{b}</script>. We’re going to need to update each one at every step:</p>
+<p>Since <script type="math/tex">L</script> is a composition function, we will need to use the chain rule (Remember Calc 1). Furthermore, <script type="math/tex">\theta</script> isn’t a single variable, we will be optimizing with respect to 4 different variables <script type="math/tex">\boldsymbol{w}_{m}, b_{m}, \boldsymbol{W}, \boldsymbol{b}</script>. We’re going to need to update each one at every step:</p>
 
 <p><script type="math/tex">\boldsymbol{w}_{m} \leftarrow \boldsymbol{w}_{m} - \alpha * \frac{\partial L}{\partial \boldsymbol{w}_{m}}</script> <br />
   <script type="math/tex">b_{m} \leftarrow b_{m} - \alpha * \frac{\partial L}{\partial b_{m}}</script> <br />
@@ -247,14 +155,14 @@ A question that you might have at this point is “why do we need to have a deci
 
 <p><em>Skip this section if you don’t care about all of the gory details of computing the partials. Although I do think that it’s a good idea to do this at least once by hand.</em></p>
 
-<p>Now we will need to breakdown each of the partial derivatives using the chain rule. If we don’t give names to intermediate values, it will quickly get hairy. Let’s do that first.</p>
+<p>Now we will need to breakdown each of the partial derivatives using the chain rule. If we’re not careful about giving names to intermediate values, it will quickly get hairy. So let’s do that first.</p>
 
 <p><script type="math/tex">\boldsymbol{s}_1 = \boldsymbol{Wx} + \boldsymbol{b}</script> <br />
   <script type="math/tex">\boldsymbol{h} = \sigma(\boldsymbol{s}_1)</script> <br />
   <script type="math/tex">s_2 = \boldsymbol{w}^T_{m}\boldsymbol{h} + b_{m}</script> <br />
   <script type="math/tex">\hat{y} = \sigma(s_2)</script></p>
 
-<p>Before we start the tedious process of taking partial derivatives of a composed function, I want to remind you that the goal is to compute these four partial derivatives: <script type="math/tex">\frac{\partial L}{\partial \boldsymbol{w}_{m}}, \frac{\partial L}{\partial b_{m}}, \frac{\partial L}{\partial \boldsymbol{W}}, \frac{\partial L}{\partial \boldsymbol{b}}</script>. If we have these values, we can use them to update the parameters at each step of gradient descent. Using the chain rule we can write down each of the partial derivatives as a product:</p>
+<p>Before we start the tedious process of taking partial derivatives of a composed function I want to remind you that the goal is to compute these four partial derivatives: <script type="math/tex">\frac{\partial L}{\partial \boldsymbol{w}_{m}}, \frac{\partial L}{\partial b_{m}}, \frac{\partial L}{\partial \boldsymbol{W}}, \frac{\partial L}{\partial \boldsymbol{b}}</script>. If we have these values, we can use them to update the parameters at each step of gradient descent. Using the chain rule we can write down each of the partial derivatives as a product:</p>
 
 <p><script type="math/tex">\frac{\partial L}{\partial \boldsymbol{w}_{m}} = \frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial \boldsymbol{w}_{m}}</script> <br />
   <script type="math/tex">\frac{\partial L}{\partial b_{m}} = \frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial b_{m}}</script> <br />
@@ -276,15 +184,15 @@ A question that you might have at this point is “why do we need to have a deci
   <script type="math/tex">\frac{\partial s_2}{\partial b_{m}} = 1</script> <br />
   <script type="math/tex">\frac{\partial s_2}{\partial \boldsymbol{h}} = \boldsymbol{w}_{m}</script></p>
 
-<p>Now since, <script type="math/tex">\boldsymbol{h}</script> and <script type="math/tex">\boldsymbol{s_1}</script> are both vectors, the partial <script type="math/tex">\frac{\partial \boldsymbol{h}}{\partial \boldsymbol{s_1}}</script> will be a matrix; however it will be a diagonal matrix.</p>
+<p>Now since, <script type="math/tex">\boldsymbol{h}</script> and <script type="math/tex">\boldsymbol{s_1}</script> are both vectors, the partial <script type="math/tex">\frac{\partial \boldsymbol{h}}{\partial \boldsymbol{s_1}}</script> will be a matrix, however it will be a diagonal matrix.</p>
 
 <script type="math/tex; mode=display">\frac{\partial \boldsymbol{h}}{\partial \boldsymbol{s_1}} = \text{diag}((\boldsymbol{1} - \boldsymbol{h}) \odot \boldsymbol{h})</script>
 
-<p>This can be replaced by an element-wise multiplication in the chain as: <script type="math/tex">\odot (\boldsymbol{1} - \boldsymbol{h}) \odot \boldsymbol{h}</script></p>
+<p>Which can be replaced by an element-wise multiplication in the chain as: <script type="math/tex">\odot (\boldsymbol{1} - \boldsymbol{h}) \odot \boldsymbol{h}</script></p>
 
-<p>The partial derivative <script type="math/tex">\frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{W}}</script> is the most complicated to compute. <script type="math/tex">\boldsymbol{s_1}</script> is a vector and <script type="math/tex">\boldsymbol{W}</script> is a matrix, therefore the result of the partial derivative will be a 3 dimensional tensor! Fortunately, we will be able to reduce it to something more simple.</p>
+<p>The partial derivative <script type="math/tex">\frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{W}}</script> is the most complicated to compute. <script type="math/tex">\boldsymbol{s_1}</script> is a vector and <script type="math/tex">\boldsymbol{W}</script> is a matrix, therefore the result of the partial derivative will be a 3 dimensional tensor! But fortunately, we will be able to reduce it to something more simple.</p>
 
-<p>Instead of computing the partial derivative with respect to entire weight matrix, let’s instead take derivatives with respect to each of the classifiers <script type="math/tex">\boldsymbol{w_1}, \boldsymbol{w_2},</script> and <script type="math/tex">\boldsymbol{w_3}</script> (these correspond to the rows of <script type="math/tex">\boldsymbol{W}</script>). Each of these derivatives will be a matrix instead of a tensor.</p>
+<p>Instead of computing the partial derivative with respect to entire weight matrix, let’s instead take derivatives with respect to each of the classifiers <script type="math/tex">\boldsymbol{w_1}, \boldsymbol{w_2},</script> and <script type="math/tex">\boldsymbol{w_3}</script> (These would correspond to the rows of <script type="math/tex">\boldsymbol{W}</script>). Each of these derivatives will be a matrix instead of a tensor.</p>
 
 <p><script type="math/tex">% <![CDATA[
 \frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{w_1}} = \begin{bmatrix}
@@ -322,7 +230,7 @@ A question that you might have at this point is “why do we need to have a deci
 
 <script type="math/tex; mode=display">\frac{\partial L}{\partial \hat{y}}\frac{\partial \hat{y}}{\partial s_2}\frac{\partial s_2}{\partial \boldsymbol{h}}\frac{\partial \boldsymbol{h}}{\partial \boldsymbol{s}_1}\frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{W}} = \boldsymbol{\delta} \otimes \boldsymbol{x}</script>
 
-<p>And finally,</p>
+<p>And finally</p>
 
 <script type="math/tex; mode=display">\frac{\partial \boldsymbol{s_1}}{\partial \boldsymbol{b}} = \text{diag}(\boldsymbol{1}) = \boldsymbol{I}</script>
 
@@ -333,9 +241,9 @@ A question that you might have at this point is “why do we need to have a deci
   <script type="math/tex">\frac{\partial L}{\partial \boldsymbol{W}} = ((\hat{y} - y)\boldsymbol{w}_{m}\odot (\boldsymbol{1} - \boldsymbol{h}) \odot \boldsymbol{h}) \otimes \boldsymbol{x}</script> <br />
   <script type="math/tex">\frac{\partial L}{\partial \boldsymbol{b}} = ((\hat{y} - y)\boldsymbol{w}_{m}\odot (\boldsymbol{1} - \boldsymbol{h}) \odot \boldsymbol{h})^T</script></p>
 
-<p>You may have noticed that all of this is for a single datapoint <script type="math/tex">\boldsymbol{x}</script>, we wouldn’t do this in practice. It is much more preferable to have everything computed for a batch (or mini-batch) of inputs <script type="math/tex">\boldsymbol{X}</script>, this allows us to update the parameters much more efficiently. I highly recommend you redo all of the computations of the partial derivatives in matrix form.</p>
+<p>You may have noticed that all of this is for a single datapoint <script type="math/tex">\boldsymbol{x}</script>, we wouldn’t do this in practice. It is much more preferable to have everything computed for a batch of inputs <script type="math/tex">\boldsymbol{X}</script>, this allows us to update the parameters much more efficiently. I highly recommend you redo all of the computations of the partial derivatives in matrix form.</p>
 
-<p>I’ve purposefully skipped over a lot of the details. I want this block of the post to serve as a reference for your own solutions rather than a complete step-by-step guide. Here are some useful notes that can come in handy if you want to do everything from scratch:</p>
+<p>I’ve also purposefully skipped over a lot of the details. I wanted this block of the post to serve as a reference for your own solutions rather than a complete step-by-step guide. Here are some useful notes that can come in handy if you want to do everything from scratch:</p>
 
 <ul>
   <li><a href="http://cs231n.stanford.edu/vecDerivs.pdf">Vector, Matrix, and Tensor Derivatives - Erik Learned-Miller</a></li>
@@ -343,35 +251,35 @@ A question that you might have at this point is “why do we need to have a deci
 </ul>
 
 <h2 id="results">Results</h2>
-<p>Phew! Now that’s over with. Let’s see what the results are after running gradient descent (1000 iterations with a learning rate of 0.01). Do you remember how we started? We said that if only we had a transformation function that could make the dataset linearly separable, then learning would be easy. Well <script type="math/tex">\phi(\boldsymbol{x}) = \sigma(\boldsymbol{Wx} + \boldsymbol{b})</script> will actually be that transformation that makes the dataset linearly separable. This is what the data looks like after applying that learned function:</p>
+<p>Phew! now that’s over with. Let’s see what the results after running gradient descent (1000 iterations with a learning rate of 0.01). Do you remember how we started? We said that if only we had a transformation function that could make the dataset linearly separable then learning would be easy. Well <script type="math/tex">\phi(\boldsymbol{x}) = \sigma(\boldsymbol{Wx} + \boldsymbol{b})</script> will actually be that transformation that makes the dataset linearly separable. This is what the data looks like after applying that learned function:</p>
 
 <p><img src="../images/projection.png" alt="" /></p>
 
-<p>As you can see the data is completely linearly separable. In essence, this is what most of learning is when it comes to neural networks. Every neural network classifier that has classification as a primary task is trying to learn some kind of a transformation on the data so that the data becomes linearly separable. This is a big reason why neural networks became so popular. In the past, people (usually domain experts) spent tremendous efforts in engineering features to make learning easy. Now a lot of that is handled by (deep) neural networks <sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup>.</p>
+<p>As you can see the data is completely linearly separable. In essence, this is what most of learning is when it comes to neural networks. Every neural network classifier that has classification as a primary task is trying to learn some kind of a transformation on the data so that the data becomes linearly separable. This is a big reason why neural networks became so popular. In the past people (usually domain experts) spent tremendous efforts in engineering features to make learning easy. Now a lot of that is handled by (deep) neural networks <sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup>.</p>
 
-<p>We were also trying to learn multiple linear classifiers. And voilà, these are the three linear classifiers <script type="math/tex">(\boldsymbol{w}_{1}, b_1), (\boldsymbol{w}_{2}, b_3)</script> and <script type="math/tex">(\boldsymbol{w}_{3}, b_3)</script> that are learned:</p>
+<p>We were also trying to learn multiple linear classifiers. and voilà, these are the three linear classifiers <script type="math/tex">(\boldsymbol{w}_{1}, b_1), (\boldsymbol{w}_{2}, b_3)</script> and <script type="math/tex">(\boldsymbol{w}_{3}, b_3)</script> that are learned:</p>
 
 <p><img src="../images/hidden_classifiers.png" alt="" /></p>
 
-<p>Finally this is what the learned decision boundary looks like in the original space. The colors indicate the predictions of the classifier.</p>
+<p>And finally this is what the learned decision boundary looks like in the original space. The colors indicate the predictions of the classifier.</p>
 
 <p><img src="../images/decision_boundary.png" alt="" /></p>
 
-<p>This is awesome, isn’t it? But wait, hold on. While this classifier gets 100% accuracy, it does not represent the true function… with three classifiers, the shape we are learning is a triangle-ish shape. That’s because it’s the only possible shape that captures all the data with three lines. But we know that the actual function is a circle. With four classifiers we can get rectangle-ish shapes, with five a pentagon-ish and so on. Intuitively, if we add more classifiers, we should get closer to an actual circle. Here’s a progression of the decision boundary going from 5 to 50 with increments of 5:</p>
+<p>This is awesome isn’t it? but wait hold on. While this classifier gets 100% accuracy, it does not represent the true function… With three classifiers the shape we are learning is a triangle-ish shape. That’s because it’s the only possible shape that captures all the data with three classifiers. But we know that the actual function is a circle. With four classifiers we can get rectangle-ish shapes, with five a pentagon-ish and so on. Intuitively, if we added a lot more classifiers we should get closer to an actual circle. Here’s a progression of the decision boundary going from 5 to 50 with increments of 5:</p>
 
 <p><img src="../images/decision_boundaries_progress.png" alt="" /></p>
 
-<p>This looks much better. Yet this isn’t really the true function either. Everything in the middle is classified as red, but there will never be any points there. The true function generates points on the boundary of the circle, never inside the circle. Furthermore, the only reason we were able to make this correction was because we’re working in 2 dimensions and we know exactly what the true function is. What do we do if we have a dataset in high dimensions coming from an unknown function? Would we be able to trust the learned classifier even if we get 100% accuracy?</p>
+<p>This looks much better. But wait… This isn’t really the true function either. Everything in the middle is classified as red, but there will never by any points there. The true function generates points on the boundary of the circle, never inside the circle. Furthermore, the only reason we were able to make this correction was because we’re working in 2 dimensions and we know exactly what the true function is. What do we do if we have a dataset in high dimensions coming from an unknown function? Would we be able to trust the learned classifier even if we get 100% accuracy?</p>
 
 <h2 id="jargon">Jargon</h2>
 
-<p>For the entirety of the post, I have purposefully avoided mentioning neural network lingo that you usually see in the literature. I think some of the terms themselves can bring a lot of confusion to people when they first get introduced to neural networks. However, since the field is set on using these terms, it’s necessary to know them. Let’s go back and put names on some of the things we’ve talked about.</p>
+<p>For the entirety of the post I have purposefully avoided mentioning neural network lingo that you usually see in the literature. I think some of the terms itself can bring a lot of confusion to people when they first get introduced to neural networks. However, since the field is set on using these terms, it’s necessary to know them. Let’s go back and put names on some of the things we’ve talked about.</p>
 
 <h3 id="activation-functions">Activation Functions</h3>
 
-<p>We talked about decision functions. We mentioned the step function and the sigmoid function. The justification for having them was straight-forward since we were talking in the context of classifiers and we had to have a function that produces a prediction. In the context of neural networks we don’t really care for predictions if it isn’t the last classifier (the meta-classifier). Every intermediate function can have any form, as long as it’s differentiable.</p>
+<p>We talked about decision functions. We mentioned the step function and the sigmoid function. The justification for having them was straight-forward since we were talking in the context of classifiers and we had to have a function that produces a prediction. But in the context of neural networks we don’t really care for predictions if it isn’t the last classifier (the meta-classifier). Every intermediate function can have any form, as long as it’s differentiable.</p>
 
-<p>Because of this, we aren’t constrained to using functions that produce predictions like sigmoid or the step function. Here are a few others we could have used: Tanh, ReLu, LeakyReLu, SoftPlus etc. People refer to these functions as activation functions. The most popular choice in practice is the ReLu activation defined as <script type="math/tex">\text{ReLu}(z)=\max(0, z)</script>. Activation functions are almost always non-linear. The non-linearity is the reason why neural networks are able to learn non-linear functions. When the input is a vector or a matrix, the activation function is applied element-wise.</p>
+<p>So we aren’t constrained to using functions that produce predictions like sigmoid or the step function. Here are a few others we could have used: Tanh, ReLu, LeakyReLu, SoftPlus etc. People refer to these functions as activation functions. The most popular choice in practice is the ReLu activation defined as <script type="math/tex">\text{ReLu}(z)=\max(0, z)</script>. Activation functions are usually non-linear which is the reason why neural networks are able to learn non-linear functions. When the input is a vector or a matrix, the activation function is applied element-wise.</p>
 
 <h3 id="unit-neuron">Unit (Neuron)</h3>
 
@@ -385,16 +293,16 @@ A question that you might have at this point is “why do we need to have a deci
 
 <p>A layer in the context of an MLP is a linear transformation followed by an activation function. A bunch of neurons together on the same level make a layer. What a level means will be more clear when we see the graphical representation of neural networks.</p>
 
-<p>In this post, we defined a 2 layer MLP.</p>
+<p>In this post we defined a 2 layer MLP.</p>
 <ul>
   <li>Layer 1: Linear transformation <script type="math/tex">\boldsymbol{Wx} + \boldsymbol{b} = \boldsymbol{s}_1 \rightarrow</script> activation <script type="math/tex">\rightarrow \sigma(\boldsymbol{s}_1) = \boldsymbol{h}</script></li>
   <li>Layer 2: Linear transformation <script type="math/tex">\boldsymbol{w}_{m}^T\boldsymbol{h} + b_{m} = \boldsymbol{s}_2 \rightarrow</script> activation <script type="math/tex">\sigma(\boldsymbol{s}_2) \rightarrow \hat{y}</script></li>
 </ul>
 
-<p>People refer to the layers before the last layer as hidden layers. In this case, we only had one hidden layer (Layer 1).</p>
+<p>People refer to the layers before the last layer as hidden layers. In this case we only had one hidden layer (Layer 1).</p>
 
-<p><strong>More layers:</strong>
-In practice, we usually have many such layers with each connected to each other, i.e the output of one becomes the input for to next one. Chaining layers like this is actually the same as function composition. If we define each layer as a function <script type="math/tex">f_i(x) = g(\boldsymbol{W}_i\boldsymbol{x} + \boldsymbol{b}_i)</script> where <script type="math/tex">g</script> is some activation function, then an n-layer MLP can be written as the function composition <script type="math/tex">MLP(x) = f_n(f_{n-1}(...(f_1(x)))</script>. The depth of a network corresponds to <script type="math/tex">n</script>. A network with depth <script type="math/tex">n > 2</script>, is called deep (this is where the term deep learning comes from). The width of a network corresponds to the number of units in each of the layer.</p>
+<p><strong>More layers</strong>
+In practice we usually have many such layers each connected to each other, i.e the output of one becomes the input for to next one. Chaining layers like this is actually the same as function composition. If we define each layer as a function, <script type="math/tex">f_i(x) = g(\boldsymbol{W}_i\boldsymbol{x} + \boldsymbol{b}_i)</script>, where <script type="math/tex">g</script> is some activation function, then an n-layer MLP can be written as the function composition <script type="math/tex">MLP(x) = f_n(f_{n-1}(...(f_1(x)))</script>. The depth of a network corresponds to <script type="math/tex">n</script>. A network with depth <script type="math/tex">n > 2</script>, is called deep (this is where the term deep learning comes from). The width of a network corresponds to the number of units in each of the layer.</p>
 
 <h3 id="graph">Graph</h3>
 
@@ -404,7 +312,7 @@ In practice, we usually have many such layers with each connected to each other,
 
 <p>These kinds of graphs are called computational graphs and they are just another way to describe a neural network model. It provides a good way to break down a complex computation into its’ primitive parts.</p>
 
-<p>All of the edges correspond to the weights (parameters) of the model. The nodes represent computation. For example, <script type="math/tex">h_1</script> represents the following computation:</p>
+<p>All of the edges correspond to the weights (parameters) of the model. The nodes represent computation. For example <script type="math/tex">h_1</script> represents the following computation:</p>
 
 <script type="math/tex; mode=display">h_{1} = \sigma(\boldsymbol{w}_{1}^T\boldsymbol{x} + b_{1})</script>
 
@@ -428,19 +336,20 @@ In practice, we usually have many such layers with each connected to each other,
 
 <h2 id="final-words">Final Words</h2>
 
-<p>I hope this post has provided some insight to you on how neural networks work. It is by no means comprehensive, I have skipped over a lot of details. If you want to continue learning about neural networks, I would recommend the <a href="https://www.deeplearningbook.org/">Deep Learning book by Ian Goodfellow and Yoshua Bengio and Aaron Courville</a> as a good place to start. Here are a few other good resources:</p>
+<p>I hope this post has provided some insight to you on how neural networks work. It is by no means comprehensive, I have skipped over a lot of really important details. If you want to continue learning about neural networks, the <a href="https://www.deeplearningbook.org/">Deep Learning book by Ian Goodfellow and Yoshua Bengio and Aaron Courville</a> is a good place to start. Here are a few other good resources:</p>
 
 <ul>
-  <li><a href="https://playground.tensorflow.org">Neural Network Playground</a> - One of the best ways to learn something is to play around with it. The NN playground lets you easily build and train models on various synthetic datasets. Great tool for building intuition.</li>
-  <li><a href="http://cs231n.github.io/">CS231n: Convolutional Neural Networks for Visual Recognition</a> - Contains excellent notes from Andrej Karpathy, highly recommend.</li>
-  <li><a href="https://www.cs.toronto.edu/~rgrosse/courses/csc321_2018/">CSC 321: Intro to Neural Networks and Machine Learning</a> - This has more than just neural networks. The lecture slides and notes are really good and it builds up from linear classifiers.</li>
-  <li><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi">3Blue1Brown: Neural Networks</a> - One of my all time favorite educational channels. Has some amazing, visual heavy explanations on the concepts behind neural networks.</li>
+  <li><a href="https://playground.tensorflow.org">Neural Network Playground</a> One of the best ways to learn something is to play around with it. The NN playground lets you easily build and train models and various synthetic datasets. Great tool for building intuition.</li>
+  <li><a href="http://cs231n.github.io/">CS231n: Convolutional Neural Networks for Visual Recognition</a> Contains excellent notes from Andrej Karpathy, highly recommend</li>
+  <li><a href="https://www.cs.toronto.edu/~rgrosse/courses/csc321_2018/">CSC 321: Intro to Neural Networks and Machine Learning</a> Has more than just neural networks. The lecture slides and notes are really good and it builds up from linear classifiers.</li>
+  <li><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi">3Blue1Brown: Neural Networks</a> One of my all time favorite educational channels</li>
+  <li><a href="http://cs229.stanford.edu/notes2019fall/cs229-notes-deep_learning.pdf">CS229 Lecture Notes by Andrew Ng: Deep Learning</a> Andrew Ng’s tutorials are always very good</li>
 </ul>
 
 <hr />
 <h2 id="code">Code</h2>
 
-<p>What’s a tutorial without code, am I right? <a href="https://github.com/colonialjelly/multilayer-perceptron/blob/master/multilayer-perceptron.ipynb">Here</a> is a link to the Jupyter notebook that contains all the code for this post.</p>
+<p>What’s a tutorial without code, am I right? Here’s a link to the Jupyter notebook that contains all the code for this post: <a href="https://github.com/colonialjelly/multilayer-perceptron/blob/master/multilayer-perceptron.ipynb">Code</a></p>
 
 <h2 id="footnotes">Footnotes</h2>
 <div class="footnotes">
@@ -456,81 +365,4 @@ In practice, we usually have many such layers with each connected to each other,
     </li>
   </ol>
 </div>
-
-  </div>
-
-  <div>
-    <p><span class="share-box">Share:</span> <a href="http://twitter.com/share?text=From Linear Classifiers to Neural Networks&url=http://localhost:4000/multilayer-perceptron/" target="_blank">Twitter</a>, <a href="https://www.facebook.com/sharer.php?u=http://localhost:4000/multilayer-perceptron/" target="_blank">Facebook</a></p>
-  </div>
-
-  <!--<div class="date">
-    Written on December 19, 2019
-  </div>-->
-
-  
-<div class="comments">
-	<div id="disqus_thread"></div>
-	<script type="text/javascript">
-
-	    var disqus_shortname = 'giothinks';
-
-	    (function() {
-	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-	    })();
-
-	</script>
-	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-
-
-<script type="text/javascript" async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
-
-</article>
-
-        </div>
-      </div>
-
-      <div class="wrapper-footer">
-        <div class="container">
-          <footer class="footer">
-            
-<a href="mailto:giorgi@cs.utah.edu"><i class="svg-icon email"></i></a>
-
-
-<a href="https://github.com/colonialjelly"><i class="svg-icon github"></i></a>
-
-
-
-<a href="/feed.xml"><i class="svg-icon rss"></i></a>
-<a href="https://www.twitter.com/colonialjelly"><i class="svg-icon twitter"></i></a>
-
-
-
-
-
-          </footer>
-        </div>
-      </div>
-    </div>
-
-    
-	<!-- Google Analytics -->
-	<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-		ga('create', 'UA-157355591-1', 'auto');
-		ga('send', 'pageview', {
-		  'page': '/multilayer-perceptron/',
-		  'title': 'From Linear Classifiers to Neural Networks'
-		});
-	</script>
-	<!-- End Google Analytics -->
-
-
-  </body>
-</html>
+:ET
