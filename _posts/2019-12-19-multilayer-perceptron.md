@@ -339,7 +339,7 @@ Computing the derivatives of all the parameters with respect to the outputs is c
 I hope this post has provided some insight to you on how neural networks work. It is by no means comprehensive, I have skipped over a lot of details. If you want to continue learning about neural networks, I would recommend the [Deep Learning book by Ian Goodfellow and Yoshua Bengio and Aaron Courville](https://www.deeplearningbook.org/) as a good place to start. Here are a few other good resources:
 
 - [Neural Network Playground](https://playground.tensorflow.org) - One of the best ways to learn something is to play around with it. The NN playground lets you easily build and train models on various synthetic datasets. Great tool for building intuition.  
-- [CS231n: Convolutional Neural Networks for Visual Recognition](http://cs231n.github.io/) - Contains excellent notes from Andrej Karpathy, highly recommend.
+- [CS231n: Convolutional Neural Networks for Visual Recognition](http://cs231n.github.io/) - Contains excellent notes from Andrej Karpathy, highly recommended.
 - [CSC 321: Intro to Neural Networks and Machine Learning](https://www.cs.toronto.edu/~rgrosse/courses/csc321_2018/) - This has more than just neural networks. The lecture slides and notes are really good and it builds up from linear classifiers.
 - [3Blue1Brown: Neural Networks](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi) - One of my all time favorite educational channels. Has some amazing, visual heavy explanations on the concepts behind neural networks.
 
