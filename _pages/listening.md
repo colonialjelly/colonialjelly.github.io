@@ -4,23 +4,24 @@ title: Listening
 permalink: /listening/
 ---
 
-List of some albums I recommend listening to (in no particular order):
+List of some of my favorite albums (in no particular order):
 
-* **Lonerism** - Tame Impala
-* **Currents** - Tame Impala
-* **Suzuki** - Tosca
 * **In a Silent Way** - Miles Davis
-* **Moon Safari** - Air
-* **Le voyage dans la lune** - Air
-* **The Dark Side of the Moon** - Pink Floyd
+* **Oh My God** - Kevin Morby
+* **Mala** - Devandra Banhart
+* **Currents** - Tame Impala
 * **Wish You Were Here** - Pink Floyd
+* **Suzuki** - Tosca
+* **Moon Safari** - Air
+* **The Dark Side of the Moon** - Pink Floyd
 * **Physical Graffiti** - Led Zeppelin
 * **Interloper** - Carbon Based Lifeforms
+* **Lonerism** - Tame Impala
 * **Shining the Money Ball** - Body San
-* **Oh My God** - Kevin Morby
 * **The Blue Yusef Lateef** - Yusef Lateef
 * **It's Album Time** - Todd Terje
 * **Depression Cherry** - Beach House
+* **Le voyage dans la lune** - Air
 * **Awake** - Tycho
 * **The Richest Man in Babylon** - Thievery Corporation
 * **Harmless Melodies** - Yellow Days
@@ -28,4 +29,3 @@ List of some albums I recommend listening to (in no particular order):
 * **The Everlasting Blink** - Bent
 * **Mezzanine** - Massive Attack
 * **Who Can You Trust?** - Morcheeba
-* **Mala** - Devandra Banhart

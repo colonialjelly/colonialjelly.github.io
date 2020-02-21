@@ -16,7 +16,6 @@ I recently started keeping a log of all the books I read. It turns out it's a ni
 * **The Metamorphosis** - Franz Kafka
 * **Thinking in Bets**: *Making Smarter Decisions When You Don't Have All the Facts* - Annie Duke
 * **21 Lessons for the 21st Century** - Yuval Noah Harari
-* **The Awakened Ape**: *A Biohacker's Guide to Evolutionary Fitness, Natural Ecstasy, and Stress-Free Living* - Jevan Pradas
 * **Ishmael** - Daniel Quinn
 * **Meditations** - Marcus Aurelius
 * **A Random Walk Down Wall Street**: *The Time-Tested Strategy for Successful Investing* - Burton G. Malkiel
