@@ -8,11 +8,11 @@ I recently started keeping a log of all the books I read. It turns out it's a ni
 
 ## Currently reading
 
-* **The Selfish Gene** - Richard Dawkins
 * **Consciousness Explained** - Daniel Dennett
 
 ## Finished
 
+* **The Selfish Gene** - Richard Dawkins
 * **The Metamorphosis** - Franz Kafka
 * **Thinking in Bets**: *Making Smarter Decisions When You Don't Have All the Facts* - Annie Duke
 * **21 Lessons for the 21st Century** - Yuval Noah Harari
