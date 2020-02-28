@@ -7,7 +7,7 @@ permalink: /reading/
 I recently started keeping a log of all the books I read. It turns out it's a nice way to motivate yourself to read more :).
 
 ## Currently reading
-
+* **Radical Acceptance**: *Embracing Your Life With the Heart of a Buddha* - Tara Brach
 * **Consciousness Explained** - Daniel Dennett
 
 ## Finished
