@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  From Linear Classifiers to Neural Networks
-categories: [Machine Learning, Neural Networks]
+categories: [Machine Learning, Neural Networks, Educational]
 excerpt: There are many types of neural networks, each having some advantage over others. In this post, I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it's a relatively simple model to implement.
 mathjax: true
 ---

@@ -7,11 +7,12 @@ permalink: /reading/
 I recently started keeping a log of all the books I read. It turns out it's a nice way to motivate yourself to read more :).
 
 ## Currently reading
+* **Algorithms to Live By**: *The Computer Science of Human Decisions* -  Brian Christian & Tom Griffiths
 * **Radical Acceptance**: *Embracing Your Life With the Heart of a Buddha* - Tara Brach
-* **Consciousness Explained** - Daniel Dennett
+<!-- * **Consciousness Explained** - Daniel Dennett -->
 
 ## Finished
-
+* **How to Lie with Statistics** - Darrell Huff
 * **The Selfish Gene** - Richard Dawkins
 * **The Metamorphosis** - Franz Kafka
 * **Thinking in Bets**: *Making Smarter Decisions When You Don't Have All the Facts* - Annie Duke

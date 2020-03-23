@@ -5,6 +5,10 @@
 // IMPORTS
 //
 
+// Import partials from `sass_dir` (defaults to `_sass`)
+@import "bigfoot-default";
+
+
 @import "reset";
 @import "variables";
 // Syntax highlighting @import is at the bottom of this file
@@ -35,6 +39,14 @@ body {
   max-width: 740px;
   padding: 0 10px;
   width: 100%;
+}
+
+a.footnote:before {
+ content: "[";
+}
+
+a.footnote:after {
+    content: "]";
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -90,6 +102,7 @@ p {
 
 table {
 	padding: 0;
+  margin: 0 auto;
 }
 
 table tr {
@@ -114,7 +127,7 @@ table tr th {
 table tr td {
 	border: 1px solid #cccccc;
 	text-align: left;
-	margin: 0;
+	margin: 0 auto;
 	padding: 6px 13px;
 }
 
@@ -611,7 +624,7 @@ Modules - reusable parts of our design
 
 #gh-latest{
     font-size: 16px;
-    text-align: center;		
+    text-align: center;
 }
 
 .text-link {
@@ -714,7 +727,7 @@ Modules - reusable parts of our design
   display: inline-block;
 }
 
-.pagination a {    
+.pagination a {
   &:hover {
       background-color: #f1f1f1;
       color: #333;

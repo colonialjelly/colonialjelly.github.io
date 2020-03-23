@@ -47,7 +47,7 @@ For the second part of the experiment I add a pseudo feature to the dataset. Thi
 
 Finally, I create a OOD dataset that is entirely zeros expect for the feature that corresponds to the pseudo feature. The modified loss function will contain a term that will prefer a low KL divergence on the output of the model on these examples and the uniform distribution. In other words, the objective will force the model to be uncertain on OOD samples.
 
-The results after 100 random trials show that the new objective helps regularize the model by essentially canceling the pseudo feature. The test set accuracy is ~0.91 with a standard deviation of ~0.03. The accuracy isn't as high is the model that does not get the pseudo feature at all, but it is definitely much higher than 0.64. Furthermore, the weight of the pseudo feature is consistently low, compared to the baseline model.
+The results after 100 random trials show that the new objective helps regularize the model by essentially canceling the pseudo feature. The test set accuracy is ~0.91 with a standard deviation of ~0.03. The accuracy isn't as high as the model that does not get the pseudo feature at all, but it is definitely much higher than 0.64. Furthermore, the weight of the pseudo feature is consistently low, compared to the baseline model.
 
 ## References
 <a id="1">[1]</a>
