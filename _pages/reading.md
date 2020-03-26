@@ -7,11 +7,12 @@ permalink: /reading/
 I recently started keeping a log of all the books I read. It turns out it's a nice way to motivate yourself to read more :).
 
 ## Currently reading
+* **Black Swan**: *The Impact of the Highly Improbable* - Nassim Nicholas Taleb
 * **Algorithms to Live By**: *The Computer Science of Human Decisions* -  Brian Christian & Tom Griffiths
-* **Radical Acceptance**: *Embracing Your Life With the Heart of a Buddha* - Tara Brach
 <!-- * **Consciousness Explained** - Daniel Dennett -->
 
 ## Finished
+* **Radical Acceptance**: *Embracing Your Life With the Heart of a Buddha* - Tara Brach
 * **How to Lie with Statistics** - Darrell Huff
 * **The Selfish Gene** - Richard Dawkins
 * **The Metamorphosis** - Franz Kafka
