@@ -4,7 +4,8 @@ title: Reading
 permalink: /reading/
 ---
 
-I recently started keeping a log of all the books I read. It turns out it's a nice way to motivate yourself to read more :).
+Don't mind me. I'm just trying to exploit my ape brain.
+
 
 ## Currently reading
 * **Black Swan**: *The Impact of the Highly Improbable* - Nassim Nicholas Taleb
