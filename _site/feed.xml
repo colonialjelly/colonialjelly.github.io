@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-29T15:04:31-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Giorgi</title><subtitle>I think, therefore I'm distracted</subtitle><author><name>Giorgi Kvernadze</name></author><entry><title type="html">Min Hashing</title><link href="http://localhost:4000/minhashing/" rel="alternate" type="text/html" title="Min Hashing" /><published>2020-03-10T00:00:00-06:00</published><updated>2020-03-10T00:00:00-06:00</updated><id>http://localhost:4000/minhashing</id><content type="html" xml:base="http://localhost:4000/minhashing/">&lt;p&gt;Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. First thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user ids of people that have listened to that artist at least once. For example, the representation for Miles Davis could be,&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-29T16:05:26-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Giorgi</title><subtitle>I think, therefore I'm distracted</subtitle><author><name>Giorgi Kvernadze</name></author><entry><title type="html">Min Hashing</title><link href="http://localhost:4000/minhashing/" rel="alternate" type="text/html" title="Min Hashing" /><published>2020-03-10T00:00:00-06:00</published><updated>2020-03-10T00:00:00-06:00</updated><id>http://localhost:4000/minhashing</id><content type="html" xml:base="http://localhost:4000/minhashing/">&lt;p&gt;Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. First thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user ids of people that have listened to that artist at least once. For example, the representation for Miles Davis could be,&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{Miles Davis} = \{5, 23533, 2034, 932, ..., 10003243\}&lt;/script&gt;
 
@@ -350,9 +350,9 @@ $$h_{3}(x) = (3x + 1) \mod 11$$
 
 &lt;p&gt;&lt;img src=&quot;../images/artist_matrix_hash.png&quot; width=&quot;50%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Each hash function defines an implicit shuffling order. As an exercise, for each hash function, iterate over the rows in the order that that hash function displays. For each column (artist) and each hash function store the index of the first-non zero element. Then to compute the Jaccard similarities, compare the stored values the same way we did before.&lt;/p&gt;
+&lt;p&gt;Since each hash function defines an implicit shuffling order, we can iterate over the rows in that order. As an exercise, iterate the rows in the defined orders of each hash function. For each column (artist) store the index of the first-non zero element. Then to compute the Jaccard similarities, compare the stored values the same way we did before. &lt;sup id=&quot;fnref:min_index_diff&quot;&gt;&lt;a href=&quot;#fn:min_index_diff&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
-&lt;p&gt;The MinHash algorithm is essentially doing the same thing but in a more efficient way by just doing a single pass over the rows.&lt;/p&gt;
+&lt;p&gt;The MinHash algorithm is essentially doing the same thing but in a more efficient way by just making a single pass over the rows.&lt;/p&gt;
 
 &lt;!-- Now that we have the hash functions, we're finally ready for the MinHash algorithm: --&gt;
 
@@ -373,6 +373,12 @@ for each row r in the dataset
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/qA4WdrY6aPk&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 &lt;/center&gt;
 
+&lt;h3 id=&quot;further-improvement&quot;&gt;Further improvement&lt;/h3&gt;
+
+&lt;p&gt;Using the MinHash algorithm, we can reduce the computational complexity of computing similarities between pairs of artists but there is still one more issue. In order to implement the recommendation feature we still need to compute the similarities between every pair of artists. This is quadratic in running time, if &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; is the number of artists, we need to make &lt;script type=&quot;math/tex&quot;&gt;{n \choose 2} = \frac{n(n-1)}{2} = O(n^2)&lt;/script&gt; comparisons. If &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; is large, even with parallelization, this will be a horribly slow computation.&lt;/p&gt;
+
+&lt;p&gt;We’re in luck because there’s another ingenious method called Locality-sensitive hashing (LSH) that uses the minhash signatures to find candidate pairs. Which means that we’ll only have to compute the similarities for the candidates, rather than for every pair. I’ll write about LSH in the next post. Until then :v:.&lt;/p&gt;
+
 &lt;!-- ## Further reading
 
 - [Finding Similar Items](http://infolab.stanford.edu/~ullman/mmds/ch3.pdf) - Chapter 3 of the book &quot;Mining of Massive Datasets&quot; by Jure Leskovec, Anand Rajaraman and Jeff Ullman. Has some really good exercises that are worth checking out.
@@ -391,6 +397,9 @@ for each row r in the dataset
     &lt;/li&gt;
     &lt;li id=&quot;fn:3&quot;&gt;
       &lt;p&gt;The strange looking one (&lt;script type=&quot;math/tex&quot;&gt;\unicode{x1D7D9}&lt;/script&gt;) is called the indicator function. It outputs a 1 if the expression inside the brackets evaluates to true, otherwise the output is a 0. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:min_index_diff&quot;&gt;
+      &lt;p&gt;You may notice that the values that get stored are different from what we would store in the naive-min hashing algorithm, will this make any difference? &lt;a href=&quot;#fnref:min_index_diff&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;</content><author><name>Giorgi Kvernadze</name></author><summary type="html">Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. First thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user ids of people that have listened to that artist at least once. For example, the representation for Miles Davis could be,</summary></entry><entry><title type="html">From Linear Classifiers to Neural Networks</title><link href="http://localhost:4000/multilayer-perceptron/" rel="alternate" type="text/html" title="From Linear Classifiers to Neural Networks" /><published>2019-12-19T00:00:00-07:00</published><updated>2019-12-19T00:00:00-07:00</updated><id>http://localhost:4000/multilayer-perceptron</id><content type="html" xml:base="http://localhost:4000/multilayer-perceptron/">&lt;ul&gt;

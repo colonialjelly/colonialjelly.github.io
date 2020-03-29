@@ -374,9 +374,11 @@ We'll be applying these hash functions to the rows of our toy dataset. Since the
 
 <img src="../images/artist_matrix_hash.png" width="50%">
 
-Each hash function defines an implicit shuffling order. As an exercise, for each hash function, iterate over the rows in the order that that hash function displays. For each column (artist) and each hash function store the index of the first-non zero element. Then to compute the Jaccard similarities, compare the stored values the same way we did before.
+Since each hash function defines an implicit shuffling order, we can iterate over the rows in that order. As an exercise, iterate the rows in the defined orders of each hash function. For each column (artist) store the index of the first-non zero element. Then to compute the Jaccard similarities, compare the stored values the same way we did before. [^min_index_diff]
 
-The MinHash algorithm is essentially doing the same thing but in a more efficient way by just doing a single pass over the rows.
+[^min_index_diff]: You may notice that the values that get stored are different from what we would store in the naive-min hashing algorithm, will this make any difference?
+
+The MinHash algorithm is essentially doing the same thing but in a more efficient way by just making a single pass over the rows.
 
 <!-- Now that we have the hash functions, we're finally ready for the MinHash algorithm: -->
 
@@ -397,6 +399,12 @@ The video below is an animation that simulates the algorithm over the toy datase
 <center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/qA4WdrY6aPk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </center>
+
+### Further improvement
+
+Using the MinHash algorithm, we can reduce the computational complexity of computing similarities between pairs of artists but there is still one more issue. In order to implement the recommendation feature we still need to compute the similarities between every pair of artists. This is quadratic in running time, if $$n$$ is the number of artists, we need to make $${n \choose 2} = \frac{n(n-1)}{2} = O(n^2)$$ comparisons. If $$n$$ is large, even with parallelization, this will be a horribly slow computation.
+
+We're in luck because there's another ingenious method called Locality-sensitive hashing (LSH) that uses the minhash signatures to find candidate pairs. Which means that we'll only have to compute the similarities for the candidates, rather than for every pair. I'll write about LSH in the next post. Until then :v:.
 
 <!-- ## Further reading
 
