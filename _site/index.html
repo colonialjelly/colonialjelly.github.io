@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://localhost:4000/" />
 <meta property="og:site_name" content="Giorgi" />
 <script type="application/ld+json">
-{"author":{"@type":"Person","name":"Giorgi Kvernadze"},"description":"I think, therefore I’m distracted","@type":"WebSite","url":"http://localhost:4000/","headline":"Giorgi","name":"Giorgi","@context":"https://schema.org"}</script>
+{"author":{"@type":"Person","name":"Giorgi Kvernadze"},"headline":"Giorgi","description":"I think, therefore I’m distracted","@type":"WebSite","url":"http://localhost:4000/","name":"Giorgi","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
         <meta charset="utf-8" />
@@ -81,7 +81,7 @@
         </div>
       </a>
       <div class="entry">
-        <p>Suppose we want to cluster similar users on Spotify. With about 271 million users, if we assume that each user has about 1000 songs in their listening history we would need ~4.33 terabytes to represent the entire data. That is a lot! To make things even worse, in order to find the clusters with <script type="math/tex">n</script> users, we need to measure the similarity between all <script type="math/tex">{n \choose 2} = \frac{n(n - 1)}{2}</script> pairs of users. With 271 million users that is an astronomical number of comparisons!</p>
+        <p>Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. First thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user ids of people that have listened to that artist at least once. For example, the representation for Miles Davis could be,</p>
 
 
       </div>
