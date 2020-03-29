@@ -229,7 +229,7 @@ $$\hat{J}(\text{artist}_{i}, \text{artist}_{j}) = \unicode{x1D7D9}[h(\text{artis
 
 **Why would this work?**
 
-To understand why this is a reasonable thing to do, we need to recall our previous discussions on approximating the Jaccard similarity. We were drawing elements from the union of two sets at random and checking if that element appeared in the intersection. What we're doing here might look different, but it's actually the same thing.
+To understand why this is a reasonable thing to do, we need to recall our previous discussion on approximating the Jaccard similarity. We were drawing elements from the union of two sets at random and checking if that element appeared in the intersection. What we're doing here might look different, but it's actually the same thing.
 
 - We are shuffling the rows (thus bringing in randomness)
 - By picking the first non-zero element for every artist, we're always picking an element from the union (for any pair of artists).  
@@ -255,7 +255,8 @@ Let's go through an example together with sets $$\text{artist}_{1}$$ and $$\text
 
 If we shuffled the rows what is the probability that the first **non**-"null" row is of type "+"? In other words, after shuffling the rows, if we proceeded from top to bottom while skipping over all "null" rows, what is the probability of seeing a "+" before seeing a "-"?
 
-If we think back to our example with sets, this question should be easy to answer. All we have to realize is that, encountering a "+" before a "-" is the exact same thing as randomly drawing a "+" in the union. Which we know has a probability that is equal to the Jaccard similarity.
+If we think back to our example with sets, this question should be easy to answer. All we have to realize is that,
+encountering a "+" before a "-" is the exact same thing as randomly drawing a "+" in the union. Which we know has a probability that is equal to the Jaccard similarity.
 
 <!-- [^3]: The only difference is that we're using shuffling instead of randomly picking, which we've concluded is the exact same thing. -->
 
@@ -265,7 +266,7 @@ If the first row is of type "+" that also means that $$h(\text{artist}_{1}) = h(
 
 $$P(h(\text{artist}_{1}) = h(\text{artist}_{2})) = J(\text{artist}_{1}, \text{artist}_{2})$$
 
-The same argument holds for any pair of artists. The most important take away here is that if the Jaccard similarity is high between two pairs of sets, then the probability that $$h(\text{artist}_{i}) = h(\text{artist}_{j})$$ is also high. Remember, throwing darts at the diagrams?
+The same argument holds for any pair of artists. The most important take away here is that if the Jaccard similarity is high between two pairs of sets, then the probability that $$h(\text{artist}_{i}) = h(\text{artist}_{j})$$ is also high. Remember, throwing darts at the diagrams? It's the same intuition here.
 
 Now going back to our example. With a single trial we have the following estimations.
 
@@ -322,13 +323,21 @@ def min_hashing_naive(data, num_iter):
 
 ### MinHash Algorithm
 
-Shuffling the rows of the data matrix can be infeasible if the matrix is large. In the Spotify example we would have to shuffle 271 million rows for each iteration of the algorithm. So while the algorithm that we defined works conceptually, it is useless in practice.
+Shuffling the rows of the data matrix can be infeasible if the matrix is large. In the Spotify example we would have to shuffle 271 million rows for each iteration of the algorithm. So while the algorithm works conceptually, it is not that useful in practice.
 
-Instead of explicitly shuffling the rows, what we can instead do is *implicitly* shuffle the rows by mapping each row index to some unique integer. There are special functions called hash functions that can do exactly that. They map each unique input to some unique output. For example with 8 rows, the hash function could map them to:
+Instead of explicitly shuffling the rows, what we can instead do is *implicitly* shuffle the rows by mapping each row index to some unique integer. There are special functions called hash functions that can do exactly that. They map each unique input to some unique output (usually in the same range).
 
-$$[0, 1, 2, 3, 4, 5, 6, 7] \rightarrow [4, 1, 5, 6, 0, 2, 3, 7]$$
+$$h: [n] \rightarrow [n]$$
 
-Although it's not a necessary for the range of the hash values to be the same as the indices, let's assume for the sake of this example that it is. Then you can think of these permutations as, *where the row would have landed if we actually randomly shuffled the rows*.
+<!-- For example with 8 rows, the hash function could map them to:
+
+$$[0, 1, 2, 3, 4, 5, 6, 7] \rightarrow [4, 1, 5, 6, 0, 2, 3, 7]$$ -->
+
+Although it's not a necessary for the range of the hash values to be the same as the indices, let's assume for the sake of this example that it is. Then you can think of these permutations as, *where the row would have landed if we actually randomly shuffled the rows*. For example if we had some hash function $$h$$ and applied it to row index 4:
+
+$$h(4) = 2$$
+
+The way you can interpret this is, the row at position 4 got moved to position 2 after shuffling.
 
 <!-- be generating a random permutation on the indices of the rows. We'll define functions that will take the index of a row as input and will output a random integer such that each row will have a unique integer associated with it. These kinds of functions are called, hash functions.   
 
@@ -338,7 +347,7 @@ What we're going to do instead is *implicitly* shuffle the rows by generating a 
 
 $$[0, 1, 2, 3, 4, 5, 6, 7] \rightarrow [4, 1, 5, 6, 0, 2, 3, 7]$$ -->
 
-To simulate multiple iterations of shuffling, we're going to apply multiple distinct hash functions $$h_{1}, h_{2}, ..., h_{k}$$ to each row index. This is great, but where can we get these hash functions?
+To simulate multiple iterations of implicit shuffling, we're going to apply multiple distinct hash functions $$h_{1}, h_{2}, ..., h_{k}$$ to each row index.
 
 **Recipe for generating hash functions**
 
@@ -356,7 +365,7 @@ $$h_{2}(x) = (x + 5) \mod 11$$
 $$h_{3}(x) = (3x + 1) \mod 11$$
 </center>
 
-We'll be applying these hash functions to the rows of our toy dataset. Since the number of rows $$m = 8$$ is not a prime number we chose $$p = 11$$. As I've mentioned before, the values of the hash function need not be in the same range as the indices. As long as each index is mapped to a unique value, the range of the values actually makes no difference. If this doesn't make sense to you, let's unpack the example we have. In this case, our hash functions will produce values in the range $$[0, 10]$$. We can imagine expanding our dataset with a bunch of "null" type rows so that we have $$m=p=11$$ rows. We know that the "null" rows don't change the probability of two artists having the same signature, therefore our estimates should be be unaffected.
+We'll be applying these hash functions to the rows of our toy dataset. Since the number of rows $$m = 8$$ is not a prime number we chose $$p = 11$$. As I've mentioned before, the values of the hash function need not be in the same range as the indices. As long as each index is mapped to a unique value, the range of the values actually makes no difference. If this doesn't make sense to you, let's unpack the example we have. In this case, our hash functions will produce values in the range $$[0, 10]$$. We can imagine expanding our dataset with a bunch of "null" type rows so that we have $$p=11$$ rows. We know that the "null" rows don't change the probability of two artists having the same signature, therefore our estimates should be be unaffected.
 
 <!-- The reason for doing this is because we don't want to have collisions, that is we don't want more than one row to map to the same value for a given hash function. -->
 

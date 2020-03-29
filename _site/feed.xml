@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-29T14:31:00-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Giorgi</title><subtitle>I think, therefore I'm distracted</subtitle><author><name>Giorgi Kvernadze</name></author><entry><title type="html">Min Hashing</title><link href="http://localhost:4000/minhashing/" rel="alternate" type="text/html" title="Min Hashing" /><published>2020-03-10T00:00:00-06:00</published><updated>2020-03-10T00:00:00-06:00</updated><id>http://localhost:4000/minhashing</id><content type="html" xml:base="http://localhost:4000/minhashing/">&lt;p&gt;Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. First thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user ids of people that have listened to that artist at least once. For example, the representation for Miles Davis could be,&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-29T15:04:31-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Giorgi</title><subtitle>I think, therefore I'm distracted</subtitle><author><name>Giorgi Kvernadze</name></author><entry><title type="html">Min Hashing</title><link href="http://localhost:4000/minhashing/" rel="alternate" type="text/html" title="Min Hashing" /><published>2020-03-10T00:00:00-06:00</published><updated>2020-03-10T00:00:00-06:00</updated><id>http://localhost:4000/minhashing</id><content type="html" xml:base="http://localhost:4000/minhashing/">&lt;p&gt;Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. First thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user ids of people that have listened to that artist at least once. For example, the representation for Miles Davis could be,&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{Miles Davis} = \{5, 23533, 2034, 932, ..., 10003243\}&lt;/script&gt;
 
@@ -207,7 +207,7 @@ $$h(\text{artist}_{3}) = 0$$
 
 &lt;p&gt;&lt;strong&gt;Why would this work?&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;To understand why this is a reasonable thing to do, we need to recall our previous discussions on approximating the Jaccard similarity. We were drawing elements from the union of two sets at random and checking if that element appeared in the intersection. What we’re doing here might look different, but it’s actually the same thing.&lt;/p&gt;
+&lt;p&gt;To understand why this is a reasonable thing to do, we need to recall our previous discussion on approximating the Jaccard similarity. We were drawing elements from the union of two sets at random and checking if that element appeared in the intersection. What we’re doing here might look different, but it’s actually the same thing.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;We are shuffling the rows (thus bringing in randomness)&lt;/li&gt;
@@ -234,7 +234,8 @@ $$P(h(\text{artist}_{i}) = h(\text{artist}_{j})) = J(\text{artist}_{i}, \text{ar
 
 &lt;p&gt;If we shuffled the rows what is the probability that the first &lt;strong&gt;non&lt;/strong&gt;-“null” row is of type “+”? In other words, after shuffling the rows, if we proceeded from top to bottom while skipping over all “null” rows, what is the probability of seeing a “+” before seeing a “-“?&lt;/p&gt;
 
-&lt;p&gt;If we think back to our example with sets, this question should be easy to answer. All we have to realize is that, encountering a “+” before a “-“ is the exact same thing as randomly drawing a “+” in the union. Which we know has a probability that is equal to the Jaccard similarity.&lt;/p&gt;
+&lt;p&gt;If we think back to our example with sets, this question should be easy to answer. All we have to realize is that,
+encountering a “+” before a “-“ is the exact same thing as randomly drawing a “+” in the union. Which we know has a probability that is equal to the Jaccard similarity.&lt;/p&gt;
 
 &lt;!-- [^3]: The only difference is that we're using shuffling instead of randomly picking, which we've concluded is the exact same thing. --&gt;
 
@@ -244,7 +245,7 @@ $$P(h(\text{artist}_{i}) = h(\text{artist}_{j})) = J(\text{artist}_{i}, \text{ar
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;P(h(\text{artist}_{1}) = h(\text{artist}_{2})) = J(\text{artist}_{1}, \text{artist}_{2})&lt;/script&gt;
 
-&lt;p&gt;The same argument holds for any pair of artists. The most important take away here is that if the Jaccard similarity is high between two pairs of sets, then the probability that &lt;script type=&quot;math/tex&quot;&gt;h(\text{artist}_{i}) = h(\text{artist}_{j})&lt;/script&gt; is also high. Remember, throwing darts at the diagrams?&lt;/p&gt;
+&lt;p&gt;The same argument holds for any pair of artists. The most important take away here is that if the Jaccard similarity is high between two pairs of sets, then the probability that &lt;script type=&quot;math/tex&quot;&gt;h(\text{artist}_{i}) = h(\text{artist}_{j})&lt;/script&gt; is also high. Remember, throwing darts at the diagrams? It’s the same intuition here.&lt;/p&gt;
 
 &lt;p&gt;Now going back to our example. With a single trial we have the following estimations.&lt;/p&gt;
 
@@ -299,13 +300,21 @@ $$P(h(\text{artist}_{i}) = h(\text{artist}_{j})) = J(\text{artist}_{i}, \text{ar
 
 &lt;h3 id=&quot;minhash-algorithm&quot;&gt;MinHash Algorithm&lt;/h3&gt;
 
-&lt;p&gt;Shuffling the rows of the data matrix can be infeasible if the matrix is large. In the Spotify example we would have to shuffle 271 million rows for each iteration of the algorithm. So while the algorithm that we defined works conceptually, it is useless in practice.&lt;/p&gt;
+&lt;p&gt;Shuffling the rows of the data matrix can be infeasible if the matrix is large. In the Spotify example we would have to shuffle 271 million rows for each iteration of the algorithm. So while the algorithm works conceptually, it is not that useful in practice.&lt;/p&gt;
 
-&lt;p&gt;Instead of explicitly shuffling the rows, what we can instead do is &lt;em&gt;implicitly&lt;/em&gt; shuffle the rows by mapping each row index to some unique integer. There are special functions called hash functions that can do exactly that. They map each unique input to some unique output. For example with 8 rows, the hash function could map them to:&lt;/p&gt;
+&lt;p&gt;Instead of explicitly shuffling the rows, what we can instead do is &lt;em&gt;implicitly&lt;/em&gt; shuffle the rows by mapping each row index to some unique integer. There are special functions called hash functions that can do exactly that. They map each unique input to some unique output (usually in the same range).&lt;/p&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;[0, 1, 2, 3, 4, 5, 6, 7] \rightarrow [4, 1, 5, 6, 0, 2, 3, 7]&lt;/script&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;h: [n] \rightarrow [n]&lt;/script&gt;
 
-&lt;p&gt;Although it’s not a necessary for the range of the hash values to be the same as the indices, let’s assume for the sake of this example that it is. Then you can think of these permutations as, &lt;em&gt;where the row would have landed if we actually randomly shuffled the rows&lt;/em&gt;.&lt;/p&gt;
+&lt;!-- For example with 8 rows, the hash function could map them to:
+
+$$[0, 1, 2, 3, 4, 5, 6, 7] \rightarrow [4, 1, 5, 6, 0, 2, 3, 7]$$ --&gt;
+
+&lt;p&gt;Although it’s not a necessary for the range of the hash values to be the same as the indices, let’s assume for the sake of this example that it is. Then you can think of these permutations as, &lt;em&gt;where the row would have landed if we actually randomly shuffled the rows&lt;/em&gt;. For example if we had some hash function &lt;script type=&quot;math/tex&quot;&gt;h&lt;/script&gt; and applied it to row index 4:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;h(4) = 2&lt;/script&gt;
+
+&lt;p&gt;The way you can interpret this is, the row at position 4 got moved to position 2 after shuffling.&lt;/p&gt;
 
 &lt;!-- be generating a random permutation on the indices of the rows. We'll define functions that will take the index of a row as input and will output a random integer such that each row will have a unique integer associated with it. These kinds of functions are called, hash functions.   
 
@@ -315,7 +324,7 @@ What we're going to do instead is *implicitly* shuffle the rows by generating a 
 
 $$[0, 1, 2, 3, 4, 5, 6, 7] \rightarrow [4, 1, 5, 6, 0, 2, 3, 7]$$ --&gt;
 
-&lt;p&gt;To simulate multiple iterations of shuffling, we’re going to apply multiple distinct hash functions &lt;script type=&quot;math/tex&quot;&gt;h_{1}, h_{2}, ..., h_{k}&lt;/script&gt; to each row index. This is great, but where can we get these hash functions?&lt;/p&gt;
+&lt;p&gt;To simulate multiple iterations of implicit shuffling, we’re going to apply multiple distinct hash functions &lt;script type=&quot;math/tex&quot;&gt;h_{1}, h_{2}, ..., h_{k}&lt;/script&gt; to each row index.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Recipe for generating hash functions&lt;/strong&gt;&lt;/p&gt;
 
@@ -333,7 +342,7 @@ $$h_{2}(x) = (x + 5) \mod 11$$
 $$h_{3}(x) = (3x + 1) \mod 11$$
 &lt;/center&gt;
 
-&lt;p&gt;We’ll be applying these hash functions to the rows of our toy dataset. Since the number of rows &lt;script type=&quot;math/tex&quot;&gt;m = 8&lt;/script&gt; is not a prime number we chose &lt;script type=&quot;math/tex&quot;&gt;p = 11&lt;/script&gt;. As I’ve mentioned before, the values of the hash function need not be in the same range as the indices. As long as each index is mapped to a unique value, the range of the values actually makes no difference. If this doesn’t make sense to you, let’s unpack the example we have. In this case, our hash functions will produce values in the range &lt;script type=&quot;math/tex&quot;&gt;[0, 10]&lt;/script&gt;. We can imagine expanding our dataset with a bunch of “null” type rows so that we have &lt;script type=&quot;math/tex&quot;&gt;m=p=11&lt;/script&gt; rows. We know that the “null” rows don’t change the probability of two artists having the same signature, therefore our estimates should be be unaffected.&lt;/p&gt;
+&lt;p&gt;We’ll be applying these hash functions to the rows of our toy dataset. Since the number of rows &lt;script type=&quot;math/tex&quot;&gt;m = 8&lt;/script&gt; is not a prime number we chose &lt;script type=&quot;math/tex&quot;&gt;p = 11&lt;/script&gt;. As I’ve mentioned before, the values of the hash function need not be in the same range as the indices. As long as each index is mapped to a unique value, the range of the values actually makes no difference. If this doesn’t make sense to you, let’s unpack the example we have. In this case, our hash functions will produce values in the range &lt;script type=&quot;math/tex&quot;&gt;[0, 10]&lt;/script&gt;. We can imagine expanding our dataset with a bunch of “null” type rows so that we have &lt;script type=&quot;math/tex&quot;&gt;p=11&lt;/script&gt; rows. We know that the “null” rows don’t change the probability of two artists having the same signature, therefore our estimates should be be unaffected.&lt;/p&gt;
 
 &lt;!-- The reason for doing this is because we don't want to have collisions, that is we don't want more than one row to map to the same value for a given hash function. --&gt;
 

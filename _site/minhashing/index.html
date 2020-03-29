@@ -307,7 +307,7 @@ $$h(\text{artist}_{3}) = 0$$
 
 <p><strong>Why would this work?</strong></p>
 
-<p>To understand why this is a reasonable thing to do, we need to recall our previous discussions on approximating the Jaccard similarity. We were drawing elements from the union of two sets at random and checking if that element appeared in the intersection. What we’re doing here might look different, but it’s actually the same thing.</p>
+<p>To understand why this is a reasonable thing to do, we need to recall our previous discussion on approximating the Jaccard similarity. We were drawing elements from the union of two sets at random and checking if that element appeared in the intersection. What we’re doing here might look different, but it’s actually the same thing.</p>
 
 <ul>
   <li>We are shuffling the rows (thus bringing in randomness)</li>
@@ -334,7 +334,8 @@ $$P(h(\text{artist}_{i}) = h(\text{artist}_{j})) = J(\text{artist}_{i}, \text{ar
 
 <p>If we shuffled the rows what is the probability that the first <strong>non</strong>-“null” row is of type “+”? In other words, after shuffling the rows, if we proceeded from top to bottom while skipping over all “null” rows, what is the probability of seeing a “+” before seeing a “-“?</p>
 
-<p>If we think back to our example with sets, this question should be easy to answer. All we have to realize is that, encountering a “+” before a “-“ is the exact same thing as randomly drawing a “+” in the union. Which we know has a probability that is equal to the Jaccard similarity.</p>
+<p>If we think back to our example with sets, this question should be easy to answer. All we have to realize is that,
+encountering a “+” before a “-“ is the exact same thing as randomly drawing a “+” in the union. Which we know has a probability that is equal to the Jaccard similarity.</p>
 
 <!-- [^3]: The only difference is that we're using shuffling instead of randomly picking, which we've concluded is the exact same thing. -->
 
@@ -344,7 +345,7 @@ $$P(h(\text{artist}_{i}) = h(\text{artist}_{j})) = J(\text{artist}_{i}, \text{ar
 
 <script type="math/tex; mode=display">P(h(\text{artist}_{1}) = h(\text{artist}_{2})) = J(\text{artist}_{1}, \text{artist}_{2})</script>
 
-<p>The same argument holds for any pair of artists. The most important take away here is that if the Jaccard similarity is high between two pairs of sets, then the probability that <script type="math/tex">h(\text{artist}_{i}) = h(\text{artist}_{j})</script> is also high. Remember, throwing darts at the diagrams?</p>
+<p>The same argument holds for any pair of artists. The most important take away here is that if the Jaccard similarity is high between two pairs of sets, then the probability that <script type="math/tex">h(\text{artist}_{i}) = h(\text{artist}_{j})</script> is also high. Remember, throwing darts at the diagrams? It’s the same intuition here.</p>
 
 <p>Now going back to our example. With a single trial we have the following estimations.</p>
 
@@ -399,13 +400,21 @@ $$P(h(\text{artist}_{i}) = h(\text{artist}_{j})) = J(\text{artist}_{i}, \text{ar
 
 <h3 id="minhash-algorithm">MinHash Algorithm</h3>
 
-<p>Shuffling the rows of the data matrix can be infeasible if the matrix is large. In the Spotify example we would have to shuffle 271 million rows for each iteration of the algorithm. So while the algorithm that we defined works conceptually, it is useless in practice.</p>
+<p>Shuffling the rows of the data matrix can be infeasible if the matrix is large. In the Spotify example we would have to shuffle 271 million rows for each iteration of the algorithm. So while the algorithm works conceptually, it is not that useful in practice.</p>
 
-<p>Instead of explicitly shuffling the rows, what we can instead do is <em>implicitly</em> shuffle the rows by mapping each row index to some unique integer. There are special functions called hash functions that can do exactly that. They map each unique input to some unique output. For example with 8 rows, the hash function could map them to:</p>
+<p>Instead of explicitly shuffling the rows, what we can instead do is <em>implicitly</em> shuffle the rows by mapping each row index to some unique integer. There are special functions called hash functions that can do exactly that. They map each unique input to some unique output (usually in the same range).</p>
 
-<script type="math/tex; mode=display">[0, 1, 2, 3, 4, 5, 6, 7] \rightarrow [4, 1, 5, 6, 0, 2, 3, 7]</script>
+<script type="math/tex; mode=display">h: [n] \rightarrow [n]</script>
 
-<p>Although it’s not a necessary for the range of the hash values to be the same as the indices, let’s assume for the sake of this example that it is. Then you can think of these permutations as, <em>where the row would have landed if we actually randomly shuffled the rows</em>.</p>
+<!-- For example with 8 rows, the hash function could map them to:
+
+$$[0, 1, 2, 3, 4, 5, 6, 7] \rightarrow [4, 1, 5, 6, 0, 2, 3, 7]$$ -->
+
+<p>Although it’s not a necessary for the range of the hash values to be the same as the indices, let’s assume for the sake of this example that it is. Then you can think of these permutations as, <em>where the row would have landed if we actually randomly shuffled the rows</em>. For example if we had some hash function <script type="math/tex">h</script> and applied it to row index 4:</p>
+
+<script type="math/tex; mode=display">h(4) = 2</script>
+
+<p>The way you can interpret this is, the row at position 4 got moved to position 2 after shuffling.</p>
 
 <!-- be generating a random permutation on the indices of the rows. We'll define functions that will take the index of a row as input and will output a random integer such that each row will have a unique integer associated with it. These kinds of functions are called, hash functions.   
 
@@ -415,7 +424,7 @@ What we're going to do instead is *implicitly* shuffle the rows by generating a 
 
 $$[0, 1, 2, 3, 4, 5, 6, 7] \rightarrow [4, 1, 5, 6, 0, 2, 3, 7]$$ -->
 
-<p>To simulate multiple iterations of shuffling, we’re going to apply multiple distinct hash functions <script type="math/tex">h_{1}, h_{2}, ..., h_{k}</script> to each row index. This is great, but where can we get these hash functions?</p>
+<p>To simulate multiple iterations of implicit shuffling, we’re going to apply multiple distinct hash functions <script type="math/tex">h_{1}, h_{2}, ..., h_{k}</script> to each row index.</p>
 
 <p><strong>Recipe for generating hash functions</strong></p>
 
@@ -433,7 +442,7 @@ $$h_{2}(x) = (x + 5) \mod 11$$
 $$h_{3}(x) = (3x + 1) \mod 11$$
 </center>
 
-<p>We’ll be applying these hash functions to the rows of our toy dataset. Since the number of rows <script type="math/tex">m = 8</script> is not a prime number we chose <script type="math/tex">p = 11</script>. As I’ve mentioned before, the values of the hash function need not be in the same range as the indices. As long as each index is mapped to a unique value, the range of the values actually makes no difference. If this doesn’t make sense to you, let’s unpack the example we have. In this case, our hash functions will produce values in the range <script type="math/tex">[0, 10]</script>. We can imagine expanding our dataset with a bunch of “null” type rows so that we have <script type="math/tex">m=p=11</script> rows. We know that the “null” rows don’t change the probability of two artists having the same signature, therefore our estimates should be be unaffected.</p>
+<p>We’ll be applying these hash functions to the rows of our toy dataset. Since the number of rows <script type="math/tex">m = 8</script> is not a prime number we chose <script type="math/tex">p = 11</script>. As I’ve mentioned before, the values of the hash function need not be in the same range as the indices. As long as each index is mapped to a unique value, the range of the values actually makes no difference. If this doesn’t make sense to you, let’s unpack the example we have. In this case, our hash functions will produce values in the range <script type="math/tex">[0, 10]</script>. We can imagine expanding our dataset with a bunch of “null” type rows so that we have <script type="math/tex">p=11</script> rows. We know that the “null” rows don’t change the probability of two artists having the same signature, therefore our estimates should be be unaffected.</p>
 
 <!-- The reason for doing this is because we don't want to have collisions, that is we don't want more than one row to map to the same value for a given hash function. -->
 
