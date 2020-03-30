@@ -8,11 +8,11 @@ published: true
 ---
 
 
-Suppose you're an engineer at Spotify and you're on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. First thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user ids of people that have listened to that artist at least once. For example, the representation for Miles Davis could be,
+Suppose you're an engineer at Spotify and you're on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. The first thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user IDs of people that have listened to that artist at least once. For example, the representation for Miles Davis could be,
 
 $$\text{Miles Davis} = \{5, 23533, 2034, 932, ..., 10003243\}$$
 
-The number of elements in the set is the number of users that have listened to Miles Davis at least once. To compute the similarity between artists, we can compare these set representations (more on this later). Now, with Spotify having more than 271 million users, these sets could be very large (especially for popular artists). It would take forever to compute the similarities, especially since we have to compare every artist to each other. In this post, we're going to talk about a method that can help us speed up this process. We're going to be converting each set into a smaller representation called a signature, such that the similarities between the sets are well preserved.
+The number of elements in the set is the number of users that have listened to Miles Davis at least once. To compute the similarity between artists, we can compare these set representations. Now, with Spotify having more than 271 million users, these sets could be very large (especially for popular artists). It would take forever to compute the similarities, especially since we have to compare every artist to each other. In this post, I'll introduce a method that can help us speed up this process. We're going to be converting each set into a smaller representation called a signature, such that the similarities between the sets are well preserved.
 
 <!-- We're going to do something different instead. Instead of representing the artist as a set of all of the users, that listen to it.
 
@@ -27,9 +27,9 @@ In this post, the goal will be to reduce the size of the representation of each 
 <!--
 Measuring similarity of objects is one of the most fundamental computations for data mining. Similarity can be used to detect plagiarism, categorize documents, recommend products to customers and there are many many more applications. There are a lot of different ways of defining similarity. In this post I'll be talking about Jaccard similarity and its' approximation. -->
 
-### Toy example
+### Toy Example
 
-I think working with tiny examples to build intuition is an excellent method for learning. So in that spirit, let's consider a toy example. Let's assume that we only have 3 artists and we have a total of 8 users in our dataset.
+I think working with tiny examples to build intuition can be an excellent method for learning. In that spirit, now consider a toy example. Assume that we only have 3 artists and we have a total of 8 users in our dataset.
 
 $$\text{artist}_{1} = \{1, 4, 7\}$$
 
@@ -43,7 +43,7 @@ $$\text{artist}_{3} = \{0, 2, 3, 5, 6\}$$
 
 ### Jaccard similarity
 
-The goal is to find similar artists, so we obviously need a way to measure similarities between a pair of artists. We will be using Jaccard similarity. It is defined as the fraction of shared elements between two sets. In our case the sets are user ids. All we have to compute is how many users each pair of artists share with each other, divided by total number of users in both artists. For example the Jaccard similarity between $$\text{artist}_1$$ and $$\text{artist}_2$$
+The goal is to find similar artists, so we need a way to measure similarities between a pair of artists. We will be using Jaccard similarity, it is defined as the fraction of shared elements between two sets. In our case the sets are user ids. All we have to compute is how many users each pair of artists share, divided by total number of users in both artists. For example, the Jaccard similarity between $$\text{artist}_1$$ and $$\text{artist}_2$$:
 
 <!-- To compute the similarities, we said that we were going to measure the fraction of shared users for each artist. This computation actually has a name, it's called the Jaccard similarity. For a pair of artists, we compute the Jaccard similarity by counting the number of users that are shared and dividing it by the total number of users in both of the artist sets. For example the Jaccard similarity between $$\text{artist}_{1}$$ and $$\text{artist}_{2}$$ -->
 
@@ -60,7 +60,7 @@ $$J(\text{artist}_{2}, \text{artist}_{3}) = \frac{3}{8} = 0.375$$
 $$J(\text{artist}_{1}, \text{artist}_{3}) = \frac{0}{8} = 0$$
 </center>
 
-A few important facts about the Jaccard similarity:
+A few key things about the Jaccard similarity:
 
  - The Jaccard similarity is 0 if the two sets share no elements, and it's 1 if the two sets are identical. Every other case has values between 0 and 1.
  - The Jaccard similarity between two sets corresponds to the probability of a randomly selected element from the union of the sets also being in the intersection.
@@ -75,7 +75,7 @@ For some people (present company included), visual explanations are easier to gr
 
 <img src="../images/js_venn.png" width="50%">
 
-Now imagine that I'm throwing darts on the diagrams and I'm horrible at it. I'm so bad that every element on the diagrams has an equal chance of being hit. What's the chance that I throw a dart and it lands on the intersection? It would be the number of elements in the intersection divided by the total number of elements. Which is exactly what the Jaccard similarity is. This implies that the larger the similarity, the higher the probability that we land on the intersection with a random throw.
+Now imagine that I'm throwing darts on the diagrams and I'm horrible at it. I'm so bad that every element on the diagrams has an equal chance of being hit. What's the chance that I throw a dart and it lands on the intersection? It would be the number of elements in the intersection divided by the total number of elements, which is exactly what the Jaccard similarity is. This implies that the larger the similarity, the higher the probability that we land on the intersection with a random throw.
 
 <img src="../images/venns.png" width="50%">
 
@@ -113,7 +113,7 @@ Imagine that you're at a carnival and there's a shooting game. There are n diagr
 
 $$\mathbb{E}[X] = P(X=1) \times 1 + P(X=0) \times 0 = 0.5 = J(\text{artist}_{1}, \text{artist}_{2})$$ -->
 
-What this means is that we can approximate the Jaccard similarity between pairs of artists. Let $$X$$ be a random variable such that $$X = 1$$ if we draw a plus and $$X = 0$$ if we draw a minus. $$X$$ is a Bernoulli random variable with $$p=J(\text{artist}_{1}, \text{artist}_{2})$$. In order to estimate the similarity we can estimate $$p$$. In this case we obviously know that $$p=0.5$$ since we already computed it, but let's assume that we don't know this.
+What this means is that we can approximate the Jaccard similarity between pairs of artists. Let $$X$$ be a random variable such that $$X = 1$$ if we draw a plus and $$X = 0$$ if we draw a minus. $$X$$ is a Bernoulli random variable with $$p=J(\text{artist}_{1}, \text{artist}_{2})$$. In order to estimate the similarity, we can estimate $$p$$. In this case, we obviously know that $$p=0.5$$ since we already computed it, but let's assume that we don't know this.
 
 If we repeat the random draw multiple times and keep track of how many times a "+" type came up versus a "-", we can estimate the parameter $$p$$ for $$X$$ by maximum likelihood estimation (MLE):
 
@@ -152,9 +152,11 @@ If you run the above code you should get something that is close to $$0.5$$. Whi
 
 <!-- This is great, but we need to compute similarities between all pairs of artists not just two artists. -->
 
-### Shuffling and picking first $$\equiv$$ Randomly picking
+### Shuffling and Picking First $$\equiv$$ Randomly Picking
 
-Before we move on, we need to understand one more thing. Randomly selecting an element from a set is the same thing as shuffling the set and picking the first element [^1]. Everything that we have said above is also true if we, instead of randomly selecting an element, shuffled the set and picked the first element. Make sure to pause here, if this doesn't make sense.
+Before we move on, we need to understand one more thing. Randomly selecting an element from a set is the same thing as shuffling the set and picking the first element [^1]. Everything that we have said above is also true if we, instead of randomly selecting an element, shuffled the set and picked the first element.
+
+<!-- Make sure to pause here, if this doesn't make sense. -->
 
 [^1]: I know shuffling a set of elements is meaningless since sets don't have order but imagine that they do :).
 
@@ -177,21 +179,21 @@ for i in range(num_trials):
         num_intersect += 1
 print(num_intersect/num_trials)
 ```
-The code above implements the same process that I described before, but instead of randomly picking an element it is shuffling the elements in the union and picking the first element. If you run this you should similarly get something that is close to $$0.5$$.
+The code above implements the same process that I described before, but instead of randomly picking an element, it is shuffling the elements in the union and picking the first element. If you run this, you should similarly get something that is close to $$0.5$$.
 
-### Data matrix
+### Data Matrix
 
-We have shown that it's possible to approximate Jaccard similarity for a pair of artists using randomness. But our previous method had a significant issue. We still needed to have the intersection and the union set to estimate the Jaccard similarity, which kind of defeats the whole purpose. We need a way to approximate the similarities without having to compute these sets. We also need to approximate the similarities for all pairs of artists, not just a given pair. In order to do that, we're going to switch our view of the data from sets to a matrix.
+We have shown that it's possible to approximate Jaccard similarity for a pair of artists using randomness but our previous method had a significant issue. We still needed to have the intersection and the union of the sets to estimate the Jaccard similarity, which kind of defeats the whole purpose. We need a way to approximate the similarities without having to compute these sets. We also need to approximate the similarities for all pairs of artists, not just a given pair. In order to do that, we're going to switch our view of the data from sets to a matrix.
 
 <img src="../images/artist_matrix.png" width="50%">
 
 The columns represent the artists and the rows represent the user IDs. A given artist has a $$1$$ in a particular row if the user with that ID has that artist in in their listening history [^2].
 
-[^2]: Obviously, we wouldn't store the data in this form in practice, since it's extremely wasteful. But seeing the data as a matrix will be a helpful for conceptualizing the methods that we're gonna discuss.
+[^2]: In practice this matrix would be very sparse, therefore we wouldn't store the data in this form, since would be extremely wasteful. But seeing the data as a matrix will be a helpful for conceptualizing the methods that we're gonna discuss.
 
 ### Min Hashing
 
-Going back to our main goal. We want to reduce the size of the representation for each artist while preserving the Jaccard similarities between pairs of artists in the dataset. In more "mathy" terms, we have a data matrix $$D$$ that we want to encode in some smaller matrix $$\hat{D}$$ called the signature matrix, such that $$J_{pairwise}(D) \approx \hat{J}_{pairwise}(\hat{D})$$
+Going back to our main goal, we want to reduce the size of the representation for each artist while preserving the Jaccard similarities between pairs of artists in the dataset. In more "mathy" terms, we have a data matrix $$D$$ that we want to encode in some smaller matrix $$\hat{D}$$ called the signature matrix, such that $$J_{pairwise}(D) \approx \hat{J}_{pairwise}(\hat{D})$$
 
 [^4]: $$J_{pairwise}$$ is a function that produces a matrix which represents all pairwise similarities of the artists in the data. -->
 
@@ -212,7 +214,7 @@ Let's go through one iteration of this algorithm:
 
 ![](../images/1iteration.png)
 
-We have reduced each artist to a single number. To compute the Jaccard similarities between the artists we compare the signatures. Let $$h$$ be the function that finds and returns the index of the first non-zero element. Then we have:
+We have now reduced each artist to a single number. To compute the Jaccard similarities between the artists we compare the signatures. Let $$h$$ be the function that finds and returns the index of the first non-zero element. Then we have:
 
 <center>
 $$h(\text{artist}_{1}) = 7$$
@@ -256,9 +258,7 @@ Let's go through an example together with sets $$\text{artist}_{1}$$ and $$\text
 If we shuffled the rows what is the probability that the first **non**-"null" row is of type "+"? In other words, after shuffling the rows, if we proceeded from top to bottom while skipping over all "null" rows, what is the probability of seeing a "+" before seeing a "-"?
 
 If we think back to our example with sets, this question should be easy to answer. All we have to realize is that,
-encountering a "+" before a "-" is the exact same thing as randomly drawing a "+" in the union. Which we know has a probability that is equal to the Jaccard similarity.
-
-<!-- [^3]: The only difference is that we're using shuffling instead of randomly picking, which we've concluded is the exact same thing. -->
+encountering a "+" before a "-" is the exact same thing as randomly drawing a "+" in the union, which we know has a probability that is equal to the Jaccard similarity.
 
 $$P(\text{seeing a "+" before "-"})  = \frac{\text{number of "+"}}{\text{number of "+" and "-"}} = J(\text{artist}_{1}, \text{artist}_{2})$$
 
@@ -279,7 +279,7 @@ Now going back to our example. With a single trial we have the following estimat
 
 <img src="../images/sig1.png" width="50%">
 
-As you can see it's a *little* off. How can we make it better? It's simple, we run more iterations and make the signatures larger. In the earlier discussions we introduced a Bernoulli random variable and we estimated it's parameter by simulating multiple random trials. We can do the same exact thing here. Let $$Y$$ be a random variable that has value 1 if $$h(\text{artist}_{i}) = h(\text{artist}_{j})$$ and is 0 otherwise. $$Y$$ is an instance of a Bernoulli random variable with $$p = J(\text{artist}_{i}, \text{artist}_{j})$$. If we run the algorithm multiple times, thus simulating multiple but identical variables $$Y_{1}, Y_{2}, ..., Y_{k}$$, we can then estimate the Jaccard similarity as:
+As you can see, it's a *little* off. How can we make it better? It's simple, we run more iterations and make the signatures larger. In the earlier discussions we introduced a Bernoulli random variable and we estimated it's parameter by simulating multiple random trials. We can do the same exact thing here. Let $$Y$$ be a random variable that has value 1 if $$h(\text{artist}_{i}) = h(\text{artist}_{j})$$ and is 0 otherwise. $$Y$$ is an instance of a Bernoulli random variable with $$p = J(\text{artist}_{i}, \text{artist}_{j})$$. If we run the algorithm multiple times, thus simulating multiple but identical variables $$Y_{1}, Y_{2}, ..., Y_{k}$$, we can then estimate the Jaccard similarity as:
 
 <!-- Remember how we approximated the parameter $$p$$ for the random variable $$X$$? It's the exact same thing here. With a signature with length greater than one the estimation for Jaccard similarity is done by taking the average of each element-wise comparison. -->
 
@@ -323,7 +323,7 @@ def min_hashing_naive(data, num_iter):
 
 ### MinHash Algorithm
 
-Shuffling the rows of the data matrix can be infeasible if the matrix is large. In the Spotify example we would have to shuffle 271 million rows for each iteration of the algorithm. So while the algorithm works conceptually, it is not that useful in practice.
+Shuffling the rows of the data matrix can be infeasible if the matrix is large. In the Spotify example, we would have to shuffle 271 million rows for each iteration of the algorithm. So while the algorithm works conceptually, it is not that useful in practice.
 
 Instead of explicitly shuffling the rows, what we can instead do is *implicitly* shuffle the rows by mapping each row index to some unique integer. There are special functions called hash functions that can do exactly that. They map each unique input to some unique output (usually in the same range).
 
@@ -376,7 +376,7 @@ We'll be applying these hash functions to the rows of our toy dataset. Since the
 
 Since each hash function defines an implicit shuffling order, we can iterate over the rows in that order. As an exercise, iterate the rows in the defined orders of each hash function. For each column (artist) store the index of the first-non zero element. Then to compute the Jaccard similarities, compare the stored values the same way we did before. [^min_index_diff]
 
-[^min_index_diff]: You may notice that the values that get stored are different from what we would store in the naive-min hashing algorithm, will this make any difference?
+[^min_index_diff]: You may notice that the values that get stored are different from what we would store in the naive-min hashing algorithm, will this make any difference? Why?
 
 The MinHash algorithm is essentially doing the same thing but in a more efficient way by just making a single pass over the rows.
 
@@ -400,11 +400,13 @@ The video below is an animation that simulates the algorithm over the toy datase
 <iframe width="560" height="315" src="https://www.youtube.com/embed/qA4WdrY6aPk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </center>
 
+Now with this algorithm we can reduce all of the artist representations to smaller sets. If we use $$k$$ hash functions we will have a signature of size $$k$$ for each artist. This means that the time complexity of comparing two sets (artists) is now $$O(k)$$, which is independent of the size of the original sets.
+
 ### Further improvement
 
 Using the MinHash algorithm, we can reduce the computational complexity of computing similarities between pairs of artists but there is still one more issue. In order to implement the recommendation feature we still need to compute the similarities between every pair of artists. This is quadratic in running time, if $$n$$ is the number of artists, we need to make $${n \choose 2} = \frac{n(n-1)}{2} = O(n^2)$$ comparisons. If $$n$$ is large, even with parallelization, this will be a horribly slow computation.
 
-We're in luck because there's another ingenious method called Locality-sensitive hashing (LSH) that uses the minhash signatures to find candidate pairs. Which means that we'll only have to compute the similarities for the candidates, rather than for every pair. I'll write about LSH in the next post. Until then :v:.
+We're in luck because there's another ingenious method called Locality-sensitive hashing (LSH) that uses the minhash signatures to find candidate pairs. This means that we'll only have to compute the similarities for the candidates, rather than for every pair. I'll write about LSH in the next post. Until then, :v:.
 
 <!-- ## Further reading
 

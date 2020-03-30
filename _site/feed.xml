@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-29T16:05:26-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Giorgi</title><subtitle>I think, therefore I'm distracted</subtitle><author><name>Giorgi Kvernadze</name></author><entry><title type="html">Min Hashing</title><link href="http://localhost:4000/minhashing/" rel="alternate" type="text/html" title="Min Hashing" /><published>2020-03-10T00:00:00-06:00</published><updated>2020-03-10T00:00:00-06:00</updated><id>http://localhost:4000/minhashing</id><content type="html" xml:base="http://localhost:4000/minhashing/">&lt;p&gt;Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. First thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user ids of people that have listened to that artist at least once. For example, the representation for Miles Davis could be,&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-29T18:01:44-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Giorgi</title><subtitle>I think, therefore I'm distracted</subtitle><author><name>Giorgi Kvernadze</name></author><entry><title type="html">Min Hashing</title><link href="http://localhost:4000/minhashing/" rel="alternate" type="text/html" title="Min Hashing" /><published>2020-03-10T00:00:00-06:00</published><updated>2020-03-10T00:00:00-06:00</updated><id>http://localhost:4000/minhashing</id><content type="html" xml:base="http://localhost:4000/minhashing/">&lt;p&gt;Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. The first thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user IDs of people that have listened to that artist at least once. For example, the representation for Miles Davis could be,&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{Miles Davis} = \{5, 23533, 2034, 932, ..., 10003243\}&lt;/script&gt;
 
-&lt;p&gt;The number of elements in the set is the number of users that have listened to Miles Davis at least once. To compute the similarity between artists, we can compare these set representations (more on this later). Now, with Spotify having more than 271 million users, these sets could be very large (especially for popular artists). It would take forever to compute the similarities, especially since we have to compare every artist to each other. In this post, we’re going to talk about a method that can help us speed up this process. We’re going to be converting each set into a smaller representation called a signature, such that the similarities between the sets are well preserved.&lt;/p&gt;
+&lt;p&gt;The number of elements in the set is the number of users that have listened to Miles Davis at least once. To compute the similarity between artists, we can compare these set representations. Now, with Spotify having more than 271 million users, these sets could be very large (especially for popular artists). It would take forever to compute the similarities, especially since we have to compare every artist to each other. In this post, I’ll introduce a method that can help us speed up this process. We’re going to be converting each set into a smaller representation called a signature, such that the similarities between the sets are well preserved.&lt;/p&gt;
 
 &lt;!-- We're going to do something different instead. Instead of representing the artist as a set of all of the users, that listen to it.
 
@@ -17,9 +17,9 @@ In this post, the goal will be to reduce the size of the representation of each 
 &lt;!--
 Measuring similarity of objects is one of the most fundamental computations for data mining. Similarity can be used to detect plagiarism, categorize documents, recommend products to customers and there are many many more applications. There are a lot of different ways of defining similarity. In this post I'll be talking about Jaccard similarity and its' approximation. --&gt;
 
-&lt;h3 id=&quot;toy-example&quot;&gt;Toy example&lt;/h3&gt;
+&lt;h3 id=&quot;toy-example&quot;&gt;Toy Example&lt;/h3&gt;
 
-&lt;p&gt;I think working with tiny examples to build intuition is an excellent method for learning. So in that spirit, let’s consider a toy example. Let’s assume that we only have 3 artists and we have a total of 8 users in our dataset.&lt;/p&gt;
+&lt;p&gt;I think working with tiny examples to build intuition can be an excellent method for learning. In that spirit, now consider a toy example. Assume that we only have 3 artists and we have a total of 8 users in our dataset.&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{artist}_{1} = \{1, 4, 7\}&lt;/script&gt;
 
@@ -33,7 +33,7 @@ Measuring similarity of objects is one of the most fundamental computations for 
 
 &lt;h3 id=&quot;jaccard-similarity&quot;&gt;Jaccard similarity&lt;/h3&gt;
 
-&lt;p&gt;The goal is to find similar artists, so we obviously need a way to measure similarities between a pair of artists. We will be using Jaccard similarity. It is defined as the fraction of shared elements between two sets. In our case the sets are user ids. All we have to compute is how many users each pair of artists share with each other, divided by total number of users in both artists. For example the Jaccard similarity between &lt;script type=&quot;math/tex&quot;&gt;\text{artist}_1&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\text{artist}_2&lt;/script&gt;&lt;/p&gt;
+&lt;p&gt;The goal is to find similar artists, so we need a way to measure similarities between a pair of artists. We will be using Jaccard similarity, it is defined as the fraction of shared elements between two sets. In our case the sets are user ids. All we have to compute is how many users each pair of artists share, divided by total number of users in both artists. For example, the Jaccard similarity between &lt;script type=&quot;math/tex&quot;&gt;\text{artist}_1&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\text{artist}_2&lt;/script&gt;:&lt;/p&gt;
 
 &lt;!-- To compute the similarities, we said that we were going to measure the fraction of shared users for each artist. This computation actually has a name, it's called the Jaccard similarity. For a pair of artists, we compute the Jaccard similarity by counting the number of users that are shared and dividing it by the total number of users in both of the artist sets. For example the Jaccard similarity between $$\text{artist}_{1}$$ and $$\text{artist}_{2}$$ --&gt;
 
@@ -50,7 +50,7 @@ $$J(\text{artist}_{2}, \text{artist}_{3}) = \frac{3}{8} = 0.375$$
 $$J(\text{artist}_{1}, \text{artist}_{3}) = \frac{0}{8} = 0$$
 &lt;/center&gt;
 
-&lt;p&gt;A few important facts about the Jaccard similarity:&lt;/p&gt;
+&lt;p&gt;A few key things about the Jaccard similarity:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;The Jaccard similarity is 0 if the two sets share no elements, and it’s 1 if the two sets are identical. Every other case has values between 0 and 1.&lt;/li&gt;
@@ -67,7 +67,7 @@ $$J(\text{artist}_{1}, \text{artist}_{3}) = \frac{0}{8} = 0$$
 
 &lt;p&gt;&lt;img src=&quot;../images/js_venn.png&quot; width=&quot;50%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Now imagine that I’m throwing darts on the diagrams and I’m horrible at it. I’m so bad that every element on the diagrams has an equal chance of being hit. What’s the chance that I throw a dart and it lands on the intersection? It would be the number of elements in the intersection divided by the total number of elements. Which is exactly what the Jaccard similarity is. This implies that the larger the similarity, the higher the probability that we land on the intersection with a random throw.&lt;/p&gt;
+&lt;p&gt;Now imagine that I’m throwing darts on the diagrams and I’m horrible at it. I’m so bad that every element on the diagrams has an equal chance of being hit. What’s the chance that I throw a dart and it lands on the intersection? It would be the number of elements in the intersection divided by the total number of elements, which is exactly what the Jaccard similarity is. This implies that the larger the similarity, the higher the probability that we land on the intersection with a random throw.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../images/venns.png&quot; width=&quot;50%&quot; /&gt;&lt;/p&gt;
 
@@ -104,7 +104,7 @@ Imagine that you're at a carnival and there's a shooting game. There are n diagr
 
 $$\mathbb{E}[X] = P(X=1) \times 1 + P(X=0) \times 0 = 0.5 = J(\text{artist}_{1}, \text{artist}_{2})$$ --&gt;
 
-&lt;p&gt;What this means is that we can approximate the Jaccard similarity between pairs of artists. Let &lt;script type=&quot;math/tex&quot;&gt;X&lt;/script&gt; be a random variable such that &lt;script type=&quot;math/tex&quot;&gt;X = 1&lt;/script&gt; if we draw a plus and &lt;script type=&quot;math/tex&quot;&gt;X = 0&lt;/script&gt; if we draw a minus. &lt;script type=&quot;math/tex&quot;&gt;X&lt;/script&gt; is a Bernoulli random variable with &lt;script type=&quot;math/tex&quot;&gt;p=J(\text{artist}_{1}, \text{artist}_{2})&lt;/script&gt;. In order to estimate the similarity we can estimate &lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt;. In this case we obviously know that &lt;script type=&quot;math/tex&quot;&gt;p=0.5&lt;/script&gt; since we already computed it, but let’s assume that we don’t know this.&lt;/p&gt;
+&lt;p&gt;What this means is that we can approximate the Jaccard similarity between pairs of artists. Let &lt;script type=&quot;math/tex&quot;&gt;X&lt;/script&gt; be a random variable such that &lt;script type=&quot;math/tex&quot;&gt;X = 1&lt;/script&gt; if we draw a plus and &lt;script type=&quot;math/tex&quot;&gt;X = 0&lt;/script&gt; if we draw a minus. &lt;script type=&quot;math/tex&quot;&gt;X&lt;/script&gt; is a Bernoulli random variable with &lt;script type=&quot;math/tex&quot;&gt;p=J(\text{artist}_{1}, \text{artist}_{2})&lt;/script&gt;. In order to estimate the similarity, we can estimate &lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt;. In this case, we obviously know that &lt;script type=&quot;math/tex&quot;&gt;p=0.5&lt;/script&gt; since we already computed it, but let’s assume that we don’t know this.&lt;/p&gt;
 
 &lt;p&gt;If we repeat the random draw multiple times and keep track of how many times a “+” type came up versus a “-“, we can estimate the parameter &lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt; for &lt;script type=&quot;math/tex&quot;&gt;X&lt;/script&gt; by maximum likelihood estimation (MLE):&lt;/p&gt;
 
@@ -141,9 +141,11 @@ $$\mathbb{E}[X] = P(X=1) \times 1 + P(X=0) \times 0 = 0.5 = J(\text{artist}_{1},
 
 &lt;!-- This is great, but we need to compute similarities between all pairs of artists not just two artists. --&gt;
 
-&lt;h3 id=&quot;shuffling-and-picking-first-equiv-randomly-picking&quot;&gt;Shuffling and picking first &lt;script type=&quot;math/tex&quot;&gt;\equiv&lt;/script&gt; Randomly picking&lt;/h3&gt;
+&lt;h3 id=&quot;shuffling-and-picking-first-equiv-randomly-picking&quot;&gt;Shuffling and Picking First &lt;script type=&quot;math/tex&quot;&gt;\equiv&lt;/script&gt; Randomly Picking&lt;/h3&gt;
 
-&lt;p&gt;Before we move on, we need to understand one more thing. Randomly selecting an element from a set is the same thing as shuffling the set and picking the first element &lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. Everything that we have said above is also true if we, instead of randomly selecting an element, shuffled the set and picked the first element. Make sure to pause here, if this doesn’t make sense.&lt;/p&gt;
+&lt;p&gt;Before we move on, we need to understand one more thing. Randomly selecting an element from a set is the same thing as shuffling the set and picking the first element &lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. Everything that we have said above is also true if we, instead of randomly selecting an element, shuffled the set and picked the first element.&lt;/p&gt;
+
+&lt;!-- Make sure to pause here, if this doesn't make sense. --&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
 
@@ -163,11 +165,11 @@ $$\mathbb{E}[X] = P(X=1) \times 1 + P(X=0) \times 0 = 0.5 = J(\text{artist}_{1},
         &lt;span class=&quot;n&quot;&gt;num_intersect&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num_intersect&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num_trials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;The code above implements the same process that I described before, but instead of randomly picking an element it is shuffling the elements in the union and picking the first element. If you run this you should similarly get something that is close to &lt;script type=&quot;math/tex&quot;&gt;0.5&lt;/script&gt;.&lt;/p&gt;
+&lt;p&gt;The code above implements the same process that I described before, but instead of randomly picking an element, it is shuffling the elements in the union and picking the first element. If you run this, you should similarly get something that is close to &lt;script type=&quot;math/tex&quot;&gt;0.5&lt;/script&gt;.&lt;/p&gt;
 
-&lt;h3 id=&quot;data-matrix&quot;&gt;Data matrix&lt;/h3&gt;
+&lt;h3 id=&quot;data-matrix&quot;&gt;Data Matrix&lt;/h3&gt;
 
-&lt;p&gt;We have shown that it’s possible to approximate Jaccard similarity for a pair of artists using randomness. But our previous method had a significant issue. We still needed to have the intersection and the union set to estimate the Jaccard similarity, which kind of defeats the whole purpose. We need a way to approximate the similarities without having to compute these sets. We also need to approximate the similarities for all pairs of artists, not just a given pair. In order to do that, we’re going to switch our view of the data from sets to a matrix.&lt;/p&gt;
+&lt;p&gt;We have shown that it’s possible to approximate Jaccard similarity for a pair of artists using randomness but our previous method had a significant issue. We still needed to have the intersection and the union of the sets to estimate the Jaccard similarity, which kind of defeats the whole purpose. We need a way to approximate the similarities without having to compute these sets. We also need to approximate the similarities for all pairs of artists, not just a given pair. In order to do that, we’re going to switch our view of the data from sets to a matrix.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../images/artist_matrix.png&quot; width=&quot;50%&quot; /&gt;&lt;/p&gt;
 
@@ -175,7 +177,7 @@ $$\mathbb{E}[X] = P(X=1) \times 1 + P(X=0) \times 0 = 0.5 = J(\text{artist}_{1},
 
 &lt;h3 id=&quot;min-hashing&quot;&gt;Min Hashing&lt;/h3&gt;
 
-&lt;p&gt;Going back to our main goal. We want to reduce the size of the representation for each artist while preserving the Jaccard similarities between pairs of artists in the dataset. In more “mathy” terms, we have a data matrix &lt;script type=&quot;math/tex&quot;&gt;D&lt;/script&gt; that we want to encode in some smaller matrix &lt;script type=&quot;math/tex&quot;&gt;\hat{D}&lt;/script&gt; called the signature matrix, such that &lt;script type=&quot;math/tex&quot;&gt;J_{pairwise}(D) \approx \hat{J}_{pairwise}(\hat{D})&lt;/script&gt;&lt;/p&gt;
+&lt;p&gt;Going back to our main goal, we want to reduce the size of the representation for each artist while preserving the Jaccard similarities between pairs of artists in the dataset. In more “mathy” terms, we have a data matrix &lt;script type=&quot;math/tex&quot;&gt;D&lt;/script&gt; that we want to encode in some smaller matrix &lt;script type=&quot;math/tex&quot;&gt;\hat{D}&lt;/script&gt; called the signature matrix, such that &lt;script type=&quot;math/tex&quot;&gt;J_{pairwise}(D) \approx \hat{J}_{pairwise}(\hat{D})&lt;/script&gt;&lt;/p&gt;
 
 &lt;!-- To reiterate the goal, we want to encode the data into a smaller representation such that the Jaccard similarities are preserved. In more &quot;mathy&quot; terms, we have a data matrix $$D$$ that we want to encode in some smaller matrix $$\hat{D}$$ called the signature matrix, such that $$J_{pairwise}(D) \approx \hat{J}_{pairwise}(\hat{D})$$ [^4].
 
@@ -193,7 +195,7 @@ $$\mathbb{E}[X] = P(X=1) \times 1 + P(X=0) \times 0 = 0.5 = J(\text{artist}_{1},
 
 &lt;p&gt;&lt;img src=&quot;../images/1iteration.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;We have reduced each artist to a single number. To compute the Jaccard similarities between the artists we compare the signatures. Let &lt;script type=&quot;math/tex&quot;&gt;h&lt;/script&gt; be the function that finds and returns the index of the first non-zero element. Then we have:&lt;/p&gt;
+&lt;p&gt;We have now reduced each artist to a single number. To compute the Jaccard similarities between the artists we compare the signatures. Let &lt;script type=&quot;math/tex&quot;&gt;h&lt;/script&gt; be the function that finds and returns the index of the first non-zero element. Then we have:&lt;/p&gt;
 
 &lt;center&gt;
 $$h(\text{artist}_{1}) = 7$$
@@ -235,9 +237,7 @@ $$P(h(\text{artist}_{i}) = h(\text{artist}_{j})) = J(\text{artist}_{i}, \text{ar
 &lt;p&gt;If we shuffled the rows what is the probability that the first &lt;strong&gt;non&lt;/strong&gt;-“null” row is of type “+”? In other words, after shuffling the rows, if we proceeded from top to bottom while skipping over all “null” rows, what is the probability of seeing a “+” before seeing a “-“?&lt;/p&gt;
 
 &lt;p&gt;If we think back to our example with sets, this question should be easy to answer. All we have to realize is that,
-encountering a “+” before a “-“ is the exact same thing as randomly drawing a “+” in the union. Which we know has a probability that is equal to the Jaccard similarity.&lt;/p&gt;
-
-&lt;!-- [^3]: The only difference is that we're using shuffling instead of randomly picking, which we've concluded is the exact same thing. --&gt;
+encountering a “+” before a “-“ is the exact same thing as randomly drawing a “+” in the union, which we know has a probability that is equal to the Jaccard similarity.&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;P(\text{seeing a &quot;+&quot; before &quot;-&quot;})  = \frac{\text{number of &quot;+&quot;}}{\text{number of &quot;+&quot; and &quot;-&quot;}} = J(\text{artist}_{1}, \text{artist}_{2})&lt;/script&gt;
 
@@ -257,7 +257,7 @@ encountering a “+” before a “-“ is the exact same thing as randomly draw
 
 &lt;p&gt;&lt;img src=&quot;../images/sig1.png&quot; width=&quot;50%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;As you can see it’s a &lt;em&gt;little&lt;/em&gt; off. How can we make it better? It’s simple, we run more iterations and make the signatures larger. In the earlier discussions we introduced a Bernoulli random variable and we estimated it’s parameter by simulating multiple random trials. We can do the same exact thing here. Let &lt;script type=&quot;math/tex&quot;&gt;Y&lt;/script&gt; be a random variable that has value 1 if &lt;script type=&quot;math/tex&quot;&gt;h(\text{artist}_{i}) = h(\text{artist}_{j})&lt;/script&gt; and is 0 otherwise. &lt;script type=&quot;math/tex&quot;&gt;Y&lt;/script&gt; is an instance of a Bernoulli random variable with &lt;script type=&quot;math/tex&quot;&gt;p = J(\text{artist}_{i}, \text{artist}_{j})&lt;/script&gt;. If we run the algorithm multiple times, thus simulating multiple but identical variables &lt;script type=&quot;math/tex&quot;&gt;Y_{1}, Y_{2}, ..., Y_{k}&lt;/script&gt;, we can then estimate the Jaccard similarity as:&lt;/p&gt;
+&lt;p&gt;As you can see, it’s a &lt;em&gt;little&lt;/em&gt; off. How can we make it better? It’s simple, we run more iterations and make the signatures larger. In the earlier discussions we introduced a Bernoulli random variable and we estimated it’s parameter by simulating multiple random trials. We can do the same exact thing here. Let &lt;script type=&quot;math/tex&quot;&gt;Y&lt;/script&gt; be a random variable that has value 1 if &lt;script type=&quot;math/tex&quot;&gt;h(\text{artist}_{i}) = h(\text{artist}_{j})&lt;/script&gt; and is 0 otherwise. &lt;script type=&quot;math/tex&quot;&gt;Y&lt;/script&gt; is an instance of a Bernoulli random variable with &lt;script type=&quot;math/tex&quot;&gt;p = J(\text{artist}_{i}, \text{artist}_{j})&lt;/script&gt;. If we run the algorithm multiple times, thus simulating multiple but identical variables &lt;script type=&quot;math/tex&quot;&gt;Y_{1}, Y_{2}, ..., Y_{k}&lt;/script&gt;, we can then estimate the Jaccard similarity as:&lt;/p&gt;
 
 &lt;!-- Remember how we approximated the parameter $$p$$ for the random variable $$X$$? It's the exact same thing here. With a signature with length greater than one the estimation for Jaccard similarity is done by taking the average of each element-wise comparison. --&gt;
 
@@ -300,7 +300,7 @@ encountering a “+” before a “-“ is the exact same thing as randomly draw
 
 &lt;h3 id=&quot;minhash-algorithm&quot;&gt;MinHash Algorithm&lt;/h3&gt;
 
-&lt;p&gt;Shuffling the rows of the data matrix can be infeasible if the matrix is large. In the Spotify example we would have to shuffle 271 million rows for each iteration of the algorithm. So while the algorithm works conceptually, it is not that useful in practice.&lt;/p&gt;
+&lt;p&gt;Shuffling the rows of the data matrix can be infeasible if the matrix is large. In the Spotify example, we would have to shuffle 271 million rows for each iteration of the algorithm. So while the algorithm works conceptually, it is not that useful in practice.&lt;/p&gt;
 
 &lt;p&gt;Instead of explicitly shuffling the rows, what we can instead do is &lt;em&gt;implicitly&lt;/em&gt; shuffle the rows by mapping each row index to some unique integer. There are special functions called hash functions that can do exactly that. They map each unique input to some unique output (usually in the same range).&lt;/p&gt;
 
@@ -373,11 +373,13 @@ for each row r in the dataset
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/qA4WdrY6aPk&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 &lt;/center&gt;
 
+&lt;p&gt;Now with this algorithm we can reduce all of the artist representations to smaller sets. If we use &lt;script type=&quot;math/tex&quot;&gt;k&lt;/script&gt; hash functions we will have a signature of size &lt;script type=&quot;math/tex&quot;&gt;k&lt;/script&gt; for each artist. This means that the time complexity of comparing two sets (artists) is now &lt;script type=&quot;math/tex&quot;&gt;O(k)&lt;/script&gt;, which is independent of the size of the original sets.&lt;/p&gt;
+
 &lt;h3 id=&quot;further-improvement&quot;&gt;Further improvement&lt;/h3&gt;
 
 &lt;p&gt;Using the MinHash algorithm, we can reduce the computational complexity of computing similarities between pairs of artists but there is still one more issue. In order to implement the recommendation feature we still need to compute the similarities between every pair of artists. This is quadratic in running time, if &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; is the number of artists, we need to make &lt;script type=&quot;math/tex&quot;&gt;{n \choose 2} = \frac{n(n-1)}{2} = O(n^2)&lt;/script&gt; comparisons. If &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; is large, even with parallelization, this will be a horribly slow computation.&lt;/p&gt;
 
-&lt;p&gt;We’re in luck because there’s another ingenious method called Locality-sensitive hashing (LSH) that uses the minhash signatures to find candidate pairs. Which means that we’ll only have to compute the similarities for the candidates, rather than for every pair. I’ll write about LSH in the next post. Until then :v:.&lt;/p&gt;
+&lt;p&gt;We’re in luck because there’s another ingenious method called Locality-sensitive hashing (LSH) that uses the minhash signatures to find candidate pairs. This means that we’ll only have to compute the similarities for the candidates, rather than for every pair. I’ll write about LSH in the next post. Until then, :v:.&lt;/p&gt;
 
 &lt;!-- ## Further reading
 
@@ -393,16 +395,16 @@ for each row r in the dataset
       &lt;p&gt;I know shuffling a set of elements is meaningless since sets don’t have order but imagine that they do :). &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:2&quot;&gt;
-      &lt;p&gt;Obviously, we wouldn’t store the data in this form in practice, since it’s extremely wasteful. But seeing the data as a matrix will be a helpful for conceptualizing the methods that we’re gonna discuss. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;In practice this matrix would be very sparse, therefore we wouldn’t store the data in this form, since would be extremely wasteful. But seeing the data as a matrix will be a helpful for conceptualizing the methods that we’re gonna discuss. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:3&quot;&gt;
       &lt;p&gt;The strange looking one (&lt;script type=&quot;math/tex&quot;&gt;\unicode{x1D7D9}&lt;/script&gt;) is called the indicator function. It outputs a 1 if the expression inside the brackets evaluates to true, otherwise the output is a 0. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:min_index_diff&quot;&gt;
-      &lt;p&gt;You may notice that the values that get stored are different from what we would store in the naive-min hashing algorithm, will this make any difference? &lt;a href=&quot;#fnref:min_index_diff&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;You may notice that the values that get stored are different from what we would store in the naive-min hashing algorithm, will this make any difference? Why? &lt;a href=&quot;#fnref:min_index_diff&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>Giorgi Kvernadze</name></author><summary type="html">Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. First thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user ids of people that have listened to that artist at least once. For example, the representation for Miles Davis could be,</summary></entry><entry><title type="html">From Linear Classifiers to Neural Networks</title><link href="http://localhost:4000/multilayer-perceptron/" rel="alternate" type="text/html" title="From Linear Classifiers to Neural Networks" /><published>2019-12-19T00:00:00-07:00</published><updated>2019-12-19T00:00:00-07:00</updated><id>http://localhost:4000/multilayer-perceptron</id><content type="html" xml:base="http://localhost:4000/multilayer-perceptron/">&lt;ul&gt;
+&lt;/div&gt;</content><author><name>Giorgi Kvernadze</name></author><summary type="html">Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. The first thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user IDs of people that have listened to that artist at least once. For example, the representation for Miles Davis could be,</summary></entry><entry><title type="html">From Linear Classifiers to Neural Networks</title><link href="http://localhost:4000/multilayer-perceptron/" rel="alternate" type="text/html" title="From Linear Classifiers to Neural Networks" /><published>2019-12-19T00:00:00-07:00</published><updated>2019-12-19T00:00:00-07:00</updated><id>http://localhost:4000/multilayer-perceptron</id><content type="html" xml:base="http://localhost:4000/multilayer-perceptron/">&lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;em&gt;This post is best suited for people who are familiar with linear classifiers. I will also be assuming that the reader is familiar with gradient descent.&lt;/em&gt;&lt;/p&gt;
   &lt;/li&gt;
