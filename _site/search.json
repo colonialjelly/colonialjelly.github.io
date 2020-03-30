@@ -4,7 +4,7 @@
 
       "title"    : "Min Hashing",
       "url"      : "/minhashing/",
-      "category" : "Data Mining, Educational",
+      "category" : "Data Mining, Tutorial",
       "date"     : "March 10, 2020"
     } ,
   
@@ -12,7 +12,7 @@
 
       "title"    : "From Linear Classifiers to Neural Networks",
       "url"      : "/multilayer-perceptron/",
-      "category" : "Machine Learning, Neural Networks, Educational",
+      "category" : "Machine Learning, Neural Networks, Tutorial",
       "date"     : "December 19, 2019"
     } 
   

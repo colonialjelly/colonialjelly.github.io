@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Min Hashing
-categories: [Data Mining, Educational]
+categories: [Data Mining, Tutorial]
 excerpt:
 mathjax: true
 published: true
