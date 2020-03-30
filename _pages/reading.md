@@ -4,7 +4,7 @@ title: Reading
 permalink: /reading/
 ---
 
-Don't mind me. I'm just trying to exploit my ape brain (Maintaining a list of books I've read, causes me to read more books). :blush: :books: 
+Don't mind me. I'm just trying to exploit brain (maintaining a list of books I've read, causes me to read more books). :blush: :books: 
 
 ## Currently reading
 * **Black Swan**: *The Impact of the Highly Improbable* - Nassim Nicholas Taleb
