@@ -7,7 +7,6 @@ mathjax: true
 published: true
 ---
 
-
 Suppose you're an engineer at Spotify and you're on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. The first thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user IDs of people that have listened to that artist at least once. For example, the representation for Miles Davis could be,
 
 $$\text{Miles Davis} = \{5, 23533, 2034, 932, ..., 10003243\}$$
@@ -402,16 +401,16 @@ The video below is an animation that simulates the algorithm over the toy datase
 
 Now with this algorithm we can reduce all of the artist representations to smaller sets. If we use $$k$$ hash functions we will have a signature of size $$k$$ for each artist. This means that the time complexity of comparing two sets (artists) is now $$O(k)$$, which is independent of the size of the original sets.
 
-### Further improvement
+### Next Steps
 
 Using the MinHash algorithm, we can reduce the computational complexity of computing similarities between pairs of artists but there is still one more issue. In order to implement the recommendation feature we still need to compute the similarities between every pair of artists. This is quadratic in running time, if $$n$$ is the number of artists, we need to make $${n \choose 2} = \frac{n(n-1)}{2} = O(n^2)$$ comparisons. If $$n$$ is large, even with parallelization, this will be a horribly slow computation.
 
 We're in luck because there's another ingenious method called Locality-sensitive hashing (LSH) that uses the minhash signatures to find candidate pairs. This means that we'll only have to compute the similarities for the candidates, rather than for every pair. I'll write about LSH in the next post. Until then, :v:.
 
-<!-- ## Further reading
+## Further reading
 
+- [Min Hashing](https://www.cs.utah.edu/~jeffp/DMBook/L4-Minhash.pdf) - Lecture notes from University of Utah CS 5140 (Data Mining) by Jeff M Phillips. This is were I actually learned about Min Hashing. Answers an important question that I have not addressed in this tutorial, "So how large should we set k so that this gives us an accurate measure?"
 - [Finding Similar Items](http://infolab.stanford.edu/~ullman/mmds/ch3.pdf) - Chapter 3 of the book "Mining of Massive Datasets" by Jure Leskovec, Anand Rajaraman and Jeff Ullman. Has some really good exercises that are worth checking out.
-- [Min Hashing](https://www.cs.utah.edu/~jeffp/DMBook/L4-Minhash.pdf) - Lecture notes from University of Utah CS 5140 (Data Mining) by Jeff M Phillips. Answers an important question that I have not addressed in this tutorial, "So how large should we set k so that this gives us an accurate measure?" -->
 
 ---
 
