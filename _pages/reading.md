@@ -4,16 +4,17 @@ title: Reading
 permalink: /reading/
 ---
 
-Don't mind me. I'm just trying to exploit my brain (maintaining a list of books I've read, causes me to read more books). :blush: :books: 
+Don't mind me. I'm just trying to exploit my brain (maintaining a list of books I've read, causes me to read more books). :blush: :books:
 
 ## Currently reading
+* **Poking a Dead Frog**: *Conversations with Today's Top Comedy Writers* - Mike Sacks
 * **Black Swan**: *The Impact of the Highly Improbable* - Nassim Nicholas Taleb
-* **Algorithms to Live By**: *The Computer Science of Human Decisions* -  Brian Christian & Tom Griffiths
 <!-- * **Consciousness Explained** - Daniel Dennett -->
 
 ## Read
 ---
 ### 2020
+* **Algorithms to Live By**: *The Computer Science of Human Decisions* -  Brian Christian & Tom Griffiths
 * **Radical Acceptance**: *Embracing Your Life With the Heart of a Buddha* - Tara Brach
 * **How to Lie with Statistics** - Darrell Huff
 * **The Selfish Gene** - Richard Dawkins
