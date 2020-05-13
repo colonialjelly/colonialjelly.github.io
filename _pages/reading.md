@@ -4,23 +4,33 @@ title: Reading
 permalink: /reading/
 ---
 
-Don't mind me. I'm just trying to exploit my brain (maintaining a list of books I've read, causes me to read more books). :blush: :books:
+I use this page to keep track of what I read. If you have any suggestions for books don't hesitate to shoot me an email :blush: :books:
 
 ## Currently reading
 <!-- * **Consciousness Explained** - Daniel Dennett -->
 * **What I Talk About When I Talk About Running** - Haruki Murakami
 * **Mindset**: *The New Psychology of Success* - Carol S. Dweck
+* **The Art of Loving** - Erich Fromm
 ## Read
 ---
 ### 2020
-* **Poking a Dead Frog**: *Conversations with Today's Top Comedy Writers* - Mike Sacks
-* **Black Swan**: *The Impact of the Highly Improbable* - Nassim Nicholas Taleb
-* **Algorithms to Live By**: *The Computer Science of Human Decisions* -  Brian Christian & Tom Griffiths
-* **Radical Acceptance**: *Embracing Your Life With the Heart of a Buddha* - Tara Brach
-* **How to Lie with Statistics** - Darrell Huff
-* **The Selfish Gene** - Richard Dawkins
-* **The Metamorphosis** - Franz Kafka
-* **Thinking in Bets**: *Making Smarter Decisions When You Don't Have All the Facts* - Annie Duke
+* **Poking a Dead Frog**: *Conversations with Today's Top Comedy Writers* - Mike Sacks <br />
+  When observation is a skill that is required to succeed in your career you tend to become good at filtering out the noise of life in order to get to the truth. This book provides an insightful look into the minds of people have above average observational skills. The interviews are in a candid style and are pretty fun to read. Most of the interviews have interesting and just straight non-BS wisdom on life. The book is also packed with some really good advice on writing in general, not just comedy writing. Would recommend it to anyone that's trying to become a better writer. It's also super interesting to peek behind some shows I've really loved over the years. For example, I was fascinated by the fact that the creator of Freaks and Geeks, Paul Feig, wrote a [55 page bible](http://leethomson.myzen.co.uk/Freaks_and_Geeks/Freaks_and_Geeks_Bible.pdf) of the show that has detailed descriptions on what the world and the characters should be like. He even compiled a list of songs/artists that were labelled with freak or geek.
+* **Black Swan**: *The Impact of the Highly Improbable* - Nassim Nicholas Taleb <br />
+  Humans have a tendency to predict the future without realizing how unpredictable the future really is. We consistently overestimate our knowledge of the causal effects of events. Taleb argues that there are highly improbable but hugely impactful events called Black Swans. These Black Swan events essentially dictate how the world shifts around us. Trying to predict these events is hopeless, but being ready for an occurrence of one is a requirement, if we want to survive.
+* **Algorithms to Live By**: *The Computer Science of Human Decisions* -  Brian Christian & Tom Griffiths <br />
+  An interesting take on the parallels of computer science and human decision making. Although, I think the book falls short on explaining the concepts well enough to make them intuitive for a non-technical audience. They have enough information for someone with a CS background, but some of the chapters are not really that accessible for people outside the discipline.
+* **Radical Acceptance**: *Embracing Your Life With the Heart of a Buddha* - Tara Brach <br />
+  Tara Brach describes the incapacitating condition of self-judgement and self-criticism, what she calls the trance of unworthiness. She offers a conceptually simple solution, just accept it. Recognize what you are feeling (mindfulness) and
+  let yourself feel it without judgement (compassion). The book contains useful lessons from the Buddhist teachings and real life examples from Tara's practice with people that struggled with trauma, shame, fear, addiction and self-denial.
+* **How to Lie with Statistics** - Darrell Huff <br />
+  A gem of a book about how easy it is to trick or be tricked by someone by essentially making you focus on the wrong things. It's kind of like how illusionists do their illusions, no one is ever looking in the right spot and that's no accident. The book has really accessible explanations on concepts like, correlation does not imply causation, importance of sample statistics, data visualization and many more. It's written in a playful/witty language and has heavy usage of examples to ground the concepts.
+* **The Selfish Gene** - Richard Dawkins <br />
+  Dawkins masterfully explains how evolution is driven by replicators and their quest for immortality for which we serve as vehicles. He defines a replicator as a fundamental unit of natural selection, which is basically the thing that gets copied over and sometimes gets mutated (a DNA molecule is an example of a replicator). He also introduces the meme as a replicator. A meme is a unit for cultural evolution; the ideas we have, the songs we sing and the symbols we use are all examples of memes.
+* **The Metamorphosis** - Franz Kafka <br />
+  This was not at all what I was expecting but the surprise was a pleasant one. It's a hilarious read that has some deep implications on the contemporary human condition. Although, the interpretation is up to the reader, to me Metamorphosis is about the degradation of human society into something unrecognizable, something as ugly as a bug. We have lost touch with our humanity by allowing the world we ourselves have constructed to completely take over our being.
+* **Thinking in Bets**: *Making Smarter Decisions When You Don't Have All the Facts* - Annie Duke <br />
+  Life involves a lot of bets and uncertainty, it is more like poker than chess. The most important take away from this book is the fact that we often judge actions by their outcomes rather than the rationale behind the act. We have to recognize that sometimes we can do everything right but still lose. The bet was right, the luck just wasn't on our side in that instance.
 
 ### 2019
 * **21 Lessons for the 21st Century** - Yuval Noah Harari

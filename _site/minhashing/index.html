@@ -475,16 +475,20 @@ for each row r in the dataset
 
 <p>Now with this algorithm we can reduce all of the artist representations to smaller sets. If we use <script type="math/tex">k</script> hash functions we will have a signature of size <script type="math/tex">k</script> for each artist. This means that the time complexity of comparing two sets (artists) is now <script type="math/tex">O(k)</script>, which is independent of the size of the original sets.</p>
 
-<h3 id="further-improvement">Further improvement</h3>
+<h3 id="next-steps">Next Steps</h3>
 
 <p>Using the MinHash algorithm, we can reduce the computational complexity of computing similarities between pairs of artists but there is still one more issue. In order to implement the recommendation feature we still need to compute the similarities between every pair of artists. This is quadratic in running time, if <script type="math/tex">n</script> is the number of artists, we need to make <script type="math/tex">{n \choose 2} = \frac{n(n-1)}{2} = O(n^2)</script> comparisons. If <script type="math/tex">n</script> is large, even with parallelization, this will be a horribly slow computation.</p>
 
 <p>We’re in luck because there’s another ingenious method called Locality-sensitive hashing (LSH) that uses the minhash signatures to find candidate pairs. This means that we’ll only have to compute the similarities for the candidates, rather than for every pair. I’ll write about LSH in the next post. Until then, <img class="emoji" title=":v:" alt=":v:" src="https://github.githubassets.com/images/icons/emoji/unicode/270c.png" height="20" width="20">.</p>
 
-<!-- ## Further reading
+<h2 id="further-reading">Further reading</h2>
 
-- [Finding Similar Items](http://infolab.stanford.edu/~ullman/mmds/ch3.pdf) - Chapter 3 of the book "Mining of Massive Datasets" by Jure Leskovec, Anand Rajaraman and Jeff Ullman. Has some really good exercises that are worth checking out.
-- [Min Hashing](https://www.cs.utah.edu/~jeffp/DMBook/L4-Minhash.pdf) - Lecture notes from University of Utah CS 5140 (Data Mining) by Jeff M Phillips. Answers an important question that I have not addressed in this tutorial, "So how large should we set k so that this gives us an accurate measure?" -->
+<ul>
+  <li>
+<a href="https://www.cs.utah.edu/~jeffp/DMBook/L4-Minhash.pdf">Min Hashing</a> - Lecture notes from University of Utah CS 5140 (Data Mining) by Jeff M Phillips. This is were I actually learned about Min Hashing. Answers an important question that I have not addressed in this tutorial, “So how large should we set k so that this gives us an accurate measure?”</li>
+  <li>
+<a href="http://infolab.stanford.edu/~ullman/mmds/ch3.pdf">Finding Similar Items</a> - Chapter 3 of the book “Mining of Massive Datasets” by Jure Leskovec, Anand Rajaraman and Jeff Ullman. Has some really good exercises that are worth checking out.</li>
+</ul>
 
 <hr>
 
