@@ -9,16 +9,18 @@ I use this page to keep track of what I read. If you have any suggestions don't 
 ## Currently reading
 <!-- * **Consciousness Explained** - Daniel Dennett -->
 * **Mindset**: *The New Psychology of Success* - Carol S. Dweck
-* **The Art of Loving** - Erich Fromm
 ## Read
 ---
 ### 2020
+* **The Art of Loving** - Erich Fromm <br />
+  Fromm argues that our understanding of love is misguided in thinking that it is something that happens to us rather than something that we actively engage in. Most people think that love itself is easy but to find the object of love or to be loved is difficult. We so often fail in love because of our misunderstanding of it. Love like any other discipline, requires knowledge and most importantly practice. The same way you wouldn't expect to be a good engineer without hard-work, you shouldn't expect to be good at loving without dedicating time and attention to it.
+
 * **What I Talk About When I Talk About Running** - Haruki Murakami <br />
   On the surface level this book is Murakami's memoirs on his experience and passion for long-distance running, but at a deeper level this book is a manifestation of his philosophy on living. He identifies writing and running as similar activities in the sense that both require endurance and persistent focus, yet I think the real message in this book is that the act of living possesses a similar nature as well. Life is the one true marathon that we all run, and in order to live the fullest we must develop endurance and resilience to the hurdles that are constantly thrown at us.
   Overall, it's a short and very readable book and I don't think you necessarily have to be passionate about running to be able to enjoy this book, although I can see it being a little harder to relate to if you've never completed a long run and don't know how it feels when your body and mind are screaming at you to stop but you keep going.
 
 * **Poking a Dead Frog**: *Conversations with Today's Top Comedy Writers* - Mike Sacks <br />
-  When observation is a skill that is required to succeed in your career you tend to become good at filtering out the noise of life in order to get to the truth. This book provides an insightful look into the minds of people have above average observational skills. The interviews are in a candid style and are pretty fun to read. Most of the interviews have interesting and just straight non-BS wisdom on life. The book is also packed with some really good advice on writing in general, not just comedy writing. Would recommend it to anyone that's trying to become a better writer. It's also super interesting to peek behind some shows I've really loved over the years. For example, I was fascinated by the fact that the creator of Freaks and Geeks, Paul Feig, wrote a [55 page bible](http://leethomson.myzen.co.uk/Freaks_and_Geeks/Freaks_and_Geeks_Bible.pdf) of the show that has detailed descriptions on what the world and the characters should be like. He even compiled a list of songs/artists that were labelled with freak or geek.
+  When observation is a skill that is required to succeed in your career you tend to become good at filtering out the noise of life in order to get to the truth. This book provides an insightful look into the minds of people that have above average observational skills. The interviews are in a candid style and are pretty fun to read. Most of the interviews have interesting and just straight non-BS wisdom on life. The book is also packed with some really good advice on writing in general, not just comedy writing. Would recommend it to anyone that's trying to become a better writer. It's also super interesting to peek behind some shows I've really loved over the years. For example, I was fascinated by the fact that the creator of Freaks and Geeks, Paul Feig, wrote a [55 page bible](http://leethomson.myzen.co.uk/Freaks_and_Geeks/Freaks_and_Geeks_Bible.pdf) of the show that has detailed descriptions on what the world and the characters should be like. He even compiled a list of songs/artists that were labelled with freak or geek.
 
 * **Black Swan**: *The Impact of the Highly Improbable* - Nassim Nicholas Taleb <br />
   Humans have a tendency to predict the future without realizing how unpredictable the future really is. We consistently overestimate our knowledge of the causal effects of events. Taleb argues that there are highly improbable but hugely impactful events called Black Swans. These Black Swan events essentially dictate how the world shifts around us. Trying to predict these events is hopeless, but being ready for an occurrence of one is a requirement, if we want to survive.
@@ -38,7 +40,7 @@ I use this page to keep track of what I read. If you have any suggestions don't 
 
 * **The Metamorphosis** - Franz Kafka <br />
   This was not at all what I was expecting but the surprise was a pleasant one. It's a hilarious read that has some deep implications on the contemporary human condition. Although, the interpretation is up to the reader, to me Metamorphosis is about the degradation of human society into something unrecognizable, something as ugly as a bug. We have lost touch with our humanity by allowing the world we ourselves have constructed to completely take over our being.
-  
+
 * **Thinking in Bets**: *Making Smarter Decisions When You Don't Have All the Facts* - Annie Duke <br />
   Life involves a lot of bets and uncertainty, it is more like poker than chess. The most important take away from this book is the fact that we often judge actions by their outcomes rather than the rationale behind the act. We have to recognize that sometimes we can do everything right but still lose. The bet was right, the luck just wasn't on our side in that instance.
 
