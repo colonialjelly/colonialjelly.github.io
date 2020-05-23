@@ -45,8 +45,8 @@ google_analytics: UA-157355591-1
 
 # Your website URL (e.g. http://amitmerchant1990.github.io or http://www.amitmerchant.com)
 # Used for Sitemap.xml and your RSS feed
-url: https://giothinks.com/
-enforce_ssl: https://giothinks.com/
+url: https://giorgi.tech/
+enforce_ssl: https://giorgi.tech/
 
 # If you're hosting your site at a Project repository on GitHub pages
 # (http://yourusername.github.io/repository-name)
