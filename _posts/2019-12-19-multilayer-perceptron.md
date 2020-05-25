@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  From Linear Classifiers to Neural Networks
+title:  Multilayer Perceptron
 categories: [Machine Learning, Neural Networks, Tutorial]
 mathjax: true
 ---

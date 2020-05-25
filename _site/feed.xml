@@ -5,7 +5,7 @@
   
   <link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" />
-  <updated>2020-05-25T01:05:20+00:00</updated>
+  <updated>2020-05-25T01:13:27+00:00</updated>
   <id>http://localhost:4000//</id>
 
   
@@ -482,10 +482,10 @@ for each row r in the dataset
   
     <entry>
       
-      <title type="html">From Linear Classifiers to Neural Networks</title>
+      <title type="html">Multilayer Perceptron</title>
       
       
-      <link href="http://localhost:4000/blog/multilayer-perceptron/" rel="alternate" type="text/html" title="From Linear Classifiers to Neural Networks" />
+      <link href="http://localhost:4000/blog/multilayer-perceptron/" rel="alternate" type="text/html" title="Multilayer Perceptron" />
       
       <published>2019-12-19T00:00:00+00:00</published>
       <updated>2019-12-19T00:00:00+00:00</updated>

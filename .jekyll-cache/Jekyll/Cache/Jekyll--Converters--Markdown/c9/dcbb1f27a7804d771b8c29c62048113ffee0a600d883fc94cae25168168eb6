@@ -1,0 +1,28 @@
+I"?<ul>
+  <li>
+    <p><em>This post is best suited for people who are familiar with linear classifiers. I will also be assuming that the reader is familiar with gradient descent.</em></p>
+  </li>
+  <li>
+    <p><em>The goal of this post isn’t to be a comprehensive guide about neural networks, but rather an attempt to show an intuitive path going from linear classifiers to a simple neural network.</em></p>
+  </li>
+</ul>
+
+<p>There are many types of neural networks, each having some advantage over others. In this post, I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it’s a relatively simple model to implement.</p>
+
+<p>Before we delve into MLPs, let’s quickly go over linear classifiers. Given training data as pairs \((\boldsymbol{x}_i, y_i)\) where \(\boldsymbol{x}_i \in \mathbb{R}^{d}\) are datapoints (observations) and \(y_i \in \{0, 1\}\) are their corresponding class labels, the goal is to learn a vector of weights \(\boldsymbol{w} \in \mathbb{R}^{d}\) and a bias \(b \in \mathbb{R}\) such that \(\boldsymbol{w}^T\boldsymbol{x}_{i} + b \ge 0\) if \(y_{i} = 1\) and \(\boldsymbol{w}^T\boldsymbol{x}_{i} + b &lt; 0\) otherwise (\(y_{i} = 0\)). This decision can be summarized as the following step function:</p>
+
+\[\text{Prediction} = \begin{cases}
+      1 &amp; \boldsymbol{w}^T\boldsymbol{x} + b \ge 0 \\
+      0 &amp;  \text{Otherwise}\\
+\end{cases}\]
+
+<p>In the case of Logistic Regression the decision function is characterized by the sigmoid function \(\sigma(z) = \frac{1}{1+e^{-z}}\) where \(z = \boldsymbol{w}^T\boldsymbol{x} + b\)</p>
+
+\[\text{Prediction} = \begin{cases}
+      1 &amp; \sigma(z) \ge \theta \\
+      0 &amp;  \text{Otherwise}\\
+\end{cases}\]
+
+<p>Where \(\theta\) is a threshold that is usually set to be 0.5.</p>
+
+:ET
