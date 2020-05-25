@@ -2,7 +2,6 @@
 layout: post
 title:  From Linear Classifiers to Neural Networks
 categories: [Machine Learning, Neural Networks, Tutorial]
-excerpt: There are many types of neural networks, each having some advantage over others. In this post, I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it's a relatively simple model to implement.
 mathjax: true
 ---
 
@@ -28,15 +27,17 @@ $$\text{Prediction} = \begin{cases}
 
 Where $$\theta$$ is a threshold that is usually set to be 0.5.
 
+<!-- more -->
+
 <!-- *Note: These are actually just a couple of examples of a zoo of functions that people in deep learning literature refer to as activation functions.* -->
 
 If the dataset is linearly separable, this is all fine since we can always learn $$\boldsymbol{w}$$ and $$b$$ that separates the data perfectly. We're in good shape even if the dataset isn't perfectly linearly separable, i.e the data points can be separated with a line barring a few noisy observations.  
 
-![](../images/blobs.png)
+<img class="center" src="/images/blobs.png">
 
 But what can we do if the dataset is highly non-linear? For example, something like this:
 
-![](../images/circles.png)
+<img class="center" src="/images/circles.png">
 
 One thing we could potentially do is to come up with some non-linear transformation function $$\phi(\boldsymbol{x})$$, such that applying it renders the data linearly separable. Having this transformation function would allow us to use all the tools we have for linear classification.
 
@@ -44,13 +45,13 @@ For example, in this case, we can see that the data points come from two concent
 
 Now we can learn a vector $$\boldsymbol{w}$$ and bias $$b$$ such that $$\boldsymbol{w}^T\phi(\boldsymbol{x}_{i}) + b \ge 0$$ if $$y_{i} = 1$$ and $$\boldsymbol{w}^T\phi(\boldsymbol{x}_{i}) + b < 0$$ otherwise.
 
-![](../images/circles_transformed_clf.png)
+<img class="center" src="/images/circles_transformed_clf.png">
 
 This works for this particular case since we know exactly what the data generation process is, but what can we do when the underlying function is not obvious? What if we're working in high dimensions where we can't visualize the shape of the dataset? In general, it's hard to come up with these transformation functions.
 
 Here's another idea, instead of learning one linear classifier, let's try to learn three linear classifiers and then combine them to get something like this:
 
-![](../images/circles3.png)
+<img class="center" src="/images/circles3.png">
 
 We know how to learn a single linear classifier but how can we learn three linear classifiers that can produce a result like this? The naive approach would be to try to learn them independently using different random initializations and hope that they converge to something like what we want. However, this approach is doomed from the beginning since each classifier will try to fit the whole data while ignoring what the other classifiers are doing. In other words there will be no cooperation since none of the classifiers will be "aware" of each other. This is the opposite of what we want. We want/need the classifiers to work together.
 
@@ -253,7 +254,7 @@ I've purposefully skipped over a lot of the details. I want this block of the po
 ## Results
 Phew! Now that's over with. Let's see what the results are after running gradient descent (1000 iterations with a learning rate of 0.01). Do you remember how we started? We said that if only we had a transformation function that could make the dataset linearly separable, then learning would be easy. Well $$\phi(\boldsymbol{x}) = \sigma(\boldsymbol{Wx} + \boldsymbol{b})$$ will actually be that transformation that makes the dataset linearly separable. This is what the data looks like after applying that learned function:
 
-![](../images/projection.png)
+<img class="center" src="/images/projection.png">
 
 As you can see the data is completely linearly separable. In essence, this is what most of learning is when it comes to neural networks. Every neural network classifier that has classification as a primary task is trying to learn some kind of a transformation on the data so that the data becomes linearly separable. This is a big reason why neural networks became so popular. In the past, people (usually domain experts) spent tremendous efforts in engineering features to make learning easy. Now a lot of that is handled by (deep) neural networks [^3].
 
@@ -261,15 +262,15 @@ As you can see the data is completely linearly separable. In essence, this is wh
 
 We were also trying to learn multiple linear classifiers. And voilà, these are the three linear classifiers $$(\boldsymbol{w}_{1}, b_1), (\boldsymbol{w}_{2}, b_3)$$ and $$(\boldsymbol{w}_{3}, b_3)$$ that are learned:
 
-![](../images/hidden_classifiers.png)
+<img class="center" src="/images/hidden_classifiers.png">
 
 Finally this is what the learned decision boundary looks like in the original space. The colors indicate the predictions of the classifier.
 
-![](../images/decision_boundary.png)
+<img class="center" src="/images/decision_boundary.png">
 
 This is awesome, isn't it? But wait, hold on. While this classifier gets 100% accuracy, it does not represent the true function... with three classifiers, the shape we are learning is a triangle-ish shape. That's because it's the only possible shape that captures all the data with three lines. But we know that the actual function is a circle. With four classifiers we can get rectangle-ish shapes, with five a pentagon-ish and so on. Intuitively, if we add more classifiers, we should get closer to an actual circle. Here's a progression of the decision boundary going from 5 to 50 with increments of 5:
 
-![](../images/decision_boundaries_progress.png)
+<img class="center" src="/images/decision_boundaries_progress.png">
 
 This looks much better. Yet this isn't really the true function either. Everything in the middle is classified as red, but there will never be any points there. The true function generates points on the boundary of the circle, never inside the circle. Furthermore, the only reason we were able to make this correction was because we're working in 2 dimensions and we know exactly what the true function is. What do we do if we have a dataset in high dimensions coming from an unknown function? Would we be able to trust the learned classifier even if we get 100% accuracy?
 
@@ -309,7 +310,7 @@ In practice, we usually have many such layers with each connected to each other,
 
 You may have been confused about the fact that MLP is called a neural network. So far we haven't seen the "network" part. The MLP that we defined can equivalently be represented by a directed acyclic graph (DAG).
 
-![](../images/nn.png)
+<img class="center" src="/images/nn.png">
 
 These kinds of graphs are called computational graphs and they are just another way to describe a neural network model. It provides a good way to break down a complex computation into its' primitive parts.
 
@@ -321,7 +322,7 @@ Edges coming out of the node that have a 1 on it are the biases.
 
 To make sense of the rest of the edges, let's highlight a path of a single unit  $$(\boldsymbol{w_1}, b_{1})$$ to the output:
 
-![](../images/nn_single.png)
+<img class="center" src="../images/nn_single.png">
 
 This representation is useful for computing gradients. If we wanted to take the derivative of the loss with respect to the first unit, the highlighted path tells us that we have to start from the last output and work our way backwards until we reach the desired variables.
 
@@ -348,5 +349,3 @@ I hope this post has provided some insight to you on how neural networks work. I
 ## Code
 
 What's a tutorial without code, am I right? [Here](https://github.com/colonialjelly/multilayer-perceptron/blob/master/multilayer-perceptron.ipynb) is a link to the Jupyter notebook that contains all the code for this post.
-
-## Footnotes

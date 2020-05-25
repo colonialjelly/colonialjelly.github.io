@@ -1,0 +1,17 @@
+<div class="social-icons">
+  {% for footer_link in site.footer_links %}
+    {% if footer_link.url contains "://" %}
+      {% assign url = footer_link.url %}
+    {% else %}
+      {% assign url = footer_link.url | relative_url %}
+    {% endif %}
+      <a class="social-icon" href="{{ url }}" target="_blank">
+        <i class="{{ footer_link.icon}}" title="{{ footer_link.title }}"></i>
+      </a>
+  {% endfor %}
+</div>
+
+&copy; 2019 - {{ site.time | date: '%Y' }} Giorgi Kvernadze (I don't know why I have this here but everyone seems to have and I'm just a blind follower)
+<!-- - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; customized version of <a href="https://github.com/yous/whiteglass">whiteglass</a> -->
+
+<!-- - Subscribe via <a href="{{ feed_path | absolute_url }}">RSS</a> -->

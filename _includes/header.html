@@ -1,0 +1,17 @@
+<header class="site-header">
+  <div class="wrapper">
+    <a class="site-title" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+    <nav class="site-nav">
+      {% for link in site.data.navigation.main %}
+        {% if link.url contains "http" %}
+          {% assign url = link.url %}
+        {% else %}
+          {% assign url = link.url | relative_url %}
+        {% endif %}
+        <a class="page-link" href="{{url}}">{{ link.title }}</a>
+      {% endfor %}
+      <a class ="social-link" href="https://github.com/colonialjelly" target="_blank"><i class="fab fa-github"></i></a>
+      <a class ="social-link"href="https://twitter.com/colonialjelly" target="_blank"><i class="fab fa-twitter"></i></a>
+    </nav>
+  </div>
+</header>

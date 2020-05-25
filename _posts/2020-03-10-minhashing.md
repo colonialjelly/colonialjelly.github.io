@@ -13,6 +13,8 @@ $$\text{Miles Davis} = \{5, 23533, 2034, 932, ..., 10003243\}$$
 
 The number of elements in the set is the number of users that have listened to Miles Davis at least once. To compute the similarity between artists, we can compare these set representations. Now, with Spotify having more than 271 million users, these sets could be very large (especially for popular artists). It would take forever to compute the similarities, especially since we have to compare every artist to each other. In this post, I'll introduce a method that can help us speed up this process. We're going to be converting each set into a smaller representation called a signature, such that the similarities between the sets are well preserved.
 
+<!-- more -->
+
 <!-- We're going to do something different instead. Instead of representing the artist as a set of all of the users, that listen to it.
 
 In this post, we're going to talk about how to speed up the process of computing the similarities between these sets. -->
@@ -72,11 +74,11 @@ A few key things about the Jaccard similarity:
 
 For some people (present company included), visual explanations are easier to grasp than algebraic ones. We'll briefly shift our view from sets to Venn diagrams. Let's imagine any two artists as Venn diagrams, the Jaccard similarity is the size of the intersection divided by the size of the union:
 
-<img src="../images/js_venn.png" width="50%">
+<img class="center" src="/images/js_venn.png" width="50%">
 
 Now imagine that I'm throwing darts on the diagrams and I'm horrible at it. I'm so bad that every element on the diagrams has an equal chance of being hit. What's the chance that I throw a dart and it lands on the intersection? It would be the number of elements in the intersection divided by the total number of elements, which is exactly what the Jaccard similarity is. This implies that the larger the similarity, the higher the probability that we land on the intersection with a random throw.
 
-<img src="../images/venns.png" width="50%">
+<img class="center" src="/images/venns.png" width="50%">
 
 Consider another scenario. Suppose you want to know the similarity between two sets, but you can't see the diagram, you're blindfolded. However, if you throw a dart, you do get the information on where it landed. Can you make a good guess on the similarity of two sets by randomly throwing darts on it? Let's say after throwing 10 darts we know that 6 of them landed in the intersection. What would you guess that the similarity of the two sets are? Let's say after throwing 40 more darts, we know that 30 of the total 50 throws landed in the intersection. What would your guess be now? Are you more certain about your guess? Why?
 
@@ -184,7 +186,7 @@ The code above implements the same process that I described before, but instead 
 
 We have shown that it's possible to approximate Jaccard similarity for a pair of artists using randomness but our previous method had a significant issue. We still needed to have the intersection and the union of the sets to estimate the Jaccard similarity, which kind of defeats the whole purpose. We need a way to approximate the similarities without having to compute these sets. We also need to approximate the similarities for all pairs of artists, not just a given pair. In order to do that, we're going to switch our view of the data from sets to a matrix.
 
-<img src="../images/artist_matrix.png" width="50%">
+<img class="center" src="/images/artist_matrix.png" width="50%">
 
 The columns represent the artists and the rows represent the user IDs. A given artist has a $$1$$ in a particular row if the user with that ID has that artist in in their listening history [^2].
 
@@ -211,7 +213,7 @@ for k iterations
 ```
 Let's go through one iteration of this algorithm:
 
-![](../images/1iteration.png)
+![](/images/1iteration.png)
 
 We have now reduced each artist to a single number. To compute the Jaccard similarities between the artists we compare the signatures. Let $$h$$ be the function that finds and returns the index of the first non-zero element. Then we have:
 
@@ -252,7 +254,7 @@ $$P(h(\text{artist}_{i}) = h(\text{artist}_{j})) = J(\text{artist}_{i}, \text{ar
 
 Let's go through an example together with sets $$\text{artist}_{1}$$ and $$\text{artist}_{2}$$. I've highlighted the relevant rows using the same definition for the symbols "+" and "-" as before. We have an additional symbol called "null", these correspond to elements that are in neither of the selected artists. The "null" type rows can be ignored since they do not contribute to the similarity (and they are skipped over in the algorithm).
 
-<img src="../images/artist_matrix_highlighted.png" width="50%">
+<img class="center" src="/images/artist_matrix_highlighted.png" width="50%">
 
 If we shuffled the rows what is the probability that the first **non**-"null" row is of type "+"? In other words, after shuffling the rows, if we proceeded from top to bottom while skipping over all "null" rows, what is the probability of seeing a "+" before seeing a "-"?
 
@@ -276,7 +278,7 @@ Now going back to our example. With a single trial we have the following estimat
 <!-- Going back to our example, we have pairs ($$\text{artist}_1$$, $$\text{artist}_2$$) and ($$\text{artist}_1$$, $$\text{artist}_3$$) having similarity zero since their signatures do not match. The similarity for ($$\text{artist}_2$$, $$\text{artist}_3$$) will be 1 since both have the same signature. -->
 
 
-<img src="../images/sig1.png" width="50%">
+<img class="center" src="/images/sig1.png" width="50%">
 
 As you can see, it's a *little* off. How can we make it better? It's simple, we run more iterations and make the signatures larger. In the earlier discussions we introduced a Bernoulli random variable and we estimated it's parameter by simulating multiple random trials. We can do the same exact thing here. Let $$Y$$ be a random variable that has value 1 if $$h(\text{artist}_{i}) = h(\text{artist}_{j})$$ and is 0 otherwise. $$Y$$ is an instance of a Bernoulli random variable with $$p = J(\text{artist}_{i}, \text{artist}_{j})$$. If we run the algorithm multiple times, thus simulating multiple but identical variables $$Y_{1}, Y_{2}, ..., Y_{k}$$, we can then estimate the Jaccard similarity as:
 
@@ -294,11 +296,11 @@ Where $$h_{m}$$ is a function that returns the first non-zero index for iteratio
 
 The animation below shows the process of going through 3 iterations of this algorithm:
 
-![](../images/minhashing_permuation_animation.gif)
+![](/images/minhashing_permuation_animation.gif)
 
 Computing the Jaccard similarities with the larger signature matrix:
 
-<img src="../images/sig3_sims.png">
+<img class="center" src="/images/sig3_sims.png">
 
 That's much better. It's still not exactly the same but it's not too far off. We've managed to reduce the number of rows of the matrix from 8 to 3 while preserving the pairwise Jaccard similarities up to some error. To achieve a better accuracy, we could construct an even larger signature matrix, but obviously we would be trading off the size of the representation.
 
@@ -371,7 +373,7 @@ We'll be applying these hash functions to the rows of our toy dataset. Since the
 
 <!-- But what this means is that our hash functions will produce values in the range $$[0, 10]$$, which is larger than your set of indices. This will actually end up not making any difference. To see why we can imagine expanding our dataset with a bunch of "null" type rows so that we have $$m=11$$. We know that the "null" rows don't change the probability of two artists having the same signature, therefore having a range bigger than the actual is not going to change anything. -->
 
-<img src="../images/artist_matrix_hash.png" width="50%">
+<img class="center" src="/images/artist_matrix_hash.png" width="50%">
 
 Since each hash function defines an implicit shuffling order, we can iterate over the rows in that order. As an exercise, iterate the rows in the defined orders of each hash function. For each column (artist) store the index of the first-non zero element. Then to compute the Jaccard similarities, compare the stored values the same way we did before. [^min_index_diff]
 

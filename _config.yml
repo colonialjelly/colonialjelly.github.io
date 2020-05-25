@@ -1,100 +1,91 @@
+# Welcome to Jekyll!
 #
-# This file contains configuration flags to customize your site
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
 #
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
 
-# Name of your site (displayed in the header)
-name: Giorgi
-
-# Name of the author
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.author }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+title: Giorgi Kvernadze
 author: Giorgi Kvernadze
-
-# Short bio or description (displayed in the header)
-description: I think, therefore I'm distracted
-
-# URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: https://avatars0.githubusercontent.com/u/10067792?s=460&v=4
-
-#
-# Flags below are optional
-#
-
-# Includes an icon in the footer for each username you enter
-footer-links:
-  dribbble:
-  email: giorgi@cs.utah.edu
-  facebook:
-  flickr:
-  github: colonialjelly
-  instagram:
-  linkedin: 
-  pinterest:
-  rss: rss
-  twitter: colonialjelly
-  stackoverflow: 
-  youtube: # channel/<your_long_string> or user/<user-name>
-  googleplus: # anything in your profile username that comes after plus.google.com/
-  playconsole:
-
-
-# Enter your Disqus shortname (not your username) to enable commenting on posts
-# You can find your shortname on the Settings page of your Disqus account
-disqus: giothinks
-
-# Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
-google_analytics: UA-157355591-1
-
-# Your website URL (e.g. http://amitmerchant1990.github.io or http://www.amitmerchant.com)
-# Used for Sitemap.xml and your RSS feed
-url: https://giorgi.tech/
-enforce_ssl: https://giorgi.tech/
-
-# If you're hosting your site at a Project repository on GitHub pages
-# (http://yourusername.github.io/repository-name)
-# and NOT your User repository (http://yourusername.github.io)
-# then add in the baseurl here, like this: "/repository-name"
-baseurl: 
-
-#
-# !! You don't need to change any of the configuration flags below !!
-#
-
-permalink: /:title/
-
-# The release of Jekyll Now that you're using
-version: v1.2.0
-
-# Jekyll 3 now only supports Kramdown for Markdown
-kramdown:
-  # Use GitHub flavored markdown, including triple backtick fenced code blocks
-  input: GFM
-  # Jekyll 3 and GitHub Pages now only support rouge for syntax highlighting
-  syntax_highlighter: rouge
-  syntax_highlighter_opts:
-    # Use existing pygments syntax highlighting css
-    css_class: 'highlight'
-
-# Set the Sass partials directory, as we're using @imports
-sass:
-  style: :expanded # You might prefer to minify using :compressed
-
-# Use the following plug-ins
-plugins:
-  - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
-  - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
-  - jekyll-seo-tag
-  - jekyll-paginate
-  - jemoji
-
-include: ['_pages']
-
-paginate: 6
-paginate_path: /page:num/
-
-# Exclude these files from your production _site
+description: Minimal, responsive Jekyll theme for hackers.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://giorgi.tech" # the base hostname & protocol for your site, e.g. http://example.com
+lang: en
+timezone: UTC
 exclude:
   - Gemfile
   - Gemfile.lock
-  - LICENSE
+  - Rakefile
   - README.md
-  - CNAME
+  - LICENSE.txt
+  - CHANGELOG.md
+  - jekyll-whiteglass.gemspec
+  - screenshot.png
+  - vendor
 
+# Social media
+twitter_username: colonialjelly
+twitter_image: 
+facebook_app_id:
+facebook_image:
+google_analytics:
+comments: false
+
+footer_links:
+- title: E-Mail
+  url: mailto:giorgi@cs.utah.edu
+  icon: fas fa-at
+- title: Twitter
+  url: https://twitter.com/colonialjelly
+  icon: fab fa-twitter
+- title: Github
+  url: https://github.com/colonialjelly
+  icon: fab fa-github
+- title: LinkedIn
+  url: https://www.linkedin.com/in/giorgi-kvernadze-208a081b/
+  icon: fab fa-linkedin
+- title: Feed
+  url: feed.xml
+  icon: fas fa-rss
+
+# Plugins
+plugins:
+  - jekyll-archives
+  - jekyll-paginate
+  - jekyll-sitemap
+
+# Build settings
+markdown: kramdown
+excerpt_separator: "<!-- more -->"
+
+# Outputting
+permalink: /blog/:title/
+paginate_path: /posts/:num/
+paginate: 5
+
+# Markdown settings
+kramdown:
+  auto_ids: false
+  enable_coderay: false
+  entity_output: as_char
+  footnote_nr: 1
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+  toc_levels: 1..6
+
+# jekyll-archives
+jekyll-archives:
+  enabled:
+    - categories
+    - tags
+  layout: category_archives
+  permalinks:
+    category: /categories/:name/
+    tag: /tags/:name/

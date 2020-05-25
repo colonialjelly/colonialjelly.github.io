@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://kit.fontawesome.com/c89c590422.js" crossorigin="anonymous"></script>
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>testing</title>
+  <meta name="description" content="Minimal, responsive Jekyll theme for hackers.">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/blog/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="Giorgi Kvernadze" href="http://localhost:4000/feed.xml">
+
+  
+
+  
+  <meta property="og:title" content="testing">
+  <meta property="og:site_name" content="Giorgi Kvernadze">
+  <meta property="og:url" content="http://localhost:4000/blog/">
+  <meta property="og:description" content="Minimal, responsive Jekyll theme for hackers.">
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="colonialjelly">
+  <meta name="twitter:title" content="testing">
+  <meta name="twitter:description" content="Minimal, responsive Jekyll theme for hackers.">
+  
+    <meta name="twitter:creator" content="colonialjelly">
+  
+  
+
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css?family=Bitter:400,400i,700&amp;display=swap" rel="stylesheet">
+
+  
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+  <div class="wrapper">
+    <a class="site-title" href="/">Giorgi Kvernadze</a>
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/about/">About</a>
+      
+        
+        <a class="page-link" href="/blog/">Blog</a>
+      
+        
+        <a class="page-link" href="/reading/">Reading</a>
+      
+        
+        <a class="page-link" href="/archives/">Archives</a>
+      
+      <a class ="social-link" href="https://github.com/colonialjelly" target="_blank"><i class="fab fa-github"></i></a>
+      <a class ="social-link"href="https://twitter.com/colonialjelly" target="_blank"><i class="fab fa-twitter"></i></a>
+    </nav>
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="home">
+  <script type="text/javascript" async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  
+
+  
+
+  <ul class="post-list">
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/blog/minhashing/">Min Hashing</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Mar 10, 2020
+            
+               •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/categories/data-mining/">Data Mining</a>,
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+        <a href="/categories/tutorial/">Tutorial</a>
+      
+    
+      
+    
+  
+
+
+
+
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <p>Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. The first thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user IDs of people that have listened to that artist at least once. For example, the representation for Miles Davis could be,</p>
+
+\[\text{Miles Davis} = \{5, 23533, 2034, 932, ..., 10003243\}\]
+
+<p>The number of elements in the set is the number of users that have listened to Miles Davis at least once. To compute the similarity between artists, we can compare these set representations. Now, with Spotify having more than 271 million users, these sets could be very large (especially for popular artists). It would take forever to compute the similarities, especially since we have to compare every artist to each other. In this post, I’ll introduce a method that can help us speed up this process. We’re going to be converting each set into a smaller representation called a signature, such that the similarities between the sets are well preserved.</p>
+
+
+        </div>
+        
+          <p class="post-continue">
+            <a href="/blog/minhashing/">Read on &rarr;</a>
+          </p>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/blog/multilayer-perceptron/">From Linear Classifiers to Neural Networks</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Dec 19, 2019
+            
+               •
+  
+    
+    
+      
+        <a href="/categories/machine-learning/">Machine Learning</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+        <a href="/categories/neural-networks/">Neural Networks</a>,
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+        <a href="/categories/tutorial/">Tutorial</a>
+      
+    
+      
+    
+  
+
+
+
+
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <ul>
+  <li>
+    <p><em>This post is best suited for people who are familiar with linear classifiers. I will also be assuming that the reader is familiar with gradient descent.</em></p>
+  </li>
+  <li>
+    <p><em>The goal of this post isn’t to be a comprehensive guide about neural networks, but rather an attempt to show an intuitive path going from linear classifiers to a simple neural network.</em></p>
+  </li>
+</ul>
+
+<p>There are many types of neural networks, each having some advantage over others. In this post, I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it’s a relatively simple model to implement.</p>
+
+<p>Before we delve into MLPs, let’s quickly go over linear classifiers. Given training data as pairs \((\boldsymbol{x}_i, y_i)\) where \(\boldsymbol{x}_i \in \mathbb{R}^{d}\) are datapoints (observations) and \(y_i \in \{0, 1\}\) are their corresponding class labels, the goal is to learn a vector of weights \(\boldsymbol{w} \in \mathbb{R}^{d}\) and a bias \(b \in \mathbb{R}\) such that \(\boldsymbol{w}^T\boldsymbol{x}_{i} + b \ge 0\) if \(y_{i} = 1\) and \(\boldsymbol{w}^T\boldsymbol{x}_{i} + b &lt; 0\) otherwise (\(y_{i} = 0\)). This decision can be summarized as the following step function:</p>
+
+\[\text{Prediction} = \begin{cases}
+      1 &amp; \boldsymbol{w}^T\boldsymbol{x} + b \ge 0 \\
+      0 &amp;  \text{Otherwise}\\
+\end{cases}\]
+
+<p>In the case of Logistic Regression the decision function is characterized by the sigmoid function \(\sigma(z) = \frac{1}{1+e^{-z}}\) where \(z = \boldsymbol{w}^T\boldsymbol{x} + b\)</p>
+
+\[\text{Prediction} = \begin{cases}
+      1 &amp; \sigma(z) \ge \theta \\
+      0 &amp;  \text{Otherwise}\\
+\end{cases}\]
+
+<p>Where \(\theta\) is a threshold that is usually set to be 0.5.</p>
+
+
+        </div>
+        
+          <p class="post-continue">
+            <a href="/blog/multilayer-perceptron/">Read on &rarr;</a>
+          </p>
+        
+      </li>
+    
+  </ul>
+
+  
+
+
+</div>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+  <div class="wrapper">
+    <p>
+      <div class="social-icons">
+  
+    
+      <a class="social-icon" href="mailto:giorgi@cs.utah.edu" target="_blank">
+        <i class="fas fa-at" title="E-Mail"></i>
+      </a>
+  
+    
+      <a class="social-icon" href="https://twitter.com/colonialjelly" target="_blank">
+        <i class="fab fa-twitter" title="Twitter"></i>
+      </a>
+  
+    
+      <a class="social-icon" href="https://github.com/colonialjelly" target="_blank">
+        <i class="fab fa-github" title="Github"></i>
+      </a>
+  
+    
+      <a class="social-icon" href="https://www.linkedin.com/in/giorgi-kvernadze-208a081b/" target="_blank">
+        <i class="fab fa-linkedin" title="LinkedIn"></i>
+      </a>
+  
+    
+      <a class="social-icon" href="/feed.xml" target="_blank">
+        <i class="fas fa-rss" title="Feed"></i>
+      </a>
+  
+</div>
+
+&copy; 2019 - 2020 Giorgi Kvernadze (I don't know why I have this here but everyone seems to have and I'm just a blind follower)
+<!-- - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; customized version of <a href="https://github.com/yous/whiteglass">whiteglass</a> -->
+
+<!-- - Subscribe via <a href="http://localhost:4000/feed.xml">RSS</a> -->
+
+    </p>
+  </div>
+</footer>
+
+
+  </body>
+
+</html>
