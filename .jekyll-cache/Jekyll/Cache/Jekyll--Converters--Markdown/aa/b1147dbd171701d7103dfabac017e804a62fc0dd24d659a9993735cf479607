@@ -1,148 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<script src="https://kit.fontawesome.com/c89c590422.js" crossorigin="anonymous"></script>
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
-
-  <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  
-  
-  <title>Min Hashing</title>
-  <meta name="description" content="Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. The first thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user IDs of people that have listened to that artist at least once. For example, the representation for Miles Davis could be, \[\text{Miles Davis} = \{5, 23533, 2034, 932, ..., 10003243\}\] The number of elements in the set is the number of users that have listened to Miles Davis at least once. To compute the similarity between artists, we can compare these set representations. Now, with Spotify having more than 271 million users, these sets could be very large (especially for popular artists). It would take forever to compute the similarities, especially since we have to compare every artist to each other. In this post, I’ll introduce a method that can help us speed up this process. We’re going to be converting each set into a smaller representation called a signature, such that the similarities between the sets are well preserved.">
-  
-
-  <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/blog/minhashing/">
-  
-  
-  <link rel="alternate" type="application/rss+xml" title="Giorgi Kvernadze" href="http://localhost:4000/feed.xml">
-
-  
-
-  
-  <meta property="og:title" content="Min Hashing">
-  <meta property="og:site_name" content="Giorgi Kvernadze">
-  <meta property="og:url" content="http://localhost:4000/blog/minhashing/">
-  <meta property="og:description" content="Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. The first thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user IDs of people that have listened to that artist at least once. For example, the representation for Miles Davis could be, \[\text{Miles Davis} = \{5, 23533, 2034, 932, ..., 10003243\}\] The number of elements in the set is the number of users that have listened to Miles Davis at least once. To compute the similarity between artists, we can compare these set representations. Now, with Spotify having more than 271 million users, these sets could be very large (especially for popular artists). It would take forever to compute the similarities, especially since we have to compare every artist to each other. In this post, I’ll introduce a method that can help us speed up this process. We’re going to be converting each set into a smaller representation called a signature, such that the similarities between the sets are well preserved.">
-  
-  
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="colonialjelly">
-  <meta name="twitter:title" content="Min Hashing">
-  <meta name="twitter:description" content="Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. The first thing you need t...">
-  
-    <meta name="twitter:creator" content="colonialjelly">
-  
-  
-
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css?family=Bitter:400,400i,700&amp;display=swap" rel="stylesheet">
-
-  
-  <!-- Google Analytics -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-157355591-1', 'auto');
-    ga('send', 'pageview');
-
-  </script>
-
-
-</head>
-
-
-  <body>
-
-    <header class="site-header">
-  <div class="wrapper">
-    <a class="site-title" href="/">Giorgi Kvernadze</a>
-    <nav class="site-nav">
-      
-        
-        <a class="page-link" href="/about/">About</a>
-        
-          <span class="dot"></span>
-        
-      
-        
-        <a class="page-link" href="/blog/">Blog</a>
-        
-          <span class="dot"></span>
-        
-      
-        
-        <a class="page-link" href="/reading/">Reading</a>
-        
-          <span class="dot"></span>
-        
-      
-        
-        <a class="page-link" href="/archives/">Archives</a>
-        
-      
-      <!-- <a class ="social-link" href="https://github.com/colonialjelly" target="_blank"><i class="fab fa-github"></i></a> -->
-      <!-- <a class ="social-link"href="https://twitter.com/colonialjelly" target="_blank"><i class="fab fa-twitter"></i></a> -->
-    </nav>
-  </div>
-</header>
-
-
-    <main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-
-  <header class="post-header">
-    
-      <h1 class="post-title" itemprop="name headline">Min Hashing</h1>
-    
-    <p class="post-meta"><time datetime="2020-03-10T00:00:00+00:00" itemprop="datePublished">Mar 10, 2020</time> •
-  
-    
-    
-      
-    
-      
-    
-      
-    
-      
-        <a href="/categories/data-mining/">Data Mining</a>,
-      
-    
-  
-    
-    
-      
-    
-      
-    
-      
-        <a href="/categories/tutorial/">Tutorial</a>
-      
-    
-      
-    
-  
-
-
-
-</p>
-  </header>
-
-  <div class="post-content" itemprop="articleBody">
-    <p>Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. The first thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user IDs of people that have listened to that artist at least once. For example, the representation for Miles Davis could be,</p>
+I"��<p>Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. The first thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user IDs of people that have listened to that artist at least once. For example, the representation for Miles Davis could be,</p>
 
 \[\text{Miles Davis} = \{5, 23533, 2034, 932, ..., 10003243\}\]
 
@@ -238,9 +94,8 @@ Some of the elements in union are also in the intersection, more specifically \(
 
 <p>The number of “+” corresponds to the number of elements in the intersection and the number of “+” and the number of “-“ corresponds to the total number of elements or the size of the union. Therefore,</p>
 
-<div style="font-size: 80%;">    
-$$P(\text{picking a "+"}) = \frac{\text{number of "+"}}{\text{number of "+" and "-"}} = \frac{|\{1, 4, 7\}|}{|\{0, 1, 2, 4, 5, 7\}|} = J(\text{artist}_1, \text{artist}_2)$$
-</div>
+\[P(\text{picking a "+"}) = \frac{\text{number of "+"}}{\text{number of "+" and "-"}} = \frac{|\{1, 4, 7\}|}{|\{0, 1, 2, 4, 5, 7\}|} = J(\text{artist}_1, \text{artist}_2)\]
+
 <!-- More than two sets:
 
 If we have more than two sets some things change. Now we can have multiple intersections. Just knowing that a dart landed in an intersection is not enough, we need to keep track of all possible intersections between the sets. This might be too much of a hassle. So we're gonna change the game.
@@ -386,8 +241,14 @@ $$P(h(\text{artist}_{i}) = h(\text{artist}_{j})) = J(\text{artist}_{i}, \text{ar
 <p>If we think back to our example with sets, this question should be easy to answer. All we have to realize is that,
 encountering a “+” before a “-“ is the exact same thing as randomly drawing a “+” in the union, which we know has a probability that is equal to the Jaccard similarity.</p>
 
-\[P(\text{seeing a "+" before "-"})  = \frac{\text{number of "+"}}{\text{number of "+" and "-"}} = J(\text{artist}_{1}, \text{artist}_{2})\]
+<div style="font-size: 500%;">
+\[
 
+  P(\text{seeing a "+" before "-"})  = \frac{\text{number of "+"}}{\text{number of "+" and "-"}} = J(\text{artist}_{1}, \text{artist}_{2})
+
+\]     
+  <!-- $$P(\text{seeing a "+" before "-"})  = \frac{\text{number of "+"}}{\text{number of "+" and "-"}} = J(\text{artist}_{1}, \text{artist}_{2})$$ -->
+</div>
 <p>If the first row is of type “+” that also means that \(h(\text{artist}_{1}) = h(\text{artist}_{2})\), so the above expression is equivalent to saying:</p>
 
 \[P(h(\text{artist}_{1}) = h(\text{artist}_{2})) = J(\text{artist}_{1}, \text{artist}_{2})\]
@@ -554,67 +415,4 @@ for each row r in the dataset
     </li>
   </ol>
 </div>
-
-  </div>
-
-  
-  
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      CommonHTML: {
-        scale: 90
-      }
-    });
-  </script>
-  <script type="text/javascript" async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
-  
-</article>
-
-      </div>
-    </main>
-
-    <footer class="site-footer">
-  <div class="wrapper">
-    <p>
-      <div class="social-icons">
-  
-    
-      <a class="social-icon" href="mailto:giorgi@cs.utah.edu" target="_blank">
-        <i class="fas fa-at" title="E-Mail"></i>
-      </a>
-  
-    
-      <a class="social-icon" href="https://twitter.com/colonialjelly" target="_blank">
-        <i class="fab fa-twitter" title="Twitter"></i>
-      </a>
-  
-    
-      <a class="social-icon" href="https://github.com/colonialjelly" target="_blank">
-        <i class="fab fa-github" title="Github"></i>
-      </a>
-  
-    
-      <a class="social-icon" href="https://www.linkedin.com/in/giorgi-kvernadze-208a081b/" target="_blank">
-        <i class="fab fa-linkedin" title="LinkedIn"></i>
-      </a>
-  
-    
-      <a class="social-icon" href="/feed.xml" target="_blank">
-        <i class="fas fa-rss" title="Feed"></i>
-      </a>
-  
-</div>
-
-&copy; 2019 - 2020 Giorgi Kvernadze (I don't know why I have this here but everyone seems to have and I'm just a blind follower)
-<!-- - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; customized version of <a href="https://github.com/yous/whiteglass">whiteglass</a> -->
-
-<!-- - Subscribe via <a href="http://localhost:4000/feed.xml">RSS</a> -->
-
-    </p>
-  </div>
-</footer>
-
-
-  </body>
-
-</html>
+:ET

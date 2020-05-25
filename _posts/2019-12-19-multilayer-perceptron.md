@@ -322,7 +322,7 @@ Edges coming out of the node that have a 1 on it are the biases.
 
 To make sense of the rest of the edges, let's highlight a path of a single unit  $$(\boldsymbol{w_1}, b_{1})$$ to the output:
 
-<img class="center" src="../images/nn_single.png">
+<img class="center" src="/images/nn_single.png">
 
 This representation is useful for computing gradients. If we wanted to take the derivative of the loss with respect to the first unit, the highlighted path tells us that we have to start from the last output and work our way backwards until we reach the desired variables.
 

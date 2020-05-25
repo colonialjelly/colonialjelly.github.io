@@ -5,7 +5,7 @@
   
   <link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" />
-  <updated>2020-05-25T01:39:51+00:00</updated>
+  <updated>2020-05-25T03:35:55+00:00</updated>
   <id>http://localhost:4000//</id>
 
   
@@ -132,8 +132,9 @@ Some of the elements in union are also in the intersection, more specifically \(
 
 &lt;p&gt;The number of “+” corresponds to the number of elements in the intersection and the number of “+” and the number of “-“ corresponds to the total number of elements or the size of the union. Therefore,&lt;/p&gt;
 
-\[P(\text{picking a &quot;+&quot;}) = \frac{\text{number of &quot;+&quot;}}{\text{number of &quot;+&quot; and &quot;-&quot;}} = \frac{|\{1, 4, 7\}|}{|\{0, 1, 2, 4, 5, 7\}|} = J(\text{artist}_1, \text{artist}_2)\]
-
+&lt;div style=&quot;font-size: 80%;&quot;&gt;    
+$$P(\text{picking a &quot;+&quot;}) = \frac{\text{number of &quot;+&quot;}}{\text{number of &quot;+&quot; and &quot;-&quot;}} = \frac{|\{1, 4, 7\}|}{|\{0, 1, 2, 4, 5, 7\}|} = J(\text{artist}_1, \text{artist}_2)$$
+&lt;/div&gt;
 &lt;!-- More than two sets:
 
 If we have more than two sets some things change. Now we can have multiple intersections. Just knowing that a dart landed in an intersection is not enough, we need to keep track of all possible intersections between the sets. This might be too much of a hassle. So we're gonna change the game.
@@ -409,9 +410,9 @@ for each row r in the dataset
 
 &lt;p&gt;The video below is an animation that simulates the algorithm over the toy dataset. Watching it should hopefully clear up any questions you have about how or why the algorithm works.&lt;/p&gt;
 
-&lt;center&gt;
+&lt;div class=&quot;video-responsive&quot;&gt;
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/qA4WdrY6aPk&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;/center&gt;
+&lt;/div&gt;
 
 &lt;p&gt;Now with this algorithm we can reduce all of the artist representations to smaller sets. If we use \(k\) hash functions we will have a signature of size \(k\) for each artist. This means that the time complexity of comparing two sets (artists) is now \(O(k)\), which is independent of the size of the original sets.&lt;/p&gt;
 
@@ -801,7 +802,7 @@ In practice, we usually have many such layers with each connected to each other,
 
 &lt;p&gt;To make sense of the rest of the edges, let’s highlight a path of a single unit  \((\boldsymbol{w_1}, b_{1})\) to the output:&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;center&quot; src=&quot;../images/nn_single.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;center&quot; src=&quot;/images/nn_single.png&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;This representation is useful for computing gradients. If we wanted to take the derivative of the loss with respect to the first unit, the highlighted path tells us that we have to start from the last output and work our way backwards until we reach the desired variables.&lt;/p&gt;
 

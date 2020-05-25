@@ -27,11 +27,11 @@
 
   .social-link{
     margin-right: 25px;
-    color: Black;
+    color: black;
   }
 
   .social-link:hover {
-    color: #1979a9;
+    color: $brand-color;
   }
 
   .page-link {
@@ -40,8 +40,18 @@
 
     // Gaps between nav items, but not on the last one
     &:not(:last-child) {
-      margin-right: 25px;
+      margin-right: 10px;
     }
+  }
+
+    .dot {
+      height: 4px;
+      width: 4px;
+      background-color: black;
+      // border-radius: 50%;
+      display: inline-block;
+      margin-right: 10px;
+      margin-bottom: 0.15em;
   }
 
   @include media-query($on-palm) {
@@ -74,7 +84,7 @@
 
 .social-icon:hover {
   text-decoration: none;
-  color: Tomato !important;
+  color: $brand-color !important;
 }
 
 .social-icons {
@@ -210,6 +220,26 @@
     @include media-query($on-laptop) {
       font-size: 18px;
     }
+  }
+}
+
+.video-responsive {
+  text-align: center;
+}
+
+@media screen and (max-width: 560px) {
+  .video-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+  }
+  .video-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
   }
 }
 

@@ -9,9 +9,12 @@
           {% assign url = link.url | relative_url %}
         {% endif %}
         <a class="page-link" href="{{url}}">{{ link.title }}</a>
+        {% if forloop.last == false %}
+          <span class="dot"></span>
+        {% endif %}
       {% endfor %}
-      <a class ="social-link" href="https://github.com/colonialjelly" target="_blank"><i class="fab fa-github"></i></a>
-      <a class ="social-link"href="https://twitter.com/colonialjelly" target="_blank"><i class="fab fa-twitter"></i></a>
+      <!-- <a class ="social-link" href="https://github.com/colonialjelly" target="_blank"><i class="fab fa-github"></i></a> -->
+      <!-- <a class ="social-link"href="https://twitter.com/colonialjelly" target="_blank"><i class="fab fa-twitter"></i></a> -->
     </nav>
   </div>
 </header>

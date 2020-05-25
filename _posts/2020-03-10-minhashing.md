@@ -102,8 +102,9 @@ $$P(\text{picking a "+"}) = \frac{\text{number of "+"}}{\text{number of "+" and 
 
 The number of "+" corresponds to the number of elements in the intersection and the number of "+" and the number of "-" corresponds to the total number of elements or the size of the union. Therefore,
 
+<div style="font-size: 80%;">    
 $$P(\text{picking a "+"}) = \frac{\text{number of "+"}}{\text{number of "+" and "-"}} = \frac{|\{1, 4, 7\}|}{|\{0, 1, 2, 4, 5, 7\}|} = J(\text{artist}_1, \text{artist}_2)$$
-
+</div>
 <!-- More than two sets:
 
 If we have more than two sets some things change. Now we can have multiple intersections. Just knowing that a dart landed in an intersection is not enough, we need to keep track of all possible intersections between the sets. This might be too much of a hassle. So we're gonna change the game.
@@ -397,9 +398,9 @@ When the algorithm terminates the signature matrix should contain all the minimu
 
 The video below is an animation that simulates the algorithm over the toy dataset. Watching it should hopefully clear up any questions you have about how or why the algorithm works.
 
-<center>
+<div class="video-responsive">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/qA4WdrY6aPk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>
+</div>
 
 Now with this algorithm we can reduce all of the artist representations to smaller sets. If we use $$k$$ hash functions we will have a signature of size $$k$$ for each artist. This means that the time complexity of comparing two sets (artists) is now $$O(k)$$, which is independent of the size of the original sets.
 
