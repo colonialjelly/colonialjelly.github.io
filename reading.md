@@ -3,7 +3,7 @@ layout: page
 title: "Reading"
 permalink: /reading/
 ---
-I use this page to keep track of what I read. If you have any suggestions don't hesitate to shoot me an email :blush: :books:
+I use this page as my reading log. If you have any suggestions I'd love to hear it!
 
 ## Currently reading
 <!-- * **Consciousness Explained** - Daniel Dennett -->
