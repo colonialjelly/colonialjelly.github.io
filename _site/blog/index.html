@@ -14,8 +14,8 @@
   
   
   
-  <title>testing</title>
-  <meta name="description" content="Minimal, responsive Jekyll theme for hackers.">
+  <title>Blog</title>
+  <meta name="description" content="Mostly things about Machine Learning.">
   
 
   <link rel="stylesheet" href="/assets/main.css">
@@ -27,16 +27,16 @@
   
 
   
-  <meta property="og:title" content="testing">
+  <meta property="og:title" content="Blog">
   <meta property="og:site_name" content="Giorgi Kvernadze">
   <meta property="og:url" content="http://localhost:4000/blog/">
-  <meta property="og:description" content="Minimal, responsive Jekyll theme for hackers.">
+  <meta property="og:description" content="Mostly things about Machine Learning.">
   
   
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="colonialjelly">
-  <meta name="twitter:title" content="testing">
-  <meta name="twitter:description" content="Minimal, responsive Jekyll theme for hackers.">
+  <meta name="twitter:title" content="Blog">
+  <meta name="twitter:description" content="Mostly things about Machine Learning.">
   
     <meta name="twitter:creator" content="colonialjelly">
   
@@ -84,12 +84,6 @@
       
         
         <a class="page-link" href="/reading/">Reading</a>
-        
-          <span class="dot"></span>
-        
-      
-        
-        <a class="page-link" href="/archives/">Archives</a>
         
       
       <!-- <a class ="social-link" href="https://github.com/colonialjelly" target="_blank"><i class="fab fa-github"></i></a> -->
@@ -163,7 +157,7 @@
         <div class="post-content">
           <p>Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. The first thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user IDs of people that have listened to that artist at least once. For example, the representation for Miles Davis could be,</p>
 
-\[\text{Miles Davis} = \{5, 23533, 2034, 932, ..., 10003243\}\]
+\[\text{Miles Davis} = \{5, 23533, 2034, 932, ..., 17\}\]
 
 <p>The number of elements in the set is the number of users that have listened to Miles Davis at least once. To compute the similarity between artists, we can compare these set representations. Now, with Spotify having more than 271 million users, these sets could be very large (especially for popular artists). It would take forever to compute the similarities, especially since we have to compare every artist to each other. In this post, I’ll introduce a method that can help us speed up this process. We’re going to be converting each set into a smaller representation called a signature, such that the similarities between the sets are well preserved.</p>
 

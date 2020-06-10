@@ -1,6 +1,6 @@
-I"��<p>Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. The first thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user IDs of people that have listened to that artist at least once. For example, the representation for Miles Davis could be,</p>
+I"ߤ<p>Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. The first thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user IDs of people that have listened to that artist at least once. For example, the representation for Miles Davis could be,</p>
 
-\[\text{Miles Davis} = \{5, 23533, 2034, 932, ..., 10003243\}\]
+\[\text{Miles Davis} = \{5, 23533, 2034, 932, ..., 17\}\]
 
 <p>The number of elements in the set is the number of users that have listened to Miles Davis at least once. To compute the similarity between artists, we can compare these set representations. Now, with Spotify having more than 271 million users, these sets could be very large (especially for popular artists). It would take forever to compute the similarities, especially since we have to compare every artist to each other. In this post, I’ll introduce a method that can help us speed up this process. We’re going to be converting each set into a smaller representation called a signature, such that the similarities between the sets are well preserved.</p>
 
@@ -94,8 +94,9 @@ Some of the elements in union are also in the intersection, more specifically \(
 
 <p>The number of “+” corresponds to the number of elements in the intersection and the number of “+” and the number of “-“ corresponds to the total number of elements or the size of the union. Therefore,</p>
 
-\[P(\text{picking a "+"}) = \frac{\text{number of "+"}}{\text{number of "+" and "-"}} = \frac{|\{1, 4, 7\}|}{|\{0, 1, 2, 4, 5, 7\}|} = J(\text{artist}_1, \text{artist}_2)\]
-
+<div style="font-size: 80%;">    
+$$P(\text{picking a "+"}) = \frac{\text{number of "+"}}{\text{number of "+" and "-"}} = \frac{|\{1, 4, 7\}|}{|\{0, 1, 2, 4, 5, 7\}|} = J(\text{artist}_1, \text{artist}_2)$$
+</div>
 <!-- More than two sets:
 
 If we have more than two sets some things change. Now we can have multiple intersections. Just knowing that a dart landed in an intersection is not enough, we need to keep track of all possible intersections between the sets. This might be too much of a hassle. So we're gonna change the game.

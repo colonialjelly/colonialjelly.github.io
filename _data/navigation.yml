@@ -7,5 +7,5 @@ main:
     url: /blog/
   - title: "Reading"
     url: /reading/
-  - title: "Archives"
-    url: /archives/
+  # - title: "Archives"
+  #   url: /archives/

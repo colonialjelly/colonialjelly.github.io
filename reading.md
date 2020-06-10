@@ -7,11 +7,17 @@ I use this page as my reading log. If you have any suggestions I'd love to hear 
 
 ## Currently reading
 <!-- * **Consciousness Explained** - Daniel Dennett -->
-* **Mindset**: *The New Psychology of Success* - Carol S. Dweck
+* **Bossypants** - Tina Fey
 
 ## Read
 ---
 ### 2020
+* **Mindset**: *The New Psychology of Success* - Carol S. Dweck <br />
+  There are two types of mindsets: fixed mindset and growth mindset. A person with a fixed mindset thinks that theirs and other's abilities are fixed and are mostly inherent. Either you're smart or not, either you're talented or you're not, there's little or no room for improvement. People with this mindset dwell too much on numbers that "measure" their capabilities and are easily dissuaded by challenging endeavors. On the other hand, people with a grow mindset think that talents can be acquired and essentially nothing is fixed. A challenge for them is nothing but an opportunity to learn new things. The book provides an insightful look into both type of mindsets, with plenty of examples that illustrate how each mindset reveals itself in different settings such as education, sports, business, relationships etc. The author is a professor of Psychology at Stanford, and this book is essentially a summary of her research. The book is extremely accessible and insightful.
+
+* **Feel the Fear . . . and Do It Anyway** -  Susan Jeffers <br />
+  I went into this book completely blind, I started reading purely based on the title, it sounded intriguing. It is an interesting book with a lot of good advice on overcoming fear but I would've liked a lot more on the nature of fear than this book provides. It's also more "self-helpy" than scientific, which is not my taste.
+
 * **The Art of Loving** - Erich Fromm <br />
   Fromm argues that our understanding of love is misguided in thinking that it is something that happens to us rather than something that we actively engage in. Most people think that love itself is easy but to find the object of love or to be loved is difficult. We so often fail in love because of our misunderstanding of it. Love like any other discipline, requires knowledge and most importantly practice. The same way you wouldn't expect to be a good engineer without hard-work, you shouldn't expect to be good at loving without dedicating time and attention to it.
 
