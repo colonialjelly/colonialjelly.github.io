@@ -5,7 +5,7 @@
   
   <link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" />
-  <updated>2020-06-10T14:35:16+00:00</updated>
+  <updated>2020-06-11T05:01:31+00:00</updated>
   <id>http://localhost:4000//</id>
 
   
@@ -411,7 +411,7 @@ for each row r in the dataset
 &lt;p&gt;The video below is an animation that simulates the algorithm over the toy dataset. Watching it should hopefully clear up any questions you have about how or why the algorithm works.&lt;/p&gt;
 
 &lt;div class=&quot;video-responsive&quot;&gt;
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/qA4WdrY6aPk&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/YoVJOlpViog&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 &lt;/div&gt;
 
 &lt;p&gt;Now with this algorithm we can reduce all of the artist representations to smaller sets. If we use \(k\) hash functions we will have a signature of size \(k\) for each artist. This means that the time complexity of comparing two sets (artists) is now \(O(k)\), which is independent of the size of the original sets.&lt;/p&gt;
