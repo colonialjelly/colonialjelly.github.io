@@ -1,28 +1,31 @@
 ---
 layout: post
-title:  Pseudo features and OOC data regularization
+title:  Pseudo features
 categories: [Machine Learning]
-excerpt: Every classification problem has some *true* set of features. These features, if given, renders the problem almost entirely solved. Unfortunately, there is no way to directly uncover what these true features are. Instead we use a labeled training set to learn a mapping function from the inputs to the labels. The hope is that by learning the mapping, we would also learn at least some or most of these true features. However, the problem is that, the training set may also contain features that are not part of the true set but do help with the mapping. This most often happens because of artifacts in data collection. I'll refer to these type of features as pseudo features.
 mathjax: true
 published: false
 ---
+*This is an old post that I kept unpublished till now.*
 
-Every classification problem has some "true" set of features. These features, if given, renders the problem almost entirely solved. Unfortunately,  there is no way to directly uncover what these true features are. Instead we use a labeled training set to learn a mapping function from the inputs to the labels. The hope is that by learning the mapping, we would also learn at least some or most of these true features. However, the problem is that, the training set may also contain features that are not part of the true set but do help with the mapping. This most often happens because of artifacts in data collection. I'll refer to these type of features as pseudo features.
+Every classification problem has some "true" set of features. These features, if given, renders the problem almost entirely solved. Unfortunately,  there is no way to directly uncover these true features. Instead we use a labeled training set to learn a mapping function from the inputs to the labels. The hope is that by learning the mapping, we would also learn at least some or most of these true features. However, the problem is that, the training set may also contain features that are not part of the true set but do help with the mapping. This most often happens because of artifacts in data collection. I'll refer to these type of features as pseudo features.
+
+<!-- more -->
 
 **Definition:** Pseudo features are features that have a high predictive power at training time but either do not provide any help or hurt with generalization.
 
 To give an intuitive example, let's say that we're working on image classification and for some reason one of the classes has a bias in the training data. For example all of the pictures that have a bear on it were taken in a snowy background. Since the model is trying to find features that are correlated with the label it *may* learn that a lot of white pixels means that there's a bear on the picture. Obviously, this is an oversimplification of the problem but hopefully you understand the point I'm trying to make.
-
+<br>
 <center>
 <tr>
-<td> <img src="../images/snow_bear.jpg" alt="Bear" style="width: 300px" border="5"/> </td>
-<td> <img src="../images/snow_no_bear.jpg" alt="No Bear" style="width: 300px" border="5"/> </td>
+<td> <img src="/images/snow_bear.jpg" alt="Bear" style="width: 250px" border="1"/> </td>
+<td> <img src="/images/snow_no_bear.jpg" alt="No Bear" style="width: 250px" border="1"/> </td>
 </tr>
 </center>
+<br>
 
 Unfortunately, these kinds of data biases are not rare and they are extremely difficult to catch. Rolling out models in the real-world with the intention of using them for critical decisions is scary if you don't know for sure that the model is not using pseudo features for predictions.
 
-One potential solution to this problem could be to expand the objective of training. For classification, we usually provide labeled training data $$(x, y) \in \mathcal{D}$$ and optimize the parameters $$\theta$$ of the model $$f$$ such that the outputs match the labels. This objective promotes features that help with prediction on the training set. But as we've discussed earlier, pseudo features can also be promoted during this process. Instead of only promoting features with the training set, we could also try to demote features using some auxiliary dataset $$\hat{\mathcal{D}}$$. The auxiliary dataset should ideally be a dataset that contains the pseudo features but does not contain any true features. This would mean that a model that is making prediction with the true features should be *confused* on the inputs that are from $$\hat{\mathcal{D}}$$. The two term objective is:
+One potential solution to this problem could be to expand the objective of training. For classification, we usually provide labeled training data $$(x, y) \in \mathcal{D}$$ and optimize the parameters $$\theta$$ of the model $$f$$ such that the outputs match the labels. This objective promotes features that help with prediction on the training set. But as we've discussed earlier, pseudo features can also be promoted during this process. Instead of only promoting features with the training set, we could also try to demote features using some auxiliary dataset $$\hat{\mathcal{D}}$$. The auxiliary dataset should ideally be a dataset that contains the pseudo features but does not contain any true features. This would mean that a model that is making predictions with the true features should be *confused* on the inputs that are from $$\hat{\mathcal{D}}$$. The two term objective is:
 
 $$\min_{\theta} \mathbb{E}_{x \sim \mathcal{D}} \text{L}(y, f(x; \theta)) + \lambda\mathbb{E}_{x \sim \hat{\mathcal{D}}}\text{H}(f(x; \theta))$$
 

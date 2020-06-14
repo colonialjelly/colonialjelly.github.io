@@ -7,11 +7,14 @@ I use this page as my reading log. If you have any suggestions I'd love to hear 
 
 ## Currently reading
 <!-- * **Consciousness Explained** - Daniel Dennett -->
-* **Bossypants** - Tina Fey
+* **The Tipping Point**: *How Little Things Can Make a Big Difference* - Malcolm Gladwell
 
 ## Read
 ---
 ### 2020
+* **Bossypants** - Tina Fey <br />
+  A hilarious and insightful look into Tina Fey's life and career. It's a light and entertaining read, although I just found out that there's an audio version narrated by Tina herself and I'd imagine that's a much better way to experience this book.
+
 * **Mindset**: *The New Psychology of Success* - Carol S. Dweck <br />
   There are two types of mindsets: fixed mindset and growth mindset. A person with a fixed mindset thinks that theirs and other's abilities are fixed and are mostly inherent. Either you're smart or not, either you're talented or you're not, there's little or no room for improvement. People with this mindset dwell too much on numbers that "measure" their capabilities and are easily dissuaded by challenging endeavors. On the other hand, people with a grow mindset think that talents can be acquired and essentially nothing is fixed. A challenge for them is nothing but an opportunity to learn new things. The book provides an insightful look into both type of mindsets, with plenty of examples that illustrate how each mindset reveals itself in different settings such as education, sports, business, relationships etc. The author is a professor of Psychology at Stanford, and this book is essentially a summary of her research. The book is extremely accessible and insightful.
 
