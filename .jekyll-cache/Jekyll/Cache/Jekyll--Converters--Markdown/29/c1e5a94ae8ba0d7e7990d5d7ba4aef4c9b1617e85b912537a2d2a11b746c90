@@ -1,0 +1,21 @@
+I"�<p>In the previous post we covered a method that approximates the Jaccard similarity by constructing a signature of the original representation. This allows us to significantly speed up the process of computing similarities between the sets. But remember that the goal is to find all similar items to a given item. This requires to compute the similarities between all pairs of items in the data. If we go back to our example, Spotify has about 1.2 million artists on their platform. Which means that to find all similar artists we need to make 1.4 trillion comparisons… ahm… how about no. We’re going to do something different. We’re instead going to use Locality Sensitive Hashing (LSH) to identify candidate pairs and only compute the similarities on those. This will substantially reduce the computational burden.</p>
+
+<p>LSH is a neat method to find similar items without computing similarities between every pair. It accomplishes this by hashing items in such a way that results in similar items being hashed in the same bucket with high probability. If two items are hashed to the same bucket, we consider them as candidate pairs and proceed with computing their similarity.</p>
+
+<h3>MinHash LSH</h3>
+
+<p>Intuitively, if two items have identical parts in some random positions then they’re probably similar. This is the idea we’re going to rely on to identify candidate pairs.</p>
+
+<p>We begin by dividing the signature matrix into \(b\) bands with \(r\) rows</p>
+
+<p>We hash each item’s portion of the band with some hashing function with a large number of buckets <sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>. We can use the same hash function for every band but each band should have a separate array to store the buckets. If for a given band two items end up hashed into the same bucket, we consider them as candidate pairs.</p>
+
+<h3>Cosine LSH</h3>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>We can use the built-in hashing function of whatever programming language we’re using. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

@@ -1,108 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<script src="https://kit.fontawesome.com/c89c590422.js" crossorigin="anonymous"></script>
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
-
-  <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  
-  
-  <title>Reading</title>
-  <meta name="description" content="Mostly things about Machine Learning.">
-  
-
-  <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/reading/">
-  
-  
-  <link rel="alternate" type="application/rss+xml" title="Giorgi Kvernadze" href="http://localhost:4000/feed.xml">
-
-  
-
-  
-  <meta property="og:title" content="Reading">
-  <meta property="og:site_name" content="Giorgi Kvernadze">
-  <meta property="og:url" content="http://localhost:4000/reading/">
-  <meta property="og:description" content="Mostly things about Machine Learning.">
-  
-  
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="colonialjelly">
-  <meta name="twitter:title" content="Reading">
-  <meta name="twitter:description" content="Mostly things about Machine Learning.">
-  
-    <meta name="twitter:creator" content="colonialjelly">
-  
-  
-
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css?family=Bitter:400,400i,700&amp;display=swap" rel="stylesheet">
-
-  
-  <!-- Google Analytics -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-157355591-1', 'auto');
-    ga('send', 'pageview');
-
-  </script>
-
-
-</head>
-
-
-  <body>
-
-    <header class="site-header">
-  <div class="wrapper">
-    <a class="site-title" href="/">Giorgi Kvernadze</a>
-    <nav class="site-nav">
-      
-        
-        <a class="page-link" href="/about/">About</a>
-        
-          <span class="dot"></span>
-        
-      
-        
-        <a class="page-link" href="/blog/">Blog</a>
-        
-          <span class="dot"></span>
-        
-      
-        
-        <a class="page-link" href="/reading/">Reading</a>
-        
-      
-      <!-- <a class ="social-link" href="https://github.com/colonialjelly" target="_blank"><i class="fab fa-github"></i></a> -->
-      <!-- <a class ="social-link"href="https://twitter.com/colonialjelly" target="_blank"><i class="fab fa-twitter"></i></a> -->
-    </nav>
-  </div>
-</header>
-
-
-    <main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post">
-
-  <header class="post-header">
-    <h1 class="post-title">Reading</h1>
-  </header>
-
-  <div class="post-content">
-    <p>I use this page as my reading log. If you have any suggestions I’d love to hear it!</p>
+I"�4<p>I use this page as my reading log. If you have any suggestions I’d love to hear it!</p>
 
 <h2>Currently reading</h2>
 <ul>
@@ -115,10 +11,13 @@
 <hr />
 <h3>2020</h3>
 <ul>
-  <li>
-    <p><strong>What I Learned Losing a Million Dollars</strong> - Jim Paul et al. <br />
-  One of the few honest books about investing/trading. The book is split into two parts. The first part is the story of Jim Paul, how he made money and became a big shot in the trading world and how he then lost it all on a single bet. The main lesson in the first part is how personalizing outcomes, be it success or failure, can hinder one’s decision making to the point of delusion. After losing everything, Jim Paul realized that he didn’t actually know trading, he simply got lucky by either being at the right place at the right time or just by knowing the right people. This realization sets him on a path to learning how to trade successfully by studying strategies of famous investors and traders. But as it turns out, the strategies offered by these experts are all different and sometimes contradictory, hence the key isn’t about how to win rather how not to lose. He comes to the conclusion that there are thousands of ways of making money in the markets but there are only a few ways of losing it. The second part of the book goes deep on this premise. It provides analysis on the psychological factors that lead to losses and strategies on avoiding them with the biggest advice being on always having an exit strategy or a stop-loss in trading terms.</p>
-  </li>
+  <li><strong>What I Learned Losing a Million Dollars</strong> - Jim Paul et al. <br />
+  a totally non-BS book about investing/trading. The book is split into two parts. The first part is the story of Jim Paul, how he made money and gained respect of people around him and how we lost it all on a single bet. The main idea in the first part is how personalizing outcomes, be it success or failure, can hinder one’s decision making to the point of delusion.  The second part of the book provides analysis and strategies on avoiding losses in the market. After losing everything, Jim Paul went on a quest to learn how to win, by</li>
+</ul>
+
+<p>Part 1) The moment you personalize your success you are doomed to fail: the story of Jim Paul, how he fooled himself into thinking that everything he touched turned to gold and how that attitude led do him losing everything he had. Part 2) There are thousands of ways of making money in the markets, but only a few ways of losing it: analysis on psychological factors that lead to losses and strategies on avoiding them.</p>
+
+<ul>
   <li>
     <p><strong>The Tipping Point</strong>: <em>How Little Things Can Make a Big Difference</em> - Malcolm Gladwell <br />
 A really interesting, well-researched book about social epidemics. Malcom Gladwell dissects the process of how certain ideas gain traction and eventually reach a tipping point that brings them into widespread adoption. He proposes a theory on the spread of ideas with three central concepts: 1) <em>The Law of the Few</em>: There are three different categories of people that are essential contributors to social epidemics: connectors, mavens and salesmen. Each of these people have a certain special talent that make them crucial for rapid spread of ideas. 2) <em>The Stickiness Factor</em>: The presentation of the message can either make or break the spread. The idea has to have a certain stickiness to it, i.e when heard by people it has to remain in their minds.  In general, it’s hard to know what type of message will stick, usually experimentation and refinement is required. 3) <em>The Power of Context</em>: How an idea is spread is highly dependent on the context of when it is first heard. Human behavior can have a large variance depending on the context and even the tiniest changes in the environment can have hugely consequential results.</p>
@@ -206,58 +105,4 @@ Life involves a lot of bets and uncertainty, it is more like poker than chess. T
   <li><strong>How to Win Friends and Influence People</strong> - Dale Carnegie</li>
   <li><strong>Mere Christianity</strong> - C. S. Lewis</li>
 </ul>
-
-  </div>
-
-  
-
-</article>
-
-      </div>
-    </main>
-
-    <footer class="site-footer">
-  <div class="wrapper">
-    <p>
-      <div class="social-icons">
-  
-    
-      <a class="social-icon" href="mailto:giorgi@cs.utah.edu" target="_blank">
-        <i class="fas fa-at" title="E-Mail"></i>
-      </a>
-  
-    
-      <a class="social-icon" href="https://twitter.com/colonialjelly" target="_blank">
-        <i class="fab fa-twitter" title="Twitter"></i>
-      </a>
-  
-    
-      <a class="social-icon" href="https://github.com/colonialjelly" target="_blank">
-        <i class="fab fa-github" title="Github"></i>
-      </a>
-  
-    
-      <a class="social-icon" href="https://www.linkedin.com/in/giorgi-kvernadze-208a081b/" target="_blank">
-        <i class="fab fa-linkedin" title="LinkedIn"></i>
-      </a>
-  
-    
-      <a class="social-icon" href="/feed.xml" target="_blank">
-        <i class="fas fa-rss" title="Feed"></i>
-      </a>
-  
-</div>
-
-&copy; 2019 - 2020 Giorgi Kvernadze (I don't know why I have this here but everyone seems to have and I'm just a blind follower)
-<!-- - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; customized version of <a href="https://github.com/yous/whiteglass">whiteglass</a> -->
-
-<!-- - Subscribe via <a href="http://localhost:4000/feed.xml">RSS</a> -->
-
-    </p>
-  </div>
-</footer>
-
-
-  </body>
-
-</html>
+:ET
