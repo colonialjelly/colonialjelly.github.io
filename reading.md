@@ -6,13 +6,17 @@ permalink: /reading/
 I use this page as my reading log. If you have any suggestions I'd love to hear it!
 
 ## Currently reading
-* **Drive**: *The Surprising Truth About What Motivates Us* - Daniel H. Pink
-* **Good to Great**: *Why Some Companies Make the Leap and Others Don't* - Jim Collins
-<!-- * **Consciousness Explained** - Daniel Dennett -->
+* **The Omnivore's Dilemma**: *A Natural History of Four Meals* -  Michael Pollan
 
 ## Read
 ---
 ### 2020
+* **Drive**: *The Surprising Truth About What Motivates Us* - Daniel H. Pink <br />
+  According to Pink, there is a misalignment between what science of motivation says and what the industry is doing. He argues that the standard reward system of carrots and sticks does not work for jobs that require creativity. Setting up an if-then reward system can lead to diminished motivation, decrease of creativity and quality of work. He instead offers another system, Motivation 3.0 as he calls it, based on the assumption that people have an innate desire to work on challenging problems. He identifies three key factors to this type of a motivation: the need for autonomy, need for mastery and need for purpose. Setting up an environment where these three conditions are met can enable people to be intrinsically motivated or in other words, they will be driven from the inside rather than having to establish external reward systems. 
+
+* **Good to Great**: *Why Some Companies Make the Leap and Others Don't* - Jim Collins <br />
+  A culmination of a 5 year research conducted by Jim Collins and his 21 person team. It's an extremely dense and thoughtful book that goes deep into analyzing how certain companies have achieved excellence. Although, some of the companies that made the list have since fallen off from greatness, the value that Collins and team provide by presenting the core concepts that drive excellence is still extremely valuable.
+
 *  **What I Learned Losing a Million Dollars** - Jim Paul et al. <br />
   One of the few honest books about investing/trading. The book is split into two parts. The first part is the story of Jim Paul, how he made money and became a big shot in the trading world and how he then lost it all on a single bet. The main lesson in the first part is how personalizing outcomes, be it success or failure, can hinder one's decision making to the point of delusion. After losing everything, Jim Paul realized that he didn't actually know trading, he simply got lucky by either being at the right place at the right time or just by knowing the right people. This realization sets him on a path to learning how to trade successfully by studying strategies of famous investors and traders. But as it turns out, the strategies offered by these experts are all different and sometimes contradictory, hence the key isn't about how to win rather how not to lose. He comes to the conclusion that there are thousands of ways of making money in the markets but there are only a few ways of losing it. The second part of the book goes deep on this premise. It provides analysis on the psychological factors that lead to losses and strategies on avoiding them with the biggest advice being on always having an exit strategy or a stop-loss in trading terms.
 
