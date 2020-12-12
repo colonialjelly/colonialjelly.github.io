@@ -14,7 +14,7 @@
   
   
   
-  <title>Giorgi Kvernadze</title>
+  <title>Blog</title>
   <meta name="description" content="Mostly things about Machine Learning.">
   
 
@@ -27,7 +27,7 @@
   
 
   
-  <meta property="og:title" content="Giorgi Kvernadze">
+  <meta property="og:title" content="Blog">
   <meta property="og:site_name" content="Giorgi Kvernadze">
   <meta property="og:url" content="http://localhost:4000/">
   <meta property="og:description" content="Mostly things about Machine Learning.">
@@ -35,7 +35,7 @@
   
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="colonialjelly">
-  <meta name="twitter:title" content="Giorgi Kvernadze">
+  <meta name="twitter:title" content="Blog">
   <meta name="twitter:description" content="Mostly things about Machine Learning.">
   
     <meta name="twitter:creator" content="colonialjelly">
@@ -95,12 +95,187 @@
 
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <div class="wrapper">
-<center><b>Hey there!</b></center>
-<img class="center" src="/images/circular_bw.png" width="200px">
-<br>
+        <div class="home">
+  <script type="text/javascript" async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  
 
-<center>I'm a machine learning engineer with a passion for <i>learning</i></center>
+  
+
+  <ul class="post-list">
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/blog/minhashing/">Min Hashing</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Mar 10, 2020
+            
+               •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/categories/data-mining/">Data Mining</a>,
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+        <a href="/categories/tutorial/">Tutorial</a>
+      
+    
+      
+    
+  
+
+
+
+
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <p>Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. The first thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user IDs of people that have listened to that artist at least once. For example, the representation for Miles Davis could be,</p>
+
+\[\text{Miles Davis} = \{5, 23533, 2034, 932, ..., 17\}\]
+
+<p>The number of elements in the set is the number of users that have listened to Miles Davis at least once. To compute the similarity between artists, we can compare these set representations. Now, with Spotify having more than 271 million users, these sets could be very large (especially for popular artists). It would take forever to compute the similarities, especially since we have to compare every artist to each other. In this post, I’ll introduce a method that can help us speed up this process. We’re going to be converting each set into a smaller representation called a signature, such that the similarities between the sets are well preserved.</p>
+
+
+        </div>
+        
+          <p class="post-continue">
+            <a href="/blog/minhashing/">Read on &rarr;</a>
+          </p>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/blog/multilayer-perceptron/">Multilayer Perceptron</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Dec 19, 2019
+            
+               •
+  
+    
+    
+      
+        <a href="/categories/machine-learning/">Machine Learning</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+        <a href="/categories/neural-networks/">Neural Networks</a>,
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+        <a href="/categories/tutorial/">Tutorial</a>
+      
+    
+      
+    
+  
+
+
+
+
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <ul>
+  <li>
+    <p><em>This post is best suited for people who are familiar with linear classifiers. I will also be assuming that the reader is familiar with gradient descent.</em></p>
+  </li>
+  <li>
+    <p><em>The goal of this post isn’t to be a comprehensive guide about neural networks, but rather an attempt to show an intuitive path going from linear classifiers to a simple neural network.</em></p>
+  </li>
+</ul>
+
+<p>There are many types of neural networks, each having some advantage over others. In this post, I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it’s a relatively simple model to implement.</p>
+
+<p>Before we delve into MLPs, let’s quickly go over linear classifiers. Given training data as pairs \((\boldsymbol{x}_i, y_i)\) where \(\boldsymbol{x}_i \in \mathbb{R}^{d}\) are datapoints (observations) and \(y_i \in \{0, 1\}\) are their corresponding class labels, the goal is to learn a vector of weights \(\boldsymbol{w} \in \mathbb{R}^{d}\) and a bias \(b \in \mathbb{R}\) such that \(\boldsymbol{w}^T\boldsymbol{x}_{i} + b \ge 0\) if \(y_{i} = 1\) and \(\boldsymbol{w}^T\boldsymbol{x}_{i} + b &lt; 0\) otherwise (\(y_{i} = 0\)). This decision can be summarized as the following step function:</p>
+
+\[\text{Prediction} = \begin{cases}
+      1 &amp; \boldsymbol{w}^T\boldsymbol{x} + b \ge 0 \\
+      0 &amp;  \text{Otherwise}\\
+\end{cases}\]
+
+<p>In the case of Logistic Regression the decision function is characterized by the sigmoid function \(\sigma(z) = \frac{1}{1+e^{-z}}\) where \(z = \boldsymbol{w}^T\boldsymbol{x} + b\)</p>
+
+\[\text{Prediction} = \begin{cases}
+      1 &amp; \sigma(z) \ge \theta \\
+      0 &amp;  \text{Otherwise}\\
+\end{cases}\]
+
+<p>Where \(\theta\) is a threshold that is usually set to be 0.5.</p>
+
+
+        </div>
+        
+          <p class="post-continue">
+            <a href="/blog/multilayer-perceptron/">Read on &rarr;</a>
+          </p>
+        
+      </li>
+    
+  </ul>
+
+  
+
+
 </div>
 
       </div>
