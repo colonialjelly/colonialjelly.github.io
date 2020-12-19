@@ -5,7 +5,7 @@
   
   <link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" />
-  <updated>2020-12-12T17:21:38+00:00</updated>
+  <updated>2020-12-19T18:29:03+00:00</updated>
   <id>http://localhost:4000//</id>
 
   
@@ -24,6 +24,125 @@
     </author>
   
 
+  
+  
+    <entry>
+      
+      <title type="html">Locality Sensitive Hashing for MinHash</title>
+      
+      
+      <link href="http://localhost:4000/blog/locality-sensitive-hashing/" rel="alternate" type="text/html" title="Locality Sensitive Hashing for MinHash" />
+      
+      <published>2020-06-10T00:00:00+00:00</published>
+      <updated>2020-06-10T00:00:00+00:00</updated>
+      <id>http://localhost:4000/blog/locality-sensitive-hashing</id>
+      <content type="html" xml:base="http://localhost:4000/blog/locality-sensitive-hashing/">&lt;p&gt;In the previous post we covered a method that approximates the Jaccard similarity by constructing a signature of the original representation. This allowed us to significantly speed up the process of computing similarities between sets. But remember that the goal is to find all similar items to any given item. This requires to compute the similarities between all pairs of items in the dataset. If we go back to our example, Spotify has about 1.2 million artists on their platform. Which means that to find all similar artists we need to make 1.4 trillion comparisons… ahm … how about no. We’re going to do something different. We’re instead going to use Locality Sensitive Hashing (LSH) to identify candidate pairs and only compute the similarities on those. This will substantially reduce the computational burden.&lt;/p&gt;
+
+&lt;p&gt;LSH is a neat method to find similar items without computing similarities between every possible pair. It works by having items that have high similarity be hashed to the same bucket with high probability. This allows us to only measure similarities between items that land in the same bucket rather than comparing every possible pair of items. If two items are hashed to the same bucket, we consider them as candidate pairs and proceed with computing their similarity.&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;h3&gt;MinHash LSH&lt;/h3&gt;
+
+&lt;p&gt;LSH is a broad term that refers to the collection of hashing methods that preserve similarities. In this post we’re going to be discussing one particular such method that efficiently computes candidate pairs for items that are in the form of minhash signatures. It is a pretty easy procedure both algorithmically and conceptually. It uses the intuition that if two items have identical signature parts in some random positions then they’re probably similar. This is the idea we’re going to turn to in order to identify candidate pairs.&lt;/p&gt;
+
+&lt;p&gt;In order to proceed we first need a signature matrix, if you don’t recall how a signature matrix is computed you can refer to my previous post. Let’s assume that a signature matrix is provided to us:&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;center&quot; src=&quot;/images/sig.png&quot; width=&quot;50%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We begin by dividing the signature matrix into \(b\) bands with \(r\) rows. This means that we are slicing each item’s signature into contiguous but distinct chunks.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;center&quot; src=&quot;/images/sig_banded.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;For each band, we take all of the chunks and hash them individually using some hashing function &lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; and we store them into a hash bucket. An important thing to note is that we use a separate hash bucket for each of the bands, this makes sure that we only compare chunks of signatures within the same bands rather than across bands. The idea is that if two items land in the same bucket for any of the bands then we consider them as candidates. Using a hashing function rather than directly comparing the items is what allows us to avoid the quadratic amount of comparisons.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;center&quot; src=&quot;/images/lsh.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this case it looks like we have the following candidate pairs: \((\text{artist}_{3}, \text{artist}_{5})\) and \((\text{artist}_{1}, \text{artist}_{5})\).&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: Although the picture depicts a hash table with only four buckets in reality the number of buckets is usually much larger than the number of items.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Here’s a really simple implementation of an LSH for Jaccard similarities:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;collections&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;defaultdict&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;minhash_lsh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sig_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num_bands&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;num_rows&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sig_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;bands&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sig_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num_bands&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;bands_buckets&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;band&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bands&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;items_buckets&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;defaultdict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;items&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hsplit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;band&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num_rows&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;tuple&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flatten&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;astype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;items_buckets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;bands_buckets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;items_buckets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bands_buckets&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now you may have noticed that \(b\) and \(r\) are parameters that we completely arbitrarily picked. To understand the significance of them we have to go back a little bit. Recall that the probability of two items having matching the same min hash value in any of the rows of the signature matrix is equal to the Jaccard similarity of those two items. We can use this fact to compute the probability of these two items being candidate pairs. Let \(s\) be the Jaccard similarity, then:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;If each band has \(r\) rows, the probability that the signatures agree on the entire band is: \(s^r\)&lt;/li&gt;
+  &lt;li&gt;The inverse of this, the probability that they do not agree is \(1 - s^r\)&lt;/li&gt;
+  &lt;li&gt;The probability that the signatures disagree in all of the bands \((1 - s^r)^b\)&lt;/li&gt;
+  &lt;li&gt;Therefore, the probability that the two items signatures agree in at least one band is \(1 - (1 - s^r)^b\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We have just derived the probability of two items being a candidate pair as a function of \(s\) with parameters \(r\) and \(b\): \(f_{b, r}(s) = 1 - (1 - s^r)^b\). If you plot this function using any \(b\) and \(r\) it will look like an S curve.&lt;/p&gt;
+
+&lt;p&gt;For example, let’s plot the function with parameters \(b=2\) and \(r=3\).&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;center&quot; src=&quot;/images/b2r3.png&quot; width=&quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As we can see the plot is shifted to right side, this means that in order for two items be candidates their similarities have to be high. For example, if two items have similarity of \(0.5\) they only have \(0.23\) probability of being candidates. If you go back and look at the signature matrix this should make perfect sense, we selected parameters that produce large bands relative to the signature matrix. If we wanted to make it more probably for candidates to appear, we can increase \(b\).&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;center&quot; src=&quot;/images/b3r2.png&quot; width=&quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Notice how the plot has shifted to the left. With these parameters if two candidates have similarity \(0.5\) we have \(0.57\) probability of them being candidates.&lt;/p&gt;
+
+&lt;p&gt;In the beginning of the post I mentioned that we would only cover a single instance of an LSH method. The method we described can work really great for approximating nearest neighbours when your data points are sets but what if our data points are vectors in some high dimensional space? Luckily, there are methods that work on other types of data.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;We can use the built-in hashing function of whatever programming language we’re using. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Giorgi Kvernadze</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="Data Mining" />
+      
+        <category term="Tutorial" />
+      
+
+      
+
+      
+        <summary type="html">In the previous post we covered a method that approximates the Jaccard similarity by constructing a signature of the original representation. This allowed us to significantly speed up the process of computing similarities between sets. But remember that the goal is to find all similar items to any given item. This requires to compute the similarities between all pairs of items in the dataset. If we go back to our example, Spotify has about 1.2 million artists on their platform. Which means that to find all similar artists we need to make 1.4 trillion comparisons… ahm … how about no. We’re going to do something different. We’re instead going to use Locality Sensitive Hashing (LSH) to identify candidate pairs and only compute the similarities on those. This will substantially reduce the computational burden. LSH is a neat method to find similar items without computing similarities between every possible pair. It works by having items that have high similarity be hashed to the same bucket with high probability. This allows us to only measure similarities between items that land in the same bucket rather than comparing every possible pair of items. If two items are hashed to the same bucket, we consider them as candidate pairs and proceed with computing their similarity.</summary>
+      
+
+      
+      
+    </entry>
+  
   
   
     <entry>

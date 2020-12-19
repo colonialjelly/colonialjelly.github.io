@@ -110,6 +110,71 @@
         <header class="post-header">
           <h1 class="post-title">
             
+              <a class="post-link" href="/blog/locality-sensitive-hashing/">Locality Sensitive Hashing for MinHash</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Jun 10, 2020
+            
+               •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/categories/data-mining/">Data Mining</a>,
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+        <a href="/categories/tutorial/">Tutorial</a>
+      
+    
+      
+    
+  
+
+
+
+
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <p>In the previous post we covered a method that approximates the Jaccard similarity by constructing a signature of the original representation. This allowed us to significantly speed up the process of computing similarities between sets. But remember that the goal is to find all similar items to any given item. This requires to compute the similarities between all pairs of items in the dataset. If we go back to our example, Spotify has about 1.2 million artists on their platform. Which means that to find all similar artists we need to make 1.4 trillion comparisons… ahm … how about no. We’re going to do something different. We’re instead going to use Locality Sensitive Hashing (LSH) to identify candidate pairs and only compute the similarities on those. This will substantially reduce the computational burden.</p>
+
+<p>LSH is a neat method to find similar items without computing similarities between every possible pair. It works by having items that have high similarity be hashed to the same bucket with high probability. This allows us to only measure similarities between items that land in the same bucket rather than comparing every possible pair of items. If two items are hashed to the same bucket, we consider them as candidate pairs and proceed with computing their similarity.</p>
+
+
+        </div>
+        
+          <p class="post-continue">
+            <a href="/blog/locality-sensitive-hashing/">Read on &rarr;</a>
+          </p>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
               <a class="post-link" href="/blog/minhashing/">Min Hashing</a>
             
           </h1>

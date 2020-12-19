@@ -1,0 +1,61 @@
+I"�<p>In the previous post we covered a method that approximates the Jaccard similarity by constructing a signature of the original representation. This allowed us to significantly speed up the process of computing similarities between sets. But remember that the goal is to find all similar items to any given item. This requires to compute the similarities between all pairs of items in the dataset. If we go back to our example, Spotify has about 1.2 million artists on their platform. Which means that to find all similar artists we need to make 1.4 trillion comparisons… ahm … how about no. We’re going to do something different. We’re instead going to use Locality Sensitive Hashing (LSH) to identify candidate pairs and only compute the similarities on those. This will substantially reduce the computational burden.</p>
+
+<p>LSH is a neat method to find similar items without computing similarities between every possible pair. LSH works by having items that have high similarity be hashed to the same bucket with high probability. This allows us to only measure similarities between items that land in the same bucket rather than comparing every possible pair of items. If two items are hashed to the same bucket, we consider them as candidate pairs and proceed with computing their similarity.</p>
+
+<h3>MinHash LSH</h3>
+
+<p>LSH is a broad term that refers to the collection of hashing methods that preserve similarities. In this post we’re going to be discussing one particular such method that efficiently computes candidate pairs for items that are in the form of minhash signatures. It is a pretty easy procedure both algorithmically and conceptually. It uses the intuition that if two items have identical signature parts in some random positions then they’re probably similar. This is the idea we’re going to turn to in order to identify candidate pairs.</p>
+
+<p>In order to proceed we first need a signature matrix, if you don’t recall how a signature matrix is computed you can refer to my previous post. Let’s assume that a signature matrix is provided to us:</p>
+
+<p><img class="center" src="/images/sig.png" width="50%" /></p>
+
+<p>We begin by dividing the signature matrix into \(b\) bands with \(r\) rows. This means that we are slicing each item’s signature into contiguous but distinct chunks.</p>
+
+<p><img class="center" src="/images/sig_banded.png" /></p>
+
+<p>For each band, we take all of the chunks and hash them individually using some hashing function <sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup> and we store them into a hash bucket. An important thing to note is that we use a separate hash bucket for each of the bands, this makes sure that we only compare chunks of signatures within the same bands rather than across bands. The idea is that if two items land in the same bucket for any of the bands then we consider them as candidates. Using a hashing function rather than directly comparing the items is what allows us to avoid the quadratic amount of comparisons.</p>
+
+<p><img class="center" src="/images/lsh.png" /></p>
+
+<p>In this case it looks like we have the following candidate pairs: \((\text{artist}_{3}, \text{artist}_{5})\) and \((\text{artist}_{1}, \text{artist}_{5})\).</p>
+
+<p><em>Note: Although the picture depicts a hash table with only four buckets in reality the number of buckets is usually much larger than the number of items.</em></p>
+
+<p>Here’s a really simple implementation of an LSH for Jaccard similarities:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="k">def</span> <span class="nf">minhash_lsh</span><span class="p">(</span><span class="n">sig_matrix</span><span class="p">,</span> <span class="n">num_bands</span><span class="p">):</span>
+    <span class="n">num_rows</span> <span class="o">=</span> <span class="n">sig_matrix</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">bands</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="n">sig_matrix</span><span class="p">,</span> <span class="n">num_bands</span><span class="p">)</span>
+    <span class="n">bands_buckets</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="n">bands</span><span class="p">:</span>
+        <span class="n">items_buckets</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">hsplit</span><span class="p">(</span><span class="n">band</span><span class="p">,</span> <span class="n">num_rows</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">flatten</span><span class="p">().</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
+            <span class="n">items_buckets</span><span class="p">[</span><span class="n">item</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">bands_buckets</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">items_buckets</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">bands_buckets</span>
+</code></pre></div></div>
+
+<p>Now you may have noticed that \(b\) and \(r\) are parameters that we completely arbitrarily picked. To understand the significance of them we have to go back a little bit. Recall that if two items have a Jaccard similarity equal to \(s\) then the probability that they match in any row of the signature matrix is also equal to \(s\). Using this fact we can compute the probability of these two items being candidate pairs.</p>
+
+<ul>
+  <li>If each band has \(r\) rows then the probability that the signatures agree on the entire band is: \(s^r\)</li>
+  <li>The inverse of this, the probability that they do not agree is \(1 - s^r\)</li>
+  <li>The probability that the signatures disagree in all of the bands \((1 - s^r)^b\)</li>
+  <li></li>
+</ul>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>We can use the built-in hashing function of whatever programming language we’re using. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET
