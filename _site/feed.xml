@@ -5,7 +5,7 @@
   
   <link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" />
-  <updated>2020-12-19T18:29:03+00:00</updated>
+  <updated>2020-12-19T18:39:01+00:00</updated>
   <id>http://localhost:4000//</id>
 
   
@@ -42,7 +42,7 @@
 
 &lt;!-- more --&gt;
 
-&lt;h3&gt;MinHash LSH&lt;/h3&gt;
+&lt;h3&gt;Banding Technique&lt;/h3&gt;
 
 &lt;p&gt;LSH is a broad term that refers to the collection of hashing methods that preserve similarities. In this post we’re going to be discussing one particular such method that efficiently computes candidate pairs for items that are in the form of minhash signatures. It is a pretty easy procedure both algorithmically and conceptually. It uses the intuition that if two items have identical signature parts in some random positions then they’re probably similar. This is the idea we’re going to turn to in order to identify candidate pairs.&lt;/p&gt;
 
@@ -103,7 +103,7 @@
 
 &lt;p&gt;Notice how the plot has shifted to the left. With these parameters if two candidates have similarity \(0.5\) we have \(0.57\) probability of them being candidates.&lt;/p&gt;
 
-&lt;p&gt;In the beginning of the post I mentioned that we would only cover a single instance of an LSH method. The method we described can work really great for approximating nearest neighbours when your data points are sets but what if our data points are vectors in some high dimensional space? Luckily, there are methods that work on other types of data.&lt;/p&gt;
+&lt;p&gt;In the beginning of the post I mentioned that we would only cover a single instance of an LSH method. The method we described can work really great for approximating nearest neighbours when your data points are sets but what if our data points are vectors in some high dimensional space? Luckily, there are methods that work on other types of data. Check out &lt;a href=&quot;http://infolab.stanford.edu/~ullman/mmds/ch3.pdf&quot;&gt;Chapter 3.6 of Mining Massive Datatests&lt;/a&gt; if you want to know more about what LSH is formally and what other techniques are there.&lt;/p&gt;
 
 &lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
   &lt;ol&gt;
