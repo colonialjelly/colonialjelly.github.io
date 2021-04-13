@@ -14,7 +14,7 @@
   
   
   
-  <title>Multilayer Perceptron</title>
+  <title>Introduction to Neural Networks</title>
   <meta name="description" content="This post is best suited for people who are familiar with linear classifiers. I will also be assuming that the reader is familiar with gradient descent. The goal of this post isn’t to be a comprehensive guide about neural networks, but rather an attempt to show an intuitive path going from linear classifiers to a simple neural network. There are many types of neural networks, each having some advantage over others. In this post, I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it’s a relatively simple model to implement. Before we delve into MLPs, let’s quickly go over linear classifiers. Given training data as pairs \((\boldsymbol{x}_i, y_i)\) where \(\boldsymbol{x}_i \in \mathbb{R}^{d}\) are datapoints (observations) and \(y_i \in \{0, 1\}\) are their corresponding class labels, the goal is to learn a vector of weights \(\boldsymbol{w} \in \mathbb{R}^{d}\) and a bias \(b \in \mathbb{R}\) such that \(\boldsymbol{w}^T\boldsymbol{x}_{i} + b \ge 0\) if \(y_{i} = 1\) and \(\boldsymbol{w}^T\boldsymbol{x}_{i} + b &amp;lt; 0\) otherwise (\(y_{i} = 0\)). This decision can be summarized as the following step function: \[\text{Prediction} = \begin{cases} 1 &amp;amp; \boldsymbol{w}^T\boldsymbol{x} + b \ge 0 \\ 0 &amp;amp; \text{Otherwise}\\ \end{cases}\] In the case of Logistic Regression the decision function is characterized by the sigmoid function \(\sigma(z) = \frac{1}{1+e^{-z}}\) where \(z = \boldsymbol{w}^T\boldsymbol{x} + b\) \[\text{Prediction} = \begin{cases} 1 &amp;amp; \sigma(z) \ge \theta \\ 0 &amp;amp; \text{Otherwise}\\ \end{cases}\] Where \(\theta\) is a threshold that is usually set to be 0.5.">
   
 
@@ -27,7 +27,7 @@
   
 
   
-  <meta property="og:title" content="Multilayer Perceptron">
+  <meta property="og:title" content="Introduction to Neural Networks">
   <meta property="og:site_name" content="Giorgi Kvernadze">
   <meta property="og:url" content="http://localhost:4000/blog/multilayer-perceptron/">
   <meta property="og:description" content="This post is best suited for people who are familiar with linear classifiers. I will also be assuming that the reader is familiar with gradient descent. The goal of this post isn’t to be a comprehensive guide about neural networks, but rather an attempt to show an intuitive path going from linear classifiers to a simple neural network. There are many types of neural networks, each having some advantage over others. In this post, I want to introduce the simplest form of a neural network, a Multilayer Perceptron (MLP). MLPs are a powerful method for approximating functions and it’s a relatively simple model to implement. Before we delve into MLPs, let’s quickly go over linear classifiers. Given training data as pairs \((\boldsymbol{x}_i, y_i)\) where \(\boldsymbol{x}_i \in \mathbb{R}^{d}\) are datapoints (observations) and \(y_i \in \{0, 1\}\) are their corresponding class labels, the goal is to learn a vector of weights \(\boldsymbol{w} \in \mathbb{R}^{d}\) and a bias \(b \in \mathbb{R}\) such that \(\boldsymbol{w}^T\boldsymbol{x}_{i} + b \ge 0\) if \(y_{i} = 1\) and \(\boldsymbol{w}^T\boldsymbol{x}_{i} + b &amp;lt; 0\) otherwise (\(y_{i} = 0\)). This decision can be summarized as the following step function: \[\text{Prediction} = \begin{cases} 1 &amp;amp; \boldsymbol{w}^T\boldsymbol{x} + b \ge 0 \\ 0 &amp;amp; \text{Otherwise}\\ \end{cases}\] In the case of Logistic Regression the decision function is characterized by the sigmoid function \(\sigma(z) = \frac{1}{1+e^{-z}}\) where \(z = \boldsymbol{w}^T\boldsymbol{x} + b\) \[\text{Prediction} = \begin{cases} 1 &amp;amp; \sigma(z) \ge \theta \\ 0 &amp;amp; \text{Otherwise}\\ \end{cases}\] Where \(\theta\) is a threshold that is usually set to be 0.5.">
@@ -35,7 +35,7 @@
   
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="colonialjelly">
-  <meta name="twitter:title" content="Multilayer Perceptron">
+  <meta name="twitter:title" content="Introduction to Neural Networks">
   <meta name="twitter:description" content="This post is best suited for people who are familiar with linear classifiers. I will also be assuming that the reader is familiar with gradient descent. The goal of this post isn’t to be a comprehe...">
   
     <meta name="twitter:creator" content="colonialjelly">
@@ -99,7 +99,7 @@
 
   <header class="post-header">
     
-      <h1 class="post-title" itemprop="name headline">Multilayer Perceptron</h1>
+      <h1 class="post-title" itemprop="name headline">Introduction to Neural Networks</h1>
     
     <p class="post-meta"><time datetime="2019-12-19T00:00:00+00:00" itemprop="datePublished">Dec 19, 2019</time> •
   
@@ -553,7 +553,7 @@ Computing the derivatives of all the parameters with respect to the outputs is c
   
 </div>
 
-&copy; 2019 - 2020 Giorgi Kvernadze (I don't know why I have this here but everyone seems to have and I'm just a blind follower)
+&copy; 2019 - 2021 Giorgi Kvernadze (I don't know why I have this here but everyone seems to have and I'm just a blind follower)
 <!-- - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; customized version of <a href="https://github.com/yous/whiteglass">whiteglass</a> -->
 
 <!-- - Subscribe via <a href="http://localhost:4000/feed.xml">RSS</a> -->
