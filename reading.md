@@ -6,15 +6,23 @@ permalink: /reading/
 I use this page as my reading log. If you have any suggestions I'd love to hear it!
 
 ## Currently reading
-* **Based on a True Story**: *Not a Memoir* -  Norm MacDonald <br />
-* **Zen and the Art of Motorcycle Maintenance**: *An Inquiry into Values* -  Robert M. Pirsig <br />
-* **Look at the Birdie** -   Kurt Vonnegut <br />
+* **Antifragile**: *Things That Gain from Disorder* -  Nassim Nicholas Taleb <br />
+* **Is This Anything?** - Jerry Seinfeld
 <!-- * **The Omnivore's Dilemma**: *A Natural History of Four Meals* -  Michael Pollan -->
 
 ## Read
 ---
+
+### 2021
+* **Zen and the Art of Motorcycle Maintenance**: *An Inquiry into Values* -  Robert M. Pirsig <br />
+
+* **Look at the Birdie** -   Kurt Vonnegut <br />
+
 ### 2020
+* **Based on a True Story**: *Not a Memoir* -  Norm MacDonald <br />
+
 * **Gift of Imperfection** -  Brené Brown <br />
+
 * **Drive**: *The Surprising Truth About What Motivates Us* - Daniel H. Pink <br />
   According to Pink, there is a misalignment between what science of motivation says and what the industry is doing. He argues that the standard reward system of carrots and sticks does not work for jobs that require creativity. Setting up an if-then reward system can lead to diminished motivation, decrease of creativity and quality of work. He instead offers another system, Motivation 3.0 as he calls it, based on the assumption that people have an innate desire to work on challenging problems. He identifies three key factors to this type of a motivation: the need for autonomy, need for mastery and need for purpose. Setting up an environment where these three conditions are met can enable people to be intrinsically motivated or in other words, they will be driven from the inside rather than having to establish external reward systems.
 
