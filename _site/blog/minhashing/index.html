@@ -14,7 +14,7 @@
   
   
   
-  <title>Min Hashing</title>
+  <title>Illustrated Guide to Min Hashing</title>
   <meta name="description" content="Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. The first thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user IDs of people that have listened to that artist at least once. For example, the representation for Miles Davis could be, \[\text{Miles Davis} = \{5, 23533, 2034, 932, ..., 17\}\] The number of elements in the set is the number of users that have listened to Miles Davis at least once. To compute the similarity between artists, we can compare these set representations. Now, with Spotify having more than 271 million users, these sets could be very large (especially for popular artists). It would take forever to compute the similarities, especially since we have to compare every artist to each other. In this post, I’ll introduce a method that can help us speed up this process. We’re going to be converting each set into a smaller representation called a signature, such that the similarities between the sets are well preserved.">
   
 
@@ -27,7 +27,7 @@
   
 
   
-  <meta property="og:title" content="Min Hashing">
+  <meta property="og:title" content="Illustrated Guide to Min Hashing">
   <meta property="og:site_name" content="Giorgi Kvernadze">
   <meta property="og:url" content="http://localhost:4000/blog/minhashing/">
   <meta property="og:description" content="Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. The first thing you need to do is represent the artists in such a way that they can be compared to each other. You figure that one obvious way to characterize an artist is by the people that listen to it. You decide that each artist shall be defined as a set of user IDs of people that have listened to that artist at least once. For example, the representation for Miles Davis could be, \[\text{Miles Davis} = \{5, 23533, 2034, 932, ..., 17\}\] The number of elements in the set is the number of users that have listened to Miles Davis at least once. To compute the similarity between artists, we can compare these set representations. Now, with Spotify having more than 271 million users, these sets could be very large (especially for popular artists). It would take forever to compute the similarities, especially since we have to compare every artist to each other. In this post, I’ll introduce a method that can help us speed up this process. We’re going to be converting each set into a smaller representation called a signature, such that the similarities between the sets are well preserved.">
@@ -35,7 +35,7 @@
   
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="colonialjelly">
-  <meta name="twitter:title" content="Min Hashing">
+  <meta name="twitter:title" content="Illustrated Guide to Min Hashing">
   <meta name="twitter:description" content="Suppose you’re an engineer at Spotify and you’re on a mission to create a feature that lets users explore new artists that are similar to the ones they already listen to. The first thing you need t...">
   
     <meta name="twitter:creator" content="colonialjelly">
@@ -99,7 +99,7 @@
 
   <header class="post-header">
     
-      <h1 class="post-title" itemprop="name headline">Min Hashing</h1>
+      <h1 class="post-title" itemprop="name headline">Illustrated Guide to Min Hashing</h1>
     
     <p class="post-meta"><time datetime="2020-03-10T00:00:00+00:00" itemprop="datePublished">Mar 10, 2020</time> •
   

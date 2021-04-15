@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Min Hashing
+title:  Illustrated Guide to Min Hashing
 categories: [Data Mining, Tutorial]
 excerpt:
 mathjax: true
