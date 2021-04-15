@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Multilayer Perceptron
+title:  Introduction to Neural Networks
 categories: [Machine Learning, Neural Networks, Tutorial]
 mathjax: true
 ---

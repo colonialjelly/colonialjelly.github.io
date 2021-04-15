@@ -7,13 +7,14 @@ I use this page as my reading log. If you have any suggestions I'd love to hear 
 
 ## Currently reading
 * **Antifragile**: *Things That Gain from Disorder* -  Nassim Nicholas Taleb <br />
-* **Is This Anything?** - Jerry Seinfeld
 <!-- * **The Omnivore's Dilemma**: *A Natural History of Four Meals* -  Michael Pollan -->
 
 ## Read
 ---
 
 ### 2021
+* **Is This Anything?** - Jerry Seinfeld <br />
+
 * **Zen and the Art of Motorcycle Maintenance**: *An Inquiry into Values* -  Robert M. Pirsig <br />
 
 * **Look at the Birdie** -   Kurt Vonnegut <br />
