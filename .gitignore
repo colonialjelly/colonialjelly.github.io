@@ -1,6 +1,6 @@
 .DS_Store
 *.gem
-*~
+*.gemspec
 .bundle
 .jekyll-cache
 .jekyll-metadata
