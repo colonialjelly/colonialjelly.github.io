@@ -7,26 +7,38 @@ I use this page as my reading log. If you have any suggestions I'd love to hear 
 
 ## Currently reading
 * **Salt, Fat, Acid, Heat**: *Mastering the Elements of Good Cooking* -  Samin Nosrat <br />
-<!-- * **The Omnivore's Dilemma**: *A Natural History of Four Meals* -  Michael Pollan -->
 
 ## Read
 ---
 
 ### 2021
+* **The Simple Path to Wealth**: *Your road map to financial independence and a rich, free life* - J.L. Collins <br />
+  A book that I would recommend anyone interested in investments to read. It is extremely accessible and down to earth in it's tone. It cuts away all the usual BS you would see in investment books. This is my take away from the book in one sentence: invest early, invest in low fee index funds, ride the ups and downs of the market and watch it grow over time.
+
+* **The Hard Thing About Hard Things**: *Building a Business When There Are No Easy Answers* - Ben Horowitz <br />
+  Basically a how-to guide for CEOs. While certain lessons and points in the book are exclusive to tech startups, there's still plenty of wisdom that he provides that is generally applicable. Some of the author's comparisons to war and battle come off a little cringey, but I still thoroughly enjoyed reading the book and I think I have a better understanding of management principles CEOs apply at the highest level.
+
 * **Robin** - Dave Itzkoff <br />
+  A wonderful and tragic tale of one of the most special comedians and actors of our lifetime. A true genius he was. There are a lot of things that I learned about his life and death that I had no idea about. I think the author does a great job in bringing the reader really close to Robin Williams the person rather than the celebrity.
 
 * **Antifragile**: *Things That Gain from Disorder* -  Nassim Nicholas Taleb <br />
+  Taleb's ideas in the book are thought-provoking and insightful as always but the writing is a little convoluted. I wish he'd work on writing more concisely. For instance, I think examples are an excellent tool for explaining concepts, but if you provide too many examples the point gets diluted and the idea sticks less in people's head. For everything he introduces, he adds way to many examples for it to be clear. Overall, good book but I'd recommend reading a summary or maybe listening to his talks around the subject.
 
 * **Is This Anything?** - Jerry Seinfeld <br />
+  Jerry Seinfeld's standup material over the decades, with a few bits of autobiographical material in-between. Jerry (yes, we're on first name basis) is one of those comedians that is as funny through text as he is with his own delivery. I would definitely recommend reading this out loud, maybe with a friend or two. Expect to struggle reading through your laughter.
 
-* **Zen and the Art of Motorcycle Maintenance**: *An Inquiry into Values* -  Robert M. Pirsig <br />
+* **Zen and the Art of Motorcycle Maintenance**: *An Inquiry into Values* - Robert M. Pirsig <br />
+  I went into this book solely off of the title, it just seemed really intriguing. I came out on the other end realizing that I do not know enough philosophy and maybe I don't have enough maturity to have grasped the many concepts that the author is discussing. It's a book that I would have to revisit in ten (maybe 20) years to fully appreciate it.
 
-* **Look at the Birdie** -   Kurt Vonnegut <br />
+* **Look at the Birdie** - Kurt Vonnegut <br />
+  A collection of brilliant short stories by the great Kurt Vonnegut (my favorite author).
 
 ### 2020
 * **Based on a True Story**: *Not a Memoir* -  Norm MacDonald <br />
+  This book is exactly what you'd imagine Norm MacDonald would write. It's weird, it's confusing but most importantly it's hilarious. Norm has this incredible skill to make you doubt everything he says but still come off as an extremely honest person.
 
-* **Gift of Imperfection** -  Brené Brown <br />
+* **Gift of Imperfection** -  Brené Brown  <br />
+  Brené Brown has an amazing ability to deliver useful lessons and actionable points with a compassionate and comforting voice. While I think this book won't be everyone's cup of tea, I think it's still a valuable read.
 
 * **Drive**: *The Surprising Truth About What Motivates Us* - Daniel H. Pink <br />
   According to Pink, there is a misalignment between what science of motivation says and what the industry is doing. He argues that the standard reward system of carrots and sticks does not work for jobs that require creativity. Setting up an if-then reward system can lead to diminished motivation, decrease of creativity and quality of work. He instead offers another system, Motivation 3.0 as he calls it, based on the assumption that people have an innate desire to work on challenging problems. He identifies three key factors to this type of a motivation: the need for autonomy, need for mastery and need for purpose. Setting up an environment where these three conditions are met can enable people to be intrinsically motivated or in other words, they will be driven from the inside rather than having to establish external reward systems.
@@ -41,7 +53,7 @@ I use this page as my reading log. If you have any suggestions I'd love to hear 
   A really interesting, well-researched book about social epidemics. Malcom Gladwell dissects the process of how certain ideas gain traction and eventually reach a tipping point that brings them into widespread adoption. He proposes a theory on the spread of ideas with three central concepts: 1) *The Law of the Few*: There are three different categories of people that are essential contributors to social epidemics: connectors, mavens and salesmen. Each of these people have a certain special talent that make them crucial for rapid spread of ideas. 2) *The Stickiness Factor*: The presentation of the message can either make or break the spread. The idea has to have a certain stickiness to it, i.e when heard by people it has to remain in their minds.  In general, it's hard to know what type of message will stick, usually experimentation and refinement is required. 3) *The Power of Context*: How an idea is spread is highly dependent on the context of when it is first heard. Human behavior can have a large variance depending on the context and even the tiniest changes in the environment can have hugely consequential results.
 
 * **Bossypants** - Tina Fey <br />
-  A hilarious and insightful look into Tina Fey's life and career. It's a light and entertaining read, although I just found out that there's an audio version narrated by Tina herself and I'd imagine that's a much better way to experience this book.
+  A hilarious and insightful look into Tina Fey's life and career. It's a light and entertaining read. Although after reading it, I found out that there's an audio version narrated by Tina herself and I'd imagine that's a much better way to experience this book.
 
 * **Mindset**: *The New Psychology of Success* - Carol S. Dweck <br />
   There are two types of mindsets: fixed mindset and growth mindset. A person with a fixed mindset thinks that theirs and other's abilities are fixed and are mostly inherent. Either you're smart or not, either you're talented or you're not, there's little or no room for improvement. People with this mindset dwell too much on numbers that "measure" their capabilities and are easily dissuaded by challenging endeavors. On the other hand, people with a grow mindset think that talents can be acquired and essentially nothing is fixed. A challenge for them is nothing but an opportunity to learn new things. The book provides an insightful look into both type of mindsets, with plenty of examples that illustrate how each mindset reveals itself in different settings such as education, sports, business, relationships etc. The author is a professor of Psychology at Stanford, and this book is essentially a summary of her research. The book is extremely accessible and insightful.
