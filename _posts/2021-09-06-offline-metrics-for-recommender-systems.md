@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  Offline Metrics for Recommender Systems
-categories: [Tutorial]
+title:  Some Offline Metrics for Recommender Systems
+categories: [Tutorial, Recommender Systems]
 excerpt:
 mathjax: true
 published: true
