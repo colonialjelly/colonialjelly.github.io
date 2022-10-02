@@ -6,29 +6,46 @@ permalink: /reading/
 I use this page as my reading log. If you have any suggestions I'd love to hear it!
 
 ## Currently reading
-* **Salt, Fat, Acid, Heat**: *Mastering the Elements of Good Cooking* -  Samin Nosrat <br />
+* **The Intelligent Investor** -  Benjamin Graham <br />
 
 ## Read
 ---
 
+### 2022
+* **Zen Jiu Jitsu**: *White to Blue* -  Oliver Staark <br />
+* **A Fighter's Heart**: *One Man's Journey Through the World of Fighting* -  Sam Sheridan <br />
+* **The Hidden Tools of Comedy**: *The Serious Business of Being Funny* -  Steve Kaplan <br />
+* **10% Happier** -  Dan Harris <br />
+* **The Hungry Brain** -  Stephan J. Guyenet <br />
+
 ### 2021
+* **Salt, Fat, Acid, Heat**: *Mastering the Elements of Good Cooking* -  Samin Nosrat <br />
+  A book that got me into cooking! If you've ever wondered why certain ingredients work together but don't necessarily want to get down to the food science levels, read this book. First half details the four elements of cooking with each having a dedicated chapter, the second half of the book is a bunch of recipes where you can apply the knowledge learned in the first half.
+
+* **Open**: *An Autobiography* - Andre Agassi <br />
+  An excellent read even if you've never seen a tennis match in your life. Andre Agassi is as honest and authentic as they come. It reads more like a novel than an autobiography.
+
+* **Quitters Never Win**: *My Life in UFC* - Michael Bisping <br />
+  The cliche of fighter's being a different breed cannot be more true with Michael Bisping. The amount of pain (both physical and mental) this man had to walk through to get to the position he is in, is absolutely inspirational.
+
 * **The Simple Path to Wealth**: *Your road map to financial independence and a rich, free life* - J.L. Collins <br />
-  A book that I would recommend anyone interested in investments to read. It is extremely accessible and down to earth in it's tone. It cuts away all the usual BS you would see in investment books. This is my take away from the book in one sentence: invest early, invest in low fee index funds, ride the ups and downs of the market and watch it grow over time.
+  A book that I think everyone should read, irregardless of if you're interested in investments or not. It is extremely accessible and down to earth in it's tone. The advice in the book can essentially be distilled down to a single sentence: invest early, invest in low fee index funds, ride the ups and downs of the market and watch it grow over time.
 
 * **The Hard Thing About Hard Things**: *Building a Business When There Are No Easy Answers* - Ben Horowitz <br />
-  Basically a how-to guide for CEOs. While certain lessons and points in the book are exclusive to tech startups, there's still plenty of wisdom that he provides that is generally applicable. Some of the author's comparisons to war and battle come off a little cringey, but I still thoroughly enjoyed reading the book and I think I have a better understanding of management principles CEOs apply at the highest level.
+  Basically a how-to guide for CEOs. While certain lessons and points in the book are exclusive to tech startups, there's still plenty of wisdom in there that is generally applicable to any area. I think some of the author's comparisons to war and battle come off a little cringey, but I nonetheless thoroughly enjoyed reading the book and I think I have a better understanding of management principles CEOs apply at the highest level.
 
 * **Robin** - Dave Itzkoff <br />
-  A wonderful and tragic tale of one of the most special comedians and actors of our lifetime. A true genius he was. There are a lot of things that I learned about his life and death that I had no idea about. I think the author does a great job in bringing the reader really close to Robin Williams the person rather than the celebrity.
+  A wonderful and tragic tale of one of the most special comedians and actors of our lifetime. A true genius.
+  I think the author does a brilliant job in bringing the reader really close to Robin Williams the person rather than the celebrity.  
 
 * **Antifragile**: *Things That Gain from Disorder* -  Nassim Nicholas Taleb <br />
-  Taleb's ideas in the book are thought-provoking and insightful as always but the writing is a little convoluted. I wish he'd work on writing more concisely. For instance, I think examples are an excellent tool for explaining concepts, but if you provide too many examples the point gets diluted and the idea sticks less in people's head. For everything he introduces, he adds way to many examples for it to be clear. Overall, good book but I'd recommend reading a summary or maybe listening to his talks around the subject.
+  Taleb's ideas are thought-provoking and insightful as always, but his way of explaining concepts lacks clarity. I think he sometimes suffers from overexplaining by either providing too much detail or too many examples, which I think causes his ideas to be less sticky.
 
 * **Is This Anything?** - Jerry Seinfeld <br />
   Jerry Seinfeld's standup material over the decades, with a few bits of autobiographical material in-between. Jerry (yes, we're on first name basis) is one of those comedians that is as funny through text as he is with his own delivery. I would definitely recommend reading this out loud, maybe with a friend or two. Expect to struggle reading through your laughter.
 
 * **Zen and the Art of Motorcycle Maintenance**: *An Inquiry into Values* - Robert M. Pirsig <br />
-  I went into this book solely off of the title, it just seemed really intriguing. I came out on the other end realizing that I do not know enough philosophy and maybe I don't have enough maturity to have grasped the many concepts that the author is discussing. It's a book that I would have to revisit in ten (maybe 20) years to fully appreciate it.
+  I've seen this book on many people's must-read lists, so I went into this book with high expectations. I came out on the other end a little confused on why it gets such praise. It was a real struggle finishing this book.
 
 * **Look at the Birdie** - Kurt Vonnegut <br />
   A collection of brilliant short stories by the great Kurt Vonnegut (my favorite author).
