@@ -7,7 +7,7 @@ mathjax: true
 published: true
 ---
 
-In the previous post we covered a method that approximates the Jaccard similarity by constructing a signature of the original representation. This allowed us to significantly speed up the process of computing similarities between sets. But remember that the goal is to find all similar items to any given item. This requires to compute the similarities between all pairs of items in the dataset. If we go back to our example, Spotify has about 1.2 million artists on their platform. Which means that to find all similar artists we need to make 1.4 trillion comparisons... ahm ... how about no. We're going to do something different. We're instead going to use Locality Sensitive Hashing (LSH) to identify candidate pairs and only compute the similarities on those. This will substantially reduce the computational burden.
+In the [previous post](https://giorgi.tech/blog/minhashing/) we covered a method that approximates the Jaccard similarity by constructing a signature of the original representation. This allowed us to significantly speed up the process of computing similarities between sets. But remember that the goal is to find all similar items to any given item. This requires to compute the similarities between all pairs of items in the dataset. If we go back to our example, Spotify has about 1.2 million artists on their platform. Which means that to find all similar artists we need to make 1.4 trillion comparisons... ahm ... how about no. We're going to do something different. We're instead going to use Locality Sensitive Hashing (LSH) to identify candidate pairs and only compute the similarities on those. This will substantially reduce the computational time.
 
 LSH is a neat method to find similar items without computing similarities between every possible pair. It works by having items that have high similarity be hashed to the same bucket with high probability. This allows us to only measure similarities between items that land in the same bucket rather than comparing every possible pair of items. If two items are hashed to the same bucket, we consider them as candidate pairs and proceed with computing their similarity.
 
@@ -17,7 +17,7 @@ LSH is a neat method to find similar items without computing similarities betwee
 
 LSH is a broad term that refers to the collection of hashing methods that preserve similarities. In this post we're going to be discussing one particular such method that efficiently computes candidate pairs for items that are in the form of minhash signatures. It is a pretty easy procedure both algorithmically and conceptually. It uses the intuition that if two items have identical signature parts in some random positions then they're probably similar. This is the idea we're going to turn to in order to identify candidate pairs.
 
-In order to proceed we first need a signature matrix, if you don't recall how a signature matrix is computed you can refer to my previous post. Let's assume that a signature matrix is provided to us:
+In order to proceed we first need a signature matrix, if you don't recall how a signature matrix is computed you can refer to my previous post on [min hashing](https://giorgi.tech/blog/minhashing/). Let's assume that a signature matrix is provided to us:
 
 <img class="center" src="/images/sig.png" width="50%">
 
@@ -54,7 +54,7 @@ def minhash_lsh(sig_matrix, num_bands):
     return bands_buckets
 ```
 
-Now you may have noticed that $$b$$ and $$r$$ are parameters that we completely arbitrarily picked. To understand the significance of them we have to go back a little bit. Recall that the probability of two items having matching the same min hash value in any of the rows of the signature matrix is equal to the Jaccard similarity of those two items. We can use this fact to compute the probability of these two items being candidate pairs. Let $$s$$ be the Jaccard similarity, then:
+Now you may have noticed that $$b$$ and $$r$$ are parameters that we completely arbitrarily picked. To understand the significance of them we have to go back a little bit. Recall that the probability of two items having the same min hash value in any of the rows of the signature matrix is equal to the Jaccard similarity of those two items. We can use this fact to compute the probability of these two items being candidate pairs. Let $$s$$ be the Jaccard similarity, then:
 
 - If each band has $$r$$ rows, the probability that the signatures agree on the entire band is: $$s^r$$
 - The inverse of this, the probability that they do not agree is $$1 - s^r$$
@@ -73,7 +73,7 @@ As we can see the plot is shifted to right side, this means that in order for tw
 
 Notice how the plot has shifted to the left. With these parameters if two candidates have similarity $$0.5$$ we have $$0.57$$ probability of them being candidates.
 
-In the beginning of the post I mentioned that we would only cover a single instance of an LSH method. The method we described can work really great for approximating nearest neighbours when your data points are sets but what if our data points are vectors in some high dimensional space? Luckily, there are methods that work on other types of data. Check out [Chapter 3.6 of Mining Massive Datatests](http://infolab.stanford.edu/~ullman/mmds/ch3.pdf) if you want to know more about what LSH is formally and what other techniques are there.
+In the beginning of the post I mentioned that we would only cover a single instance of an LSH method. The method we described can work really great for approximating nearest neighbours when your data points are sets but what if our data points are vectors in some high dimensional space? Luckily, there are methods that work on other types of data. Check out [Chapter 3.6 of Mining Massive Datasets](http://infolab.stanford.edu/~ullman/mmds/ch3.pdf) if you want to know more about what LSH is formally and what other techniques are there.
 
 
 [^1]: We can use the built-in hashing function of whatever programming language we're using.
