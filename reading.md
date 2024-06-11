@@ -6,12 +6,21 @@ permalink: /reading/
 I use this page as my reading log. If you have any suggestions I'd love to hear it!
 
 ## Currently reading
-* **The Intelligent Investor** -  Benjamin Graham <br />
+* **Anxious People** - Fredrik Backman  <br />
 
 ## Read
 ---
+### 2024
+* **My Year of Rest and Relaxation** - Ottessa Moshfegh <br />
+
+### 2023
+* **Sick in the Head**: *Conversations About Life and Comedy* - Judd Apatow <br />
+* **Illusions**:  *The Adventures of a Reluctant Messiah* - Richard Bach <br />
+* **A Fighter's Mind**: *Inside the Mental Game* - Sam Sheridan <br />
+* **Funky**:  *My Defiant Path Through the Wild World of Combat Sports* - Ben Askren <br />
 
 ### 2022
+* **The Intelligent Investor** -  Benjamin Graham <br />
 * **Zen Jiu Jitsu**: *White to Blue* -  Oliver Staark <br />
 * **A Fighter's Heart**: *One Man's Journey Through the World of Fighting* -  Sam Sheridan <br />
 * **The Hidden Tools of Comedy**: *The Serious Business of Being Funny* -  Steve Kaplan <br />
