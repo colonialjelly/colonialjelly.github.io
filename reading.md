@@ -6,11 +6,13 @@ permalink: /reading/
 I use this page as my reading log. If you have any suggestions I'd love to hear it!
 
 ## Currently reading
-* **Anxious People** - Fredrik Backman  <br />
+* **Kitchen Confidential**: *Adventures in the Culinary Underbelly* - Anthony Bourdain  <br />
 
 ## Read
 ---
 ### 2024
+* **The Old Man and the Sea** - Ernest Hemingway <br />
+* **Anxious People** - Fredrik Backman  <br />
 * **My Year of Rest and Relaxation** - Ottessa Moshfegh <br />
 
 ### 2023
