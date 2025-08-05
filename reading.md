@@ -6,11 +6,19 @@ permalink: /reading/
 I use this page as my reading log. If you have any suggestions I'd love to hear it!
 
 ## Currently reading
-* **Kitchen Confidential**: *Adventures in the Culinary Underbelly* - Anthony Bourdain  <br />
+* **Post Office* - Charles Bukowski <br />
 
 ## Read
 ---
+### 2025
+* **The Stranger** - Albert Camus <br />
+* **The Dictator's Handbook**: *Why Bad Behavior is Almost Always Good Politics* - Bruce Bueno de Mesquita, Alastair Smith <br />
+* **Britt-Marie Was Here** - Fredrik Backman <br />
+* **Dataclysm**: *Love, Sex, Race, and Identity--What Our Online Lives Tell Us about Our Offline Selves* - Christian Rudder  <br />
+* **Thoughts Without A Thinker**: *Psychotherapy from a Buddhist Perspective* - Mark Epstein  <br />
+
 ### 2024
+* **Kitchen Confidential**: *Adventures in the Culinary Underbelly* - Anthony Bourdain  <br />
 * **The Old Man and the Sea** - Ernest Hemingway <br />
 * **Anxious People** - Fredrik Backman  <br />
 * **My Year of Rest and Relaxation** - Ottessa Moshfegh <br />
