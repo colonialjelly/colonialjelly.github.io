@@ -6,11 +6,12 @@ permalink: /reading/
 I use this page as my reading log. If you have any suggestions I'd love to hear it!
 
 ## Currently reading
-* **Post Office* - Charles Bukowski <br />
+* **Dopamine Nation** - Dr. Anna Lembke <br />
 
 ## Read
 ---
 ### 2025
+* **Post Office** - Charles Bukowski <br />
 * **The Stranger** - Albert Camus <br />
 * **The Dictator's Handbook**: *Why Bad Behavior is Almost Always Good Politics* - Bruce Bueno de Mesquita, Alastair Smith <br />
 * **Britt-Marie Was Here** - Fredrik Backman <br />
