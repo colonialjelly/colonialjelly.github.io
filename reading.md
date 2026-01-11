@@ -6,11 +6,13 @@ permalink: /reading/
 I use this page as my reading log. If you have any suggestions I'd love to hear it!
 
 ## Currently reading
-* **Dopamine Nation** - Dr. Anna Lembke <br />
+* **Digital Minimalism** - Cal Newport <br />
 
 ## Read
 ---
 ### 2025
+* **This Naked Mind** - Annie Grace <br />
+* **Dopamine Nation** - Dr. Anna Lembke <br />
 * **Post Office** - Charles Bukowski <br />
 * **The Stranger** - Albert Camus <br />
 * **The Dictator's Handbook**: *Why Bad Behavior is Almost Always Good Politics* - Bruce Bueno de Mesquita, Alastair Smith <br />
