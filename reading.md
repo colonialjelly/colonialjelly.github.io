@@ -6,10 +6,18 @@ permalink: /reading/
 I use this page as my reading log. If you have any suggestions I'd love to hear it!
 
 ## Currently reading
-* **Digital Minimalism** - Cal Newport <br />
+* **The Midnight Library** - Matt Haig <br />
+* **Atomic Habits** - James Clear <br />
 
 ## Read
 ---
+### 2026
+* **The Rosie Project** - Graeme Simsion <br />
+A funny and heartwarming book about a professor who is looking for a wife but lacks the social skills to meet and connect with women. I recently found out it is going to be made into a movie directed by Tom Holland, curious what that will be like. 
+
+* **Digital Minimalism** - Cal Newport <br />
+I intentionally started the year by reading this book because my biggest goal this year is to reduce the time I spend on digitally induced entertainment. Since reading it, I’ve deleted all social media apps from my phone and installed Cold Turkey on my laptop. All social media and entertainment feeds are blocked at all times, though I can unlock them for a few hours a day on my laptop. We all need to take our attention back.
+
 ### 2025
 * **This Naked Mind** - Annie Grace <br />
 * **Dopamine Nation** - Dr. Anna Lembke <br />
