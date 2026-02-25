@@ -6,17 +6,22 @@ permalink: /reading/
 I use this page as my reading log. If you have any suggestions I'd love to hear it!
 
 ## Currently reading
-* **The Midnight Library** - Matt Haig <br />
 * **Atomic Habits** - James Clear <br />
 
 ## Read
 ---
 ### 2026
+* **Dark Matter** - Blake Crouch <br />
+I feel like this book is a sibling to The Midnight Library, but a much darker, more intense version. I don't usually read sci-fi, yet this one was genuinely fun and gripping, fast-paced, mind-bending, and hard to put down. That said, I don't think I personally gained any deep insights from the book, but entertaining nonetheless.
+
+* **The Midnight Library** - Matt Haig <br />
+What if you could see what your life would look like if you had made different choices, not only see it, but fully live it? We've all wondered about the roads not taken and that's exactly the idea this book explores. This book got mixed reviews from people around me but I enjoyed it.
+
 * **The Rosie Project** - Graeme Simsion <br />
 A funny and heartwarming book about a professor who is looking for a wife but lacks the social skills to meet and connect with women. I recently found out it is going to be made into a movie directed by Tom Holland, curious what that will be like. 
 
 * **Digital Minimalism** - Cal Newport <br />
-I intentionally started the year by reading this book because my biggest goal this year is to reduce the time I spend on digitally induced entertainment. Since reading it, I’ve deleted all social media apps from my phone and installed Cold Turkey on my laptop. All social media and entertainment feeds are blocked at all times, though I can unlock them for a few hours a day on my laptop. We all need to take our attention back.
+I intentionally started the year by reading this book because my biggest goal this year is to reduce the time I spend on digitally induced entertainment. Since reading it, I've deleted all social media apps from my phone and installed Cold Turkey on my laptop. All social media and entertainment feeds are blocked at all times, though I can unlock them for a few hours a day on my laptop. We all need to take our attention back.
 
 ### 2025
 * **This Naked Mind** - Annie Grace <br />
