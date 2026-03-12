@@ -6,11 +6,15 @@ permalink: /reading/
 I use this page as my reading log. If you have any suggestions I'd love to hear it!
 
 ## Currently reading
-* **Atomic Habits** - James Clear <br />
+* **Courage to be Disliked** - Fumitake Koga and Ichiro Kishimi <br />
+* **High Fidelity** - Nick Hornby
 
 ## Read
 ---
 ### 2026
+* **Atomic Habits** - James Clear <br />
+This book has been on my shelf for ages and I finally got around to reading it. It's a pretty good collection of tips and tricks for forming or removing habits. I feel like I knew most of this stuff already, but it was still nice to validate some of the strategies I have been using.
+
 * **Dark Matter** - Blake Crouch <br />
 I feel like this book is a sibling to The Midnight Library, but a much darker, more intense version. I don't usually read sci-fi, yet this one was genuinely fun and gripping, fast-paced, mind-bending, and hard to put down. That said, I don't think I personally gained any deep insights from the book, but entertaining nonetheless.
 
