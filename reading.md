@@ -7,11 +7,13 @@ I use this page as my reading log. If you have any suggestions I'd love to hear 
 
 ## Currently reading
 * **Courage to be Disliked** - Fumitake Koga and Ichiro Kishimi <br />
-* **High Fidelity** - Nick Hornby
 
 ## Read
 ---
 ### 2026
+* **High Fidelity** - Nick Hornby <br />
+While this book was certainly funny and entertaining overall, I absolutely hated the protagonist. I'm excited to watch the movie though. I've heard it's one of the best book to movie adaptations!
+
 * **Atomic Habits** - James Clear <br />
 This book has been on my shelf for ages and I finally got around to reading it. It's a pretty good collection of tips and tricks for forming or removing habits. I feel like I knew most of this stuff already, but it was still nice to validate some of the strategies I have been using.
 
