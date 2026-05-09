@@ -6,11 +6,17 @@ permalink: /reading/
 I use this page as my reading log. If you have any suggestions I'd love to hear it!
 
 ## Currently reading
-* **Courage to be Disliked** - Fumitake Koga and Ichiro Kishimi <br />
+* **Less** - 	Andrew Sean Greer <br />
 
 ## Read
 ---
 ### 2026
+* **Piranesi** - Susanna Clarke <br />
+It's a beautifully written book, but the number of pages dedicated to describing the world rather than advancing it was a little above my threshold. I'm aware that I'm in the minority though, I think most people will thoroughly enjoy this book. I've always struggled with world-building type prose. I think my mind does not process that type of language well. This is why I've been trying to read more fiction lately, to hopefully build that muscle. Maybe I'll revisit this book in the future and see if there's any progress. The book is apparently being adapted into a stop-motion animated film. I think it's an excellent candidate for a visual adaptation, and I'm very excited to see how it turns out!
+
+* **Courage to be Disliked** - Fumitake Koga and Ichiro Kishimi <br />
+This book will challenge almost everything you know about human psychology. This was the first time I had ever heard of Adlerian psychology, and it intrigued me right away. One of the most surprising ideas in the book is the notion that trauma does not exist; rather, we choose to use it to justify our current actions and flaws. We are fully capable of changing every aspect of our lives if we first accept our circumstances and then find the courage to change them. The book is written as a dialogue between a young man and a professor. The young man is a little annoying, but I still enjoyed the format.
+
 * **High Fidelity** - Nick Hornby <br />
 While this book was certainly funny and entertaining overall, I absolutely hated the protagonist. I'm excited to watch the movie though. I've heard it's one of the best book to movie adaptations!
 
