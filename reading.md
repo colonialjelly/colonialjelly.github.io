@@ -6,11 +6,17 @@ permalink: /reading/
 I use this page as my reading log. If you have any suggestions I'd love to hear it!
 
 ## Currently reading
-* **Less** - 	Andrew Sean Greer <br />
+* **Women** - Charles Bukowski <br />
 
 ## Read
 ---
 ### 2026
+* **On Drinking** - Charles Bukowski <br />
+A collection of writings (poems, letters, interviews, and prose) about Bukowski's complicated, sad, and fascinating relationship with alcohol. One of the lines that really stuck with me from the book is: "Drinking is a form of suicide where you're allowed to return to life and begin all over the next day."
+
+* **Less** - 	Andrew Sean Greer <br />
+Funny and charming, but not what I expected a Pulitzer Prize winner to be. There were times I found myself a little bored with the book, especially towards the beginning, but it definitely got better towards the end.
+
 * **Piranesi** - Susanna Clarke <br />
 It's a beautifully written book, but the number of pages dedicated to describing the world rather than advancing it was a little above my threshold. I'm aware that I'm in the minority though, I think most people will thoroughly enjoy this book. I've always struggled with world-building type prose. I think my mind does not process that type of language well. This is why I've been trying to read more fiction lately, to hopefully build that muscle. Maybe I'll revisit this book in the future and see if there's any progress. The book is apparently being adapted into a stop-motion animated film. I think it's an excellent candidate for a visual adaptation, and I'm very excited to see how it turns out!
 
