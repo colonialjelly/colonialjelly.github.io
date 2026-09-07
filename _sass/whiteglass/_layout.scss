@@ -61,7 +61,11 @@
       &:not(:last-child) {
         margin-right: 0;
       }
-      margin-left: 20px;
+      margin-left: 0;
+    }
+
+    .dot {
+      margin-left: 10px;
     }
   }
 }
