@@ -6,11 +6,17 @@ permalink: /reading/
 I use this page as my reading log. If you have any suggestions I'd love to hear it!
 
 ## Currently reading
-* **Women** - Charles Bukowski <br />
+
 
 ## Read
 ---
 ### 2026
+* **Bright Lights, Big City** - Jay McInerney
+A young guy living a hedonistic lifestyle in early '80s Manhattan, mainly as a coping mechanism for a personal loss. Entertaining and surprisingly deep. 
+
+* **Women** - Charles Bukowski <br />
+Although Bukowski comes off as a complete asshole there's something about his nihilism that feels refreshing. He does not give a single damn about what anyone thinks of him. It feels freeing to exclude yourself entirely from societal norms and do things your own way. It's not a great way to make friends, but it is a great way to reach some form of freedom, although happiness may or may not come with it (most likely not). The book gets a little repetitive toward the end, but overall enjoyed it.
+
 * **On Drinking** - Charles Bukowski <br />
 A collection of writings (poems, letters, interviews, and prose) about Bukowski's complicated, sad, and fascinating relationship with alcohol. One of the lines that really stuck with me from the book is: "Drinking is a form of suicide where you're allowed to return to life and begin all over the next day."
 
