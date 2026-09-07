@@ -11,7 +11,7 @@ I use this page as my reading log. If you have any suggestions I'd love to hear 
 ## Read
 ---
 ### 2026
-* **Bright Lights, Big City** - Jay McInerney
+* **Bright Lights, Big City** - Jay McInerney <br />
 A young guy living a hedonistic lifestyle in early '80s Manhattan, mainly as a coping mechanism for a personal loss. Entertaining and surprisingly deep. 
 
 * **Women** - Charles Bukowski <br />
