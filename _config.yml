@@ -32,7 +32,7 @@ exclude:
   - vendor
 
 # Social media
-twitter_username: colonialjelly
+twitter_username:
 twitter_image: 
 facebook_app_id:
 facebook_image:
@@ -44,10 +44,10 @@ footer_links:
   url: mailto:giorgi@cs.utah.edu
   icon: fas fa-at
 - title: Twitter
-  url: https://twitter.com/colonialjelly
+  url: 
   icon: fab fa-twitter
 - title: Github
-  url: https://github.com/colonialjelly
+  url: 
   icon: fab fa-github
 - title: LinkedIn
   url: https://www.linkedin.com/in/giorgikvernadze/
