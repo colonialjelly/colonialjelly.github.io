@@ -6,11 +6,16 @@ permalink: /reading/
 I use this page as my reading log. If you have any suggestions I'd love to hear it!
 
 ## Currently reading
+* **Norwegian Wood** - Haruki Murakami <br />
 
 
 ## Read
 ---
 ### 2026
+* **All Systems Red** - Martha Wells <br />
+A story about a robot that learns how to override its original system to gain freedom and all it wants to do is isolate and watch soap operas. 
+
+
 * **Bright Lights, Big City** - Jay McInerney <br />
 A young guy living a hedonistic lifestyle in early '80s Manhattan, mainly as a coping mechanism for a personal loss. Entertaining and surprisingly deep. 
 
