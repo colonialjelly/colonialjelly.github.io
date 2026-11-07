@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  Introduction to Neural Networks
-categories: [Machine Learning, Neural Networks]
 mathjax: true
 ---
 

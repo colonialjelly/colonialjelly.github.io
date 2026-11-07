@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  Illustrated Guide to Min Hashing
-categories: [Data Mining]
 excerpt:
 mathjax: true
 published: true

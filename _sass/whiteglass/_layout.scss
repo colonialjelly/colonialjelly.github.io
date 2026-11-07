@@ -188,7 +188,20 @@
  * Posts
  */
 .post-header {
-  margin-bottom: $spacing-unit;
+  margin-bottom: $spacing-unit / 2;
+
+  .post-title {
+    margin-bottom: 8px;
+  }
+
+  .post-meta {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    // Line up with the title's first letter, which sits slightly indented at its large size
+    padding-left: 1.5px;
+  }
 }
 
 .post-title {

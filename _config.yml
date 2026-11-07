@@ -58,7 +58,6 @@ footer_links:
 
 # Plugins
 plugins:
-  - jekyll-archives
   - jekyll-paginate
   - jekyll-sitemap
   - jemoji
@@ -80,13 +79,3 @@ kramdown:
   footnote_nr: 1
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   toc_levels: 1..6
-
-# jekyll-archives
-jekyll-archives:
-  enabled:
-    - categories
-    - tags
-  layout: category_archives
-  permalinks:
-    category: /categories/:name/
-    tag: /tags/:name/

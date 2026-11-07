@@ -15,6 +15,13 @@ layout: default
 
       <li{% if lang != empty %} lang="{{ lang }}"{% endif %}>
         <header class="post-header">
+          <p class="post-meta">
+            {{ post.date | date: "%b %-d, %Y" }}
+            {% if post.external-url %}
+              • <a href="{{ post.url | relative_url }}">Permalink</a>
+            {% endif %}
+          </p>
+
           <h1 class="post-title">
             {% if post.external-url %}
               <a class="post-link" href="{{ post.external-url }}">{{ post.title | escape }} &rarr;</a>
@@ -22,16 +29,6 @@ layout: default
               <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
             {% endif %}
           </h1>
-
-          <p class="post-meta">
-            {{ post.date | date: "%b %-d, %Y" }}
-            {% if post.categories != empty or post.tags != empty %}
-              {% include category_links.html categories=post.categories tags=post.tags %}
-            {% endif %}
-            {% if post.external-url %}
-              • <a href="{{ post.url | relative_url }}">Permalink</a>
-            {% endif %}
-          </p>
         </header>
 
         <div class="post-content">

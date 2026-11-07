@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  Some Offline Metrics for Recommender Systems
-categories: [Recommender Systems]
 excerpt:
 mathjax: true
 published: true

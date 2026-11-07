@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  Pseudo features
-categories: [Machine Learning]
 mathjax: true
 published: false
 ---
