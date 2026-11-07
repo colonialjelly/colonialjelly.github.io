@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Locality Sensitive Hashing for MinHash
-categories: [Data Mining, Tutorial]
+categories: [Data Mining]
 excerpt:
 mathjax: true
 published: true

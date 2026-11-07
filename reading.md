@@ -6,12 +6,19 @@ permalink: /reading/
 I use this page as my reading log. If you have any suggestions I'd love to hear it!
 
 ## Currently reading
-* **Norwegian Wood** - Haruki Murakami <br />
+* **Confessions of a Public Speaker** - Scott Berkun <br />
 
 
 ## Read
 ---
 ### 2026
+* **Project Hail Mary** - Andy Weir <br />
+Not the typical genre I consume, but I wanted to read it due to the overwhelmingly positive reception. I really enjoyed it, it's an uplifting, fast-paced read. I haven't seen the movie yet, so I can't wait to check it out!
+
+* **Norwegian Wood** - Haruki Murakami <br />
+Arguably Murakami's most famous novel. I enjoyed the read overall, but the female characters felt pretty unrealistic. Some written choices read more like a teenage boy's fantasy than a 38-year-old author's grounded character study.
+
+
 * **All Systems Red** - Martha Wells <br />
 A story about a robot that learns how to override its original system to gain freedom and all it wants to do is isolate and watch soap operas. 
 

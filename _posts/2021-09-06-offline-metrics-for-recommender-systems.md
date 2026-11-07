@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Some Offline Metrics for Recommender Systems
-categories: [Tutorial, Recommender Systems]
+categories: [Recommender Systems]
 excerpt:
 mathjax: true
 published: true
@@ -10,11 +10,12 @@ published: true
 
 Evaluating recommender systems is notoriously tricky as offline measurements don't always align with online outcomes, but offline metrics nonetheless have an important place in the toolset of a recommender system's engineer. In this post, I'll cover some popular offline metrics that are used for evaluating recommender systems.
 
-<!-- more -->
 
 <!-- For all of the metrics, I'll assume that we have a recommender system that produces $$k$$ recommendations in descending order of relevance for each given query user, where $$k$$ is the maximum number of recommendations we're allowed to present to a user. -->
 
 Since the whole point of a recommender system is to aid the user in discovery by reducing the amount of items they have to consider, we will assume that our recommender system is only allowed to make a maximum of $$k$$ recommendations for each user. We'll further assume that the recommendations are outputted as a ranked list, where higher positions imply that the recommender system has higher confidence or score for those items.
+
+<!-- more -->
 
 To give more concrete context to the metric calculation, let's imagine that we created a music recommendation system and we want to evaluate how well it works on some held-out data. Our evaluation data will be split across each user, that is for each user we'll have some data that will be fed to the recommender system as input and some hidden data that will be used to evaluate the output of the recommender system.  
 

@@ -96,6 +96,16 @@
   margin-bottom: 0.5em;
 }
 
+.icon-google-scholar {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  background-color: currentColor;
+  -webkit-mask: url("/assets/img/google-scholar.svg") center / contain no-repeat;
+  mask: url("/assets/img/google-scholar.svg") center / contain no-repeat;
+}
+
 /**
  * Page content
  */
