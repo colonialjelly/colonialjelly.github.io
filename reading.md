@@ -6,14 +6,17 @@ permalink: /reading/
 I use this page as my reading log. If you have any suggestions I'd love to hear it!
 
 ## Currently reading
-* **Confessions of a Public Speaker** - Scott Berkun <br />
+* **The Things We Never Say** - Elizabeth Strout <br />
 
 
 ## Read
 ---
 ### 2026
+* **Confessions of a Public Speaker** - Scott Berkun <br />
+It's a collection of helpful tips that are all grounded in the author's own experience as a professional public speaker. I was surprised by how much I enjoyed the book; it almost felt like I was reading someone's memoir rather than a guide. A couple of things that really stuck with me: all public speaking is a performance, so stop pretending that it's not, and even if the topic is boring, speak with enthusiasm, your energy will matter more than almost anything you say.
+
 * **Project Hail Mary** - Andy Weir <br />
-Not the typical genre I consume, but I wanted to read it due to the overwhelmingly positive reception. I really enjoyed it, it's an uplifting, fast-paced read. I haven't seen the movie yet, so I can't wait to check it out!
+Not the typical genre I consume, but I wanted to read it due to the overwhelmingly positive reception. I enjoyed it, it's an uplifting, fast-paced read. I haven't seen the movie yet, so I can't wait to check it out! Update: The movie sucks. Turned it off before it was over. My suggestion is to stick with the book kids. 
 
 * **Norwegian Wood** - Haruki Murakami <br />
 Arguably Murakami's most famous novel. I enjoyed the read overall, but the female characters felt pretty unrealistic. Some written choices read more like a teenage boy's fantasy than a 38-year-old author's grounded character study.
