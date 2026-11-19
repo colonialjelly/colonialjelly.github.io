@@ -413,7 +413,3 @@ We're in luck because there's another ingenious method called Locality-sensitive
 
 - [Min Hashing](https://www.cs.utah.edu/~jeffp/DMBook/L4-Minhash.pdf) - Lecture notes from University of Utah CS 5140 (Data Mining) by Jeff M Phillips. This is were I actually learned about Min Hashing. Answers an important question that I have not addressed in this tutorial, "So how large should we set k so that this gives us an accurate measure?"
 - [Finding Similar Items](http://infolab.stanford.edu/~ullman/mmds/ch3.pdf) - Chapter 3 of the book "Mining of Massive Datasets" by Jure Leskovec, Anand Rajaraman and Jeff Ullman. Has some really good exercises that are worth checking out.
-
----
-
-If you have any questions or you see any mistakes, please feel free to use the comment section below.
