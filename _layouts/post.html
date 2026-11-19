@@ -16,11 +16,6 @@ layout: default
     {{ content }}
   </div>
 
-  {% if site.comments == true and page.comments != false %}
-    <div class="post-comments" itemprop="comment">
-      {% include custom_comments_provider.html %}
-    </div>
-  {% endif %}
   {% if page.mathjax  %}
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -32,12 +27,5 @@ layout: default
     });
   </script>
   <script type="text/javascript" async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
-  <script src="https://utteranc.es/client.js"
-        repo="colonialjelly/colonialjelly.github.io"
-        issue-term="title"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
   {% endif %}
 </article>
